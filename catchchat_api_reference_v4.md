@@ -553,7 +553,7 @@ curl -X GET https://www.catchchatserver.com/api/attachments/upload_token/qiniu?b
 cURL 请求范例：
 
 ```
-curl -X GET https://www.catchchatserver.com/api/attachments/upload_token/upyun?bucket=mybucket&key=/myfileuuid
+curl -X GET https://www.catchchatserver.com/api/attachments/upload_token/upyun?bucket=mybucket&file_path=/myfileuuid&file_length=23
 ```
 
 返回范例：
@@ -564,7 +564,7 @@ curl -X GET https://www.catchchatserver.com/api/attachments/upload_token/upyun?b
   status: 'ok',
   provider: 'upyun',
   bucket: 'mybucket',
-  file_key: '/myfileuuid',
+  file_path: '/myfileuuid'
 }
 ```
 ### s3
