@@ -102,7 +102,7 @@ POST /api/auth/token_by_login
 
 | 参数 | 描述 |
 |--------|--------|
-| login | 用户名 / 邮箱 / 手机号 |
+| login | 用户名 / 手机号 |
 | password | 密码 |
 | expiring | access_token 过期时间。单位为秒，设置为0表示永不过期，不设置默认7天过期 |
 
@@ -156,7 +156,8 @@ curl -X POST https://www.catchchatserver.com/api/auth/send_verify_code -F mobile
 
 ```
 {
-  mobile: "your_mobile"
+  mobile: "your_mobile",
+  status: "sms sent"
 }
 ```
 
@@ -512,3 +513,71 @@ POST /api/messages/:id/mark_as_read
 
 ## Attachment 附件
 
+GET /api/attachments/upload\_token/:provider
+
+### qiniu
+
+| 参数 | 描述 |
+|--------|--------|
+| provider | qiniu|
+| bucket | bucket |
+| key | 用于保存文件的key，必须是唯一标识符如UUID |
+
+cURL 请求范例：
+
+```
+curl -X GET https://www.catchchatserver.com/api/attachments/upload_token/qiniu?bucket=mybucket&key=myfileuuid
+
+```
+
+返回范例：
+
+```
+{
+  token: 'asdfasdfdsafas',
+  status: 'ok',
+  provider: 'qiniu',
+  bucket: 'mybucket',
+  key: 'myfileuuid',
+}
+```
+
+### upyun
+
+| 参数 | 描述 |
+|--------|--------|
+| provider | upyun|
+| bucket | bucket |
+| file\_path | upyun要求必须是/开始的路径名，如/abcuuid |
+| file\_length | 文件长度 |
+cURL 请求范例：
+
+```
+curl -X GET https://www.catchchatserver.com/api/attachments/upload_token/upyun?bucket=mybucket&key=/myfileuuid
+```
+
+返回范例：
+
+```
+{
+  token: 'asdfasdfdsafas',
+  status: 'ok',
+  provider: 'upyun',
+  bucket: 'mybucket',
+  file_key: '/myfileuuid',
+}
+```
+### s3
+GET /api/attachments/upload\_fields/:provider
+
+| 参数 | 描述 |
+|--------|--------|
+| provider | s3 |
+| bucket | bucket |
+| key | 用于保存文件的key，必须是唯一标识符如UUID |
+
+cURL 请求范例：
+
+```
+curl -X GET https://www.catchchatserver.com/api/attachments/upload_fields/s3?bucket=mybucket&key=/myfileuuid
+```
