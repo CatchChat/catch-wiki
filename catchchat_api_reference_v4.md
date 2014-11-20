@@ -358,32 +358,271 @@ GET /api/users/search?q=keyword
 
 ### 所有好友
 
+按照 position 升序排列，最近联系过的好友越靠前 
+
 ```
-GET /api/friendships
+GET /api/v4/friendships
+```
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+page | Integer | 否 | 当前页码，默认1
+per_page | Integer | 否 | 每页数量，默认30
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/friendships\?page\=1\&per_page\=10 -H 'AuthorizationToken: 8ni89Uirfva2Zyyzq1ou1416506910.739525'
+```
+
+#### 响应
+
+```
+{
+  "friendships":[
+    {
+      "id":3,
+      "user_id":3,
+      "friend_id":4,
+      "contact_name":null,
+      "remarked_name":null,
+      "position":1,
+      "name":"tumayun",
+      "created_at":"2014-11-20T17:00:53Z",
+      "updated_at":"2014-11-20T17:00:53Z",
+      "created_at_string":"2014年11月20日 17:00:53",
+      "updated_at_string":"2014年11月20日 17:00:53",
+      "friend":{
+        "id":4,
+        "username":"tumayun",
+        "nickname":null,
+        "avatar":null
+      }
+    }
+    .
+    .
+    .
+  ],
+  "current_page":1,
+  "per_page":10,
+  "count":1
+}
 ```
 
 ### 最近有联系的好友
 
+最近三天有过联系的好友，包括发送消息给我的和我发过消息的好友
+
 ```
-GET /api/friendships/recent
+GET /api/v4/friendships/recent
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+page | Integer | 否 | 当前页码，默认1
+per_page | Integer | 否 | 每页数量，默认30
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/friendships/recent\?page\=1\&per_page\=10 -H 'AuthorizationToken: 8ni89Uirfva2Zyyzq1ou1416506910.739525'
+```
+
+#### 响应
+
+```
+{
+  "friendships":[
+    {
+      "id":3,
+      "user_id":3,
+      "friend_id":4,
+      "contact_name":null,
+      "remarked_name":null,
+      "position":1,
+      "name":"tumayun",
+      "created_at":"2014-11-20T17:00:53Z",
+      "updated_at":"2014-11-20T17:00:53Z",
+      "created_at_string":"2014年11月20日 17:00:53",
+      "updated_at_string":"2014年11月20日 17:00:53",
+      "friend":{
+        "id":4,
+        "username":"tumayun",
+        "nickname":null,
+        "avatar":null
+      }
+      .
+      .
+      .
+    }
+  ],
+  "current_page":1,
+  "per_page":10,
+  "count":1
+}
 ```
 
 ### 某一好友的详细信息
 
 ```
-GET /api/friendships/:id
+GET /api/v4/friendships/:id
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+id | Integer | 是 | friendship id
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/friendships/3 -H 'AuthorizationToken: 8ni89Uirfva2Zyyzq1ou1416506910.739525'
+```
+
+#### 响应
+
+```
+{
+  "id":3,
+  "user_id":3,
+  "friend_id":4,
+  "contact_name":null,
+  "remarked_name":null,
+  "position":2,
+  "name":"tumayun",
+  "created_at":"2014-11-20T17:00:53Z",
+  "updated_at":"2014-11-20T17:00:53Z",
+  "created_at_string":"2014年11月20日 17:00:53",
+  "updated_at_string":"2014年11月20日 17:00:53",
+  "friend":{
+    "id":4,
+    "username":"tumayun",
+    "nickname":null,
+    "avatar":null
+  }
+}
 ```
 
 ### 更新好友信息
 
 ```
-PATCH /api/friendships/:id
+PATCH /api/v4/friendships/:id
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+id | Integer | 是 | friendship id
+remarked_name | String | 否 | 备注名
+contact_name | String | 否 | 通讯录名
+
+#### 示例
+
+```
+curl -X PATCH https://catchchatserver.com/api/v4/friendships/3 -F remarked_name=tumayun -F contact_name=涂马云 -H 'AuthorizationToken: 8ni89Uirfva2Zyyzq1ou1416506910.739525'
+```
+
+#### 响应
+
+```
+{
+  "id":3,
+  "user_id":3,
+  "friend_id":4,
+  "contact_name":"涂马云",
+  "remarked_name":"tumayun",
+  "position":2,
+  "name":"tumayun",
+  "created_at":"2014-11-20T17:00:53Z",
+  "updated_at":"2014-11-21T02:22:53Z",
+  "created_at_string":"2014年11月20日 17:00:53",
+  "updated_at_string":"2014年11月20日 17:00:53",
+  "friend":{
+    "id":4,
+    "username":"tumayun",
+    "nickname":null,
+    "avatar":null
+  }
+}
 ```
 
 ### 搜索好友
 
 ```
 GET /api/friendships/search?q=keyword
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+q | String | 是 | remarked_name 或者 contact_name 或者 nickname 或者 username
+page | Integer | 否 | 当前页码，默认1
+per_page | Integer | 否 | 每页数量，默认30
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/friendships/search\?q\=tumayun -H 'AuthorizationToken: 8ni89Uirfva2Zyyzq1ou1416506910.739525'
+```
+
+#### 响应
+
+```
+{
+  "friendships":[
+    {
+      "id":3,
+      "user_id":3,
+      "friend_id":4,
+      "contact_name":"涂马云",
+      "remarked_name":"tumayun",
+      "position":2,
+      "name":"tumayun",
+      "created_at":"2014-11-20T17:00:53Z",
+      "updated_at":"2014-11-21T02:22:53Z",
+      "created_at_string":"2014年11月20日 17:00:53",
+      "updated_at_string":"2014年11月20日 17:00:53",
+      "friend":{
+        "id":4,
+        "username":"tumayun",
+        "nickname":null,
+        "avatar":null
+      }
+    }
+  ],
+  "current_page":1,
+  "per_page":30,
+  "count":1
+}
+```
+
+### 好友置顶
+
+```
+PATCH /api/v4/friendships/:id/move_to_top
+```
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+id | Integer | 是 | friendship id
+
+#### 示例
+
+```
+curl -X PATCH https://catchchatserver.com/api/v4/friendships/3/move_to_top -H 'AuthorizationToken: 8ni89Uirfva2Zyyzq1ou1416506910.739525'
+```
+
+#### 响应
+
+```
+{}
 ```
 
 ---
