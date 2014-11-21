@@ -102,7 +102,7 @@ POST /api/auth/token_by_login
 
 | 参数 | 描述 |
 |--------|--------|
-| login | 用户名 / 手机号 |
+| login | 用户名 / 邮箱 / 手机号 |
 | password | 密码 |
 | expiring | access_token 过期时间。单位为秒，设置为0表示永不过期，不设置默认7天过期 |
 
@@ -157,7 +157,6 @@ curl -X POST https://www.catchchatserver.com/api/auth/send_verify_code -F mobile
 ```
 {
   mobile: "your_mobile",
-  status: "sms sent"
 }
 ```
 
