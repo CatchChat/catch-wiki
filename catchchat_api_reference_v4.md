@@ -156,7 +156,7 @@ curl -X POST https://www.catchchatserver.com/api/auth/send_verify_code -F mobile
 
 ```
 {
-  mobile: "your_mobile",
+  mobile: "your_mobile"
 }
 ```
 
