@@ -512,3 +512,71 @@ POST /api/messages/:id/mark_as_read
 
 ## Attachment 附件
 
+GET /api/attachments/upload\_token/:provider
+
+### qiniu
+
+| 参数 | 描述 |
+|--------|--------|
+| provider | qiniu|
+| bucket | bucket |
+| key | 用于保存文件的key，必须是唯一标识符如UUID |
+
+cURL 请求范例：
+
+```
+curl -X GET https://www.catchchatserver.com/api/attachments/upload_token/qiniu?bucket=mybucket&key=myfileuuid
+
+```
+
+返回范例：
+
+```
+{
+  token: 'asdfasdfdsafas',
+  status: 'ok',
+  provider: 'qiniu',
+  bucket: 'mybucket',
+  key: 'myfileuuid',
+}
+```
+
+### upyun
+
+| 参数 | 描述 |
+|--------|--------|
+| provider | upyun|
+| bucket | bucket |
+| file\_path | upyun要求必须是/开始的路径名，如/abcuuid |
+| file\_length | 文件长度 |
+cURL 请求范例：
+
+```
+curl -X GET https://www.catchchatserver.com/api/attachments/upload_token/upyun?bucket=mybucket&file_path=/myfileuuid&file_length=23
+```
+
+返回范例：
+
+```
+{
+  token: 'asdfasdfdsafas',
+  status: 'ok',
+  provider: 'upyun',
+  bucket: 'mybucket',
+  file_path: '/myfileuuid'
+}
+```
+### s3
+GET /api/attachments/upload\_fields/:provider
+
+| 参数 | 描述 |
+|--------|--------|
+| provider | s3 |
+| bucket | bucket |
+| key | 用于保存文件的key，必须是唯一标识符如UUID |
+
+cURL 请求范例：
+
+```
+curl -X GET https://www.catchchatserver.com/api/attachments/upload_fields/s3?bucket=mybucket&key=/myfileuuid
+```
