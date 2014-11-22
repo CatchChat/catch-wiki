@@ -1,7 +1,7 @@
 # CatchChat API Reference
 
 * Author: Kgen (kgen@catch.la)
-* Version: 0.4 (2014-11-13)
+* Version: 0.5 (2014-11-21)
 
 ## 概述
 
@@ -237,6 +237,24 @@ cURL 请求范例：
 ```
 curl https://www.catchchatserver.com/api/friendships?page=2&per_page=100
 ```
+
+分页信息包含在 [Link header](http://tools.ietf.org/html/rfc5988) 中。
+
+```
+Link: <https://www.catchchatserver.com/api/friendships?page=3&per_page=100>; rel="next",
+  <https://www.catchchatserver.com/api/friendships?page=50&per_page=100>; rel="last",
+  <https://www.catchchatserver.com/api/friendships?page=1&per_page=100>; rel="first",
+  <https://www.catchchatserver.com/api/friendships?page=1&per_page=100>; rel="prev"
+```
+
+参数 `rel` 包含如下取值：
+
+| Header 字段 | 描述 |
+|---|---|
+| next | 显示下一页结果 |
+| last | 显示最后一页结果 |
+| first | 显示第一页结果 |
+| prev | 显示上一页结果 |
 
 ### 请求速率
 
@@ -751,3 +769,33 @@ POST /api/messages/:id/mark_as_read
 
 ## Attachment 附件
 
+### 获取上传 token
+
+```
+GET /api/messages/:id/attachment/upload_token
+```
+
+不能单独请求上传，必须依赖一条已经生成的 Message，没有上传完成前，Message 的 state 是 drafted。
+
+返回：
+
+```
+{
+  "provider": "qiniu",
+  "options": {
+    "token": "LsTN5ioRCbSo7Vb:wQ4ofysef1R7IKnrziqtomqyDvI=:eyJzY29wZSI6IodCksXCJodX0ifQ==",
+    "bucket": "messages1",
+    "key": "a97b1d2570fc4823aec57522b618e779.jpg"
+  }
+}
+```
+
+获取上传 token 后，根据 provider 上传到相应的云存储，options 中包含了客户端上传所需要的参数。
+
+七牛参数：
+
+| 名称 | 类型 | 描述 |
+|---|---|---|
+| token | String | 上传凭证 |
+| bucket | String | Bucket 的名称 |
+| key | String | 文件名 |
