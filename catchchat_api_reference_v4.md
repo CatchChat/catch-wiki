@@ -565,7 +565,7 @@ GET /api/messages/:id/attachment/upload_token
 
 ### 上传通讯录
 
-** 覆盖式上传，上传后会删除之前的通讯录 **
+**覆盖式上传，上传后会删除之前的通讯录**
 
 ```
 POST /api/v4/contacts/upload
