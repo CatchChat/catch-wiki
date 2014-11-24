@@ -449,7 +449,25 @@ POST /api/friend_requests/received/:id/reject
 ### 新建请求解除好友关系
 
 ```
-POST /api/unfriend_requests
+POST /api/v4/unfriend_requests
+```
+
+#### 参数
+
+| 名称 | 类型 | 描述 |
+|---|---|---|
+| friend_id | Integer | 好友 ID |
+
+#### 示例
+
+```
+curl -X POST https://catchchatserver.com/api/v4/unfriend_requests -F friend_id=2 -H 'Authorization: Token token=yZp5UZMeCB8yKBUy_ae81416827431.104971'
+```
+
+#### 响应
+
+```
+{}
 ```
 
 ---
