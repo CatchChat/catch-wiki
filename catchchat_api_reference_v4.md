@@ -560,3 +560,31 @@ GET /api/messages/:id/attachment/upload_token
 | token | String | 上传凭证 |
 | bucket | String | Bucket 的名称 |
 | key | String | 文件名 |
+
+## Contact 通讯录
+
+### 上传通讯录
+
+** 覆盖式上传，上传后会删除之前的通讯录 **
+
+```
+POST /api/v4/contacts/upload
+```
+
+#### 参数
+
+| 名称 | 类型 | 描述 |
+|---|---|---|
+| contacts | JSON | contacts JSON format, 如 "[{\"name\":\"abc\",\"number\":\"15158166372\"},{\"name\":\"bac\",\"number\":\"15158166723\"}]"|
+
+#### 示例
+
+```
+curl -X POST https://catchchatserver.com/api/v4/contacts/upload -F contacts="[{\"name\":\"abc\",\"number\":\"15158166372\"},{\"name\":\"bac\",\"number\":\"15158166723\"}]" -H 'Authorization: Token token=yZp5UZMeCB8yKBUy_ae81416827431.104971'
+```
+
+#### 响应
+
+```
+{}
+```
