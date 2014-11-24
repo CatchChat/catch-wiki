@@ -447,6 +447,7 @@ curl https://catchchatserver.com/api/v4/friend_requests/received/accepted -H 'Au
         "id":1,
         "username":"ruanwztest",
         "nickname":"ruanwztest",
+        "name":"ruanwztest", // remarked_name || contact_name || nickname || username
         "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
       }
     }
@@ -500,6 +501,7 @@ curl https://catchchatserver.com/api/v4/friend_requests/sent/accepted -H 'Author
         "id":3,
         "username":"user1",
         "nickname":"user1",
+        "name":"user1", // remarked_name || contact_name || nickname || username
         "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
       }
     },
@@ -517,6 +519,7 @@ curl https://catchchatserver.com/api/v4/friend_requests/sent/accepted -H 'Author
         "id":2,
         "username":"tumayun",
         "nickname":"tumayun",
+        "name":"tumayun", // remarked_name || contact_name || nickname || username
         "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
       }
     }
@@ -562,6 +565,7 @@ curl -X POST https://catchchatserver.com/api/v4/friend_requests -F friend_id=3 -
     "id":3,
     "username":"user1",
     "nickname":"user1",
+    "name":"user1", // 如果是通讯录好友，则返回通讯录名字，否则返回 nickname
     "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
   }
 }
@@ -602,6 +606,7 @@ curl -X PATCH https://catchchatserver.com/api/v4/friend_requests/received/3/acce
     "id":1,
     "username":"ruanwztest",
     "nickname":"ruanwztest",
+    "name":"ruanwztest", // 如果是通讯录好友，则返回通讯录名字，否则返回 nickname
     "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
   }
 }
@@ -642,6 +647,7 @@ curl -X PATCH https://catchchatserver.com/api/v4/friend_requests/received/4/reje
     "id":1,
     "username":"ruanwztest",
     "nickname":"ruanwztest",
+    "name":"ruanwztest", // 如果是通讯录好友，则返回通讯录名字，否则返回 nickname
     "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
   }
 }
@@ -682,6 +688,7 @@ curl -X PATCH https://catchchatserver.com/api/v4/friend_requests/received/5/bloc
     "id":1,
     "username":"tumayun",
     "nickname":"tumayun",
+    "name":"tumayun", // 如果是通讯录好友，则返回通讯录名字，否则返回 nickname
     "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
   }
 }
