@@ -685,7 +685,7 @@ curl -X POST https://catchchatserver.com/api/v4/groups/2/add_friendship -F frien
 ### 从组里移除好友
 
 ```
-POST /api/groups/:id/remove_friendship/:friendship_id
+DELETE /api/groups/:id/remove_friendship/:friendship_id
 ```
 
 #### 参数
