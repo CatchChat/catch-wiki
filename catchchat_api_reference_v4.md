@@ -459,7 +459,7 @@ POST /api/unfriend_requests
 ### 获取所有组
 
 ```
-GET /api/groups
+GET /api/v4/groups
 ```
 
 #### 参数
@@ -509,14 +509,14 @@ curl https://catchchatserver.com/api/v4/groups -H 'Authorization: Token token=ND
 ### 新建组
 
 ```
-POST /api/groups
+POST /api/v4/groups
 ```
 
 #### 参数
 
-| 名称 | 类型 | 描述 |
-|---|---|---|
-| name | String | 群组名 |
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| name | String | 是 | 群组名 |
 
 #### 示例
 
@@ -545,14 +545,14 @@ curl -X POST https://catchchatserver.com/api/v4/groups -F name="test-group" -H '
 ### 获取单个组信息
 
 ```
-GET /api/groups/:id
+GET /api/v4/groups/:id
 ```
 
 #### 参数
 
-| 名称 | 类型 | 描述 |
-|---|---|---|
-| id | Integer | 群组 ID |
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 群组 ID |
 
 #### 示例
 
@@ -590,14 +590,14 @@ curl https://catchchatserver.com/api/v4/groups/2 -H 'Authorization: Token token=
 ### 更新组信息
 
 ```
-PATCH /api/groups/:id
+PATCH /api/v4/groups/:id
 ```
 #### 参数
 
-| 名称 | 类型 | 描述 |
-|---|---|---|
-| id | Integer | 群组 ID |
-| name | String | 群组名 |
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 群组 ID |
+| name | String | 是 | 群组名 |
 
 #### 示例
 
@@ -636,14 +636,14 @@ curl -X PATCH https://catchchatserver.com/api/v4/groups/2 -F name='test' -H 'Aut
 ### 删除组
 
 ```
-DELETE /api/groups/:id
+DELETE /api/v4/groups/:id
 ```
 
 #### 参数
 
-| 名称 | 类型 | 描述 |
-|---|---|---|
-| id | Integer | 群组 ID |
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 群组 ID |
 
 #### 示例
 
@@ -660,15 +660,15 @@ curl -X DELETE https://catchchatserver.com/api/v4/groups/2 -H 'Authorization: To
 ### 添加好友到组
 
 ```
-POST /api/groups/:id/add_friendship
+POST /api/v4/groups/:id/add_friendship
 ```
 
 #### 参数
 
-| 名称 | 类型 | 描述 |
-|---|---|---|
-| id | Integer | 群组 ID |
-| friendship_id | Integer | friendship id |
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 群组 ID |
+| friendship_id | Integer | 是 | friendship id |
 
 #### 示例
 
@@ -685,15 +685,15 @@ curl -X POST https://catchchatserver.com/api/v4/groups/2/add_friendship -F frien
 ### 从组里移除好友
 
 ```
-DELETE /api/groups/:id/remove_friendship/:friendship_id
+DELETE /api/v4/groups/:id/remove_friendship/:friendship_id
 ```
 
 #### 参数
 
-| 名称 | 类型 | 描述 |
-|---|---|---|
-| id | Integer | group id |
-| friendship_id | Integer | friendship id |
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 群组 ID |
+| friendship_id | Integer | 是 | friendship id |
 
 #### 示例
 
