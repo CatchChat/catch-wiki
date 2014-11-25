@@ -573,9 +573,9 @@ POST /api/v4/contacts/upload
 
 #### 参数
 
-| 名称 | 类型 | 描述 |
-|---|---|---|
-| contacts | JSON | contacts JSON format, 如 "[{\"name\":\"abc\",\"number\":\"15158166372\"},{\"name\":\"bac\",\"number\":\"15158166723\"}]"|
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| contacts | JSON | 是 | contacts JSON format, 如 "[{\"name\":\"abc\",\"number\":\"15158166372\"},{\"name\":\"bac\",\"number\":\"15158166723\"}]"|
 
 #### 示例
 
