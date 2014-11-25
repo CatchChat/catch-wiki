@@ -418,7 +418,7 @@ GET /api/friend_requests/received/:state
 
 #### 参数
 
-名称 | 类型 | 是否必须 | 描述
+名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
 state | String | 是 | `:state` 是状态，可选：`pending`, `accepted`, `rejected`, `blocked`
 
@@ -472,7 +472,7 @@ GET /api/friend_requests/sent/:state
 
 #### 参数
 
-名称 | 类型 | 是否必须 | 描述
+名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
 state | String | 是 | `:state` 是状态，可选：`pending`, `accepted`, `rejected`, `blocked`
 
@@ -538,7 +538,7 @@ POST /api/friend_requests
 
 #### 参数
 
-名称 | 类型 | 是否必须 | 描述
+名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
 friend_id | Integer | 是 | 要添加的好友ID
 
@@ -579,7 +579,7 @@ POST /api/friend_requests/received/:id/accept
 
 #### 参数
 
-名称 | 类型 | 是否必须 | 描述
+名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
 id | Integer | 是 | friend_request ID
 
@@ -620,7 +620,7 @@ POST /api/friend_requests/received/:id/reject
 
 #### 参数
 
-名称 | 类型 | 是否必须 | 描述
+名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
 id | Integer | 是 | friend_request ID
 
@@ -661,7 +661,7 @@ POST /api/friend_requests/received/:id/block
 
 #### 参数
 
-名称 | 类型 | 是否必须 | 描述
+名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
 id | Integer | 是 | friend_request ID
 
