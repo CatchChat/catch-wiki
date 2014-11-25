@@ -485,7 +485,7 @@ GET /api/v4/friendships/:id
 
 #### 参数
 
-名称 | 类型 | 是否必须 | 描述
+名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
 id | Integer | 是 | friendship id
 
@@ -527,7 +527,7 @@ PATCH /api/v4/friendships/:id
 
 #### 参数
 
-名称 | 类型 | 是否必须 | 描述
+名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
 id | Integer | 是 | friendship id
 remarked_name | String | 否 | 备注名
@@ -571,7 +571,7 @@ GET /api/friendships/search?q=keyword
 
 #### 参数
 
-名称 | 类型 | 是否必须 | 描述
+名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
 q | String | 是 | remarked_name 或者 contact_name 或者 nickname 或者 username
 
@@ -619,7 +619,7 @@ PATCH /api/v4/friendships/:id/move_to_top
 ```
 #### 参数
 
-名称 | 类型 | 是否必须 | 描述
+名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
 id | Integer | 是 | friendship id
 
