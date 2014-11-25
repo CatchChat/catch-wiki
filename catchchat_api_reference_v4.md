@@ -454,9 +454,9 @@ POST /api/v4/unfriend_requests
 
 #### 参数
 
-| 名称 | 类型 | 描述 |
-|---|---|---|
-| friend_id | Integer | 好友 ID |
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| friend_id | Integer | 是 | 好友 ID |
 
 #### 示例
 
