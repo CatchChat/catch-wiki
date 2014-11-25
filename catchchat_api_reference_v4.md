@@ -559,7 +559,8 @@ curl -X GET https://www.catchchatserver.com/api/attachments/upload_token/upyun?b
 
 ```
 {
-  token: 'asdfasdfdsafas',
+  token:
+  'BBHE3ccYQ8VQhEIvZbJARrte1U3ic2Om6CW7mxvN:NTEhpoOBD4EuJ2XyGduEw9kP7uA=:eyJzY29wZSI6InJ1YW53ei1wdWJsaWM6dGVzdC1rZXkiLCJjYWxsYmFja1VybCI6Imh0dHA6Ly9ydWFud3oubmdyb2suY29tL2hpIiwiY2FsbGJhY2tCb2R5Ijoia2V5PSQoa2V5KVx1MDAyNmJ1Y2tldD0kKGJ1Y2tldCkiLCJkZWFkbGluZSI6MTQxNjQ4MTA4MH0=',
   status: 'ok',
   provider: 'upyun',
   bucket: 'mybucket',
