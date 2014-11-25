@@ -462,10 +462,84 @@ POST /api/unfriend_requests
 GET /api/groups
 ```
 
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/groups -H 'Authorization: Token token=NDccv4Yvdi9UKtwPToxx1416921006.674603'
+```
+
+#### 响应
+
+```
+{
+  "groups":[
+    {
+      "id":1,
+      "owner_id":1,
+      "name":"group",
+      "position":1,
+      "created_at":"2014-11-25T21:08:48Z",
+      "created_at_string":"2014年11月25日 21:08:48",
+      "updated_at":"2014-11-25T21:08:48Z",
+      "updated_at_string":"2014年11月25日 21:08:48",
+      "friends":[
+        {
+          "id":2,
+          "username":"tumayun",
+          "nickname":"tumayun",
+          "name":"tumayun",
+          "contact_name":"tumayun",
+          "remarked_name":"tumayun",
+          "position":1,
+          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+        }
+      ]
+    }
+  ],
+  "current_page":1,
+  "per_page":30,
+  "count":1
+}
+```
+
 ### 新建组
 
 ```
 POST /api/groups
+```
+
+#### 参数
+
+| 名称 | 类型 | 描述 |
+|---|---|---|
+| name | String | 群组名 |
+
+#### 示例
+
+```
+curl -X POST https://catchchatserver.com/api/v4/groups -F name="test-group" -H 'Authorization: Token token=NDccv4Yvdi9UKtwPToxx1416921006.674603'
+```
+
+#### 响应
+
+```
+{
+  "id":2,
+  "owner_id":1,
+  "name":"test-group",
+  "position":2,
+  "created_at":"2014-11-25T21:21:25Z",
+  "created_at_string":"2014年11月25日 21:21:25",
+  "updated_at":"2014-11-25T21:21:25Z",
+  "updated_at_string":"2014年11月25日 21:21:25",
+  "friends":[
+
+  ]
+}
 ```
 
 ### 获取单个组信息
@@ -474,11 +548,90 @@ POST /api/groups
 GET /api/groups/:id
 ```
 
+#### 参数
+
+| 名称 | 类型 | 描述 |
+|---|---|---|
+| id | Integer | 群组 ID |
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/groups/2 -H 'Authorization: Token token=NDccv4Yvdi9UKtwPToxx1416921006.674603'
+```
+
+#### 响应
+
+```
+{
+  "id":2,
+  "owner_id":1,
+  "name":"test-group",
+  "position":2,
+  "created_at":"2014-11-25T21:21:25Z",
+  "created_at_string":"2014年11月25日 21:21:25",
+  "updated_at":"2014-11-25T21:21:25Z",
+  "updated_at_string":"2014年11月25日 21:21:25",
+  "friends":[
+    {
+      "id":2,
+      "username":"tumayun",
+      "nickname":"tumayun",
+      "name":"tumayun",
+      "contact_name":"tumayun",
+      "remarked_name":"tumayun",
+      "position":1,
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    }
+  ]
+}
+```
+
 ### 更新组信息
 
 ```
 PATCH /api/groups/:id
 ```
+#### 参数
+
+| 名称 | 类型 | 描述 |
+|---|---|---|
+| id | Integer | 群组 ID |
+| name | String | 群组名 |
+
+#### 示例
+
+```
+curl -X PATCH https://catchchatserver.com/api/v4/groups/2 -F name='test' -H 'Authorization: Token token=NDccv4Yvdi9UKtwPToxx1416921006.674603'
+```
+
+#### 响应
+
+```
+{
+  "id":2,
+  "owner_id":1,
+  "name":"test",
+  "position":2,
+  "created_at":"2014-11-25T21:21:25Z",
+  "created_at_string":"2014年11月25日 21:21:25",
+  "updated_at":"2014-11-25T22:00:39Z",
+  "updated_at_string":"2014年11月25日 21:21:25",
+  "friends":[
+    {
+      "id":2,
+      "username":"tumayun",
+      "nickname":"tumayun",
+      "name":"tumayun",
+      "contact_name":"tumayun",
+      "remarked_name":"tumayun",
+      "position":1,
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    }
+  ]
+}
+```
+
 
 ### 删除组
 
@@ -486,16 +639,72 @@ PATCH /api/groups/:id
 DELETE /api/groups/:id
 ```
 
+#### 参数
+
+| 名称 | 类型 | 描述 |
+|---|---|---|
+| id | Integer | 群组 ID |
+
+#### 示例
+
+```
+curl -X DELETE https://catchchatserver.com/api/v4/groups/2 -H 'Authorization: Token token=NDccv4Yvdi9UKtwPToxx1416921006.674603'
+```
+
+#### 响应
+
+```
+{}
+```
+
 ### 添加好友到组
 
 ```
-POST /api/groups/:id/add_friendship/:friendship_id
+POST /api/groups/:id/add_friendship
+```
+
+#### 参数
+
+| 名称 | 类型 | 描述 |
+|---|---|---|
+| id | Integer | 群组 ID |
+| friendship_id | Integer | friendship id |
+
+#### 示例
+
+```
+curl -X POST https://catchchatserver.com/api/v4/groups/2/add_friendship -F friendship_id=3 -H 'Authorization: Token token=NDccv4Yvdi9UKtwPToxx1416921006.674603'
+```
+
+#### 响应
+
+```
+{}
 ```
 
 ### 从组里移除好友
 
 ```
 POST /api/groups/:id/remove_friendship/:friendship_id
+```
+
+#### 参数
+
+| 名称 | 类型 | 描述 |
+|---|---|---|
+| id | Integer | group id |
+| friendship_id | Integer | friendship id |
+
+#### 示例
+
+```
+curl -X DELETE https://catchchatserver.com/api/v4/groups/2/remove_friendship/3 -H 'Authorization: Token token=NDccv4Yvdi9UKtwPToxx1416921006.674603'
+```
+
+#### 响应
+
+```
+{}
 ```
 
 ---
