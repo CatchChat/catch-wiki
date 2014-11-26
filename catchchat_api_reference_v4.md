@@ -563,7 +563,7 @@ GET /api/messages/:id/attachment/upload_token
 
 ## Contact 通讯录
 
-### 上传通讯录
+### 上传通讯录并返回已注册的通讯录好友
 
 **覆盖式上传，上传后会删除之前的通讯录**
 
@@ -580,11 +580,18 @@ POST /api/v4/contacts/upload
 #### 示例
 
 ```
-curl -X POST https://catchchatserver.com/api/v4/contacts/upload -F contacts="[{\"name\":\"abc\",\"number\":\"15158166372\"},{\"name\":\"bac\",\"number\":\"15158166723\"}]" -H 'Authorization: Token token=yZp5UZMeCB8yKBUy_ae81416827431.104971'
+curl -X POST https://catchchatserver.com/api/v4/contacts/upload -F contacts="[{\"name\":\"涂马云\",\"number\":\"15158166372\"}]" -H 'Authorization: Token token="possbdsrHyRhU_zmwsNy1417016499.200043"'
 ```
 
 #### 响应
 
 ```
-{}
+{
+  "registered_contacas":[
+    {
+      "user_id":1,
+      "name":"涂马云"
+    }
+  ]
+}
 ```
