@@ -145,11 +145,13 @@ POST /api/auth/send_verify_code
 | 参数 | 描述 |
 |--------|--------|
 | mobile | 手机号 |
+| phone\_code | 国家代码 |
+
 
 cURL 请求范例：
 
 ```
-curl -X POST https://www.catchchatserver.com/api/auth/send_verify_code -F mobile='your_mobile'
+curl -X POST https://www.catchchatserver.com/api/auth/send_verify_code -F mobile='your_mobile' -F phone_code='86'
 ```
 
 返回范例：
@@ -181,13 +183,14 @@ POST /api/auth/token_by_mobile
 | 参数 | 描述 |
 |--------|--------|
 | mobile | 手机号 |
-| verify_code | 验证码 |
+| phone\_code | 国家码|
+| verify\_code | 验证码 |
 | expiring | access_token 过期时间。单位为秒，设置为0表示永不过期，不设置默认7天过期 |
 
 cURL 请求范例：
 
 ```
-curl -X POST https://www.catchchatserver.com/api/auth/token_by_mobile -F mobile='your_mobile' -F verify_code='your_verify_code'
+curl -X POST https://www.catchchatserver.com/api/auth/token_by_mobile -F mobile='your_mobile' -F verify_code='your_verify_code' -F phone_code='86'
 ```
 
 返回范例：
