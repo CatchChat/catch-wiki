@@ -560,3 +560,80 @@ GET /api/messages/:id/attachment/upload_token
 | token | String | 上传凭证 |
 | bucket | String | Bucket 的名称 |
 | key | String | 文件名 |
+
+## Users 用户
+
+### 搜索用户
+
+```
+GET api/v4/users/search
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| q | String | 是 | 用户名或者昵称 |
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/users/search\?q\=t -H 'Authorization: Token token="EtErCK18xN9pxakiCPp61418029033.582837"'
+```
+
+#### 响应
+
+```
+{
+  "users":[
+    {
+      "id":24003,
+      "name":"Tumayun",
+      "username":"tumayun",
+      "nickname":"Tumayun",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    }
+  ],
+  "current_page":1,
+  "per_page":30,
+  "count":1
+}
+```
+
+### 校验 username 是否可用
+
+```
+GET api/v4/users/username_validate
+```
+username 长度范围为 4 到 16，只允许出现大小写字符和数字，且具有唯一性。
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| username | String | 是 | 用户名 |
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/users/username_validate\?username\=tumayun -H 'Authorization: Token token="EftErCK18xN9pxakiCPp61418029033.582837"'
+```
+
+#### 响应
+
+* 用户名可用
+
+```
+{  
+  "available":true
+}
+```
+
+* 用户名不可用
+
+```
+{  
+  "available":false,
+  "message":"用户名已经被使用"
+}
+```
