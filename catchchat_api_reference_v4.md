@@ -560,3 +560,168 @@ GET /api/messages/:id/attachment/upload_token
 | token | String | 上传凭证 |
 | bucket | String | Bucket 的名称 |
 | key | String | 文件名 |
+
+## User 个人信息 API
+
+### 可能认识的好友
+
+```
+GET /api/v4/user/may_know_friends
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/user/may_know_friends -H 'Authorization: Token token="kuH3PbRifgSATCanYwxd1418031570.162303"'
+```
+
+#### 响应
+
+```
+{
+  "friends":[
+    {
+      "id":8,
+      "username":"friend6",
+      "nickname":"friend6",
+      "name":"friend6",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+      "common_friend_names":[
+        "friend2",
+        "friend3",
+        "friend4",
+        "friend5"
+      ]
+    },
+    {
+      "id":9,
+      "username":"friend7",
+      "nickname":"friend7",
+      "name":"friend7",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+      "common_friend_names":[
+        "friend3",
+        "friend4",
+        "friend5"
+      ]
+    },
+    {
+      "id":10,
+      "username":"friend8",
+      "nickname":"friend8",
+      "name":"friend8",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+      "common_friend_names":[
+        "friend4",
+        "friend5"
+      ]
+    }
+  ]
+}
+```
+
+### 获取个人信息
+
+```
+GET /api/v4/user
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/user -H 'Authorization: Token token="kuH3PbRifgSATCanYwxd1418031570.162303"'
+```
+
+#### 响应
+
+```
+{
+  "id":2,
+  "name":"tumayun",
+  "username":"tumayun",
+  "nickname":"tumayun",
+  "phone_code":"86",
+  "mobile":"15158166372",
+  "mobile_verified":true,
+  "time_zone":"Beijing",
+  "state":1,
+  "state_string":"活跃",
+  "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+}
+```
+
+### 更新个人信息
+
+```
+PATCH /api/v4/user
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| nickname | String | 否 | 昵称 |
+| time_zone | String | 否 | 标准时区 |
+| avatar_url | String | 否 | 头像 URL |
+
+#### 示例
+
+```
+curl -X PATCH https://catchchatserver.com/api/v4/user -F nickname=Tumayun -F time_zone=Beijing -F avatar_url=http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg -H 'Authorization: Token token="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+```
+
+#### 响应
+
+```
+{
+  "id":2,
+  "name":"Tumayun",
+  "username":"tumayun",
+  "nickname":"Tumayun",
+  "phone_code":"86",
+  "mobile":"15158166372",
+  "mobile_verified":true,
+  "time_zone":"Beijing",
+  "state":1,
+  "state_string":"活跃",
+  "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+}
+```
+
+### 更新手机号
+
+```
+PATCH /api/v4/user/update_mobile
+```
+手机号更新后，会将 mobile_verified 置为 false。
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| phone_code | String | 是 | 手机号国家码，详见 [http://countrycode.org/](http://countrycode.org/) |
+| mobile | String | 是 | 手机号 |
+
+#### 示例
+
+```
+curl -X PATCH https://catchchatserver.com/api/v4/user/update_mobile -F phone_code=86 -F mobile=15158166372 -H 'Authorization: Token token="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+```
+
+#### 响应
+
+```
+{
+  "phone_code":"86",
+  "mobile":"15158166372",
+  "mobile_verified":false
+}
+```
