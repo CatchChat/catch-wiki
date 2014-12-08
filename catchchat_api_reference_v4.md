@@ -600,7 +600,7 @@ curl https://catchchatserver.com/api/v4/users/search\?q\=t -H 'Authorization: To
 }
 ```
 
-### 校验 username 是否可用
+### 校验 username 是否可用（无需登录）
 
 ```
 GET api/v4/users/username_validate
@@ -616,7 +616,7 @@ username 长度范围为 4 到 16，只允许出现大小写字符和数字，�
 #### 示例
 
 ```
-curl https://catchchatserver.com/api/v4/users/username_validate\?username\=tumayun -H 'Authorization: Token token="EftErCK18xN9pxakiCPp61418029033.582837"'
+curl https://catchchatserver.com/api/v4/users/username_validate\?username\=tumayun
 ```
 
 #### 响应
