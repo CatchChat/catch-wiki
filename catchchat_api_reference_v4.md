@@ -623,13 +623,13 @@ curl https://catchchatserver.com/api/v4/messages/unread -H 'Authorization: Token
         {
           "file":{
             "storage":"qiniu",
-            "expires_in":86400,
+            "expires_in":86400, // 单位：秒
             "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
           },
           "fallback_file":{
             "storage":"s3",
-            "expires_in":86400,
-            "url":null
+            "expires_in":86400, // 单位：秒
+            "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
           }
         }
       ]
@@ -687,13 +687,13 @@ curl https://catchchatserver.com/api/v4/messages/4 -H 'Authorization: Token toke
     {
       "file":{
         "storage":"qiniu",
-        "expires_in":86400,
+        "expires_in":86400, // 单位：秒
         "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
       },
       "fallback_file":{
         "storage":"s3",
-        "expires_in":86400,
-        "url":null
+        "expires_in":86400, // 单位：秒
+        "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
       }
     }
   ]
