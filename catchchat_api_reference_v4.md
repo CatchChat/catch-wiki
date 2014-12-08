@@ -477,7 +477,7 @@ curl https://catchchatserver.com/api/v4/friendships/recent\?page\=1\&per_page\=1
 }
 ```
 
-### 某一好友的详细信息
+### 某一好友的详细信息(by friendship id)
 
 ```
 GET /api/v4/friendships/:id
@@ -492,7 +492,49 @@ id | Integer | 是 | friendship id
 #### 示例
 
 ```
-curl https://catchchatserver.com/api/v4/friendships/3 -H 'Authorization: Token token=8ni89Uirfva2Zyyzq1ou1416506910.739525'
+curl https://catchchatserver.com/api/v4/friendships/3 -H 'Authorization: Token token="8ni89Uirfva2Zyyzq1ou1416506910.739525"'
+```
+
+#### 响应
+
+```
+{
+  "id":3,
+  "user_id":3,
+  "friend_id":4,
+  "contact_name":null,
+  "remarked_name":null,
+  "position":2,
+  "name":"tumayun",
+  "created_at":"2014-11-20T17:00:53Z",
+  "created_at_string":"2014年11月20日 17:00:53",
+  "updated_at":"2014-11-20T17:00:53Z",
+  "updated_at_string":"2014年11月20日 17:00:53",
+  "friend":{
+    "id":4,
+    "username":"tumayun",
+    "nickname":"tumayun",
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+  }
+}
+```
+
+### 某一好友的详细信息(by friend id)
+
+```
+GET /api/v4/friendships/with/:friend_id
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+friend_id | Integer | 是 | friend id
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/friendships/with/4 -H 'Authorization: Token token="8ni89Uirfva2Zyyzq1ou1416506910.739525"'
 ```
 
 #### 响应
@@ -536,7 +578,7 @@ contact_name | String | 否 | 通讯录名
 #### 示例
 
 ```
-curl -X PATCH https://catchchatserver.com/api/v4/friendships/3 -F remarked_name=tumayun -F contact_name=涂马云 -H 'Authorization: Token token=8ni89Uirfva2Zyyzq1ou1416506910.739525'
+curl -X PATCH https://catchchatserver.com/api/v4/friendships/3 -F remarked_name=tumayun -F contact_name=涂马云 -H 'Authorization: Token token="8ni89Uirfva2Zyyzq1ou1416506910.739525"'
 ```
 
 #### 响应
@@ -578,7 +620,7 @@ q | String | 是 | remarked_name 或者 contact_name 或者 nickname 或者 user
 #### 示例
 
 ```
-curl https://catchchatserver.com/api/v4/friendships/search\?q\=tumayun -H 'Authorization: Token token=8ni89Uirfva2Zyyzq1ou1416506910.739525'
+curl https://catchchatserver.com/api/v4/friendships/search\?q\=tumayun -H 'Authorization: Token token="8ni89Uirfva2Zyyzq1ou1416506910.739525"'
 ```
 
 #### 响应
@@ -626,7 +668,7 @@ id | Integer | 是 | friendship id
 #### 示例
 
 ```
-curl -X PATCH https://catchchatserver.com/api/v4/friendships/3/move_to_top -H 'Authorization: Token token=8ni89Uirfva2Zyyzq1ou1416506910.739525'
+curl -X PATCH https://catchchatserver.com/api/v4/friendships/3/move_to_top -H 'Authorization: Token token="8ni89Uirfva2Zyyzq1ou1416506910.739525"'
 ```
 
 #### 响应
