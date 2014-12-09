@@ -531,6 +531,7 @@ curl https://catchchatserver.com/api/v4/messages/unread -H 'Authorization: Token
       "parent_id":0,
       "longitude":122.692612,
       "latitude":30.19902,
+      "battery_level":50,
       "media_type":"text",
       "media_type_string":"一段文字",
       "state":2,
@@ -556,6 +557,7 @@ curl https://catchchatserver.com/api/v4/messages/unread -H 'Authorization: Token
       "parent_id":0,
       "longitude":122.692612,
       "latitude":30.19902,
+      "battery_level":50,
       "media_type":"text",
       "media_type_string":"一段文字",
       "state":2,
@@ -581,6 +583,7 @@ curl https://catchchatserver.com/api/v4/messages/unread -H 'Authorization: Token
       "parent_id":0,
       "longitude":122.692612,
       "latitude":30.19902,
+      "battery_level":50,
       "media_type":"text",
       "media_type_string":"一段文字",
       "state":2,
@@ -606,6 +609,7 @@ curl https://catchchatserver.com/api/v4/messages/unread -H 'Authorization: Token
       "parent_id":0,
       "longitude":122.692612,
       "latitude":30.19902,
+      "battery_level":50,
       "media_type":"video",
       "media_type_string":"一段视频",
       "state":2,
@@ -670,6 +674,7 @@ curl https://catchchatserver.com/api/v4/messages/4 -H 'Authorization: Token toke
   "parent_id":0,
   "longitude":122.692612,
   "latitude":30.19902,
+  "battery_level":50,
   "media_type":"video",
   "media_type_string":"一段视频",
   "state":2,
@@ -717,11 +722,12 @@ text_content | String | 否 | 文字内容，**只有是文字消息时才是必
 parent_id | Integer | 否 | 回复的消息 ID，表示当前要发送的消息是回复哪条消息
 longitude | Float | 否 | 经度
 latitude | Float | 否 | 纬度
+battery_level | Integer | 否 | 电量，0 - 100 之间的值，默认为 50
 
 #### 示例
 
 ```
-curl -X POST https://catchchatserver.com/api/v4/messages -F recipient_id=2 -F recipient_type=User -F text_content='This is a test!' -H 'Authorization: Token token="NDccv4Yvdi9UKtwPToxx1416921006.674603"'
+curl -X POST https://catchchatserver.com/api/v4/messages -F recipient_id=2 -F recipient_type=User -F text_content='This is a test!' -F battery_level=70 -H 'Authorization: Token token="NDccv4Yvdi9UKtwPToxx1416921006.674603"'
 ```
 
 #### 响应
@@ -729,6 +735,7 @@ curl -X POST https://catchchatserver.com/api/v4/messages -F recipient_id=2 -F re
 ```
 {
   "id":3,
+  "battery_level":70,
   "state":2,
   "state_string":"未读",
   "media_type":"text",
