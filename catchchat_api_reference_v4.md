@@ -701,7 +701,7 @@ curl -X PATCH https://catchchatserver.com/api/v4/user -F nickname=Tumayun -F tim
 ```
 PATCH /api/v4/user/update_mobile
 ```
-手机号更新后，会将 mobile_verified 置为 false。
+
 
 #### 参数
 
@@ -709,11 +709,12 @@ PATCH /api/v4/user/update_mobile
 |---|---|---|---|
 | phone_code | String | 是 | 手机号国家码，详见 [http://countrycode.org/](http://countrycode.org/) |
 | mobile | String | 是 | 手机号 |
+| token | String | 是 | 短信验证码 |
 
 #### 示例
 
 ```
-curl -X PATCH https://catchchatserver.com/api/v4/user/update_mobile -F phone_code=86 -F mobile=15158166372 -H 'Authorization: Token token="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+curl -X PATCH https://catchchatserver.com/api/v4/user/update_mobile -F phone_code=86 -F mobile=15158166372 -F token=131421 -H 'Authorization: Token token="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
 ```
 
 #### 响应
@@ -722,6 +723,6 @@ curl -X PATCH https://catchchatserver.com/api/v4/user/update_mobile -F phone_cod
 {
   "phone_code":"86",
   "mobile":"15158166372",
-  "mobile_verified":false
+  "mobile_verified":true
 }
 ```
