@@ -637,3 +637,43 @@ curl https://catchchatserver.com/api/v4/users/username_validate\?username\=tumay
   "message":"用户名已经被使用"
 }
 ```
+
+### 校验手机号是否可用（无需登录）
+
+```
+GET api/v4/users/mobile_validate
+```
+phone code 合法, mobile 合法，且具有唯一性。    
+*在设置中修改手机号时，不能拿当前手机号去校验，否则会返回手机号已经被使用*
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| phone_code | String | 是 | 国家码 |
+| mobile | String | 是 | 手机号 |
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/users/mobile_validate\?phone_code\=86\&mobile\=15158166372
+```
+
+#### 响应
+
+* 手机号可用
+
+```
+{  
+  "available":true
+}
+```
+
+* 手机号不可用
+
+```
+{  
+  "available":false,
+  "message":"手机号已经被使用"
+}
+```
