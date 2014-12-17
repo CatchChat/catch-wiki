@@ -792,6 +792,28 @@ curl -X PATCH https://catchchatserver.com/api/v4/messages/3/deliver -H 'Authoriz
 {}
 ```
 
+### 通知消息被截图保存
+
+```
+POST /api/v4/messages/:id/notify_screenshot
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+id | Integer | 是 | 消息 ID
+
+#### 示例
+
+curl -X POST https://catchchatserver.com/api/v4/messages/3/notify_screenshot -H 'Authorization: Token token="TKWsindneiDsFj3gUHs31416969554.7962759"'
+
+#### 响应
+
+```
+{}
+```
+
 ---
 
 ## Attachment 附件
