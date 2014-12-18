@@ -258,6 +258,7 @@ POST /api/auth/token_by_login
 | login | 用户名 / 邮箱 / 手机号 |
 | password | 密码 |
 | expiring | access_token 过期时间。单位为秒，设置为0表示永不过期，不设置默认7天过期 |
+| client | 用于推送, official=0, company=1, local=2 |
 
 cURL 请求范例：
 
@@ -339,6 +340,7 @@ POST /api/auth/token_by_mobile
 | phone\_code | 国家码|
 | verify\_code | 验证码 |
 | expiring | access_token 过期时间。单位为秒，设置为0表示永不过期，不设置默认7天过期 |
+| client | 用于推送, official=0, company=1, local=2 |
 
 cURL 请求范例：
 
