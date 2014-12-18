@@ -110,7 +110,7 @@ POST /api/auth/token_by_login
 cURL 请求范例：
 
 ```
-curl -X POST https://www.catchchatserver.com/api/auth/token_by_login -F login='your_login_name' -F password='yourpassword'
+curl -X POST https://www.catchchatserver.com/api/auth/token_by_login -F login='your_login_name' -F password='yourpassword' -F client=2
 ```
 
 返回范例：
@@ -125,7 +125,7 @@ curl -X POST https://www.catchchatserver.com/api/auth/token_by_login -F login='y
 cURL 请求范例（1小时过期）：
 
 ```
-curl -X POST https://www.catchchatserver.com/api/auth/token_by_login -F login='yourname' -F password='yourpassword' -F expiring='3600'
+curl -X POST https://www.catchchatserver.com/api/auth/token_by_login -F login='yourname' -F password='yourpassword' -F expiring='3600' -F client=2
 ```
 
 如果用户名密码错误，则返回 HTTP 401.
@@ -189,7 +189,7 @@ POST /api/auth/token_by_mobile
 cURL 请求范例：
 
 ```
-curl -X POST https://www.catchchatserver.com/api/auth/token_by_mobile -F mobile='your_mobile' -F verify_code='your_verify_code'
+curl -X POST https://www.catchchatserver.com/api/auth/token_by_mobile -F mobile='your_mobile' -F verify_code='your_verify_code' -F client=2
 ```
 
 返回范例：
@@ -204,7 +204,7 @@ curl -X POST https://www.catchchatserver.com/api/auth/token_by_mobile -F mobile=
 cURL 请求范例（1小时过期）：
 
 ```
-curl -X POST https://www.catchchatserver.com/api/auth/token -F mobile='your_mobile' -F verify_code='your_verify_code' -F expiring='3600'
+curl -X POST https://www.catchchatserver.com/api/auth/token -F mobile='your_mobile' -F verify_code='your_verify_code' -F expiring='3600' -F client=2
 ```
 
 如果手机号和验证码错误，或验证码已经过期，则返回 HTTP 401.
