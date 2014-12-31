@@ -210,6 +210,32 @@ curl -X POST https://www.catchchatserver.com/api/auth/token -F mobile='your_mobi
   error: "手机号或验证码错误"
 }
 
+### 发送用户名密码手机号码，发起注册,等待接收手机验证码
+
+```
+POST   /api/v4/registration/create
+```
+
+| 参数 | 描述 |
+|--------|--------|
+| mobile | 手机号 |
+| username | 用户名 |
+| password | 密码 |
+| phone_code | 国家码 |
+
+
+### 发手机验证码完成注册
+
+```
+PUT   /api/v4/registration/update
+```
+| 参数 | 描述 |
+|--------|--------|
+| mobile | 手机号 |
+| phone_code | 国家码 |
+| username | 用户名 |
+| token | 手机短信收到的验证码 |
+
 ### 用 Access Token 调用其他 API
 
 现在你可以通过 **access_token** 来调用其他 API 了，比如：
