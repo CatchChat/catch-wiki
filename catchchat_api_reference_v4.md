@@ -586,3 +586,342 @@ curl -X POST https://catchchatserver.com/api/v4/reports -F message_id=1 -H 'Auth
 ```
 {}
 ```
+
+## Circle 公有群组
+
+### 获取加入了的所有群组
+
+```
+GET /api/v4/circles
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| page | Integer | 否 | 当然页码 |
+| pre_page | Integer | 否 | 每页显示数量 |
+
+#### 示例
+
+```
+curl -X GET http://park.catchchatchina.com/api/v4/circles -H 'Authorization: Token token="nxkP4GQeXuDxof2Zd5xF1421653780.6898508"'
+```
+
+#### 响应
+
+```
+{
+  "circles":[
+    {
+      "id":1,
+      "name":"Circle1",
+      "created_at":"2015-01-19T07:52:05Z",
+      "created_at_string":"2015年01月19日 07:52:05",
+      "updated_at":"2015-01-19T08:09:37Z",
+      "updated_at_string":"2015年01月19日 07:52:05",
+      "creator":{
+        "id":2,
+        "name":"tumayun",
+        "username":"tumayun",
+        "nickname":"tumayun",
+        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+      },
+      "friends":[
+        {
+          "id":2,
+          "name":"tumayun",
+          "username":"tumayun",
+          "nickname":"tumayun",
+          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+        },
+        {
+          "id":3,
+          "name":"nick",
+          "username":"nick",
+          "nickname":"nick",
+          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6n872djhhlGkd.jpg"
+        }
+      ]
+    },
+    {
+      "id":2,
+      "name":"Circle2",
+      "created_at":"2015-01-19T08:13:43Z",
+      "created_at_string":"2015年01月19日 08:13:43",
+      "updated_at":"2015-01-19T08:20:03Z",
+      "updated_at_string":"2015年01月19日 08:13:43",
+      "creator":{
+        "id":2,
+        "name":"tumayun",
+        "username":"tumayun",
+        "nickname":"tumayun",
+        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+      },
+      "friends":[
+        {
+          "id":2,
+          "name":"tumayun",
+          "username":"tumayun",
+          "nickname":"tumayun",
+          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+        },
+        {
+          "id":3,
+          "name":"nick",
+          "username":"nick",
+          "nickname":"nick",
+          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6n872djhhlGkd.jpg"
+        }
+      ]
+    }
+  ],
+  "current_page":1,
+  "per_page":30,
+  "count":2
+}
+```
+
+### 创建公有群组
+
+```
+POST /api/v4/circles
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| name | String | 是 | 公有群组名 |
+
+#### 示例
+
+```
+curl -X POST http://park.catchchatchina.com/api/v4/circles -F name=Circle -H 'Authorization: Token token="nxkP4GQeXuDxof2Zd5xF1421653780.6898508"'
+```
+
+#### 响应
+
+```
+{
+  "id":3,
+  "name":"Circle",
+  "created_at":"2015-01-19T08:20:16Z",
+  "created_at_string":"2015年01月19日 08:20:16",
+  "updated_at":"2015-01-19T08:20:16Z",
+  "updated_at_string":"2015年01月19日 08:20:16",
+  "creator":{
+    "id":2,
+    "name":"tumayun",
+    "username":"tumayun",
+    "nickname":"tumayun",
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+  },
+  "friends":[
+    {
+      "id":2,
+      "name":"tumayun",
+      "username":"tumayun",
+      "nickname":"tumayun",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    }
+  ]
+}
+```
+
+### 更新公有群组
+
+```
+PUT /api/v4/circles/:id
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| name | String | 是 | 公有群组名 |
+| id | Integer | 是 | 公有群组 ID |
+
+#### 示例
+
+```
+curl -X PUT http://park.catchchatchina.com/api/v4/circles/3 -F name=Circle3 -H 'Authorization: Token token="nxkP4GQeXuDxof2Zd5xF1421653780.6898508"'
+```
+
+#### 响应
+
+```
+{
+  "id":3,
+  "name":"Circle3",
+  "created_at":"2015-01-19T08:20:16Z",
+  "created_at_string":"2015年01月19日 08:20:16",
+  "updated_at":"2015-01-19T08:21:33Z",
+  "updated_at_string":"2015年01月19日 08:20:16",
+  "creator":{
+    "id":2,
+    "name":"tumayun",
+    "username":"tumayun",
+    "nickname":"tumayun",
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+  },
+  "friends":[
+    {
+      "id":2,
+      "name":"tumayun",
+      "username":"tumayun",
+      "nickname":"tumayun",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    }
+  ]
+}
+```
+
+#### 获取单个公有群组
+
+```
+GET /api/v4/circles/:id
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 公有群组 ID |
+
+#### 示例
+
+```
+curl -X GET http://park.catchchatchina.com/api/v4/circles/3 -H 'Authorization: Token token="nxkP4GQeXuDxof2Zd5xF1421653780.6898508"'
+```
+
+#### 响应
+
+```
+{
+  "id":3,
+  "name":"Circle3",
+  "created_at":"2015-01-19T08:20:16Z",
+  "created_at_string":"2015年01月19日 08:20:16",
+  "updated_at":"2015-01-19T08:21:33Z",
+  "updated_at_string":"2015年01月19日 08:20:16",
+  "creator":{
+    "id":2,
+    "name":"tumayun",
+    "username":"tumayun",
+    "nickname":"tumayun",
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+  },
+  "friends":[
+    {
+      "id":2,
+      "name":"tumayun",
+      "username":"tumayun",
+      "nickname":"tumayun",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    }
+  ]
+}
+```
+
+### 删除公有群组
+
+```
+DELETE /api/v4/circles/:id
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 公有群组 ID |
+
+#### 示例
+
+```
+curl -X DELETE http://park.catchchatchina.com/api/v4/circles/3 -H 'Authorization: Token token="nxkP4GQeXuDxof2Zd5xF1421653780.6898508"'
+```
+
+#### 响应
+
+```
+{}
+```
+
+#### 加入公有群组
+
+```
+POST /api/v4/circles/:id/join
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 公有群组 ID |
+
+#### 示例
+
+```
+curl -X POST http://park.catchchatchina.com/api/v4/circles/2/join -H 'Authorization: Token token="QVXyAg6mpi14YDje9RSr1421656248.3836942"'
+```
+
+#### 响应
+
+```
+{
+  "id":2,
+  "name":"Circle2",
+  "created_at":"2015-01-19T08:13:43Z",
+  "created_at_string":"2015年01月19日 08:13:43",
+  "updated_at":"2015-01-19T08:20:03Z",
+  "updated_at_string":"2015年01月19日 08:13:43",
+  "creator":{
+    "id":2,
+    "name":"tumayun",
+    "username":"tumayun",
+    "nickname":"tumayun",
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+  },
+  "friends":[
+    {
+      "id":2,
+      "name":"tumayun",
+      "username":"tumayun",
+      "nickname":"tumayun",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    },
+    {
+      "id":3,
+      "name":"nick",
+      "username":"nick",
+      "nickname":"nick",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6n872djhhlGkd.jpg"
+    }
+  ]
+}
+```
+
+### 退出群组
+
+```
+DELETE /api/v4/circles/:id/leave
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 公有群组 ID |
+
+#### 示例
+
+```
+curl -X DELETE http://park.catchchatchina.com/api/v4/circles/2/leave -H 'Authorization: Token token="QVXyAg6mpi14YDje9RSr1421656248.3836942"'
+```
+
+#### 响应
+
+```
+{}
+```
