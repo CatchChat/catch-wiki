@@ -716,7 +716,7 @@ POST /api/v4/messages
 名称 | 类型 | 是否必须 | 描述
 --- |--- |--- |--- |
 recipient_id | Integer | 是 | 接收者 ID，接收者只有两种，User 或 Group，所以是 User ID 或者 Group ID |
-recipient_type | String | 是 | 接受者类型，只能是 User 或 Group
+recipient_type | String | 是 | 接受者类型，只能是 User、Group 或者 Circle（**Park Server 才有**）
 media_type | Integer | 否 | 消息类型，0 表示文字, 1 表示图片, 2表示视频, 默认是文字
 text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
 parent_id | Integer | 否 | 回复的消息 ID，表示当前要发送的消息是回复哪条消息
