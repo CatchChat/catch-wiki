@@ -925,3 +925,59 @@ curl -X DELETE http://park.catchchatchina.com/api/v4/circles/2/leave -H 'Authori
 ```
 {}
 ```
+
+### 群组未读消息
+
+```
+GET /api/v4/circles/:id/unread_messages
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 公有群组 ID |
+
+#### 示例
+
+```
+curl -X GET http://park.catchchatchina.com/api/v4/circles/2/unread_messages -H 'Authorization: Token token="QVXyAg6mpi14YDje9RSr1421656248.3836942"'
+```
+
+#### 响应
+
+```
+{
+  "messages":[
+    {
+      "id":3,
+      "recipient_id":2,
+      "recipient_type":"Circle",
+      "text_content":"This is a test!",
+      "parent_id":0,
+      "longitude":null,
+      "latitude":null,
+      "battery_level":70,
+      "media_type":"text",
+      "media_type_string":"一段文字",
+      "state":2,
+      "state_string":"未读",
+      "created_at":"2015-01-20T05:22:05Z",
+      "created_at_string":"2015年01月20日 05:22:05",
+      "updated_at":"2015-01-20T05:22:05Z",
+      "updated_at_string":"2015年01月20日 05:22:05",
+      "sender":{
+        "id":3,
+        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6n872djhhlGkd.jpg",
+        "name":"nick"
+      },
+      "attachments":[
+
+      ]
+    }
+  ],
+  "current_page":1,
+  "per_page":30,
+  "count":1
+}
+```
