@@ -587,9 +587,9 @@ curl -X POST https://catchchatserver.com/api/v4/reports -F message_id=1 -H 'Auth
 {}
 ```
 
-## Circle 公有群组
+## Circle 公共群组
 
-### 获取加入了的所有群组
+### 获取加入了的所有公共群组
 
 ```
 GET /api/v4/circles
@@ -682,7 +682,7 @@ curl -X GET http://park.catchchatchina.com/api/v4/circles -H 'Authorization: Tok
 }
 ```
 
-### 创建公有群组
+### 创建公共群组
 
 ```
 POST /api/v4/circles
@@ -692,7 +692,7 @@ POST /api/v4/circles
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| name | String | 是 | 公有群组名 |
+| name | String | 是 | 公共群组名 |
 
 #### 示例
 
@@ -729,7 +729,7 @@ curl -X POST http://park.catchchatchina.com/api/v4/circles -F name=Circle -H 'Au
 }
 ```
 
-### 更新公有群组
+### 更新公共群组
 
 ```
 PUT /api/v4/circles/:id
@@ -739,8 +739,8 @@ PUT /api/v4/circles/:id
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| name | String | 是 | 公有群组名 |
-| id | Integer | 是 | 公有群组 ID |
+| name | String | 是 | 公共群组名 |
+| id | Integer | 是 | 公共群组 ID |
 
 #### 示例
 
@@ -777,7 +777,7 @@ curl -X PUT http://park.catchchatchina.com/api/v4/circles/3 -F name=Circle3 -H '
 }
 ```
 
-#### 获取单个公有群组
+#### 获取单个公共群组
 
 ```
 GET /api/v4/circles/:id
@@ -787,7 +787,7 @@ GET /api/v4/circles/:id
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| id | Integer | 是 | 公有群组 ID |
+| id | Integer | 是 | 公共群组 ID |
 
 #### 示例
 
@@ -824,7 +824,7 @@ curl -X GET http://park.catchchatchina.com/api/v4/circles/3 -H 'Authorization: T
 }
 ```
 
-### 删除公有群组
+### 删除公共群组
 
 ```
 DELETE /api/v4/circles/:id
@@ -834,7 +834,7 @@ DELETE /api/v4/circles/:id
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| id | Integer | 是 | 公有群组 ID |
+| id | Integer | 是 | 公共群组 ID |
 
 #### 示例
 
@@ -848,7 +848,7 @@ curl -X DELETE http://park.catchchatchina.com/api/v4/circles/3 -H 'Authorization
 {}
 ```
 
-#### 加入公有群组
+#### 加入公共群组
 
 ```
 POST /api/v4/circles/:id/join
@@ -858,7 +858,7 @@ POST /api/v4/circles/:id/join
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| id | Integer | 是 | 公有群组 ID |
+| id | Integer | 是 | 公共群组 ID |
 
 #### 示例
 
@@ -902,7 +902,7 @@ curl -X POST http://park.catchchatchina.com/api/v4/circles/2/join -H 'Authorizat
 }
 ```
 
-### 退出群组
+### 退出公共群组
 
 ```
 DELETE /api/v4/circles/:id/leave
@@ -912,7 +912,7 @@ DELETE /api/v4/circles/:id/leave
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| id | Integer | 是 | 公有群组 ID |
+| id | Integer | 是 | 公共群组 ID |
 
 #### 示例
 
@@ -926,7 +926,7 @@ curl -X DELETE http://park.catchchatchina.com/api/v4/circles/2/leave -H 'Authori
 {}
 ```
 
-### 群组未读消息
+### 公共群组未读消息
 
 ```
 GET /api/v4/circles/:id/unread_messages
@@ -936,7 +936,7 @@ GET /api/v4/circles/:id/unread_messages
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| id | Integer | 是 | 公有群组 ID |
+| id | Integer | 是 | 公共群组 ID |
 
 #### 示例
 
