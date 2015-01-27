@@ -1793,6 +1793,123 @@ curl -X POST https://catchchatserver.com/api/v4/contacts/upload -F contacts="[\"
 }
 ```
 
+## Users 用户
+
+### 搜索用户
+
+```
+GET api/v4/users/search
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| q | String | 是 | 用户名或者昵称 |
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/users/search\?q\=t -H 'Authorization: oken token="EtErCK18xN9pxakiCPp61418029033.582837"'
+```
+
+#### 响应
+
+```
+{
+  "users":[
+    {
+      "id":24003,
+      "name":"Tumayun",
+      "username":"tumayun",
+      "nickname":"Tumayun",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    }
+  ],
+  "current_page":1,
+  "per_page":30,
+  "count":1
+}
+```
+
+### 校验 username 是否可用（无需登录）
+
+```
+GET api/v4/users/username_validate
+```
+username 长度范围为 4 到 16，只允许出现大小写字符和数字，且具有唯一性。
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| username | String | 是 | 用户名 |
+
+#### 示例
+
+```
+curl https://catchchatserver.om/api/v4/users/username_validate\?username\=tumayun
+```
+
+#### 响应
+
+* 用户名可用
+
+```
+{  
+  "available":true
+}
+```
+
+* 用户名不可用
+
+```
+{  
+  "available":false,
+  "message":"用户名已经被使用"
+}
+```
+
+### 校验手机号是否可用（无需登录）
+
+```
+GET api/v4/users/mobile_validate
+```
+phone code 合法, mobile 合法，且具有唯一性。    
+*在设置中修改手机号时，不能拿当前手机号去校验，否则会返回手机号已经被使用*
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| phone_code | String | 是 | 国家码 |
+| mobile | String | 是 | 手机号 |
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/users/mobile_validate\?phone_code\=86\mobile\=15158166372
+```
+
+#### 响应
+
+* 手机号可用
+
+```
+{  
+  "available":true
+}
+```
+
+* 手机号不可用
+
+```
+{  
+  "available":false,
+  "message":"手机号已经被使用"
+}
+```
+
 ## Report 消息举报
 
 ### 举报
