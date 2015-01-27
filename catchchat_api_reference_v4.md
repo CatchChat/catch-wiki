@@ -1,7 +1,6 @@
 # CatchChat API Reference
 
 * Author: Kgen (kgen@catch.la)
-* Version: 0.5 (2014-11-21)
 
 ## 概述
 
