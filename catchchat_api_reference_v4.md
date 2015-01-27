@@ -683,24 +683,165 @@ curl -X PATCH https://catchchatserver.com/api/v4/friendships/3/move_to_top -H 'A
 
 ### 获取当前用户收到的好友请求
 
+按创建时间倒序排
+
 ```
 GET /api/friend_requests/received/:state
 ```
 
-`:state` 是状态，可选：`pending`, `accepted`, `rejected`, `blocked`
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+state | String | 是 | `:state` 是状态，可选：`pending`, `accepted`, `rejected`, `blocked`
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/friend_requests/received/accepted -H 'Authorization: Token token=DR-2ye_k9HzcMHZKEaHe1416646800.2446852'
+```
+
+#### 响应
+
+```
+{
+  "friend_requests":[
+    {
+      "id":3,
+      "user_id":1,
+      "friend_id":3,
+      "state":2,
+      "state_string":"已接受",
+      "created_at":"2014-11-22T17:08:07Z",
+      "created_at_string":"2014年11月22日 17:08:07",
+      "updated_at":"2014-11-22T17:09:42Z",
+      "updated_at_string":"2014年11月22日 17:08:07",
+      "friend":{
+        "id":1,
+        "username":"ruanwztest",
+        "nickname":"ruanwztest",
+        "name":"ruanwztest", // remarked_name || contact_name || nickname || username
+        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+      }
+    }
+    .
+    .
+    .
+  ],
+  "current_page":1,
+  "per_page":30,
+  "count":1
+}
+```
+
 
 ### 获取当前用户发送的好友请求
+
+按创建时间倒序排
 
 ```
 GET /api/friend_requests/sent/:state
 ```
 
-`:state` 是状态，可选：`pending`, `accepted`, `rejected`, `blocked`
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+state | String | 是 | `:state` 是状态，可选：`pending`, `accepted`, `rejected`, `blocked`
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/friend_requests/sent/accepted -H 'Authorization: Token token=ZV5HH2XzrBQTgzL1NW1v1416645756.998624'
+```
+
+#### 响应
+
+```
+{
+  "friend_requests":[
+    {
+      "id":3,
+      "user_id":1,
+      "friend_id":3,
+      "state":2,
+      "state_string":"已接受",
+      "created_at":"2014-11-22T17:08:07Z",
+      "created_at_string":"2014年11月22日 17:08:07",
+      "updated_at":"2014-11-22T17:09:42Z",
+      "updated_at_string":"2014年11月22日 17:08:07",
+      "friend":{
+        "id":3,
+        "username":"user1",
+        "nickname":"user1",
+        "name":"user1", // remarked_name || contact_name || nickname || username
+        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+      }
+    },
+    {
+      "id":1,
+      "user_id":1,
+      "friend_id":2,
+      "state":2,
+      "state_string":"已接受",
+      "created_at":"2014-11-22T16:41:07Z",
+      "created_at_string":"2014年11月22日 16:41:07",
+      "updated_at":"2014-11-22T16:41:07Z",
+      "updated_at_string":"2014年11月22日 16:41:07",
+      "friend":{
+        "id":2,
+        "username":"tumayun",
+        "nickname":"tumayun",
+        "name":"tumayun", // remarked_name || contact_name || nickname || username
+        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+      }
+    }
+  ],
+  "current_page":1,
+  "per_page":30,
+  "count":2
+}
+```
 
 ### 新建好友请求
 
 ```
 POST /api/friend_requests
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+friend_id | Integer | 是 | 要添加的好友ID
+
+#### 示例
+
+```
+curl -X POST https://catchchatserver.com/api/v4/friend_requests -F friend_id=3 -H 'Authorization: Token token=ZV5HH2XzrBQTgzL1NW1v1416645756.998624'
+```
+
+#### 响应
+
+```
+{
+  "id":3,
+  "user_id":1,
+  "friend_id":3,
+  "state":1,
+  "state_string":"等待中",
+  "created_at":"2014-11-22T17:08:07Z",
+  "created_at_string":"2014年11月22日 17:08:07",
+  "updated_at":"2014-11-22T17:08:07Z",
+  "updated_at_string":"2014年11月22日 17:08:07",
+  "friend":{
+    "id":3,
+    "username":"user1",
+    "nickname":"user1",
+    "name":"user1", // 如果是通讯录好友，则返回通讯录名字，否则返回 nickname
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+  }
+}
 ```
 
 ### 同意好友请求
@@ -709,11 +850,123 @@ POST /api/friend_requests
 POST /api/friend_requests/received/:id/accept
 ```
 
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+id | Integer | 是 | friend_request ID
+
+#### 示例
+
+```
+curl -X PATCH https://catchchatserver.com/api/v4/friend_requests/received/3/accept  -H 'Authorization: Token token=ZV5HH2XzrBQTgzL1NW1v1416645756.998624'
+```
+
+#### 响应
+
+```
+{
+  "id":3,
+  "user_id":1,
+  "friend_id":3,
+  "state":2,
+  "state_string":"已接受",
+  "created_at":"2014-11-22T17:08:07Z",
+  "created_at_string":"2014年11月22日 17:08:07",
+  "updated_at":"2014-11-22T17:09:42Z",
+  "updated_at_string":"2014年11月22日 17:08:07",
+  "friend":{
+    "id":1,
+    "username":"ruanwztest",
+    "nickname":"ruanwztest",
+    "name":"ruanwztest", // 如果是通讯录好友，则返回通讯录名字，否则返回 nickname
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+  }
+}
+```
+
 ### 拒绝好友请求
 
 ```
 POST /api/friend_requests/received/:id/reject
 ```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+id | Integer | 是 | friend_request ID
+
+#### 示例
+
+```
+curl -X PATCH https://catchchatserver.com/api/v4/friend_requests/received/4/reject -H 'Authorization: Token token=XVVP8GpgezByNjhjWaEs1416648757.346672'
+```
+
+#### 响应
+
+```
+{
+  "id":4,
+  "user_id":1,
+  "friend_id":4,
+  "state":3,
+  "state_string":"已拒绝",
+  "created_at":"2014-11-22T17:31:53Z",
+  "created_at_string":"2014年11月22日 17:31:53",
+  "updated_at":"2014-11-22T17:33:41Z",
+  "updated_at_string":"2014年11月22日 17:31:53",
+  "friend":{
+    "id":1,
+    "username":"ruanwztest",
+    "nickname":"ruanwztest",
+    "name":"ruanwztest", // 如果是通讯录好友，则返回通讯录名字，否则返回 nickname
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+  }
+}
+```
+
+### 禁止好友请求
+
+```
+POST /api/friend_requests/received/:id/block
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+id | Integer | 是 | friend_request ID
+
+#### 示例
+
+```
+curl -X PATCH https://catchchatserver.com/api/v4/friend_requests/received/5/block -H 'Authorization: Token token=XVVP8GpgezByNjhjWaEs1416648757.346672'
+```
+
+#### 响应
+
+```
+{
+  "id":5,
+  "user_id":2,
+  "friend_id":4,
+  "state":4,
+  "state_string":"已禁止",
+  "created_at":"2014-11-22T17:31:53Z",
+  "created_at_string":"2014年11月22日 17:31:53",
+  "updated_at":"2014-11-22T17:33:41Z",
+  "updated_at_string":"2014年11月22日 17:31:53",
+  "friend":{
+    "id":1,
+    "username":"tumayun",
+    "nickname":"tumayun",
+    "name":"tumayun", // 如果是通讯录好友，则返回通讯录名字，否则返回 nickname
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+  }
+}
+```
+
 
 ---
 
