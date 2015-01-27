@@ -1417,22 +1417,310 @@ curl -X DELETE https://catchchatserver.com/api/v4/groups/2/remove_friendship/3 -
 GET /api/messages/unread
 ```
 
-### 获取单条消息
+#### 参数
+
+无
+
+#### 示例
 
 ```
-GET /api/messages/:id
+curl https://catchchatserver.com/api/v4/messages/unread -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"' -k
+```
+
+#### 响应
+
+```
+{
+  "messages":[
+    {
+      "id":1,
+      "recipient_id":2,
+      "recipient_type":"User",
+      "text_content":"This is a test!",
+      "parent_id":0,
+      "longitude":122.692612,
+      "latitude":30.19902,
+      "battery_level":50,
+      "media_type":"text",
+      "media_type_string":"一段文字",
+      "state":2,
+      "state_string":"未读",
+      "created_at":"2014-12-06T22:19:30Z",
+      "created_at_string":"2014年12月06日 22:19:30",
+      "updated_at":"2014-12-06T22:19:30Z",
+      "updated_at_string":"2014年12月06日 22:19:30",
+      "sender":{
+        "id":1,
+        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+        "name":"ruanwztest"
+      },
+      "attachments":[
+
+      ]
+    },
+    {
+      "id":2,
+      "recipient_id":1,
+      "recipient_type":"Group",
+      "text_content":"This is a test!",
+      "parent_id":0,
+      "longitude":122.692612,
+      "latitude":30.19902,
+      "battery_level":50,
+      "media_type":"text",
+      "media_type_string":"一段文字",
+      "state":2,
+      "state_string":"未读",
+      "created_at":"2014-12-06T22:19:30Z",
+      "created_at_string":"2014年12月06日 22:19:30",
+      "updated_at":"2014-12-06T22:19:30Z",
+      "updated_at_string":"2014年12月06日 22:19:30",
+      "sender":{
+        "id":1,
+        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+        "name":"ruanwztest"
+      },
+      "attachments":[
+
+      ]
+    },
+    {
+      "id":3,
+      "recipient_id":2,
+      "recipient_type":"User",
+      "text_content":"This is a test!",
+      "parent_id":0,
+      "longitude":122.692612,
+      "latitude":30.19902,
+      "battery_level":50,
+      "media_type":"text",
+      "media_type_string":"一段文字",
+      "state":2,
+      "state_string":"未读",
+      "created_at":"2014-12-08T13:54:29Z",
+      "created_at_string":"2014年12月08日 13:54:29",
+      "updated_at":"2014-12-08T13:54:29Z",
+      "updated_at_string":"2014年12月08日 13:54:29",
+      "sender":{
+        "id":1,
+        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+        "name":"ruanwztest"
+      },
+      "attachments":[
+
+      ]
+    },
+    {
+      "id":4,
+      "recipient_id":2,
+      "recipient_type":"User",
+      "text_content":"This is a test!",
+      "parent_id":0,
+      "longitude":122.692612,
+      "latitude":30.19902,
+      "battery_level":50,
+      "media_type":"video",
+      "media_type_string":"一段视频",
+      "state":2,
+      "state_string":"未读",
+      "created_at":"2014-12-08T13:57:26Z",
+      "created_at_string":"2014年12月08日 13:57:26",
+      "updated_at":"2014-12-08T14:12:52Z",
+      "updated_at_string":"2014年12月08日 13:57:26",
+      "sender":{
+        "id":1,
+        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+        "name":"ruanwztest"
+      },
+      "attachments":[
+        {
+          "file":{
+            "storage":"qiniu",
+            "expires_in":86400, // 单位：秒
+            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+          },
+          "fallback_file":{
+            "storage":"s3",
+            "expires_in":86400, // 单位：秒
+            "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
+          }
+        }
+      ]
+    }
+  ],
+  "current_page":1,
+  "per_page":30,
+  "count":4
+}
+```
+
+### 获取收到的单条消息
+
+```
+GET /api/v4/messages/:id
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 消息 ID |
+
+#### 示例
+
+```
+curl https://catchchatserver.com/api/v4/messages/4 -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
+```
+
+#### 响应
+
+```
+{
+  "id":4,
+  "recipient_id":2,
+  "recipient_type":"User",
+  "text_content":"This is a test!",
+  "parent_id":0,
+  "longitude":122.692612,
+  "latitude":30.19902,
+  "battery_level":50,
+  "media_type":"video",
+  "media_type_string":"一段视频",
+  "state":2,
+  "state_string":"未读",
+  "created_at":"2014-12-08T13:57:26Z",
+  "created_at_string":"2014年12月08日 13:57:26",
+  "updated_at":"2014-12-08T14:12:52Z",
+  "updated_at_string":"2014年12月08日 13:57:26",
+  "sender":{
+    "id":1,
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+    "name":"ruanwztest"
+  },
+  "attachments":[
+    {
+      "file":{
+        "storage":"qiniu",
+        "expires_in":86400, // 单位：秒
+        "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+      },
+      "fallback_file":{
+        "storage":"s3",
+        "expires_in":86400, // 单位：秒
+        "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
+      }
+    }
+  ]
+}
 ```
 
 ### 新建消息
 
 ```
-POST /api/messages
+POST /api/v4/messages
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+recipient_id | Integer | 是 | 接收者 ID，接收者只有两种，User 或 Group，所以是 User ID 或者 Group ID |
+recipient_type | String | 是 | 接受者类型，只能是 User、Group 或者 Circle（**Park Server 才有**）
+media_type | Integer | 否 | 消息类型，0 表示文字, 1 表示图片, 2表示视频, 默认是文字
+text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
+parent_id | Integer | 否 | 回复的消息 ID，表示当前要发送的消息是回复哪条消息
+longitude | Float | 否 | 经度
+latitude | Float | 否 | 纬度
+battery_level | Integer | 否 | 电量，0 - 100 之间的值，默认为 50
+
+#### 示例
+
+```
+curl -X POST https://catchchatserver.com/api/v4/messages -F recipient_id=2 -F recipient_type=User -F text_content='This is a test!' -F battery_level=70 -H 'Authorization: Token token="NDccv4Yvdi9UKtwPToxx1416921006.674603"'
+```
+
+#### 响应
+
+```
+{
+  "id":3,
+  "battery_level":70,
+  "state":2,
+  "state_string":"未读",
+  "media_type":"text",
+  "media_type_string":"一段文字"
+}
 ```
 
 ### 标记消息为已读
 
 ```
-POST /api/messages/:id/mark_as_read
+POST /api/v4/messages/:id/mark_as_read
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+id | Integer | 是 | 消息 ID
+
+#### 示例
+
+```
+curl -X PATCH https://catchchatserver.com/api/v4/messages/3/mark_as_read -H 'Authorization: Token token="TKWsindneiDsFj3gUHs31416969554.7962759"'
+```
+
+#### 响应
+
+```
+{}
+```
+
+
+### 标记消息已收到
+
+```
+PATCH /api/v4/messages/:id/deliver
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+id | Integer | 是 | 消息 ID
+
+#### 示例
+
+```
+curl -X PATCH https://catchchatserver.com/api/v4/messages/3/deliver -H 'Authorization: Token token="TKWsindneiDsFj3gUHs31416969554.7962759"'
+```
+
+#### 响应
+
+```
+{}
+```
+
+### 通知消息被截图保存
+
+```
+POST /api/v4/messages/:id/notify_screenshot
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+id | Integer | 是 | 消息 ID
+
+#### 示例
+
+curl -X POST https://catchchatserver.com/api/v4/messages/3/notify_screenshot -H 'Authorization: Token token="TKWsindneiDsFj3gUHs31416969554.7962759"'
+
+#### 响应
+
+```
+{}
 ```
 
 ---
