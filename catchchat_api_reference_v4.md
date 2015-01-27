@@ -1758,6 +1758,41 @@ GET /api/messages/:id/attachment/upload_token
 | bucket | String | Bucket 的名称 |
 | key | String | 文件名 |
 
+## Contact 通讯录
+
+### 上传通讯录并返回已注册的通讯录好友
+
+**覆盖式上传，上传后会删除之前的通讯录**
+
+```
+POST /api/v4/contacts/upload
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| contacts | JSON | 是 | contacts JSON format, 如 "[{\"name\":\"abc\",\"number\:\"15158166372\"},{\"name\":\"bac\",\"number\":\"15158166723\"}]"|
+
+#### 示例
+
+```
+curl -X POST https://catchchatserver.com/api/v4/contacts/upload -F contacts="[\"name\":\"涂马云\",\"number\":\"15158166372\"}]" -H 'Authorization: Token oken="possbdsrHyRhU_zmwsNy1417016499.200043"'
+```
+
+#### 响应
+
+```
+{
+  "registered_contacas":[
+    {
+      "user_id":1,
+      "name":"涂马云"
+    }
+  ]
+}
+```
+
 ## Report 消息举报
 
 ### 举报
