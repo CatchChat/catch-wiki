@@ -1753,26 +1753,57 @@ curl -X POST https://catchchatserver.com/api/v4/messages/3/notify_screenshot -H 
 
 ## Attachment 附件
 
-### 获取上传 token
+### 获取头像附件上传 token
+
+GET /api/v4/attachments/public\_upload\_token
+
+cURL 请求范例：
 
 ```
-GET /api/messages/:id/attachment/upload_token
+curl -X GET https://www.catchchatserver.com/api/v4/attachments/public_upload_token
+
+```
+
+返回范例：
+
+```
+ {"provider"=>"qiniu",
+ "options"=>
+  {"token"=>
+    "BBHE3ccYQ8VQhEIvZbJARrte1U3ic2Om6CW7mxvN:LKFFwB80Q3LdkfWvJTYgyT-uwzs=:eyJzY29wZSI6InJ1YW53ei1hdmF0YXJzOmE5ZTRhYjRiLWVjOWQtNDVjZS04MGQ2LTBhZDg5MjliZmNmMSIsImNhbGxiYWNrVXJsIjoiaHR0cDovL3J1YW53ei5uZ3Jvay5jb20vaGkiLCJjYWxsYmFja0JvZHkiOiJrZXk9JChrZXkpXHUwMDI2YnVja2V0PSQoYnVja2V0KVx1MDAyNm1lc3NhZ2VfaWQ9JCh4Om1lc3NhZ2VfaWQpIiwiZGVhZGxpbmUiOjE0MjI0MTk4ODd9",
+   "bucket"=>"ruanwz-avatars",
+   "key"=>"a9e4ab4b-ec9d-45ce-80d6-0ad8929bfcf1",
+   "download_url"=>"http://ruanwz-avatars.qiniudn.com/a9e4ab4b-ec9d-45ce-80d6-0ad8929bfcf1",
+   "file_path"=>nil,
+   "file_length"=>nil,
+   "callback_url"=>"http://ruanwz.ngrok.com/hi",
+   "callback_body"=>"key=$(key)&bucket=$(bucket)&message_id=$(x:message_id)"}}
+```
+### 获取Message附件上传 token
+
+```
+GET /api/v4/messages/:id/upload\_token
 ```
 
 不能单独请求上传，必须依赖一条已经生成的 Message，没有上传完成前，Message 的 state 是 drafted。
 
-返回：
+返回范例：
 
 ```
-{
-  "provider": "qiniu",
-  "options": {
-    "token": "LsTN5ioRCbSo7Vb:wQ4ofysef1R7IKnrziqtomqyDvI=:eyJzY29wZSI6IodCksXCJodX0ifQ==",
-    "bucket": "messages1",
-    "key": "a97b1d2570fc4823aec57522b618e779.jpg"
-  }
-}
+{"provider"=>"qiniu",
+ "options"=>
+  {"token"=>
+    "BBHE3ccYQ8VQhEIvZbJARrte1U3ic2Om6CW7mxvN:cAUGuAhMrx4Vk6koJytsHjdCDbQ=:eyJzY29wZSI6InJ1YW53ei1wdWJsaWM6NDMwYjk3YmYtZDI4Ni00ZDI5LTk4YzItYzk4ZWE1OTExNzZhIiwiY2FsbGJhY2tVcmwiOiJodHRwOi8vcnVhbnd6Lm5ncm9rLmNvbS9oaSIsImNhbGxiYWNrQm9keSI6ImtleT0kKGtleSlcdTAwMjZidWNrZXQ9JChidWNrZXQpXHUwMDI2bWVzc2FnZV9pZD0kKHg6bWVzc2FnZV9pZCkiLCJkZWFkbGluZSI6MTQyMjQyMDIwOH0=",
+   "message_id"=>3,
+   "bucket"=>"ruanwz-public",
+   "file_path"=>nil,
+   "file_length"=>nil,
+   "key"=>"430b97bf-d286-4d29-98c2-c98ea591176a",
+   "callback_url"=>"http://ruanwz.ngrok.com/hi",
+   "callback_body"=>"key=$(key)&bucket=$(bucket)&message_id=$(x:message_id)",
+   "notify_url"=>nil}}
 ```
+
 
 获取上传 token 后，根据 provider 上传到相应的云存储，options 中包含了客户端上传所需要的参数。
 
@@ -1782,7 +1813,11 @@ GET /api/messages/:id/attachment/upload_token
 |---|---|---|
 | token | String | 上传凭证 |
 | bucket | String | Bucket 的名称 |
+| message\_id | String | Message ID|
 | key | String | 文件名 |
+| callback_url | String | callback url|
+| callback_body | String | callback body|
+
 
 ## Contact 通讯录
 
