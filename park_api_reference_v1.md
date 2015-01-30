@@ -13,13 +13,13 @@
 
 ### 获取头像附件上传 token
 
-GET /api/v4/attachments/public\_upload\_token
+GET /api/v1/attachments/public\_upload\_token
 
 cURL 请求范例：
 
 ```
 
-curl -X GET -H "Content-Type: application/json" -H 'Authorization: Token token="_mPSDhsxxYpJyVGc7qrU1422539900.9699185"' park.catchchatchina.com/api/v4/attachments/public_upload_token
+curl -X GET -H "Content-Type: application/json" -H 'Authorization: Token token="_mPSDhsxxYpJyVGc7qrU1422539900.9699185"' park.catchchatchina.com/api/v1/attachments/public_upload_token
 
 ```
 
@@ -36,7 +36,7 @@ curl -X GET -H "Content-Type: application/json" -H 'Authorization: Token token="
     "download_url":"http://catch-avatars.qiniudn.com/40b2c039-fcbd-4ca3-b260-60b6dbd50cdf",
     "file_path":null,
     "file_length":null,
-    "callback_url":"http://park.catchchatchina.com/api/v4/attachments/public_callback/qiniu",
+    "callback_url":"http://park.catchchatchina.com/api/v1/attachments/public_callback/qiniu",
     "callback_body":"key=$(key)\u0026bucket=$(bucket)\u0026message_id=$(x:message_id)"
   }
 } 
@@ -46,7 +46,7 @@ curl -X GET -H "Content-Type: application/json" -H 'Authorization: Token token="
 
 
 ```
-POST /api/v4/messages/:id/:kind/attachments
+POST /api/v1/messages/:id/:kind/attachments
 
 ```
 
@@ -60,7 +60,7 @@ POST /api/v4/messages/:id/:kind/attachments
 
 cURL 请求范例：
 ```
-curl -X POST http://park.catchchatchina.com/api/v4/messages/9/image/attachments
+curl -X POST http://park.catchchatchina.com/api/v1/messages/9/image/attachments
 -H 'Authorization: Token token="_mPSDhsxxYpJyVGc7qrU1422539900.9699185"''
 ```
 返回范例：
@@ -75,7 +75,7 @@ curl -X POST http://park.catchchatchina.com/api/v4/messages/9/image/attachments
     "key":"bfee4d40-6cbc-4304-96d3-96c30a8e50ac",
     "file_path":null,
     "file_length":null,
-    "callback_url":"http://park.catchchatchina.com/api/v4/attachments/callback/qiniu",
+    "callback_url":"http://park.catchchatchina.com/api/v1/attachments/callback/qiniu",
     "callback_body":"key=$(key)\u0026bucket=$(bucket)\u0026message_id=$(x:message_id)",
     "notify_url":null
   }
