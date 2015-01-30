@@ -46,7 +46,7 @@ curl -X GET -H "Content-Type: application/json" -H 'Authorization: Token token="
 
 
 ```
-GET /api/v4/messages/:id/:kind/upload_token
+POST /api/v4/messages/:id/:kind/attachments
 
 ```
 
@@ -60,7 +60,8 @@ GET /api/v4/messages/:id/:kind/upload_token
 
 cURL 请求范例：
 ```
-curl -X GET http://park.catchchatchina.com/api/v4/messages/9/image/upload_token -H 'Authorization: Token token="_mPSDhsxxYpJyVGc7qrU1422539900.9699185"'
+curl -X POST http://park.catchchatchina.com/api/v4/messages/9/image/attachments
+-H 'Authorization: Token token="_mPSDhsxxYpJyVGc7qrU1422539900.9699185"''
 ```
 返回范例：
 
