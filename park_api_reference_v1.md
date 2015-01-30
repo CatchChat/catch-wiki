@@ -14,7 +14,7 @@
 ### 获取加入了的所有公共群组
 
 ```
-GET /api/v4/circles
+GET /api/v1/circles
 ```
 
 #### 参数
@@ -27,7 +27,7 @@ GET /api/v4/circles
 #### 示例
 
 ```
-curl -X GET https://park.catchchatchina.com/api/v4/circles -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
+curl -X GET https://park.catchchatchina.com/api/v1/circles -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
 ```
 
 #### 响应
@@ -135,7 +135,7 @@ curl -X GET https://park.catchchatchina.com/api/v4/circles -H 'Authorization: To
 ### 创建公共群组
 
 ```
-POST /api/v4/circles
+POST /api/v1/circles
 ```
 
 #### 参数
@@ -148,7 +148,7 @@ POST /api/v4/circles
 #### 示例
 
 ```
-curl -i -X POST https://park.catchchatchina.com/api/v4/circles -d '{ "members": [3,4,5], "name": "群组" }' -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"' -H "Content-Type: application/json"
+curl -i -X POST https://park.catchchatchina.com/api/v1/circles -d '{ "members": [3,4,5], "name": "群组" }' -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"' -H "Content-Type: application/json"
 ```
 
 #### 响应
@@ -204,7 +204,7 @@ curl -i -X POST https://park.catchchatchina.com/api/v4/circles -d '{ "members": 
 ### 更新公共群组
 
 ```
-PUT /api/v4/circles/:id
+PUT /api/v1/circles/:id
 ```
 
 #### 参数
@@ -217,7 +217,7 @@ PUT /api/v4/circles/:id
 #### 示例
 
 ```
-curl -X PUT https://park.catchchatchina.com/api/v4/circles/2 -d '{ "name": "公共群组" }' -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"' -H "Content-Type: application/json"
+curl -X PUT https://park.catchchatchina.com/api/v1/circles/2 -d '{ "name": "公共群组" }' -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"' -H "Content-Type: application/json"
 ```
 
 #### 响应
@@ -273,7 +273,7 @@ curl -X PUT https://park.catchchatchina.com/api/v4/circles/2 -d '{ "name": "公�
 #### 获取单个公共群组
 
 ```
-GET /api/v4/circles/:id
+GET /api/v1/circles/:id
 ```
 
 #### 参数
@@ -285,7 +285,7 @@ GET /api/v4/circles/:id
 #### 示例
 
 ```
-curl -X GET https://park.catchchatchina.com/api/v4/circles/2 -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"'
+curl -X GET https://park.catchchatchina.com/api/v1/circles/2 -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"'
 ```
 
 #### 响应
@@ -341,7 +341,7 @@ I
 #### 加入公共群组
 
 ```
-POST /api/v4/circles/:id/join
+POST /api/v1/circles/:id/join
 ```
 
 #### 参数
@@ -353,7 +353,7 @@ POST /api/v4/circles/:id/join
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v4/circles/2/join -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
+curl -X POST https://park.catchchatchina.com/api/v1/circles/2/join -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
 ```
 
 #### 响应
@@ -409,7 +409,7 @@ curl -X POST https://park.catchchatchina.com/api/v4/circles/2/join -H 'Authoriza
 ### 退出公共群组
 
 ```
-DELETE /api/v4/circles/:id/leave
+DELETE /api/v1/circles/:id/leave
 ```
 
 #### 参数
@@ -421,7 +421,7 @@ DELETE /api/v4/circles/:id/leave
 #### 示例
 
 ```
-curl -X DELETE https://park.catchchatchina.com/api/v4/circles/2/leave -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
+curl -X DELETE https://park.catchchatchina.com/api/v1/circles/2/leave -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
 ```
 
 #### 响应
@@ -433,7 +433,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v4/circles/2/leave -H 'Author
 ### 批量添加成员
 
 ```
-POST /api/v4/circles/:id/batch_add
+POST /api/v1/circles/:id/batch_add
 ```
 
 #### 参数
@@ -446,7 +446,7 @@ POST /api/v4/circles/:id/batch_add
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v4/circles/2/batch_add -d '{ "members": [4,5] }' -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"' -H "Content-Type: application/json"
+curl -X POST https://park.catchchatchina.com/api/v1/circles/2/batch_add -d '{ "members": [4,5] }' -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"' -H "Content-Type: application/json"
 ```
 
 #### 响应
@@ -502,7 +502,7 @@ curl -X POST https://park.catchchatchina.com/api/v4/circles/2/batch_add -d '{ "m
 ### 批量删除成员（只能是群 owner 才能删除成员）
 
 ```
-DELETE /api/v4/circles/:id/batch_delete
+DELETE /api/v1/circles/:id/batch_delete
 ```
 
 #### 参数
@@ -515,7 +515,7 @@ DELETE /api/v4/circles/:id/batch_delete
 #### 示例
 
 ```
-curl -X DELETE https://park.catchchatchina.com/api/v4/circles/2/batch_delete -d '{ "members": [4,5] }' -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"' -H "Content-Type: application/json"
+curl -X DELETE https://park.catchchatchina.com/api/v1/circles/2/batch_delete -d '{ "members": [4,5] }' -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"' -H "Content-Type: application/json"
 ```
 
 #### 响应
@@ -557,7 +557,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v4/circles/2/batch_delete -d 
 ### 公共群组未读消息
 
 ```
-GET /api/v4/circles/:id/unread_messages
+GET /api/v1/circles/:id/unread_messages
 ```
 
 #### 参数
@@ -569,7 +569,7 @@ GET /api/v4/circles/:id/unread_messages
 #### 示例
 
 ```
-curl -X GET http://park.catchchatchina.com/api/v4/circles/2/unread_messages -H 'Authorization: Token token="QVXyAg6mpi14YDje9RSr1421656248.3836942"'
+curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H 'Authorization: Token token="QVXyAg6mpi14YDje9RSr1421656248.3836942"'
 ```
 
 #### 响应
