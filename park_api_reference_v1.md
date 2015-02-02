@@ -537,7 +537,7 @@ ids | Integer | 是 | friendship ids
 #### 示例
 
 ```
-curl -X PATCH 0.0.0.0:3000/api/v1/friendships/batch_mark_as_favored -d '{ "ids": [3,5,1] }' -H "Content-Type: application/json" -H 'Authorization: Token token="wcdyPGTv3HqZ76vZt5VR1422869949.0730119"'
+curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/batch_mark_as_favored -d '{ "ids": [3,5,1] }' -H "Content-Type: application/json" -H 'Authorization: Token token="wcdyPGTv3HqZ76vZt5VR1422869949.0730119"'
 ```
 
 #### 响应
