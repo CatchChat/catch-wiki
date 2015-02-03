@@ -523,7 +523,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/3/move_to_top -
 ### 批量设置星组好友
 
 ```
-PATCH /api/v1/friendships
+PATCH /api/v1/friendships/batch_mark_as_favored
 ```
 
 **按照提交的ID顺序覆盖式设置星组好友**
