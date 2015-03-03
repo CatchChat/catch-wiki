@@ -191,6 +191,7 @@ PUT   /api/v1/registration/update
 | mobile | 手机号 |
 | phone\_code | 国家码 |
 | token | 手机短信收到的验证码 |
+| client | 用于推送, official=0, company=1, local=2 |
 
 cURL 请求范例：
 ```
