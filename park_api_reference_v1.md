@@ -191,7 +191,8 @@ PUT   /api/v1/registration/update
 | mobile | 手机号 |
 | phone\_code | 国家码 |
 | token | 手机短信收到的验证码 |
-| client |可选，用于推送, official=0, company=1, local=2 |
+| client |可选，用于推送, official=0, company=1, local=2 ，默认为0|
+| expiring | 可选，access_token 过期时间。单位为秒，设置为0表示永不过期，不设置默认一年过期 |
 
 cURL 请求范例：
 ```
