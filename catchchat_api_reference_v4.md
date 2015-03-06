@@ -1810,7 +1810,7 @@ curl -X POST https://catchchatserver.com/api/v4/contacts/upload -F contacts="[\"
 
 ```
 {
-  "registered_contacas":[
+  "registered_contacts":[
     {
       "user_id":1,
       "name":"涂马云"
