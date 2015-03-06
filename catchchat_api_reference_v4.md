@@ -1812,8 +1812,15 @@ curl -X POST https://catchchatserver.com/api/v4/contacts/upload -F contacts="[\"
 {
   "registered_contacts":[
     {
-      "user_id":1,
-      "name":"涂马云"
+      "id": 1,
+      "name": "涂马云",
+      "user": {
+        "id": 1,
+        "username": "tumayun",
+        "avatar_url": "http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+        "nickname": "Tumayun",
+        "number": "+8615158166372"
+      }
     }
   ]
 }
