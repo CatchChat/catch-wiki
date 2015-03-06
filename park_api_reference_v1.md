@@ -37,6 +37,7 @@ curl htts://park.catchchatchina.com/api/v1/contacts/upload -F contacts="[{\"name
 {
   "registered_contacts":[
     {
+      "id":1,
       "name":"abc",
       "user":{
         "id":13,
@@ -47,6 +48,7 @@ curl htts://park.catchchatchina.com/api/v1/contacts/upload -F contacts="[{\"name
       }
     },
     {
+      "id":2,
       "name":"bac",
       "user":{
         "id":14,
