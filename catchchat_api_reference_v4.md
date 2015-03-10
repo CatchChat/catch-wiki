@@ -1756,7 +1756,7 @@ curl -X POST https://catchchatserver.com/api/v4/messages/3/notify_screenshot -H 
 ### 获取上传 token
 
 ```
-GET /api/messages/:id/attachment/upload_token
+GET /api/messages/:id/upload_token
 ```
 
 不能单独请求上传，必须依赖一条已经生成的 Message，没有上传完成前，Message 的 state 是 drafted。
