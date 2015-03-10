@@ -150,7 +150,7 @@ http://park.catchchatchina.com/api/v1/auth/token_by_mobile
   error: "手机号或验证码错误"
 }
 
-### 发送用户名密码手机号码，发起注册,等待接收手机验证码
+### 发送用户名,手机号码，发起注册,等待接收手机验证码
 
 ```
 POST   /api/v1/registration/create
@@ -168,6 +168,37 @@ cURL 请求范例：
 curl -X POST -H "Content-Type: application/json" -d '{"phone_code":"86",
 "mobile":"15626044835", "nickname": "testnick"}'
 http://park.catchchatchina.com/api/v1/registration/create
+```
+
+返回范例：
+
+```
+{
+  "nickname":"testnick",
+  "mobile":"15626044835",
+  "sent_sms": "{\"error\":0,\"msg\":\"ok\"}",
+  "state":"blocked"
+}
+```
+
+### 重发送用户名,手机号码，发起注册,等待接收语音验证码
+
+```
+POST   /api/v1/registration/resend_verify_code_by_voice
+```
+
+| 参数 | 描述 |
+|--------|--------|
+| mobile | 手机号 |
+| nickname | 用户昵称 |
+| phone_code | 国家码 |
+
+cURL 请求范例：
+
+```
+curl -X POST -H "Content-Type: application/json" -d '{"phone_code":"86",
+"mobile":"15626044835", "nickname": "testnick"}'
+http://park.catchchatchina.com/api/v1/registration/resend_verify_code_by_voice
 ```
 
 返回范例：
