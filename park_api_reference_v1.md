@@ -44,7 +44,7 @@ curl -X GET -H "Content-Type: application/json" -H 'Authorization: Token token="
 ```
 ### 获取Message附件上传 token
 
-
+#### 七牛
 ```
 POST /api/v1/messages/:id/:kind/upload_token
 
@@ -97,4 +97,57 @@ http://park.catchchatchina.com/api/v1/messages/9/image/upload_token
 | key | String | 文件名 |
 | callback_url | String | callback url|
 | callback_body | String | callback body|
+
+#### S3
+
+获得S3上传所需的提交的form的参数
+
+具体S3上传需要的格式可参考S3文档或Rails里的上传例子
+[S3文档](http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html)
+
+```
+POST /api/v1/messages/:id/:kind/s3_upload_form_fields
+
+```
+
+| 名称 | 类型 | 描述 |
+|---|---|---|
+| id | String | message id|
+| kind | String | message 类型,必须是以下3种之一： image, video, thumbnail|
+
+不能单独请求上传，必须依赖一条已经生成的 Message，没有上传完成前，Message 的 state 是 drafted。
+
+
+cURL 请求范例：
+```
+curl -X POST -H "Content-Type: application/json" -H 'Authorization: Token
+token="_mPSDhsxxYpJyVGc7qrU1422539900"' -d ''
+http://park.catchchatchina.com/api/v1/messages/3/image/s3_upload_form_fields'
+
+```
+返回范例：
+
+```
+{
+  "provider":"s3",
+  "options":{
+    "message_id":3,
+    "bucket":"ruanwz-test",
+    "key":"7f597cbd-0c4c-427f-b267-8292b33983d3",
+    "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/",
+    "policy": {
+      "expiration":"2015-03-12T08:05:08.000Z",
+      "conditions":[
+        {"bucket":"ruanwz-test"},
+        {"key":"7f597cbd-0c4c-427f-b267-8292b33983d3"},
+        {"acl":"private"},
+        {"x-amz-credential":"AKIAOGBVMZAU5EZPGPIQ/20150312/cn-north-1/s3/aws4_request"},
+        {"x-amz-algorithm":"AWS4-HMAC-SHA256"},{"x-amz-date":"20150312T070508Z"}]
+      },
+    "encoded_policy":"eyJleHBpcmF0aW9uIjoiMjAxNS0wMy0xMlQwODowNTowOC4wMDBaIiwiY29uZGl0aW9ucyI6W3siYnVja2V0IjoicnVhbnd6LXRlc3QifSx7ImtleSI6IjdmNTk3Y2JkLTBjNGMtNDI3Zi1iMjY3LTgyOTJiMzM5ODNkMyJ9LHsiYWNsIjoicHJpdmF0ZSJ9LHsieC1hbXotY3JlZGVudGlhbCI6IkFLSUFPR0JWTVpBVTVFWlBHUElRLzIwMTUwMzEyL2NuLW5vcnRoLTEvczMvYXdzNF9yZXF1ZXN0In0seyJ4LWFtei1hbGdvcml0aG0iOiJBV1M0LUhNQUMtU0hBMjU2In0seyJ4LWFtei1kYXRlIjoiMjAxNTAzMTJUMDcwNTA4WiJ9XX0=",
+    "signature":"e7f94131b773e3c0db6fd20af1ac471b2a48de99012d23009ba2baf305219f50"}}
+```
+
+
+获取上传 form所需参数后，上传到S3, S3会回调设置的endpoint(需在AWS控制台设置)。
 
