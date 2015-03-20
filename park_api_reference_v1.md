@@ -11,7 +11,7 @@
 
 ## Attachment 附件
 
-### 获取头像附件上传 token
+### 获取七牛头像附件上传 token
 
 GET /api/v1/attachments/public\_upload\_token
 
@@ -42,6 +42,25 @@ curl -X GET -H "Content-Type: application/json" -H 'Authorization: Token token="
 } 
 
 ```
+### 获取S3头像附件上传 token
+
+GET /api/v1/attachments/s3upload\_public\_form_fields
+
+cURL 请求范例：
+
+```
+curl -X GET -H 'Authorization: Token token="test-token"' -H "Content-Type:
+application/json"
+http://park.catchchatchina.com/api/v1/attachments/s3_upload_public_form_fields
+
+```
+返回范例：
+
+```
+{"provider":"s3","options":{"bucket":null,"key":"61e861c2-be37-4033-9c85-685347657481","url":"https://.s3.cn-north-1.amazonaws.com.cn/","policy":{"expiration":"2015-03-20T08:48:20.000Z","conditions":[{"bucket":null},{"key":"61e861c2-be37-4033-9c85-685347657481"},{"acl":"private"},{"x-amz-credential":"AKIAOGBVMZAU5EZPGPIQ/20150320/cn-north-1/s3/aws4_request"},{"x-amz-algorithm":"AWS4-HMAC-SHA256"},{"x-amz-date":"20150320T074820Z"}]},"encoded_policy":"eyJleHBpcmF0aW9uIjoiMjAxNS0wMy0yMFQwODo0ODoyMC4wMDBaIiwiY29uZGl0aW9ucyI6W3siYnVja2V0IjpudWxsfSx7ImtleSI6IjYxZTg2MWMyLWJlMzctNDAzMy05Yzg1LTY4NTM0NzY1NzQ4MSJ9LHsiYWNsIjoicHJpdmF0ZSJ9LHsieC1hbXotY3JlZGVudGlhbCI6IkFLSUFPR0JWTVpBVTVFWlBHUElRLzIwMTUwMzIwL2NuLW5vcnRoLTEvczMvYXdzNF9yZXF1ZXN0In0seyJ4LWFtei1hbGdvcml0aG0iOiJBV1M0LUhNQUMtU0hBMjU2In0seyJ4LWFtei1kYXRlIjoiMjAxNTAzMjBUMDc0ODIwWiJ9XX0=","signature":"60165b75396f9ab5f32c22014cef9de576da2d7423de872fc6ce1e20dd8ab5a8"}}
+
+```
+
 ### 获取Message附件上传 token
 
 #### 七牛
