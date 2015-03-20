@@ -44,7 +44,7 @@ curl -X GET -H "Content-Type: application/json" -H 'Authorization: Token token="
 ```
 ### 获取S3头像附件上传 token
 
-GET /api/v1/attachments/s3upload\_public\_form_fields
+GET /api/v1/attachments/s3\_upload\_public\_form_fields
 
 cURL 请求范例：
 
