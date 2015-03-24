@@ -561,3 +561,394 @@ curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H '
   "count":2
 }
 ```
+
+## User 个人信息 API
+
+### 可能认识的好友
+
+```
+GET /api/v1/user/may_know_friends
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/user/may_know_friends -H Authorization: Token token="kuH3PbRifgSATCanYwxd1418031570.162303"'
+```
+
+#### 响应
+
+```
+{
+  "friends":[
+    {
+      "id":8,
+      "username":"friend6",
+      "nickname":"friend6",
+      "phone_code":"86",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+      "common_friend_names":[
+        "friend2",
+        "friend3",
+        "friend4",
+        "friend5"
+      ]
+    },
+    {
+      "id":9,
+      "username":"friend7",
+      "nickname":"friend7",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+      "common_friend_names":[
+        "friend3",
+        "friend4",
+        "friend5"
+      ]
+    },
+    {
+      "id":10,
+      "username":"friend8",
+      "nickname":"friend8",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+      "common_friend_names":[
+        "friend4",
+        "friend5"
+      ]
+    }
+  ]
+}
+```
+
+### 获取个人信息
+
+```
+GET /api/v1/user
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/user -H 'Authorization: Token oken="kuH3PbRifgSATCanYwxd1418031570.162303"'
+```
+
+#### 响应
+
+```
+{
+  "id":"d2cfb112ffcec856ad34a3e933ed64b0",
+  "username":"user5",
+  "nickname":"user5",
+  "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+  "phone_code":"86",
+  "mobile":"15158160005",
+  "pusher_id":"c0db0793fb939e96f2574cb4",
+  "state":"active",
+  "state_string":"激活状态",
+  "latitude":28.2534,
+  "longitude":117.068,
+  "last_sign_in_at":"2015-03-24T06:01:18Z",
+  "last_sign_in_at_string":"2015年03月24日 06:01:18",
+  "learning_skills":[
+    "ruby",
+    "javascript",
+    "ios",
+    "linux",
+    "css",
+    "cooking",
+    "boxing",
+    "drawing"
+  ],
+  "master_skills":[
+    {
+      "name":"singing",
+      "level":"beginner"
+    },
+    {
+      "name":"piano",
+      "level":"beginner"
+    },
+    {
+      "name":"dancing",
+      "level":"beginner"
+    }
+  ]
+}
+```
+
+### 更新个人信息
+
+```
+PATCH /api/v1/user
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| nickname | String | 否 | 昵称 |
+| avatar_url | String | 否 | 头像 URL |
+| username | String | 否 | 用户名，必须唯一 |
+| latitude | Float | 否 | 纬度 |
+| longitude | Float | 否 | 经度 |
+
+#### 示例
+
+```
+curl -X PATCH https://park.catchchatchina.com/api/v1/user -F username=tumayun -F latitude=26.331920 -F longitude=168.3097112 -F nickname=Tumayun -F avatar_url=http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+```
+
+#### 响应
+
+```
+{
+  "nickname":"Tumayun",
+  "username":"tumayun",
+  "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
+  "latitude":26.331920,
+  "longitude":168.3097112
+}
+```
+
+### 更新手机号
+
+```
+PATCH /api/v1/user/update_mobile
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| phone_code | String | 是 | 手机号国家码，详见 [http://countrycode.org/](ttp://countrycode.org/) |
+| mobile | String | 是 | 手机号 |
+| token | String | 是 | 短信验证码 |
+
+#### 示例
+
+```
+curl -X PATCH https://park.catchchatchina.com/api/v1/user/update_mobile -F phone_ode=86 -F mobile=15158166372 -F token=131421 -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+```
+
+#### 响应
+
+```
+{
+  "phone_code":"86",
+  "mobile":"15158166372"
+}
+```
+
+### Discover
+
+```
+GET /api/:version/user/discover
+```
+
+如果传入`master_skills`和`learning_skills`参数，则按照传入参数匹配目标用户；
+如果未传参数，则用当前用户想要学习的技能作为`master_skills`，当前用户已有的技能作为`learning_skills`，匹配出最近目标用户。
+`master_skills`权重大于`learning_skills`，故有当前用户想学技能的用户排位靠前，与当前用户距离越近越靠前，最后在线时间越近越靠前。
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| master_skills | JSON Array | 否 | 匹配用户已有技能 |
+| learning_skills | JSON Array | 否 | 匹配用户想要学习的技能 |
+
+#### 示例
+
+```
+curl -X GET https://park.catchchatchina.com/api/v1/user/discover -d '{ "master_skills": ["ruby"], "learning_skills": ["singing"] }' -H 'Authorization: Token token="xfNa4ZYEQKLynYgbAfHB1427176878.549557"' -H 'Content-Type: application/json'
+```
+
+#### 响应
+
+```
+{
+  "users":[
+    {
+      "id":"058555a359257b6d1b9e85ec425096b7",
+      "username":"user4",
+      "nickname":"user4",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+      "latitude":0.0,
+      "longitude":0.0,
+      "distance":"12646.761054269287",
+      "last_sign_in_at":"2015-03-24T05:43:05Z",
+      "last_sign_in_at_string":"2015年03月24日 05:43:05",
+      "learning_skills":[
+        "ruby",
+        "javascript",
+        "ios",
+        "linux",
+        "css",
+        "cooking",
+        "boxing",
+        "drawing"
+      ],
+      "master_skills":[
+        {
+          "name":"singing",
+          "level":"beginner"
+        },
+        {
+          "name":"piano",
+          "level":"beginner"
+        },
+        {
+          "name":"dancing",
+          "level":"beginner"
+        }
+      ]
+    },
+    {
+      "id":"8d35d33fdd000da12ff35887daa7d428",
+      "username":"user1",
+      "nickname":"user1",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+      "latitude":0.0,
+      "longitude":0.0,
+      "distance":"12646.761054269287",
+      "last_sign_in_at":"2015-03-24T05:43:03Z",
+      "last_sign_in_at_string":"2015年03月24日 05:43:03",
+      "learning_skills":[
+        "ruby",
+        "javascript",
+        "ios",
+        "linux",
+        "css",
+        "cooking",
+        "boxing",
+        "drawing"
+      ],
+      "master_skills":[
+        {
+          "name":"singing",
+          "level":"beginner"
+        },
+        {
+          "name":"piano",
+          "level":"beginner"
+        },
+        {
+          "name":"dancing",
+          "level":"beginner"
+        }
+      ]
+    },
+    {
+      "id":"3cd8d8de0b3f732f4103cbd428f8ec92",
+      "username":"tumayun",
+      "nickname":"tumayun",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+      "latitude":28.3213,
+      "longitude":117.001,
+      "distance":"9.995235609898296",
+      "last_sign_in_at":"2015-03-24T05:43:02Z",
+      "last_sign_in_at_string":"2015年03月24日 05:43:02",
+      "learning_skills":[
+        "ruby",
+        "javascript",
+        "ios",
+        "linux",
+        "css",
+        "cooking",
+        "boxing",
+        "drawing"
+      ],
+      "master_skills":[
+        {
+          "name":"singing",
+          "level":"beginner"
+        },
+        {
+          "name":"piano",
+          "level":"beginner"
+        },
+        {
+          "name":"dancing",
+          "level":"beginner"
+        }
+      ]
+    },
+    {
+      "id":"ff5405d3bdad237c7f572a58f65517a6",
+      "username":"ruanwz",
+      "nickname":"ruanwz",
+      "avatar_url":null,
+      "latitude":26.9211,
+      "longitude":118.969,
+      "distance":"238.93350644977318",
+      "last_sign_in_at":"2015-03-24T05:43:01Z",
+      "last_sign_in_at_string":"2015年03月24日 05:43:01",
+      "learning_skills":[
+        "ruby",
+        "javascript",
+        "ios",
+        "linux",
+        "css",
+        "cooking",
+        "boxing",
+        "drawing"
+      ],
+      "master_skills":[
+        {
+          "name":"singing",
+          "level":"beginner"
+        },
+        {
+          "name":"piano",
+          "level":"beginner"
+        },
+        {
+          "name":"dancing",
+          "level":"beginner"
+        }
+      ]
+    },
+    {
+      "id":"6cf2c0fae5fb7048175fd80b8cc842a5",
+      "username":"user3",
+      "nickname":"user3",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+      "latitude":0.0,
+      "longitude":0.0,
+      "distance":"12646.761054269287",
+      "last_sign_in_at":"2015-03-24T05:43:04Z",
+      "last_sign_in_at_string":"2015年03月24日 05:43:04",
+      "learning_skills":[
+        "ruby",
+        "javascript",
+        "ios",
+        "linux",
+        "css",
+        "cooking",
+        "boxing",
+        "drawing"
+      ],
+      "master_skills":[
+        {
+          "name":"singing",
+          "level":"beginner"
+        },
+        {
+          "name":"piano",
+          "level":"beginner"
+        },
+        {
+          "name":"dancing",
+          "level":"beginner"
+        }
+      ]
+    }
+  ]
+}
+```
