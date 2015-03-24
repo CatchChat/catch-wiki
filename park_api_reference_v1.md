@@ -950,5 +950,8 @@ curl -X GET https://park.catchchatchina.com/api/v1/user/discover -d '{ "master_s
       ]
     }
   ]
+  "current_page":1,
+  "per_page":30,
+  "count":5
 }
 ```
