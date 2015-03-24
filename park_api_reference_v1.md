@@ -656,10 +656,9 @@ curl https://park.catchchatchina.com/api/v1/friend_requests/sent/accepted -H 'Au
       "updated_at_string":"2015年01月30日 07:07:19",
       "friend":{
         "id":12,
+        "username":"user3",
         "nickname":"user3",
         "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-        "phone_code":"86",
-        "mobile":"15158160003",
         "contact_name":null
       }
     },
@@ -675,10 +674,9 @@ curl https://park.catchchatchina.com/api/v1/friend_requests/sent/accepted -H 'Au
       "updated_at_string":"2015年01月30日 07:07:19",
       "friend":{
         "id":11,
+        "username":"user2",
         "nickname":"user2",
         "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-        "phone_code":"86",
-        "mobile":"15158160002",
         "contact_name":null
       }
     },
@@ -694,10 +692,9 @@ curl https://park.catchchatchina.com/api/v1/friend_requests/sent/accepted -H 'Au
       "updated_at_string":"2015年01月30日 07:07:19",
       "friend":{
         "id":10,
+        "username":"user1",
         "nickname":"user1",
         "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-        "phone_code":"86",
-        "mobile":"15158160001",
         "contact_name":null
       }
     }
@@ -741,10 +738,9 @@ curl -X POST https://park.catchchatchina.com/api/v1/friend_requests -F friend_id
   "updated_at_string":"2015年01月30日 07:07:19",
   "friend":{
     "id":10,
+    "username":"user1",
     "nickname":"user1",
     "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-    "phone_code":"86",
-    "mobile":"15158160001",
     "contact_name":null
   }
 }
@@ -783,10 +779,9 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friend_requests/received/7/
   "updated_at_string":"2015年01月30日 07:07:19",
   "friend":{
     "id":10,
+    "username":"user1",
     "nickname":"user1",
     "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-    "phone_code":"86",
-    "mobile":"15158160001",
     "contact_name":null
   }
 }
@@ -825,10 +820,9 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friend_requests/received/7/
   "updated_at_string":"2015年01月30日 07:07:19",
   "friend":{
     "id":10,
+    "username":"user1",
     "nickname":"user1",
     "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-    "phone_code":"86",
-    "mobile":"15158160001",
     "contact_name":null
   }
 }
@@ -867,10 +861,9 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friend_requests/received/7/
   "updated_at_string":"2015年01月30日 07:07:19",
   "friend":{
     "id":10,
+    "username":"user1",
     "nickname":"user1",
     "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-    "phone_code":"86",
-    "mobile":"15158160001",
     "contact_name":null
   }
 }
