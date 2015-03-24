@@ -44,40 +44,20 @@ curl -X GET https://park.catchchatchina.com/api/v1/circles -H 'Authorization: To
       "updated_at_string":"2015年01月29日 09:43:35",
       "owner":{
         "id":1,
+        "username":"tumayun",
         "nickname":"tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-        "phone_code":"86",
-        "mobile":"15158161111"
+        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
       },
       "members":[
         {
           "id":1,
+          "username":"tumayun",
           "nickname":"tumayun",
-          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-          "phone_code":"86",
-          "mobile":"15158161111"
-        },
-        {
-          "id":3,
-          "nickname":"friend1",
-          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-          "phone_code":"86",
-          "mobile":"15158161113"
-        },
-        {
-          "id":4,
-          "nickname":"friend2",
-          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-          "phone_code":"86",
-          "mobile":"15158161114"
-        },
-        {
-          "id":5,
-          "nickname":"friend3",
-          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-          "phone_code":"86",
-          "mobile":"15158161115"
+          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
         }
+        .
+        .
+        .
       ]
     },
     {
@@ -89,40 +69,20 @@ curl -X GET https://park.catchchatchina.com/api/v1/circles -H 'Authorization: To
       "updated_at_string":"2015年01月29日 09:44:39",
       "owner":{
         "id":1,
+        "username":"tumayun",
         "nickname":"tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-        "phone_code":"86",
-        "mobile":"15158161111"
+        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
       },
       "members":[
         {
           "id":1,
+          "username":"tumayun",
           "nickname":"tumayun",
-          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-          "phone_code":"86",
-          "mobile":"15158161111"
-        },
-        {
-          "id":4,
-          "nickname":"friend2",
-          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-          "phone_code":"86",
-          "mobile":"15158161114"
-        },
-        {
-          "id":5,
-          "nickname":"friend3",
-          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-          "phone_code":"86",
-          "mobile":"15158161115"
-        },
-        {
-          "id":3,
-          "nickname":"friend1",
-          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-          "phone_code":"86",
-          "mobile":"15158161113"
+          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
         }
+        .
+        .
+        .
       ]
     }
   ],
@@ -163,40 +123,20 @@ curl -i -X POST https://park.catchchatchina.com/api/v1/circles -d '{ "members": 
   "updated_at_string":"2015年01月29日 09:44:38",
   "owner":{
     "id":3,
+    "username":"friend1"
     "nickname":"friend1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-    "phone_code":"86",
-    "mobile":"15158161113"
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
   },
   "members":[
     {
       "id":3,
+      "username":"friend1",
       "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161113"
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
     },
-    {
-      "id":4,
-      "nickname":"friend2",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161114"
-    },
-    {
-      "id":5,
-      "nickname":"friend3",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161115"
-    },
-    {
-      "id":1,
-      "nickname":"tumayun",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161111"
-    }
+  	.
+  	.
+  	.
   ]
 }
 ```
@@ -232,40 +172,20 @@ curl -X PUT https://park.catchchatchina.com/api/v1/circles/2 -d '{ "name": "公�
   "updated_at_string":"2015年01月29日 09:44:39",
   "owner":{
     "id":3,
+    "username":"friend1",
     "nickname":"friend1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-    "phone_code":"86",
-    "mobile":"15158161113"
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
   },
   "members":[
     {
       "id":3,
+      "username":"friend1",
       "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161113"
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
     },
-    {
-      "id":4,
-      "nickname":"friend2",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161114"
-    },
-    {
-      "id":5,
-      "nickname":"friend3",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161115"
-    },
-    {
-      "id":1,
-      "nickname":"tumayun",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161111"
-    }
+    .
+    .
+    .
   ]
 }
 ```
@@ -300,40 +220,20 @@ curl -X GET https://park.catchchatchina.com/api/v1/circles/2 -H 'Authorization: 
   "updated_at_string":"2015年01月29日 09:44:39",
   "owner":{
     "id":3,
+    "username":"friend1",
     "nickname":"friend1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-    "phone_code":"86",
-    "mobile":"15158161113"
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
   },
   "members":[
     {
       "id":3,
+      "username":"friend1",
       "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161113"
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
     },
-    {
-      "id":4,
-      "nickname":"friend2",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161114"
-    },
-    {
-      "id":5,
-      "nickname":"friend3",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161115"
-    },
-    {
-      "id":1,
-      "nickname":"tumayun",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161111"
-    }
+    .
+    .
+    .
   ]
 }
 ```
@@ -368,40 +268,20 @@ curl -X POST https://park.catchchatchina.com/api/v1/circles/2/join -H 'Authoriza
   "updated_at_string":"2015年01月29日 09:44:39",
   "owner":{
     "id":1,
+    "username":"tumayun",
     "nickname":"tumayun",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-    "phone_code":"86",
-    "mobile":"15158161111"
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
   },
   "members":[
     {
       "id":1,
+      "username":"tumayun",
       "nickname":"tumayun",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161111"
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg""
     },
-    {
-      "id":4,
-      "nickname":"friend2",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161114"
-    },
-    {
-      "id":5,
-      "nickname":"friend3",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161115"
-    },
-    {
-      "id":3,
-      "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161113"
-    }
+    .
+    .
+    .
   ]
 }
 ```
@@ -461,40 +341,20 @@ curl -X POST https://park.catchchatchina.com/api/v1/circles/2/batch_add -d '{ "m
   "updated_at_string":"2015年01月29日 09:44:39",
   "owner":{
     "id":3,
+    "username":"friend1",
     "nickname":"friend1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-    "phone_code":"86",
-    "mobile":"15158161113"
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
   },
   "members":[
     {
       "id":3,
+      "username":"friend1",
       "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161113"
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
     },
-    {
-      "id":1,
-      "nickname":"tumayun",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161111"
-    },
-    {
-      "id":4,
-      "nickname":"friend2",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161114"
-    },
-    {
-      "id":5,
-      "nickname":"friend3",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161115"
-    }
+    .
+    .
+    .
   ]
 }
 ```
@@ -530,26 +390,20 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/circles/2/batch_delete -d 
   "updated_at_string":"2015年01月29日 09:44:39",
   "owner":{
     "id":3,
+    "username":"friend1",
     "nickname":"friend1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-    "phone_code":"86",
-    "mobile":"15158161113"
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
   },
   "members":[
     {
       "id":3,
+      "username":"friend1",
       "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161113"
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
     },
-    {
-      "id":1,
-      "nickname":"tumayun",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "phone_code":"86",
-      "mobile":"15158161111"
-    }
+    .
+    .
+    .
   ]
 }
 ```
@@ -596,10 +450,9 @@ curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H '
       "updated_at_string":"2015年01月29日 10:58:07",
       "sender":{
         "id":1,
+        "username":"tumayun"
         "nickname":"tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-        "phone_code":"86",
-        "mobile":"15158161111",
+        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
         "remarked_name":"",
         "contact_name":""
       },
@@ -659,10 +512,9 @@ curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H '
       "updated_at_string":"2015年01月29日 11:00:07",
       "sender":{
         "id":1,
+        "username":"tumayun",
         "nickname":"tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-        "phone_code":"86",
-        "mobile":"15158161111",
+        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
         "remarked_name":"",
         "contact_name":""
       },
