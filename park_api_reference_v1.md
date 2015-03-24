@@ -604,10 +604,9 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
       "updated_at_string":"2015年01月30日 07:07:19",
       "sender":{
         "id":8,
+        "username":"Tumayun",
         "nickname":"Tumayun",
         "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
-        "phone_code":"86",
-        "mobile":"15158161111",
         "remarked_name":null,
         "contact_name":null
       },
@@ -634,10 +633,9 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
       "updated_at_string":"2015年01月30日 07:07:19",
       "sender":{
         "id":8,
+        "username":"Tumayun",
         "nickname":"Tumayun",
         "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
-        "phone_code":"86",
-        "mobile":"15158161111",
         "remarked_name":"",
         "contact_name":""
       },
@@ -672,10 +670,9 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
       "updated_at_string":"2015年01月30日 09:29:29",
       "sender":{
         "id":8,
+        "username":"Tumayun",
         "nickname":"Tumayun",
         "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
-        "phone_code":"86",
-        "mobile":"15158161111",
         "remarked_name":"",
         "contact_name":""
       },
@@ -763,10 +760,9 @@ curl https://park.catchchatchina.com/api/v1/messages/4 -H 'Authorization: Token 
   "updated_at_string":"2015年01月30日 09:29:29",
   "sender":{
     "id":8,
+    "username":"Tumayun",
     "nickname":"Tumayun",
     "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
-    "phone_code":"86",
-    "mobile":"15158161111",
     "remarked_name":"",
     "contact_name":""
   },
@@ -821,7 +817,7 @@ POST /api/v1/messages
 --- |--- |--- |--- |
 recipient_id | Integer | 是 | 接收者 ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
 recipient_type | String | 是 | 接受者类型，只能是 User 或者 Circle
-media_type | Integer | 否 | 消息类型，0 表示文字, 1 表示图片, 2表示视频, 默认是文字
+media_type | Integer | 否 | 消息类型，0 表示文字, 1 表示图片, 2表示视频, 3 表示语音, 4 表示贴纸, 5 表示位置, 默认是文字
 text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
 parent_id | Integer | 否 | 回复的消息 ID，表示当前要发送的消息是回复哪条消息
 longitude | Float | 否 | 经度
