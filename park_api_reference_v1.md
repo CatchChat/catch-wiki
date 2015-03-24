@@ -161,12 +161,14 @@ POST   /api/v1/registration/create
 | mobile | 手机号 |
 | nickname | 用户昵称 |
 | phone_code | 国家码 |
+| longitude | longitude |
+|latitude | latitude |
 
 cURL 请求范例：
 
 ```
 curl -X POST -H "Content-Type: application/json" -d '{"phone_code":"86",
-"mobile":"15626044835", "nickname": "testnick"}'
+"mobile":"15626044835", "nickname": "testnick", "latitude": 123.123, "longitude": 23.23}'
 http://park.catchchatchina.com/api/v1/registration/create
 ```
 
