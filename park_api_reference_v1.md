@@ -754,7 +754,7 @@ GET /api/:version/user/discover
 
 如果传入`master_skills`和`learning_skills`参数，则按照传入参数匹配目标用户；
 如果未传参数，则用当前用户想要学习的技能作为`master_skills`，当前用户已有的技能作为`learning_skills`，匹配出最近目标用户。
-`master_skills`权重大于`learning_skills`，故有当前用户想学技能的用户排位靠前，与当前用户距离越近越靠前，最后在线时间越近越靠前。
+与当前用户距离越近越靠前，最后在线时间越近越靠前。
 
 #### 参数
 
