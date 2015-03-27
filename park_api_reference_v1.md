@@ -1638,3 +1638,355 @@ curl https://park.catchchatchina.com/api/v1/users/mobile_validate\?phone_code\=8
   "message":"手机号已经被使用"
 }
 ```
+
+## Message 消息
+
+### 获取所有未读消息
+
+```
+GET /api/v1/messages/unread
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"' -k
+```
+
+#### 响应
+
+```
+{
+  "messages":[
+    {
+      "id":3,
+      "recipient_id":11,
+      "recipient_type":"User",
+      "text_content":"This is a test!",
+      "parent_id":0,
+      "longitude":null,
+      "latitude":null,
+      "battery_level":50,
+      "media_type":"text",
+      "media_type_string":"一段文字",
+      "state":"unread",
+      "state_string":"未读",
+      "created_at":"2015-01-30T07:07:19Z",
+      "created_at_string":"2015年01月30日 07:07:19",
+      "updated_at":"2015-01-30T07:07:19Z",
+      "updated_at_string":"2015年01月30日 07:07:19",
+      "sender":{
+        "id":8,
+        "username":"Tumayun",
+        "nickname":"Tumayun",
+        "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
+        "remarked_name":null,
+        "contact_name":null
+      },
+      "attachments":[
+
+      ]
+    },
+    {
+      "id":4,
+      "recipient_id":2,
+      "recipient_type":"Circle",
+      "text_content":"This is a test!",
+      "parent_id":0,
+      "longitude":null,
+      "latitude":null,
+      "battery_level":50,
+      "media_type":"text",
+      "media_type_string":"一段文字",
+      "state":"unread",
+      "state_string":"未读",
+      "created_at":"2015-01-30T07:07:19Z",
+      "created_at_string":"2015年01月30日 07:07:19",
+      "updated_at":"2015-01-30T07:07:19Z",
+      "updated_at_string":"2015年01月30日 07:07:19",
+      "sender":{
+        "id":8,
+        "username":"Tumayun",
+        "nickname":"Tumayun",
+        "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
+        "remarked_name":"",
+        "contact_name":""
+      },
+      "circle":{
+        "id":2,
+        "name":"circle",
+        "created_at":"2015-01-30T07:07:19Z",
+        "created_at_string":"2015年01月30日 07:07:19",
+        "updated_at":"2015-01-30T07:07:19Z",
+        "updated_at_string":"2015年01月30日 07:07:19"
+      },
+      "attachments":[
+
+      ]
+    },
+    {
+      "id":5,
+      "recipient_id":2,
+      "recipient_type":"Circle",
+      "text_content":"This is a test!",
+      "parent_id":0,
+      "longitude":null,
+      "latitude":null,
+      "battery_level":50,
+      "media_type":"image",
+      "media_type_string":"一张照片",
+      "state":"unread",
+      "state_string":"未读",
+      "created_at":"2015-01-30T09:29:29Z",
+      "created_at_string":"2015年01月30日 09:29:29",
+      "updated_at":"2015-01-30T09:32:04Z",
+      "updated_at_string":"2015年01月30日 09:29:29",
+      "sender":{
+        "id":8,
+        "username":"Tumayun",
+        "nickname":"Tumayun",
+        "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
+        "remarked_name":"",
+        "contact_name":""
+      },
+      "circle":{
+        "id":2,
+        "name":"circle",
+        "created_at":"2015-01-30T07:07:19Z",
+        "created_at_string":"2015年01月30日 07:07:19",
+        "updated_at":"2015-01-30T07:07:19Z",
+        "updated_at_string":"2015年01月30日 07:07:19"
+      },
+      "attachments":[
+        {
+          "kind":"thumbnail",
+          "file":{
+            "storage":"qiniu",
+            "expires_in":86400,
+            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+          },
+          "fallback_file":{
+            "storage":"s3",
+            "expires_in":86400,
+            "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
+          }
+        },
+        {
+          "kind":"image",
+          "file":{
+            "storage":"qiniu",
+            "expires_in":86400,
+            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+          },
+          "fallback_file":{
+            "storage":"s3",
+            "expires_in":86400,  //单位：秒
+            "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
+          }
+        }
+      ]
+    }
+  ],
+  "current_page":1,
+  "per_page":30,
+  "count":3
+}
+```
+
+### 获取收到的单条消息
+
+```
+GET /api/v1/messages/:id
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 消息 ID |
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/messages/4 -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
+```
+
+#### 响应
+
+```
+{
+  "id":5,
+  "recipient_id":2,
+  "recipient_type":"Circle",
+  "text_content":"This is a test!",
+  "parent_id":0,
+  "longitude":null,
+  "latitude":null,
+  "battery_level":50,
+  "media_type":"image",
+  "media_type_string":"一张照片",
+  "state":"unread",
+  "state_string":"未读",
+  "created_at":"2015-01-30T09:29:29Z",
+  "created_at_string":"2015年01月30日 09:29:29",
+  "updated_at":"2015-01-30T09:32:04Z",
+  "updated_at_string":"2015年01月30日 09:29:29",
+  "sender":{
+    "id":8,
+    "username":"Tumayun",
+    "nickname":"Tumayun",
+    "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
+    "remarked_name":"",
+    "contact_name":""
+  },
+  "circle":{
+    "id":2,
+    "name":"circle",
+    "created_at":"2015-01-30T07:07:19Z",
+    "created_at_string":"2015年01月30日 07:07:19",
+    "updated_at":"2015-01-30T07:07:19Z",
+    "updated_at_string":"2015年01月30日 07:07:19"
+  },
+  "attachments":[
+    {
+      "kind":"thumbnail",
+      "file":{
+        "storage":"qiniu",
+        "expires_in":86400,
+        "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+      },
+      "fallback_file":{
+        "storage":"s3",
+        "expires_in":86400,
+        "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
+      }
+    },
+    {
+      "kind":"image",
+      "file":{
+        "storage":"qiniu",
+        "expires_in":86400,
+        "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+      },
+      "fallback_file":{
+        "storage":"s3",
+        "expires_in":86400,
+        "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
+      }
+    }
+  ]
+}
+```
+
+### 新建消息
+
+```
+POST /api/v1/messages
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+recipient_id | Integer | 是 | 接收者 ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
+recipient_type | String | 是 | 接受者类型，只能是 User 或者 Circle
+media_type | Integer | 否 | 消息类型，0 表示文字, 1 表示图片, 2表示视频, 3 表示语音, 4 表示贴纸, 5 表示位置, 默认是文字
+text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
+parent_id | Integer | 否 | 回复的消息 ID，表示当前要发送的消息是回复哪条消息
+longitude | Float | 否 | 经度
+latitude | Float | 否 | 纬度
+battery_level | Integer | 否 | 电量，0 - 100 之间的值，默认为 50
+
+#### 示例
+
+```
+curl -X POST https://park.catchchatchina.com/api/v1/messages -F recipient_id=2 -F recipient_type=User -F text_content='This is a test!' -F battery_level=70 -H 'Authorization: Token token="NDccv1Yvdi9UKtwPToxx1416921006.674603"'
+```
+
+#### 响应
+
+```
+{
+  "id":3,
+  "battery_level":70,
+  "state":"unread",
+  "state_string":"未读",
+  "media_type":"text",
+  "media_type_string":"一段文字"
+}
+```
+
+### 标记消息为已读
+
+```
+POST /api/v1/messages/:id/mark_as_read
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+id | Integer | 是 | 消息 ID
+
+#### 示例
+
+```
+curl -X PATCH https://park.catchchatchina.com/api/v1/messages/3/mark_as_read -H 'Authorization: Token token="TKWsindneiDsFj3gUHs31416969554.7962759"'
+```
+
+#### 响应
+
+```
+{}
+```
+
+
+### 标记消息已收到
+
+```
+PATCH /api/v1/messages/:id/deliver
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+id | Integer | 是 | 消息 ID
+
+#### 示例
+
+```
+curl -X PATCH https://park.catchchatchina.com/api/v1/messages/3/deliver -H 'Authorization: Token token="TKWsindneiDsFj3gUHs31416969554.7962759"'
+```
+
+#### 响应
+
+```
+{}
+```
+
+### 通知消息被截图保存
+
+```
+POST /api/v1/messages/:id/notify_screenshot
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+id | Integer | 是 | 消息 ID
+
+#### 示例
+
+curl -X POST https://park.catchchatchina.com/api/v1/messages/3/notify_screenshot -H 'Authorization: Token token="TKWsindneiDsFj3gUHs31416969554.7962759"'
+
+#### 响应
+
+```
+{}
+```
