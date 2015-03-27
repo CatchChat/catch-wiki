@@ -746,7 +746,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/user/update_mobile -F phone
 }
 ```
 
-### Discover
+### Discover 发现
 
 ```
 GET /api/:version/user/discover
@@ -754,14 +754,15 @@ GET /api/:version/user/discover
 
 如果传入`master_skills`和`learning_skills`参数，则按照传入参数匹配目标用户；
 如果未传参数，则用当前用户想要学习的技能作为`master_skills`，当前用户已有的技能作为`learning_skills`，匹配出最近目标用户。
-与当前用户距离越近越靠前，最后在线时间越近越靠前。
+默认按照搜索引擎计算的 score 排序（越精准，越靠前），另外支持按照 distance（距离）和 last_sign_in_at（最后在线时间）排序。
 
 #### 参数
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| master_skills | JSON Array | 否 | 匹配用户已有技能 |
-| learning_skills | JSON Array | 否 | 匹配用户想要学习的技能 |
+| master_skills | JSON Array | 否 | 匹配用户已有技能，如果不传，则默认为自己想学的技能 |
+| learning_skills | JSON Array | 否 | 匹配用户想要学习的技能，如果不传，则默认为自己已有的技能 |
+| sort | String | 否 | 排序字段，目前支持 distance 和 last_sign_in_at，默认按照搜索的 score 排序 |
 
 #### 示例
 
