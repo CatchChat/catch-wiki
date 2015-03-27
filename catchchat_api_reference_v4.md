@@ -1681,7 +1681,7 @@ curl -X POST https://catchchatserver.com/api/v4/messages -F recipient_id=2 -F re
 ### 标记消息为已读
 
 ```
-POST /api/v4/messages/:id/mark_as_read
+PATCH /api/v4/messages/:id/mark_as_read
 ```
 
 #### 参数
