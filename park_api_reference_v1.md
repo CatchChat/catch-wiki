@@ -3259,7 +3259,7 @@ POST /api/v1/messages/:id/:kind/upload_token
 | 名称 | 类型 | 描述 |
 |---|---|---|
 | id | String | message id|
-| kind | String | message 类型,必须是以下3种之一： image, video, thumbnail|
+| kind | String | message 类型,必须是以下5种之一： image video thumbnail audio sticker|
 
 不能单独请求上传，必须依赖一条已经生成的 Message，没有上传完成前，Message 的 state 是 drafted。
 
@@ -3319,7 +3319,7 @@ POST /api/v1/messages/:id/:kind/s3_upload_form_fields
 | 名称 | 类型 | 描述 |
 |---|---|---|
 | id | String | message id|
-| kind | String | message 类型,必须是以下3种之一： image, video, thumbnail|
+| kind | String | message 类型,必须是以下3种之一： image video thumbnail audio sticker|
 
 不能单独请求上传，必须依赖一条已经生成的 Message，没有上传完成前，Message 的 state 是 drafted。
 
