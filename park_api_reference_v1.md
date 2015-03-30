@@ -2149,17 +2149,39 @@ POST /api/v1/messages
 --- |--- |--- |--- |
 recipient_id | Integer | 是 | 接收者 ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
 recipient_type | String | 是 | 接受者类型，只能是 User 或者 Circle
-media_type | Integer | 否 | 消息类型，0 表示文字, 1 表示图片, 2表示视频, 3 表示语音, 4 表示贴纸, 5 表示位置, 默认是文字
+media_type | String | 否 | 消息类型，text 表示文字, image 表示图片, video 表示视频, audio 表示语音, sticker 表示贴纸, location 表示位置, 默认是text
 text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
 parent_id | Integer | 否 | 回复的消息 ID，表示当前要发送的消息是回复哪条消息
 longitude | Float | 否 | 经度
 latitude | Float | 否 | 纬度
 battery_level | Integer | 否 | 电量，0 - 100 之间的值，默认为 50
+attachments | JSON Array | 否 | 如：{ "image": ["3e1b14f1-ee42-471e-96c2-2c46459f13c4"], "thumbnail": ["99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c"] }
+
+media_type 可选值：
+
+可选值 | 解释
+--- | --- |
+text | 文字消息
+image | 图片消息
+video | 视频消息
+audio | 语音消息
+sticker | 贴纸消息
+location | 位置消息
+
+attachments key 的可选值：
+
+可选值 | 解释
+--- | --- |
+image | 附件一张图片
+thumbnail | 附件一张缩略图
+audio | 附件是一段声音
+video | 附件是一段视频
+sticker | 附件是一副贴纸
 
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v1/messages -F recipient_id=2 -F recipient_type=User -F text_content='This is a test!' -F battery_level=70 -H 'Authorization: Token token="NDccv1Yvdi9UKtwPToxx1416921006.674603"'
+curl -X POST https://park.catchchatchina.com/api/v1/messages -d '{ "recipient_id": 2, "recipient_type": "User", "text_content": "This is a test!", "battery_level": 70, "media_type": "image", "attachments": { "image": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "thumbnail": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c" } }' -H 'Authorization: Token token="NDccv1Yvdi9UKtwPToxx1416921006.674603"' -H "Content-Type: application/json"
 ```
 
 #### 响应
@@ -2170,8 +2192,8 @@ curl -X POST https://park.catchchatchina.com/api/v1/messages -F recipient_id=2 -
   "battery_level":70,
   "state":"unread",
   "state_string":"未读",
-  "media_type":"text",
-  "media_type_string":"一段文字"
+  "media_type":"image",
+  "media_type_string":"一张图片"
 }
 ```
 
@@ -3200,14 +3222,12 @@ curl -X POST https://park.catchchatchina.com/api/v1/unfriend_requests -F friend_
 
 ### 获取七牛头像附件上传 token
 
-GET /api/v1/attachments/public\_upload\_token
+GET /api/v1/attachments/qiniu_public\_upload\_token
 
 cURL 请求范例：
 
 ```
-
-curl -X GET -H "Content-Type: application/json" -H 'Authorization: Token token="_mPSDhsxxYpJyVGc7qrU1422539900.9699185"' park.catchchatchina.com/api/v1/attachments/public_upload_token
-
+curl -X GET -H "Content-Type: application/json" -H 'Authorization: Token token="_mPSDhsxxYpJyVGc7qrU1422539900.9699185"' https://park.catchchatchina.com/api/v1/attachments/qiniu_public_upload_token
 ```
 
 返回范例：
@@ -3231,15 +3251,14 @@ curl -X GET -H "Content-Type: application/json" -H 'Authorization: Token token="
 ```
 ### 获取S3头像附件上传 token
 
+```
 GET /api/v1/attachments/s3\_upload\_public\_form_fields
+```
 
 cURL 请求范例：
 
 ```
-curl -X GET -H 'Authorization: Token token="test-token"' -H "Content-Type:
-application/json"
-http://park.catchchatchina.com/api/v1/attachments/s3_upload_public_form_fields
-
+curl -X GET -H 'Authorization: Token token="test-token"' -H "Content-Type: application/json" https://park.catchchatchina.com/api/v1/attachments/s3_upload_public_form_fields
 ```
 返回范例：
 
@@ -3252,23 +3271,13 @@ http://park.catchchatchina.com/api/v1/attachments/s3_upload_public_form_fields
 
 #### 七牛
 ```
-POST /api/v1/messages/:id/:kind/upload_token
-
+GET /api/v1/attachments/qiniu_upload_token
 ```
-
-| 名称 | 类型 | 描述 |
-|---|---|---|
-| id | String | message id|
-| kind | String | message 类型,必须是以下5种之一： image video thumbnail audio sticker|
-
-不能单独请求上传，必须依赖一条已经生成的 Message，没有上传完成前，Message 的 state 是 drafted。
-
 
 cURL 请求范例：
+
 ```
-curl -X POST
-http://park.catchchatchina.com/api/v1/messages/9/image/upload_token
--H 'Authorization: Token token="_mPSDhsxxYpJyVGc7qrU1422539900.9699185"''
+curl -X GET https://park.catchchatchina.com/api/v1/attachments/qiniu_upload_token -H 'Authorization: Token token="_mPSDhsxxYpJyVGc7qrU1422539900.9699185"''
 ```
 返回范例：
 
@@ -3277,7 +3286,6 @@ http://park.catchchatchina.com/api/v1/messages/9/image/upload_token
   "provider":"qiniu",
   "options":{
     "token":"TJozzjvlXhkyA_OVOzHKYCavv2wq4L_afDTeYnhp:bNlrNprAnqTVtOt-j4aKmd2aARw=:eyJzY29wZSI6ImNhdGNoOmJmZWU0ZDQwLTZjYmMtNDMwNC05NmQzLTk2YzMwYThlNTBhYyIsImNhbGxiYWNrVXJsIjoiaHR0cDovL3BhcmsuY2F0Y2hjaGF0Y2hpbmEuY29tL2FwaS92NC9hdHRhY2htZW50cy9jYWxsYmFjay9xaW5pdSIsImNhbGxiYWNrQm9keSI6ImtleT0kKGtleSlcdTAwMjZidWNrZXQ9JChidWNrZXQpXHUwMDI2bWVzc2FnZV9pZD0kKHg6bWVzc2FnZV9pZCkiLCJkZWFkbGluZSI6MTQyMjU0NTM2MX0=",
-    "message_id":9,
     "bucket":"catch",
     "key":"bfee4d40-6cbc-4304-96d3-96c30a8e50ac",
     "file_path":null,
@@ -3289,7 +3297,6 @@ http://park.catchchatchina.com/api/v1/messages/9/image/upload_token
 }
 
 ```
-
 
 获取上传 token 后，根据 provider 上传到相应的云存储，options 中包含了客户端上传所需要的参数。
 
@@ -3312,48 +3319,50 @@ http://park.catchchatchina.com/api/v1/messages/9/image/upload_token
 [S3文档](http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html)
 
 ```
-POST /api/v1/messages/:id/:kind/s3_upload_form_fields
-
+POST /api/v1/attachments/s3_upload_form_fields
 ```
-
-| 名称 | 类型 | 描述 |
-|---|---|---|
-| id | String | message id|
-| kind | String | message 类型,必须是以下5种之一： image video thumbnail audio sticker|
-
-不能单独请求上传，必须依赖一条已经生成的 Message，没有上传完成前，Message 的 state 是 drafted。
-
 
 cURL 请求范例：
 ```
-curl -X POST -H "Content-Type: application/json" -H 'Authorization: Token
-token="_mPSDhsxxYpJyVGc7qrU1422539900"' -d ''
-http://park.catchchatchina.com/api/v1/messages/3/image/s3_upload_form_fields'
-
+curl -X GET https://park.catchchatchina.com/api/v1/attachments/s3_upload_form_fields -H 'Authorization: Token token="DdPnWxQy6z5axwxZfsjs1427718553.7476008"'
 ```
+
 返回范例：
 
 ```
 {
   "provider":"s3",
   "options":{
-    "message_id":3,
-    "bucket":"ruanwz-test",
-    "key":"7f597cbd-0c4c-427f-b267-8292b33983d3",
-    "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/",
-    "policy": {
-      "expiration":"2015-03-12T08:05:08.000Z",
+    "bucket":"park-message-attachments",
+    "key":"73d63ba7-d481-49b0-b78d-0a8f6e1dd031",
+    "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/",
+    "policy":{
+      "expiration":"2015-03-30T13:30:44.000Z",
       "conditions":[
-        {"bucket":"ruanwz-test"},
-        {"key":"7f597cbd-0c4c-427f-b267-8292b33983d3"},
-        {"acl":"private"},
-        {"x-amz-credential":"AKIAOGBVMZAU5EZPGPIQ/20150312/cn-north-1/s3/aws4_request"},
-        {"x-amz-algorithm":"AWS4-HMAC-SHA256"},{"x-amz-date":"20150312T070508Z"}]
-      },
-    "encoded_policy":"eyJleHBpcmF0aW9uIjoiMjAxNS0wMy0xMlQwODowNTowOC4wMDBaIiwiY29uZGl0aW9ucyI6W3siYnVja2V0IjoicnVhbnd6LXRlc3QifSx7ImtleSI6IjdmNTk3Y2JkLTBjNGMtNDI3Zi1iMjY3LTgyOTJiMzM5ODNkMyJ9LHsiYWNsIjoicHJpdmF0ZSJ9LHsieC1hbXotY3JlZGVudGlhbCI6IkFLSUFPR0JWTVpBVTVFWlBHUElRLzIwMTUwMzEyL2NuLW5vcnRoLTEvczMvYXdzNF9yZXF1ZXN0In0seyJ4LWFtei1hbGdvcml0aG0iOiJBV1M0LUhNQUMtU0hBMjU2In0seyJ4LWFtei1kYXRlIjoiMjAxNTAzMTJUMDcwNTA4WiJ9XX0=",
-    "signature":"e7f94131b773e3c0db6fd20af1ac471b2a48de99012d23009ba2baf305219f50"}}
+        {
+          "bucket":"park-message-attachments"
+        },
+        {
+          "key":"73d63ba7-d481-49b0-b78d-0a8f6e1dd031"
+        },
+        {
+          "acl":"private"
+        },
+        {
+          "x-amz-credential":"AKIAOGBVMZAU5EZPGPIQ/20150330/cn-north-1/s3/aws4_request"
+        },
+        {
+          "x-amz-algorithm":"AWS4-HMAC-SHA256"
+        },
+        {
+          "x-amz-date":"20150330T123044Z"
+        }
+      ]
+    },
+    "encoded_policy":"eyJleHBpcmF0aW9uIjoiMjAxNS0wMy0zMFQxMzozMDo0NC4wMDBaIiwiY29uZGl0aW9ucyI6W3siYnVja2V0IjoicGFyay1tZXNzYWdlLWF0dGFjaG1lbnRzIn0seyJrZXkiOiI3M2Q2M2JhNy1kNDgxLTQ5YjAtYjc4ZC0wYThmNmUxZGQwMzEifSx7ImFjbCI6InByaXZhdGUifSx7IngtYW16LWNyZWRlbnRpYWwiOiJBS0lBT0dCVk1aQVU1RVpQR1BJUS8yMDE1MDMzMC9jbi1ub3J0aC0xL3MzL2F3czRfcmVxdWVzdCJ9LHsieC1hbXotYWxnb3JpdGhtIjoiQVdTNC1ITUFDLVNIQTI1NiJ9LHsieC1hbXotZGF0ZSI6IjIwMTUwMzMwVDEyMzA0NFoifV19",
+    "signature":"fd5fd80aabef5e59b60b0405726dd03958401d60da19cf135dcb9e9f307ac3fd"
+  }
+}
 ```
 
-
-获取上传 form所需参数后，上传到S3, S3会回调设置的endpoint(需在AWS控制台设置)。
-
+获取上传 form 所需参数后，上传到S3, 拿到 key，在创建消息的时候提交，详见 `POST messages` API
