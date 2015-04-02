@@ -9,6 +9,78 @@
 * 采用标准 HTTP Code 返回错误
 * 返回格式为 JSON
 
+### 分页
+
+默认返回30条记录，可以通过 `per_page` 参数指定最多每次返回100条记录，但是有些 API 因为一些技术原因，会忽略 `per_page` 参数。页码用 `?page` 参数指定，从1开始。
+
+cURL 请求范例：
+
+```
+curl https://www.catchchatserver.com/api/friendships?page=2&per_page=100
+```
+
+分页信息包含在 [Link header](http://tools.ietf.org/html/rfc5988) 中。
+
+```
+Link: <https://www.catchchatserver.com/api/friendships?page=3&per_page=100>; rel="next",
+  <https://www.catchchatserver.com/api/friendships?page=50&per_page=100>; rel="last",
+  <https://www.catchchatserver.com/api/friendships?page=1&per_page=100>; rel="first",
+  <https://www.catchchatserver.com/api/friendships?page=1&per_page=100>; rel="prev"
+```
+
+参数 `rel` 包含如下取值：
+
+| Header 字段 | 描述 |
+|---|---|
+| next | 显示下一页结果 |
+| last | 显示最后一页结果 |
+| first | 显示第一页结果 |
+| prev | 显示上一页结果 |
+
+### 请求速率
+
+1小时支持5000次请求，你能通过 HTTP Header 了解到请求速率的限制：
+
+cURL 请求范例：
+
+```
+curl -i https://www.catchchatserver.com/api/friendships
+```
+
+返回范例：
+
+| Header 字段 | 描述 |
+|---|---|
+| X-RateLimit-Limit | 1小时内最大请求数 |
+| X-RateLimit-Remaining | 在时间窗口内，剩余的请求数 |
+| X-RateLimit-Reset | 请求窗口重置的时间，UTC epoch seconds 表示 |
+
+```
+HTTP/1.1 200 OK
+Date: Thu, 30 Oct 2014 16:27:06 GMT
+Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+X-RateLimit-Reset: 1372700873
+```
+
+超过请求速率后，你会收到一个 429 Too Many Requests 的错误。
+
+```
+HTTP/1.1 403 Too Many Requests
+Date: Tue, 20 Aug 2013 14:50:41 GMT
+Status: 429 Too Many Requests
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 0
+X-RateLimit-Reset: 1377013266
+
+{
+    error: "来自 xxx.xxx.xxx.xxx 的 API 请求已经超过限制"
+}
+```
+
+----
+
 #### 账号和密码认证
 
 发送登录账号 (login) 和密码 (password)，可获取相应的 access_token。login 可以为邮箱或用户名。
@@ -1019,7 +1091,8 @@ GET /api/:version/user/discover
 | master_skills | JSON Array | 否 | 匹配用户已有技能，如果不传，则默认为自己想学的技能 |
 | learning_skills | JSON Array | 否 | 匹配用户想要学习的技能，如果不传，则默认为自己已有的技能 |
 | sort | String | 否 | 排序字段，目前支持 distance 和 last_sign_in_at，默认按照搜索的 score 排序 |
-
+| page | Integer | 否 | 当前页码 |
+| pre_page | Integer | 否 | 每页显示数量 |
 #### 示例
 
 ```
@@ -1225,7 +1298,7 @@ GET /api/v1/circles
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| page | Integer | 否 | 当然页码 |
+| page | Integer | 否 | 当前页码 |
 | pre_page | Integer | 否 | 每页显示数量 |
 
 #### 示例
@@ -2632,7 +2705,6 @@ curl https://park.catchchatchina.com/api/v1/friendships\?page\=1\&per_page\=10 -
       "contact_name":null,
       "remarked_name":null,
       "favored":false,           // 标示是否星组成员
-      "blocked":false,           // 标示是否拒收 friend 的消息
       "position":1,
       "favored_position":null,
       "name":"user1",
@@ -2654,7 +2726,6 @@ curl https://park.catchchatchina.com/api/v1/friendships\?page\=1\&per_page\=10 -
       "contact_name":null,
       "remarked_name":null,
       "favored":false,
-      "blocked":false,
       "position":2,
       "favored_position":null,
       "name":"user2",
@@ -2676,7 +2747,6 @@ curl https://park.catchchatchina.com/api/v1/friendships\?page\=1\&per_page\=10 -
       "contact_name":null,
       "remarked_name":null,
       "favored":false,
-      "blocked":false,
       "position":3,
       "favored_position":null,
       "name":"user3",
@@ -2698,7 +2768,6 @@ curl https://park.catchchatchina.com/api/v1/friendships\?page\=1\&per_page\=10 -
       "contact_name":"abc",
       "remarked_name":null,
       "favored":false,
-      "blocked":false,
       "position":4,
       "favored_position":null,
       "name":"abc",
@@ -2720,7 +2789,6 @@ curl https://park.catchchatchina.com/api/v1/friendships\?page\=1\&per_page\=10 -
       "contact_name":"bac",
       "remarked_name":null,
       "favored":false,
-      "blocked":false,
       "position":5,
       "favored_position":null,
       "name":"bac",
@@ -2772,7 +2840,6 @@ curl https://park.catchchatchina.com/api/v1/friendships/recent\?page\=1\&per_pag
       "contact_name":"bac",
       "remarked_name":null,
       "favored":false,
-      "blocked":false,
       "position":5,
       "favored_position":null,
       "name":"bac",
@@ -2825,7 +2892,6 @@ curl https://park.catchchatchina.com/api/v1/friendships/27 -H 'Authorization: To
   "contact_name":"bac",
   "remarked_name":null,
   "favored":false,
-  "blocked":false,
   "position":5,
   "favored_position":null,
   "name":"bac",
@@ -2870,7 +2936,6 @@ curl https://park.catchchatchina.com/api/v1/friendships/with/14 -H 'Authorizatio
   "contact_name":"bac",
   "remarked_name":null,
   "favored":false,
-  "blocked":false,
   "position":5,
   "favored_position":null,
   "name":"bac",
@@ -2900,12 +2965,11 @@ PATCH /api/v1/friendships/:id
 id | Integer | 是 | friendship id
 remarked_name | String | 否 | 备注名
 contact_name | String | 否 | 通讯录名
-blocked | Boolean | 否 | 标示是否拒收 friend 消息
 
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/13 -F contact_name=contact_name -F remarked_name=remarked_name -F blocked=true -H 'Authorization: Token token="sVNxda9nywMLZkuzUqf31422601654.468095"'
+curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/13 -F contact_name=contact_name -F remarked_name=remarked_name -H 'Authorization: Token token="sVNxda9nywMLZkuzUqf31422601654.468095"'
 ```
 
 #### 响应
@@ -2918,7 +2982,6 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/13 -F contact_n
   "contact_name":"contact_name",
   "remarked_name":"remarked_name",
   "favored":false,
-  "blocked":true,
   "position":1,
   "favored_position":null,
   "name":"remarked_name",
@@ -2965,7 +3028,6 @@ curl https://park.catchchatchina.com/api/v1/friendships/search\?q\=1515816 -H 'A
       "contact_name":"contact_name",
       "remarked_name":"remarked_name",
       "favored":true,
-      "blocked":true,
       "position":1,
       "favored_position":null,
       "name":"remarked_name",
@@ -2987,7 +3049,6 @@ curl https://park.catchchatchina.com/api/v1/friendships/search\?q\=1515816 -H 'A
       "contact_name":null,
       "remarked_name":null,
       "favored":false,
-      "blocked":false,
       "position":2,
       "favored_position":null,
       "name":"user2",
@@ -3009,7 +3070,6 @@ curl https://park.catchchatchina.com/api/v1/friendships/search\?q\=1515816 -H 'A
       "contact_name":null,
       "remarked_name":null,
       "favored":false,
-      "blocked":false,
       "position":3,
       "favored_position":null,
       "name":"user3",
@@ -3031,7 +3091,6 @@ curl https://park.catchchatchina.com/api/v1/friendships/search\?q\=1515816 -H 'A
       "contact_name":"abc",
       "remarked_name":null,
       "favored":false,
-      "blocked":false,
       "position":4,
       "favored_position":null,
       "name":"abc",
@@ -3053,7 +3112,6 @@ curl https://park.catchchatchina.com/api/v1/friendships/search\?q\=1515816 -H 'A
       "contact_name":"bac",
       "remarked_name":null,
       "favored":false,
-      "blocked":false,
       "position":5,
       "favored_position":null,
       "name":"bac",
@@ -3130,7 +3188,6 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/batch_mark_as_f
       "contact_name":null,
       "remarked_name":null,
       "favored":true,
-      "blocked":false,
       "position":2,
       "favored_position":0,
       "name":"user2",
@@ -3152,7 +3209,6 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/batch_mark_as_f
       "contact_name":null,
       "remarked_name":null,
       "favored":true,
-      "blocked":false,
       "position":3,
       "favored_position":1,
       "name":"user3",
@@ -3174,7 +3230,6 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/batch_mark_as_f
       "contact_name":null,
       "remarked_name":null,
       "favored":true,
-      "blocked":false,
       "position":1,
       "favored_position":2,
       "name":"user1",
@@ -3210,7 +3265,7 @@ POST /api/v1/unfriend_requests
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v1/unfriend_requests -F friend_id=2 -H 'Authorization: Token token=yZp5UZMeCB8yKBUy_ae81416827431.104971'
+curl -X POST https://park.catchchatchina.com/api/v1/unfriend_requests -F friend_id=2 -H 'Authorization: Token token="yZp5UZMeCB8yKBUy_ae81416827431.104971"'
 ```
 
 #### 响应
@@ -3367,3 +3422,93 @@ curl -X GET https://park.catchchatchina.com/api/v1/attachments/s3_upload_form_fi
 ```
 
 获取上传 form 所需参数后，上传到S3, 拿到 key，在创建消息的时候提交，详见 `POST messages` API
+
+## Block User API（拒绝接收对方消息）
+
+
+### 获取 Blocked Users
+
+```
+GET /api/:version/blocked_users
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl -X GET https://park.catchchatchina.com/api/v1/blocked_users -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+```
+
+#### 响应
+
+```
+{
+  "blocked_users":[
+    {
+      "id":"516055075accc1e4067dd5ff6b2682cd",
+      "username":"ruanwz",
+      "nickname":"ruanwz",
+      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    }
+  ],
+  "current_page":1,
+  "per_page":30,
+  "count":1
+}
+```
+
+### Block User
+
+```
+POST /api/:version/blocked_users
+```
+
+##### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+user_id | String | 是 | 想要 block 的用户 ID
+
+#### 示例
+
+```
+curl -X POST https://park.catchchatchina.com/api/v1/blocked_users -F user_id=516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+```
+
+#### 响应
+
+```
+{  
+  "id":"516055075accc1e4067dd5ff6b2682cd",
+  "username":"ruanwz",
+  "nickname":"ruanwz",
+  "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+}
+```
+
+### Unblock User
+
+```
+DELETE /api/:version/blocked_users/:id
+```
+
+##### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+id | String | 是 | 想要 unblock 的用户 ID
+
+#### 示例
+
+```
+curl -X DELETE https://park.catchchatchina.com/api/v1/blocked_users/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+```
+
+#### 响应
+
+```
+{}
+```
