@@ -975,6 +975,7 @@ curl https://park.catchchatchina.com/api/v1/user -H 'Authorization: Token oken="
   "username":"user5",
   "nickname":"user5",
   "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+  "push_content":true,  // 标识推送时是推送消息内容还是推送通知，true 推送消息内容，false 推送通知
   "phone_code":"86",
   "mobile":"15158160005",
   "pusher_id":"c0db0793fb939e96f2574cb4",
@@ -1026,11 +1027,12 @@ PATCH /api/v1/user
 | username | String | 否 | 用户名，必须唯一 |
 | latitude | Float | 否 | 纬度 |
 | longitude | Float | 否 | 经度 |
+| push_content | Boolean | 否 | 标识推送时是推送消息内容还是推送通知，true 推送消息内容，false 推送通知 |
 
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v1/user -F username=tumayun -F latitude=26.331920 -F longitude=168.3097112 -F nickname=Tumayun -F avatar_url=http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+curl -X PATCH https://park.catchchatchina.com/api/v1/user -F username=tumayun -F latitude=26.331920 -F longitude=168.3097112 -F nickname=Tumayun -F avatar_url=http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg -F push_content=false -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
 ```
 
 #### 响应
@@ -1041,7 +1043,8 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/user -F username=tumayun -F
   "username":"tumayun",
   "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
   "latitude":26.331920,
-  "longitude":168.3097112
+  "longitude":168.3097112,
+  "push_content":false
 }
 ```
 
