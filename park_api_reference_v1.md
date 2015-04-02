@@ -795,28 +795,20 @@ curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H '
       "attachments":[
         {
           "kind":"image",
+          "metadata":"metadata",
           "file":{
             "storage":"qiniu",
             "expires_in":86400, // 单位：秒
             "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          },
-          "fallback_file":{
-            "storage":"s3",
-            "expires_in":86400, // 单位：秒
-            "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
           }
         },
         {
           "kind":"thumbnail",
+          "metadata":"metadata",
           "file":{
             "storage":"qiniu",
             "expires_in":86400, // 单位：秒
             "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          },
-          "fallback_file":{
-            "storage":"s3",
-            "expires_in":86400, // 单位：秒
-            "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
           }
         }
       ]
@@ -857,28 +849,20 @@ curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H '
       "attachments":[
         {
           "kind":"image",
+          "metadata":"metadata",
           "file":{
             "storage":"qiniu",
             "expires_in":86400, // 单位：秒
             "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          },
-          "fallback_file":{
-            "storage":"s3",
-            "expires_in":86400, // 单位：秒
-            "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
           }
         },
         {
           "kind":"thumbnail",
+          "metadata":"metadata",
           "file":{
             "storage":"qiniu",
             "expires_in":86400, // 单位：秒
             "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          },
-          "fallback_file":{
-            "storage":"s3",
-            "expires_in":86400, // 单位：秒
-            "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
           }
         }
       ]
@@ -1747,28 +1731,20 @@ curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H '
       "attachments":[
         {
           "kind":"image",
+          "metadata":"metadata",
           "file":{
             "storage":"qiniu",
             "expires_in":86400, // 单位：秒
             "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          },
-          "fallback_file":{
-            "storage":"s3",
-            "expires_in":86400, // 单位：秒
-            "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
           }
         },
         {
           "kind":"thumbnail",
+          "metadata":"metadata",
           "file":{
             "storage":"qiniu",
             "expires_in":86400, // 单位：秒
             "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          },
-          "fallback_file":{
-            "storage":"s3",
-            "expires_in":86400, // 单位：秒
-            "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
           }
         }
       ]
@@ -1809,15 +1785,11 @@ curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H '
       "attachments":[
         {
           "kind":"image",
+          "metadata":"metadata",
           "file":{
             "storage":"qiniu",
             "expires_in":86400, // 单位：秒
             "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          },
-          "fallback_file":{
-            "storage":"s3",
-            "expires_in":86400, // 单位：秒
-            "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
           }
         },
         {
@@ -2096,28 +2068,20 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
       "attachments":[
         {
           "kind":"thumbnail",
+          "metadata":"metadata",
           "file":{
             "storage":"qiniu",
             "expires_in":86400,
             "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          },
-          "fallback_file":{
-            "storage":"s3",
-            "expires_in":86400,
-            "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
           }
         },
         {
           "kind":"image",
+          "metadata":"metadata",
           "file":{
             "storage":"qiniu",
             "expires_in":86400,
             "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          },
-          "fallback_file":{
-            "storage":"s3",
-            "expires_in":86400,  //单位：秒
-            "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
           }
         }
       ]
@@ -2186,28 +2150,20 @@ curl https://park.catchchatchina.com/api/v1/messages/4 -H 'Authorization: Token 
   "attachments":[
     {
       "kind":"thumbnail",
+      "metadata":"metadata",
       "file":{
         "storage":"qiniu",
         "expires_in":86400,
         "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-      },
-      "fallback_file":{
-        "storage":"s3",
-        "expires_in":86400,
-        "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
       }
     },
     {
       "kind":"image",
+      "metadata":"metadata",
       "file":{
         "storage":"qiniu",
         "expires_in":86400,
         "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-      },
-      "fallback_file":{
-        "storage":"s3",
-        "expires_in":86400,
-        "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
       }
     }
   ]
@@ -2232,7 +2188,7 @@ parent_id | Integer | 否 | 回复的消息 ID，表示当前要发送的消息�
 longitude | Float | 否 | 经度
 latitude | Float | 否 | 纬度
 battery_level | Integer | 否 | 电量，0 - 100 之间的值，默认为 50
-attachments | JSON Array | 否 | 如：{ "image": ["3e1b14f1-ee42-471e-96c2-2c46459f13c4"], "thumbnail": ["99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c"] }
+attachments | JSON | 否 | 如：{ "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] }
 
 media_type 可选值：
 
@@ -2245,6 +2201,7 @@ audio | 语音消息
 sticker | 贴纸消息
 location | 位置消息
 
+attachments 中 `file` 表示 S3 返回的文件 key，`metadata` 是附件的元数据。
 attachments key 的可选值：
 
 可选值 | 解释
@@ -2258,7 +2215,7 @@ sticker | 附件是一副贴纸
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v1/messages -d '{ "recipient_id": 2, "recipient_type": "User", "text_content": "This is a test!", "battery_level": 70, "media_type": "image", "attachments": { "image": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "thumbnail": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c" } }' -H 'Authorization: Token token="NDccv1Yvdi9UKtwPToxx1416921006.674603"' -H "Content-Type: application/json"
+curl -X POST https://park.catchchatchina.com/api/v1/messages -d '{ "recipient_id": 2, "recipient_type": "User", "text_content": "This is a test!", "battery_level": 70, "media_type": "image", "attachments": { "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] } }' -H 'Authorization: Token token="NDccv1Yvdi9UKtwPToxx1416921006.674603"' -H "Content-Type: application/json"
 ```
 
 #### 响应
