@@ -2222,12 +2222,50 @@ curl -X POST https://park.catchchatchina.com/api/v1/messages -d '{ "recipient_id
 
 ```
 {
-  "id":3,
+  "id":"1a04b751fae4c7e0847450973e2bc36a",
+  "recipient_id":"90913b93738c8a627129e49db32eeec3",
+  "parent_id":"e8f3d46135cda79c413678e3ad91ddfc",
+  "recipient_type":"User",
+  "text_content":"This is a test!",
+  "longitude":null,
+  "latitude":null,
   "battery_level":70,
+  "media_type":"image",
+  "media_type_string":"一张照片",
   "state":"unread",
   "state_string":"未读",
-  "media_type":"image",
-  "media_type_string":"一张图片"
+  "created_at":"2015-04-17T10:18:30Z",
+  "created_at_string":"2015年04月17日 10:18:30",
+  "updated_at":"2015-04-17T10:18:30Z",
+  "updated_at_string":"2015年04月17日 10:18:30",
+  "sender":{
+    "id":"516055075accc1e4067dd5ff6b2682cd",
+    "username":null,
+    "nickname":"tumayun",
+    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+    "remarked_name":null,
+    "contact_name":null
+  },
+  "attachments":[
+    {
+      "kind":"image",
+      "metadata":"metadata",
+      "file":{
+        "storage":"s3",
+        "expires_in":86400,
+        "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/3e1b14f1-ee42-471e-96c2-2c46459f13c4?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20150417%2Fcn-north-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20150417T101831Z\u0026X-Amz-Expires=86400\u0026X-Amz-Signature=1823eca92a52eab3a22a33ccd82ec8d09278d85fa3a5be1d677843f5fdb8ebfb\u0026X-Amz-SignedHeaders=Host"
+      }
+    },
+    {
+      "kind":"thumbnail",
+      "metadata":"metadata",
+      "file":{
+        "storage":"s3",
+        "expires_in":86400,
+        "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20150417%2Fcn-north-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20150417T101831Z\u0026X-Amz-Expires=86400\u0026X-Amz-Signature=206c17a7ef891e6832892db5526174ac96d94d9fc97f04646735cb4f4c863237\u0026X-Amz-SignedHeaders=Host"
+      }
+    }
+  ]
 }
 ```
 
@@ -2252,7 +2290,10 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/messages/3/mark_as_read -H 
 #### 响应
 
 ```
-{}
+{
+  "recipient_type":"User",
+  "recipient_id":"1a04b751fae4c7e0847450973e2bc36a"
+}
 ```
 
 
