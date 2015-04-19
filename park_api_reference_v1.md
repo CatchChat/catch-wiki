@@ -3467,7 +3467,7 @@ curl -X GET https://park.catchchatchina.com/api/v1/blocked_users -H 'Authorizati
 POST /api/:version/blocked_users
 ```
 
-##### 参数
+#### 参数
 
 名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
@@ -3496,7 +3496,7 @@ curl -X POST https://park.catchchatchina.com/api/v1/blocked_users -F user_id=516
 DELETE /api/:version/blocked_users/:id
 ```
 
-##### 参数
+#### 参数
 
 名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
@@ -3512,4 +3512,196 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/blocked_users/516055075acc
 
 ```
 {}
+```
+
+## Master Skills（已有的技能）
+
+### 添加已有技能
+
+```
+POST /api/:version/master_skills
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+skill_id | String | 是 | 技能 ID
+
+#### 示例
+
+```
+curl -X POST https://park.catchchatchina.com/api/v1/master_skills -F skill_id=516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+```
+
+#### 响应
+
+```
+{}
+```
+
+### 移除已有技能
+
+```
+DELETE /api/:version/master_skills/:id
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+id | String | 是 | 技能 ID
+
+#### 示例
+
+```
+curl -X DELETE https://park.catchchatchina.com/api/v1/master_skills/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+```
+
+#### 响应
+
+```
+{}
+```
+
+## Learning Skills（想学的技能）
+
+### 添加想学的技能
+
+```
+POST /api/:version/learning_skills
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+skill_id | String | 是 | 技能 ID
+
+#### 示例
+
+```
+curl -X POST https://park.catchchatchina.com/api/v1/learning_skills -F skill_id=516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+```
+
+#### 响应
+
+```
+{}
+```
+
+### 移除想学的技能
+
+```
+DELETE /api/:version/master_skills/:id
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+id | String | 是 | 技能 ID
+
+#### 示例
+
+```
+curl -X DELETE https://park.catchchatchina.com/api/v1/learning_skills/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+```
+
+#### 响应
+
+```
+{}
+```
+
+## 技能分类（Skill Category）
+
+### 技能分类列表
+
+```
+GET /api/:version/skill_categories
+```
+
+#### 参数
+
+无，且不支持分页，一次性返回所有分类
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/skill_categories -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+```
+
+#### 响应
+
+```
+{
+  "categories":[
+    {
+      "id":"516055075accc1e4067dd5ff6b2682cd",
+      "name":"Art"
+    },
+    {
+      "id":"90913b93738c8a627129e49db32eeec3",
+      "name":"Technology"
+    },
+    {
+      "id":"cf292b334af37778c2f92612cb4aa4c2",
+      "name":"Sport"
+    },
+    {
+      "id":"fd222e8393c0729d6008b07961f2ce9f",
+      "name":"Life Style"
+    }
+  ]
+}
+```
+
+## 技能 (Skill)
+
+**必须根据技能分类来获取技能列表**
+
+### 技能列表
+
+```
+GET /api/:version/skill_categories/:skill_category_id/skills
+```
+
+#### 参数
+
+无，且不支持分页，一次性返回分类下的所有
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/skill_categories/90913b93738c8a627129e49db32eeec3/skills -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+```
+
+#### 响应
+
+```
+{
+  "skills":[
+    {
+      "id":"a2692db13f2c2879f7ae118a46b62bd9",
+      "name":"Ruby"
+    },
+    {
+      "id":"f106a6096665c9e13df7991d822a7a2a",
+      "name":"Javascript"
+    },
+    {
+      "id":"8535a728c9b79b3e32b7f19c1e149220",
+      "name":"iOS"
+    },
+    {
+      "id":"ef92a210d2164bafc70faccefdac1200",
+      "name":"Linux"
+    },
+    {
+      "id":"0a11fec715bee0125063606978b91b44",
+      "name":"CSS"
+    }
+  ]
+}
 ```

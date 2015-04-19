@@ -72,9 +72,9 @@
     "message":{
       "state":"typing" // 即时状态，如 typing, uploading
       "user":{
-      	"id":"516055075accc1e4067dd5ff6b2682cd",
-      	"username":"tumayun",
-      	"nickname":"Tumayun"
+        "id":"516055075accc1e4067dd5ff6b2682cd",
+        "username":"tumayun",
+        "nickname":"Tumayun"
       }
     }
   }
@@ -94,6 +94,7 @@
     "access_token":"jXgVN7qKwPrsZvrazr5o1429260353.954617"
   },
   "data":{
+    "api_version":"v1", // API Server Version，因为发布已读确认消息需要请求 API Server，所以需要提供 api_version
     "message_type":"mark_as_read", // 消息类型，此处为已读确认消息
     "message":{
       "id":"516055075accc1e4067dd5ff6b2682cd" // message id，这条消息将会在后台被标记为已读，且会发送给客户端B一条已读确认消息
@@ -132,6 +133,7 @@
     "access_token":"jXgVN7qKwPrsZvrazr5o1429260353.954617"
   },
   "data":{
+    "api_version":"v1", // API Server Version，因为发布聊天消息需要请求 API Server，所以需要提供 api_version
     "message_type":"message", // 消息类型，此处为聊天消息
     "message": { // message 中的参数请参考 API Server
       "text_content":"This is a test!",
