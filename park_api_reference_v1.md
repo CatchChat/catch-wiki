@@ -969,28 +969,63 @@ curl https://park.catchchatchina.com/api/v1/user -H 'Authorization: Token oken="
   "longitude":117.068,
   "last_sign_in_at":"2015-03-24T06:01:18Z",
   "last_sign_in_at_string":"2015年03月24日 06:01:18",
-  "learning_skills":[
-    "ruby",
-    "javascript",
-    "ios",
-    "linux",
-    "css",
-    "cooking",
-    "boxing",
-    "drawing"
+  "master_skills":[  
+  {  
+    "id":"516055075accc1e4067dd5ff6b2682cd",
+    "name":"Drawing", // 技能名
+    "name_string":"Drawing" // 技能名翻译
+  },
+  {  
+    "id":"90913b93738c8a627129e49db32eeec3",
+    "name":"Singing",
+    "name_string":"Singing"
+  },
+  {  
+    "id":"cf292b334af37778c2f92612cb4aa4c2",
+    "name":"Piano",
+    "name_string":"Piano"
+  },
+  {  
+    "id":"fd222e8393c0729d6008b07961f2ce9f",
+    "name":"Dancing",
+    "name_string":"Dancing"
+  },
+  {  
+    "id":"a2692db13f2c2879f7ae118a46b62bd9",
+    "name":"Ruby",
+    "name_string":"Ruby"
+  },
+  {  
+    "id":"f106a6096665c9e13df7991d822a7a2a",
+    "name":"Javascript",
+    "name_string":"Javascript"
+  },
+  {  
+    "id":"8535a728c9b79b3e32b7f19c1e149220",
+    "name":"iOS",
+    "name_string":"Ios"
+  },
+  {  
+    "id":"ef92a210d2164bafc70faccefdac1200",
+    "name":"Linux",
+    "name_string":"Linux"
+  }
   ],
-  "master_skills":[
-    {
-      "name":"singing",
-      "level":"beginner"
+    "learning_skills":[  
+    {  
+      "id":"0a11fec715bee0125063606978b91b44",
+      "name":"CSS",
+      "name_string":"Css"
     },
-    {
-      "name":"piano",
-      "level":"beginner"
+    {  
+      "id":"ba994ac6dba5bc71489ab75fd5b8574c",
+      "name":"Boxing",
+      "name_string":"Boxing"
     },
-    {
-      "name":"dancing",
-      "level":"beginner"
+    {  
+      "id":"7106ab25a9e2170d278cbee3c5f0b247",
+      "name":"Cooking",
+      "name_string":"Cooking"
     }
   ]
 }
@@ -1101,28 +1136,63 @@ curl -X GET https://park.catchchatchina.com/api/v1/user/discover -d '{ "master_s
       "distance":"12646.761054269287",
       "last_sign_in_at":"2015-03-24T05:43:05Z",
       "last_sign_in_at_string":"2015年03月24日 05:43:05",
-      "learning_skills":[
-        "ruby",
-        "javascript",
-        "ios",
-        "linux",
-        "css",
-        "cooking",
-        "boxing",
-        "drawing"
-      ],
       "master_skills":[
         {
-          "name":"singing",
-          "level":"beginner"
+          "id":"516055075accc1e4067dd5ff6b2682cd",
+          "name":"Drawing", // 技能名
+          "name_string":"Drawing" // 技能名翻译
         },
         {
-          "name":"piano",
-          "level":"beginner"
+          "id":"90913b93738c8a627129e49db32eeec3",
+          "name":"Singing",
+          "name_string":"Singing"
         },
         {
-          "name":"dancing",
-          "level":"beginner"
+          "id":"cf292b334af37778c2f92612cb4aa4c2",
+          "name":"Piano",
+          "name_string":"Piano"
+        },
+        {
+          "id":"fd222e8393c0729d6008b07961f2ce9f",
+          "name":"Dancing",
+          "name_string":"Dancing"
+        },
+        {
+          "id":"a2692db13f2c2879f7ae118a46b62bd9",
+          "name":"Ruby",
+          "name_string":"Ruby"
+        },
+        {
+          "id":"f106a6096665c9e13df7991d822a7a2a",
+          "name":"Javascript",
+          "name_string":"Javascript"
+        },
+        {
+          "id":"8535a728c9b79b3e32b7f19c1e149220",
+          "name":"iOS",
+          "name_string":"Ios"
+        },
+        {
+          "id":"ef92a210d2164bafc70faccefdac1200",
+          "name":"Linux",
+          "name_string":"Linux"
+        }
+      ],
+      "learning_skills":[
+        {
+          "id":"0a11fec715bee0125063606978b91b44",
+          "name":"CSS",
+          "name_string":"Css"
+        },
+        {
+          "id":"ba994ac6dba5bc71489ab75fd5b8574c",
+          "name":"Boxing",
+          "name_string":"Boxing"
+        },
+        {
+          "id":"7106ab25a9e2170d278cbee3c5f0b247",
+          "name":"Cooking",
+          "name_string":"Cooking"
         }
       ]
     },
@@ -1136,28 +1206,63 @@ curl -X GET https://park.catchchatchina.com/api/v1/user/discover -d '{ "master_s
       "distance":"12646.761054269287",
       "last_sign_in_at":"2015-03-24T05:43:03Z",
       "last_sign_in_at_string":"2015年03月24日 05:43:03",
-      "learning_skills":[
-        "ruby",
-        "javascript",
-        "ios",
-        "linux",
-        "css",
-        "cooking",
-        "boxing",
-        "drawing"
-      ],
       "master_skills":[
         {
-          "name":"singing",
-          "level":"beginner"
+          "id":"516055075accc1e4067dd5ff6b2682cd",
+          "name":"Drawing",
+          "name_string":"Drawing"
         },
         {
-          "name":"piano",
-          "level":"beginner"
+          "id":"90913b93738c8a627129e49db32eeec3",
+          "name":"Singing",
+          "name_string":"Singing"
         },
         {
-          "name":"dancing",
-          "level":"beginner"
+          "id":"cf292b334af37778c2f92612cb4aa4c2",
+          "name":"Piano",
+          "name_string":"Piano"
+        },
+        {
+          "id":"fd222e8393c0729d6008b07961f2ce9f",
+          "name":"Dancing",
+          "name_string":"Dancing"
+        },
+        {
+          "id":"a2692db13f2c2879f7ae118a46b62bd9",
+          "name":"Ruby",
+          "name_string":"Ruby"
+        },
+        {
+          "id":"f106a6096665c9e13df7991d822a7a2a",
+          "name":"Javascript",
+          "name_string":"Javascript"
+        },
+        {
+          "id":"8535a728c9b79b3e32b7f19c1e149220",
+          "name":"iOS",
+          "name_string":"Ios"
+        },
+        {
+          "id":"ef92a210d2164bafc70faccefdac1200",
+          "name":"Linux",
+          "name_string":"Linux"
+        }
+      ],
+      "learning_skills":[
+        {
+          "id":"0a11fec715bee0125063606978b91b44",
+          "name":"CSS",
+          "name_string":"Css"
+        },
+        {
+          "id":"ba994ac6dba5bc71489ab75fd5b8574c",
+          "name":"Boxing",
+          "name_string":"Boxing"
+        },
+        {
+          "id":"7106ab25a9e2170d278cbee3c5f0b247",
+          "name":"Cooking",
+          "name_string":"Cooking"
         }
       ]
     },
@@ -1171,28 +1276,63 @@ curl -X GET https://park.catchchatchina.com/api/v1/user/discover -d '{ "master_s
       "distance":"9.995235609898296",
       "last_sign_in_at":"2015-03-24T05:43:02Z",
       "last_sign_in_at_string":"2015年03月24日 05:43:02",
-      "learning_skills":[
-        "ruby",
-        "javascript",
-        "ios",
-        "linux",
-        "css",
-        "cooking",
-        "boxing",
-        "drawing"
-      ],
       "master_skills":[
         {
-          "name":"singing",
-          "level":"beginner"
+          "id":"516055075accc1e4067dd5ff6b2682cd",
+          "name":"Drawing",
+          "name_string":"Drawing"
         },
         {
-          "name":"piano",
-          "level":"beginner"
+          "id":"90913b93738c8a627129e49db32eeec3",
+          "name":"Singing",
+          "name_string":"Singing"
         },
         {
-          "name":"dancing",
-          "level":"beginner"
+          "id":"cf292b334af37778c2f92612cb4aa4c2",
+          "name":"Piano",
+          "name_string":"Piano"
+        },
+        {
+          "id":"fd222e8393c0729d6008b07961f2ce9f",
+          "name":"Dancing",
+          "name_string":"Dancing"
+        },
+        {
+          "id":"a2692db13f2c2879f7ae118a46b62bd9",
+          "name":"Ruby",
+          "name_string":"Ruby"
+        },
+        {
+          "id":"f106a6096665c9e13df7991d822a7a2a",
+          "name":"Javascript",
+          "name_string":"Javascript"
+        },
+        {
+          "id":"8535a728c9b79b3e32b7f19c1e149220",
+          "name":"iOS",
+          "name_string":"Ios"
+        },
+        {
+          "id":"ef92a210d2164bafc70faccefdac1200",
+          "name":"Linux",
+          "name_string":"Linux"
+        }
+      ],
+      "learning_skills":[
+        {
+          "id":"0a11fec715bee0125063606978b91b44",
+          "name":"CSS",
+          "name_string":"Css"
+        },
+        {
+          "id":"ba994ac6dba5bc71489ab75fd5b8574c",
+          "name":"Boxing",
+          "name_string":"Boxing"
+        },
+        {
+          "id":"7106ab25a9e2170d278cbee3c5f0b247",
+          "name":"Cooking",
+          "name_string":"Cooking"
         }
       ]
     },
@@ -1206,28 +1346,63 @@ curl -X GET https://park.catchchatchina.com/api/v1/user/discover -d '{ "master_s
       "distance":"238.93350644977318",
       "last_sign_in_at":"2015-03-24T05:43:01Z",
       "last_sign_in_at_string":"2015年03月24日 05:43:01",
-      "learning_skills":[
-        "ruby",
-        "javascript",
-        "ios",
-        "linux",
-        "css",
-        "cooking",
-        "boxing",
-        "drawing"
-      ],
       "master_skills":[
         {
-          "name":"singing",
-          "level":"beginner"
+          "id":"516055075accc1e4067dd5ff6b2682cd",
+          "name":"Drawing",
+          "name_string":"Drawing"
         },
         {
-          "name":"piano",
-          "level":"beginner"
+          "id":"90913b93738c8a627129e49db32eeec3",
+          "name":"Singing",
+          "name_string":"Singing"
         },
         {
-          "name":"dancing",
-          "level":"beginner"
+          "id":"cf292b334af37778c2f92612cb4aa4c2",
+          "name":"Piano",
+          "name_string":"Piano"
+        },
+        {
+          "id":"fd222e8393c0729d6008b07961f2ce9f",
+          "name":"Dancing",
+          "name_string":"Dancing"
+        },
+        {
+          "id":"a2692db13f2c2879f7ae118a46b62bd9",
+          "name":"Ruby",
+          "name_string":"Ruby"
+        },
+        {
+          "id":"f106a6096665c9e13df7991d822a7a2a",
+          "name":"Javascript",
+          "name_string":"Javascript"
+        },
+        {
+          "id":"8535a728c9b79b3e32b7f19c1e149220",
+          "name":"iOS",
+          "name_string":"Ios"
+        },
+        {
+          "id":"ef92a210d2164bafc70faccefdac1200",
+          "name":"Linux",
+          "name_string":"Linux"
+        }
+      ],
+      "learning_skills":[
+        {
+          "id":"0a11fec715bee0125063606978b91b44",
+          "name":"CSS",
+          "name_string":"Css"
+        },
+        {
+          "id":"ba994ac6dba5bc71489ab75fd5b8574c",
+          "name":"Boxing",
+          "name_string":"Boxing"
+        },
+        {
+          "id":"7106ab25a9e2170d278cbee3c5f0b247",
+          "name":"Cooking",
+          "name_string":"Cooking"
         }
       ]
     },
@@ -1241,32 +1416,67 @@ curl -X GET https://park.catchchatchina.com/api/v1/user/discover -d '{ "master_s
       "distance":"12646.761054269287",
       "last_sign_in_at":"2015-03-24T05:43:04Z",
       "last_sign_in_at_string":"2015年03月24日 05:43:04",
-      "learning_skills":[
-        "ruby",
-        "javascript",
-        "ios",
-        "linux",
-        "css",
-        "cooking",
-        "boxing",
-        "drawing"
-      ],
       "master_skills":[
         {
-          "name":"singing",
-          "level":"beginner"
+          "id":"516055075accc1e4067dd5ff6b2682cd",
+          "name":"Drawing",
+          "name_string":"Drawing"
         },
         {
-          "name":"piano",
-          "level":"beginner"
+          "id":"90913b93738c8a627129e49db32eeec3",
+          "name":"Singing",
+          "name_string":"Singing"
         },
         {
-          "name":"dancing",
-          "level":"beginner"
+          "id":"cf292b334af37778c2f92612cb4aa4c2",
+          "name":"Piano",
+          "name_string":"Piano"
+        },
+        {
+          "id":"fd222e8393c0729d6008b07961f2ce9f",
+          "name":"Dancing",
+          "name_string":"Dancing"
+        },
+        {
+          "id":"a2692db13f2c2879f7ae118a46b62bd9",
+          "name":"Ruby",
+          "name_string":"Ruby"
+        },
+        {
+          "id":"f106a6096665c9e13df7991d822a7a2a",
+          "name":"Javascript",
+          "name_string":"Javascript"
+        },
+        {
+          "id":"8535a728c9b79b3e32b7f19c1e149220",
+          "name":"iOS",
+          "name_string":"Ios"
+        },
+        {
+          "id":"ef92a210d2164bafc70faccefdac1200",
+          "name":"Linux",
+          "name_string":"Linux"
+        }
+      ],
+      "learning_skills":[
+        {
+          "id":"0a11fec715bee0125063606978b91b44",
+          "name":"CSS",
+          "name_string":"Css"
+        },
+        {
+          "id":"ba994ac6dba5bc71489ab75fd5b8574c",
+          "name":"Boxing",
+          "name_string":"Boxing"
+        },
+        {
+          "id":"7106ab25a9e2170d278cbee3c5f0b247",
+          "name":"Cooking",
+          "name_string":"Cooking"
         }
       ]
     }
-  ]
+  ],
   "current_page":1,
   "per_page":30,
   "count":5
@@ -3624,7 +3834,7 @@ GET /api/:version/skill_categories
 
 #### 参数
 
-无，且不支持分页，一次性返回所有分类
+无，且不支持分页，一次性返回所有分类以及技能
 
 #### 示例
 
@@ -3639,68 +3849,86 @@ curl https://park.catchchatchina.com/api/v1/skill_categories -H 'Authorization: 
   "categories":[
     {
       "id":"516055075accc1e4067dd5ff6b2682cd",
-      "name":"Art"
+      "name":"Art", // 分类名
+      "name_string":"Art", // 分类名翻译
+      "skills":[
+        {
+          "id":"516055075accc1e4067dd5ff6b2682cd",
+          "name":"Drawing", // 技能名
+          "name_string":"Drawing" // 技能名翻译
+        },
+        {
+          "id":"90913b93738c8a627129e49db32eeec3",
+          "name":"Singing",
+          "name_string":"Singing"
+        },
+        {
+          "id":"cf292b334af37778c2f92612cb4aa4c2",
+          "name":"Piano",
+          "name_string":"Piano"
+        },
+        {
+          "id":"fd222e8393c0729d6008b07961f2ce9f",
+          "name":"Dancing",
+          "name_string":"Dancing"
+        }
+      ]
     },
     {
       "id":"90913b93738c8a627129e49db32eeec3",
-      "name":"Technology"
+      "name":"Technology",
+      "name_string":"Technology",
+      "skills":[
+        {
+          "id":"a2692db13f2c2879f7ae118a46b62bd9",
+          "name":"Ruby",
+          "name_string":"Ruby"
+        },
+        {
+          "id":"f106a6096665c9e13df7991d822a7a2a",
+          "name":"Javascript",
+          "name_string":"Javascript"
+        },
+        {
+          "id":"8535a728c9b79b3e32b7f19c1e149220",
+          "name":"iOS",
+          "name_string":"Ios"
+        },
+        {
+          "id":"ef92a210d2164bafc70faccefdac1200",
+          "name":"Linux",
+          "name_string":"Linux"
+        },
+        {
+          "id":"0a11fec715bee0125063606978b91b44",
+          "name":"CSS",
+          "name_string":"Css"
+        }
+      ]
     },
     {
       "id":"cf292b334af37778c2f92612cb4aa4c2",
-      "name":"Sport"
+      "name":"Sport",
+      "name_string":"Sport",
+      "skills":[
+        {
+          "id":"ba994ac6dba5bc71489ab75fd5b8574c",
+          "name":"Boxing",
+          "name_string":"Boxing"
+        }
+      ]
     },
     {
       "id":"fd222e8393c0729d6008b07961f2ce9f",
-      "name":"Life Style"
-    }
-  ]
-}
-```
-
-## 技能 (Skill)
-
-**必须根据技能分类来获取技能列表**
-
-### 技能列表
-
-```
-GET /api/:version/skill_categories/:skill_category_id/skills
-```
-
-#### 参数
-
-无，且不支持分页，一次性返回分类下的所有
-
-#### 示例
-
-```
-curl https://park.catchchatchina.com/api/v1/skill_categories/90913b93738c8a627129e49db32eeec3/skills -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
-```
-
-#### 响应
-
-```
-{
-  "skills":[
-    {
-      "id":"a2692db13f2c2879f7ae118a46b62bd9",
-      "name":"Ruby"
-    },
-    {
-      "id":"f106a6096665c9e13df7991d822a7a2a",
-      "name":"Javascript"
-    },
-    {
-      "id":"8535a728c9b79b3e32b7f19c1e149220",
-      "name":"iOS"
-    },
-    {
-      "id":"ef92a210d2164bafc70faccefdac1200",
-      "name":"Linux"
-    },
-    {
-      "id":"0a11fec715bee0125063606978b91b44",
-      "name":"CSS"
+      "name":"Life Style",
+      "name_string":"Life style",
+      "skills":[
+        {
+          "id":"7106ab25a9e2170d278cbee3c5f0b247",
+          "name":"Cooking",
+          "name_string":"Cooking"
+        }
+      ]
     }
   ]
 }
