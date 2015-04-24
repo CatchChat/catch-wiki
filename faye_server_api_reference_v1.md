@@ -18,11 +18,13 @@
 
 ## Version
 
-在订阅发布等任何操作都必须在 `ext` 中加入 `version`，用来表明要使用 Faye Server 的哪个版本，如：
+在订阅发布等任何操作都必须在 `ext` 中加入 `version`，用来表明要使用 Faye Server 的哪个版本。有些操作会请求 API Server，API Server 的版本与 Faye Server 的版本一致。如：
 
 ```
 { ext: { version: 'v1' } }
 ```
+
+此时 Faye Server 版本为 v1，如果在 Faye Server 需要请求 API Server，那么请求的 API Server 版本也将用 v1，API Server 版本与 Faye Server 版本同步更新。
 
 
 ## Authentication
@@ -64,7 +66,6 @@
 
 客户端B将会接收到如下消息：
 
-
 ```
 {
   "data":{
@@ -94,7 +95,6 @@
     "access_token":"jXgVN7qKwPrsZvrazr5o1429260353.954617"
   },
   "data":{
-    "api_version":"v1", // API Server Version，因为发布已读确认消息需要请求 API Server，所以需要提供 api_version
     "message_type":"mark_as_read", // 消息类型，此处为已读确认消息
     "message":{
       "id":"516055075accc1e4067dd5ff6b2682cd" // message id，这条消息将会在后台被标记为已读，且会发送给客户端B一条已读确认消息
@@ -102,6 +102,7 @@
   }
 }
 ```
+
 客户端B将会接收到如下消息：
 
 ```
@@ -133,12 +134,27 @@
     "access_token":"jXgVN7qKwPrsZvrazr5o1429260353.954617"
   },
   "data":{
-    "api_version":"v1", // API Server Version，因为发布聊天消息需要请求 API Server，所以需要提供 api_version
     "message_type":"message", // 消息类型，此处为聊天消息
     "message": { // message 中的参数请参考 API Server
       "text_content":"This is a test!",
       "recipient_type":"User",
       "recipient_id":"516055075accc1e4067dd5ff6b2682cd"
+    }
+  }
+}
+```
+
+客户端A将会收到 Faye Server 返回的如下 response：
+
+```
+{
+  "id":"6",
+  "clientId":"lijii8id8xakwa1oh8dj9xc4zhc32pn",
+  "channel":"/users/516055075accc1e4067dd5ff6b2682cd/messages",
+  "successful":true, // 创建成功，失败则是 false
+  "ext":{
+    "message":{
+      "id":"317a0e603c9cddbdbcd626a18066ceaa" // 创建成功的消息ID
     }
   }
 }
