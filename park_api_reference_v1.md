@@ -3933,3 +3933,30 @@ curl https://park.catchchatchina.com/api/v1/skill_categories -H 'Authorization: 
   ]
 }
 ```
+
+## Skills（技能）
+
+### 更新技能信息
+
+```
+PATCH /api/:version/skills/:id
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+id | String | 是 | 技能 ID
+cover_url | String | 否 | 技能封面图片地址
+
+#### 示例
+
+```
+curl -X PATCH park-staging.catchchatchina.com/api/v1/skills/516055075accc1e4067dd5ff6b2682cd -F cover_url=https://s3.cn-north-1.amazonaws.com.cn/ruanwz-test-public/ruby-logo.png -H 'Authorization: Token token="test-token”'
+```
+
+#### 响应
+
+```
+{"id":"516055075accc1e4067dd5ff6b2682cd","cover_url":"https://s3.cn-north-1.amazonaws.com.cn/ruanwz-test-public/ruby-logo.png"}
+```
