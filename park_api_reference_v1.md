@@ -955,79 +955,155 @@ curl https://park.catchchatchina.com/api/v1/user -H 'Authorization: Token oken="
 
 ```
 {
-  "id":"d2cfb112ffcec856ad34a3e933ed64b0",
-  "username":"user5",
-  "nickname":"user5",
+  "id":"90913b93738c8a627129e49db32eeec3",
+  "username":"",
+  "nickname":"tumayun",
   "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-  "push_content":true,  // 标识推送时是推送消息内容还是推送通知，true 推送消息内容，false 推送通知
-  "phone_code":"86",
-  "mobile":"15158160005",
-  "pusher_id":"c0db0793fb939e96f2574cb4",
-  "state":"active",
-  "state_string":"激活状态",
-  "latitude":28.2534,
-  "longitude":117.068,
-  "last_sign_in_at":"2015-03-24T06:01:18Z",
-  "last_sign_in_at_string":"2015年03月24日 06:01:18",
-  "master_skills":[  
-  {  
-    "id":"516055075accc1e4067dd5ff6b2682cd",
-    "name":"Drawing", // 技能名
-    "name_string":"Drawing" // 技能名翻译
-  },
-  {  
-    "id":"90913b93738c8a627129e49db32eeec3",
-    "name":"Singing",
-    "name_string":"Singing"
-  },
-  {  
-    "id":"cf292b334af37778c2f92612cb4aa4c2",
-    "name":"Piano",
-    "name_string":"Piano"
-  },
-  {  
-    "id":"fd222e8393c0729d6008b07961f2ce9f",
-    "name":"Dancing",
-    "name_string":"Dancing"
-  },
-  {  
-    "id":"a2692db13f2c2879f7ae118a46b62bd9",
-    "name":"Ruby",
-    "name_string":"Ruby"
-  },
-  {  
-    "id":"f106a6096665c9e13df7991d822a7a2a",
-    "name":"Javascript",
-    "name_string":"Javascript"
-  },
-  {  
-    "id":"8535a728c9b79b3e32b7f19c1e149220",
-    "name":"iOS",
-    "name_string":"Ios"
-  },
-  {  
-    "id":"ef92a210d2164bafc70faccefdac1200",
-    "name":"Linux",
-    "name_string":"Linux"
-  }
+  "latitude":28.3213,
+  "longitude":117.001,
+  "introduction":"",
+  "last_sign_in_at":"2015-05-09T04:54:00Z",
+  "last_sign_in_at_string":"2015年05月09日 04:54:00",
+  "created_at":"2015-05-09T04:54:40Z",
+  "created_at_string":"2015年05月09日 04:54:40",
+  "updated_at":"2015-05-09T15:23:42Z",
+  "updated_at_string":"2015年05月09日 15:23:42",
+  "master_skills":[
+    {
+      "id":"516055075accc1e4067dd5ff6b2682cd",
+      "name":"Drawing", // 技能名
+      "name_string":"Drawing", // 技能名翻译
+      "cover_url":null,
+      "category":{
+        "id":"516055075accc1e4067dd5ff6b2682cd",
+        "name":"Art",
+        "name_string":"Art"
+      }
+    },
+    {
+      "id":"90913b93738c8a627129e49db32eeec3",
+      "name":"Singing",
+      "name_string":"Singing",
+      "cover_url":null,
+      "category":{
+        "id":"516055075accc1e4067dd5ff6b2682cd",
+        "name":"Art",
+        "name_string":"Art"
+      }
+    },
+    {
+      "id":"cf292b334af37778c2f92612cb4aa4c2",
+      "name":"Piano",
+      "name_string":"Piano",
+      "cover_url":null,
+      "category":{
+        "id":"516055075accc1e4067dd5ff6b2682cd",
+        "name":"Art",
+        "name_string":"Art"
+      }
+    },
+    {
+      "id":"fd222e8393c0729d6008b07961f2ce9f",
+      "name":"Dancing",
+      "name_string":"Dancing",
+      "cover_url":null,
+      "category":{
+        "id":"516055075accc1e4067dd5ff6b2682cd",
+        "name":"Art",
+        "name_string":"Art"
+      }
+    },
+    {
+      "id":"a2692db13f2c2879f7ae118a46b62bd9",
+      "name":"Ruby",
+      "name_string":"Ruby",
+      "cover_url":null,
+      "category":{
+        "id":"90913b93738c8a627129e49db32eeec3",
+        "name":"Technology",
+        "name_string":"Technology"
+      }
+    },
+    {
+      "id":"f106a6096665c9e13df7991d822a7a2a",
+      "name":"Javascript",
+      "name_string":"Javascript",
+      "cover_url":null,
+      "category":{
+        "id":"90913b93738c8a627129e49db32eeec3",
+        "name":"Technology",
+        "name_string":"Technology"
+      }
+    },
+    {
+      "id":"8535a728c9b79b3e32b7f19c1e149220",
+      "name":"iOS",
+      "name_string":"Ios",
+      "cover_url":null,
+      "category":{
+        "id":"90913b93738c8a627129e49db32eeec3",
+        "name":"Technology",
+        "name_string":"Technology"
+      }
+    },
+    {
+      "id":"ef92a210d2164bafc70faccefdac1200",
+      "name":"Linux",
+      "name_string":"Linux",
+      "cover_url":null,
+      "category":{
+        "id":"90913b93738c8a627129e49db32eeec3",
+        "name":"Technology",
+        "name_string":"Technology"
+      }
+    }
   ],
-    "learning_skills":[  
-    {  
+  "learning_skills":[
+    {
       "id":"0a11fec715bee0125063606978b91b44",
       "name":"CSS",
-      "name_string":"Css"
+      "name_string":"Css",
+      "cover_url":null,
+      "category":{
+        "id":"90913b93738c8a627129e49db32eeec3",
+        "name":"Technology",
+        "name_string":"Technology"
+      }
     },
-    {  
+    {
       "id":"ba994ac6dba5bc71489ab75fd5b8574c",
       "name":"Boxing",
-      "name_string":"Boxing"
+      "name_string":"Boxing",
+      "cover_url":null,
+      "category":{
+        "id":"cf292b334af37778c2f92612cb4aa4c2",
+        "name":"Sport",
+        "name_string":"Sport"
+      }
     },
-    {  
+    {
       "id":"7106ab25a9e2170d278cbee3c5f0b247",
       "name":"Cooking",
-      "name_string":"Cooking"
+      "name_string":"Cooking",
+      "cover_url":null,
+      "category":{
+        "id":"fd222e8393c0729d6008b07961f2ce9f",
+        "name":"Life Style",
+        "name_string":"Life style"
+      }
     }
-  ]
+  ],
+  "push_content":true,
+  "phone_code":"86",
+  "mobile":"15158161111",
+  "pusher_id":"439ee7d09180529d3442bd25",
+  "state":"active",
+  "state_string":"激活状态",
+  "providers":{
+    "github":true,
+    "dribbble":true,
+    "instagram":true
+  }
 }
 ```
 
@@ -1482,6 +1558,28 @@ curl -X GET https://park.catchchatchina.com/api/v1/user/discover -d '{ "master_s
   "count":5
 }
 ```
+
+### 获取 provider 信息（github instagram dribbble）
+
+```
+GET /api/:version/user/:provider
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| provider | String | 是 | github instagram dribbble 中的一个 |
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/user/github -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+github instagram dribbble 返回各不一样，从各平台拿到数据后原样返回，所以请参考各平台 API
 
 ## Circle 公共群组
 
