@@ -2251,6 +2251,29 @@ curl https://park.catchchatchina.com/api/v1/users/mobile_validate\?phone_code\=8
 }
 ```
 
+### 获取指定用户的 provider 信息（github instagram dribbble）
+
+```
+GET /api/:version/users/:id/:provider
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | String | 是 | user id |
+| provider | String | 是 | github instagram dribbble 中的一个 |
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/users/90913b93738c8a627129e49db32eeec3/github -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+github instagram dribbble 返回各不一样，从各平台拿到数据后原样返回，所以请参考各平台 API
+
 ## Message 消息
 
 ### 获取所有未读消息
