@@ -79,6 +79,67 @@ X-RateLimit-Reset: 1377013266
 }
 ```
 
+### 字段模板
+
+为了方便 API 文档的阅读，将会用模板重用一些重复的字段结构。
+
+#### ID
+
+所有返回和提交的 ID 都是加密后的字符串("516055075accc1e4067dd5ff6b2682cd")，在 API 中用到 ID 时，都将以 `<id>` 替代。
+
+#### 技能字段结构
+
+在 API 返回技能信息时，将会以 `<skill>` 替代如下结构：
+
+```
+"id":<id>,
+"name":"Singing",        // 技能名
+"name_string":"Singing", // 技能名翻译
+"cover_url":null,        // 封面图片URL
+"category":{
+  "id":<id>,
+  "name":"Art",          // 类别名
+  "name_string":"Art"    // 类别翻译
+}
+```
+
+#### 用户基本信息字段结构
+
+在 API 返回用户信息时，将会以 `<user>` 替代如下结构：
+
+```
+"id":<id>,
+"username":"tumayun",
+"nickname":"tumayun",
+"avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+"latitude":28.3213,
+"longitude":117.001,
+"introduction":"",
+"last_sign_in_at":"2015-05-09T04:54:00Z",
+"last_sign_in_at_string":"2015年05月09日 04:54:00",
+"created_at":"2015-05-09T04:54:40Z",
+"created_at_string":"2015年05月09日 04:54:40",
+"updated_at":"2015-05-09T15:23:42Z",
+"updated_at_string":"2015年05月09日 15:23:42",
+"providers":{ // 第三方平台绑定情况
+  "github":false,
+  "dribbble":false,
+  "instagram":false
+},
+"master_skills":[
+  {
+    <skill>
+  },
+  ...
+],
+"learning_skills":[
+  {
+    <skill>
+  },
+  ...
+]
+```
+
 ----
 
 #### 账号和密码认证
@@ -92,7 +153,7 @@ POST /api/auth/token_by_login
 | 参数 | 描述 |
 |--------|--------|
 | mobile | 手机号 |
-| phone\_code | 国家代码 |
+| phone_code | 国家代码 |
 | password | 密码 |
 | expiring | access_token 过期时间。单位为秒，设置为0表示永不过期，不设置默认一年过期 |
 | client | 用于推送, official=0, company=1, local=2 |
@@ -108,9 +169,16 @@ park.catchchatchina.com/api/v1/auth/token_by_login'
 返回范例：
 
 ```
-{ 
-  "login":"86-12345678",
-  "access_token":"76si--vSz-hW-3vAsmRG1422601273.349557"
+{
+  "access_token":"Bs2H_1hVWLseG7rDy5hz1422602902.8925965",
+  "user": {
+    "id":<id>,
+    "username":"ruanwz",
+    "nickname":"ruanwz",
+    "avatar_url":null,
+    "mobile":"12345678",
+    "phone_code":"86"
+  }
 }
 ```
 
@@ -140,7 +208,7 @@ POST /api/auth/send_verify_code
 | 参数 | 描述 |
 |--------|--------|
 | mobile | 手机号 |
-| phone\_code | 国家代码 |
+| phone_code | 国家代码 |
 
 
 cURL 请求范例：
@@ -156,7 +224,7 @@ http://park.catchchatchina.com/api/v1/auth/send_verify_code
 ```
 {
   "mobile":"12345678",
-  "status":"sms sent"
+  "status":"sms sent" // 发送成功返回 `sms sent`，失败返回 `failed`
 }
 ```
 
@@ -200,7 +268,8 @@ http://park.catchchatchina.com/api/v1/auth/token_by_mobile
 {
   "access_token":"Bs2H_1hVWLseG7rDy5hz1422602902.8925965",
   "user": {
-    "id":1,
+    "id":<id>,
+    "username":"ruanwz",
     "nickname":"ruanwz",
     "avatar_url":null,
     "mobile":"12345678",
@@ -249,8 +318,10 @@ http://park.catchchatchina.com/api/v1/registration/create
 
 ```
 {
+  "username":"testnick",
   "nickname":"testnick",
   "mobile":"15626044835",
+  "phone_code":"86"
   "sent_sms": "{\"error\":0,\"msg\":\"ok\"}",
   "state":"blocked"
 }
@@ -280,8 +351,10 @@ http://park.catchchatchina.com/api/v1/registration/resend_verify_code_by_voice
 
 ```
 {
+  "username":"testnick",
   "nickname":"testnick",
   "mobile":"15626044835",
+  "phone_code":"86"
   "sent_sms": "{\"error\":0,\"msg\":\"ok\"}",
   "state":"blocked"
 }
@@ -295,7 +368,7 @@ PUT   /api/v1/registration/update
 | 参数 | 描述 |
 |--------|--------|
 | mobile | 手机号 |
-| phone\_code | 国家码 |
+| phone_code | 国家码 |
 | token | 手机短信收到的验证码 |
 | client |可选，用于推送, official=0, company=1, local=2 ，默认为0|
 | expiring | 可选，access_token 过期时间。单位为秒，设置为0表示永不过期，不设置默认一年过期 |
@@ -310,7 +383,8 @@ cURL 请求范例：
 {
   "access_token":"DAo4Cs4dkaE-7ADS-63Q1422604371.509334",
   "user":{
-    "id":12,
+    "id":<id>,
+    "username":"testnick",
     "nickname":"testnick",
     "avatar_url":null,
     "mobile":"15626044835",
@@ -364,55 +438,27 @@ curl -X GET https://park.catchchatchina.com/api/v1/circles -H 'Authorization: To
 {
   "circles":[
     {
-      "id":1,
+      "id":<id>,
       "name":"circle",
       "created_at":"2015-01-29T09:43:35Z",
       "created_at_string":"2015年01月29日 09:43:35",
       "updated_at":"2015-01-29T09:43:35Z",
       "updated_at_string":"2015年01月29日 09:43:35",
       "owner":{
-        "id":1,
-        "username":"tumayun",
-        "nickname":"tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+        <user>
       },
       "members":[
         {
-          "id":1,
-          "username":"tumayun",
-          "nickname":"tumayun",
-          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-        }
+          <user>
+        },
         .
         .
         .
       ]
     },
-    {
-      "id":2,
-      "name":"公共群组",
-      "created_at":"2015-01-29T09:44:39Z",
-      "created_at_string":"2015年01月29日 09:44:39",
-      "updated_at":"2015-01-29T09:50:49Z",
-      "updated_at_string":"2015年01月29日 09:44:39",
-      "owner":{
-        "id":1,
-        "username":"tumayun",
-        "nickname":"tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-      },
-      "members":[
-        {
-          "id":1,
-          "username":"tumayun",
-          "nickname":"tumayun",
-          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-        }
-        .
-        .
-        .
-      ]
-    }
+    .
+    .
+    .
   ],
   "current_page":1,
   "per_page":30,
@@ -443,28 +489,22 @@ curl -i -X POST https://park.catchchatchina.com/api/v1/circles -d '{ "members": 
 
 ```
 {
-  "id":2,
+  "id":<id>,
   "name":"群组",
   "created_at":"2015-01-29T09:44:38Z",
   "created_at_string":"2015年01月29日 09:44:38",
   "updated_at":"2015-01-29T09:44:38Z",
   "updated_at_string":"2015年01月29日 09:44:38",
   "owner":{
-    "id":3,
-    "username":"friend1"
-    "nickname":"friend1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    <user>
   },
   "members":[
     {
-      "id":3,
-      "username":"friend1",
-      "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+      <user>
     },
-  	.
-  	.
-  	.
+    .
+    .
+    .
   ]
 }
 ```
@@ -492,24 +532,18 @@ curl -X PUT https://park.catchchatchina.com/api/v1/circles/2 -d '{ "name": "公�
 
 ```
 {
-  "id":2,
+  "id":<id>,
   "name":"公共群组",
   "created_at":"2015-01-29T09:44:39Z",
   "created_at_string":"2015年01月29日 09:44:39",
   "updated_at":"2015-01-29T09:50:49Z",
   "updated_at_string":"2015年01月29日 09:44:39",
   "owner":{
-    "id":3,
-    "username":"friend1",
-    "nickname":"friend1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    <user>
   },
   "members":[
     {
-      "id":3,
-      "username":"friend1",
-      "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+      <user>
     },
     .
     .
@@ -540,24 +574,18 @@ curl -X GET https://park.catchchatchina.com/api/v1/circles/2 -H 'Authorization: 
 
 ```
 {
-  "id":2,
+  "id":<id>,
   "name":"公共群组",
   "created_at":"2015-01-29T09:44:39Z",
   "created_at_string":"2015年01月29日 09:44:39",
   "updated_at":"2015-01-29T09:50:49Z",
   "updated_at_string":"2015年01月29日 09:44:39",
   "owner":{
-    "id":3,
-    "username":"friend1",
-    "nickname":"friend1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    <user>
   },
   "members":[
     {
-      "id":3,
-      "username":"friend1",
-      "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+      <user>
     },
     .
     .
@@ -588,24 +616,18 @@ curl -X POST https://park.catchchatchina.com/api/v1/circles/2/join -H 'Authoriza
 
 ```
 {
-  "id":2,
+  "id":<id>,
   "name":"公共群组",
   "created_at":"2015-01-29T09:44:39Z",
   "created_at_string":"2015年01月29日 09:44:39",
   "updated_at":"2015-01-29T09:50:49Z",
   "updated_at_string":"2015年01月29日 09:44:39",
   "owner":{
-    "id":1,
-    "username":"tumayun",
-    "nickname":"tumayun",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    <user>
   },
   "members":[
     {
-      "id":1,
-      "username":"tumayun",
-      "nickname":"tumayun",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg""
+      <user>
     },
     .
     .
@@ -661,24 +683,18 @@ curl -X POST https://park.catchchatchina.com/api/v1/circles/2/batch_add -d '{ "m
 
 ```
 {
-  "id":2,
+  "id":<id>,
   "name":"公共群组",
   "created_at":"2015-01-29T09:44:39Z",
   "created_at_string":"2015年01月29日 09:44:39",
   "updated_at":"2015-01-29T09:50:49Z",
   "updated_at_string":"2015年01月29日 09:44:39",
   "owner":{
-    "id":3,
-    "username":"friend1",
-    "nickname":"friend1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    <user>
   },
   "members":[
     {
-      "id":3,
-      "username":"friend1",
-      "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+      <user>
     },
     .
     .
@@ -710,24 +726,18 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/circles/2/batch_delete -d 
 
 ```
 {
-  "id":2,
+  "id":<id>,
   "name":"公共群组",
   "created_at":"2015-01-29T09:44:39Z",
   "created_at_string":"2015年01月29日 09:44:39",
   "updated_at":"2015-01-29T09:50:49Z",
   "updated_at_string":"2015年01月29日 09:44:39",
   "owner":{
-    "id":3,
-    "username":"friend1",
-    "nickname":"friend1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    <user>
   },
   "members":[
     {
-      "id":3,
-      "username":"friend1",
-      "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+      <user>
     },
     .
     .
@@ -760,8 +770,8 @@ curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H '
 {
   "messages":[
     {
-      "id":4,
-      "recipient_id":2,
+      "id":<id>,
+      "recipient_id":<id>,
       "recipient_type":"Circle",
       "text_content":"Hello~",
       "parent_id":0,
@@ -777,15 +787,12 @@ curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H '
       "updated_at":"2015-01-29T10:58:27Z",
       "updated_at_string":"2015年01月29日 10:58:07",
       "sender":{
-        "id":1,
-        "username":"tumayun"
-        "nickname":"tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-        "remarked_name":"",
-        "contact_name":""
+        <user>,
+        "remarked_name":null,
+        "contact_name":null
       },
       "circle":{
-        "id":2,
+        "id":<id>,
         "name":"公共群组",
         "created_at":"2015-01-29T09:44:39Z",
         "created_at_string":"2015年01月29日 09:44:39",
@@ -813,60 +820,9 @@ curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H '
         }
       ]
     },
-    {
-      "id":5,
-      "recipient_id":2,
-      "recipient_type":"Circle",
-      "text_content":"Hello~",
-      "parent_id":0,
-      "longitude":null,
-      "latitude":null,
-      "battery_level":50,
-      "media_type":"image",
-      "media_type_string":"一张照片",
-      "state":"unread",
-      "state_string":"未读",
-      "created_at":"2015-01-29T11:00:07Z",
-      "created_at_string":"2015年01月29日 11:00:07",
-      "updated_at":"2015-01-29T11:02:51Z",
-      "updated_at_string":"2015年01月29日 11:00:07",
-      "sender":{
-        "id":1,
-        "username":"tumayun",
-        "nickname":"tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-        "remarked_name":"",
-        "contact_name":""
-      },
-      "circle":{
-        "id":2,
-        "name":"公共群组",
-        "created_at":"2015-01-29T09:44:39Z",
-        "created_at_string":"2015年01月29日 09:44:39",
-        "updated_at":"2015-01-29T09:50:49Z",
-        "updated_at_string":"2015年01月29日 09:44:39"
-      },
-      "attachments":[
-        {
-          "kind":"image",
-          "metadata":"metadata",
-          "file":{
-            "storage":"qiniu",
-            "expires_in":86400, // 单位：秒
-            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          }
-        },
-        {
-          "kind":"thumbnail",
-          "metadata":"metadata",
-          "file":{
-            "storage":"qiniu",
-            "expires_in":86400, // 单位：秒
-            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          }
-        }
-      ]
-    }
+    .
+    .
+    .
   ],
   "current_page":1,
   "per_page":30,
@@ -898,11 +854,7 @@ curl https://park.catchchatchina.com/api/v1/user/may_know_friends -H Authorizati
 {
   "friends":[
     {
-      "id":8,
-      "username":"friend6",
-      "nickname":"friend6",
-      "phone_code":"86",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+      <user>,
       "common_friend_names":[
         "friend2",
         "friend3",
@@ -910,27 +862,9 @@ curl https://park.catchchatchina.com/api/v1/user/may_know_friends -H Authorizati
         "friend5"
       ]
     },
-    {
-      "id":9,
-      "username":"friend7",
-      "nickname":"friend7",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "common_friend_names":[
-        "friend3",
-        "friend4",
-        "friend5"
-      ]
-    },
-    {
-      "id":10,
-      "username":"friend8",
-      "nickname":"friend8",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "common_friend_names":[
-        "friend4",
-        "friend5"
-      ]
-    }
+    .
+    .
+    .
   ]
 }
 ```
@@ -955,155 +889,13 @@ curl https://park.catchchatchina.com/api/v1/user -H 'Authorization: Token oken="
 
 ```
 {
-  "id":"90913b93738c8a627129e49db32eeec3",
-  "username":"",
-  "nickname":"tumayun",
-  "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-  "latitude":28.3213,
-  "longitude":117.001,
-  "introduction":"",
-  "last_sign_in_at":"2015-05-09T04:54:00Z",
-  "last_sign_in_at_string":"2015年05月09日 04:54:00",
-  "created_at":"2015-05-09T04:54:40Z",
-  "created_at_string":"2015年05月09日 04:54:40",
-  "updated_at":"2015-05-09T15:23:42Z",
-  "updated_at_string":"2015年05月09日 15:23:42",
-  "master_skills":[
-    {
-      "id":"516055075accc1e4067dd5ff6b2682cd",
-      "name":"Drawing", // 技能名
-      "name_string":"Drawing", // 技能名翻译
-      "cover_url":null,
-      "category":{
-        "id":"516055075accc1e4067dd5ff6b2682cd",
-        "name":"Art",
-        "name_string":"Art"
-      }
-    },
-    {
-      "id":"90913b93738c8a627129e49db32eeec3",
-      "name":"Singing",
-      "name_string":"Singing",
-      "cover_url":null,
-      "category":{
-        "id":"516055075accc1e4067dd5ff6b2682cd",
-        "name":"Art",
-        "name_string":"Art"
-      }
-    },
-    {
-      "id":"cf292b334af37778c2f92612cb4aa4c2",
-      "name":"Piano",
-      "name_string":"Piano",
-      "cover_url":null,
-      "category":{
-        "id":"516055075accc1e4067dd5ff6b2682cd",
-        "name":"Art",
-        "name_string":"Art"
-      }
-    },
-    {
-      "id":"fd222e8393c0729d6008b07961f2ce9f",
-      "name":"Dancing",
-      "name_string":"Dancing",
-      "cover_url":null,
-      "category":{
-        "id":"516055075accc1e4067dd5ff6b2682cd",
-        "name":"Art",
-        "name_string":"Art"
-      }
-    },
-    {
-      "id":"a2692db13f2c2879f7ae118a46b62bd9",
-      "name":"Ruby",
-      "name_string":"Ruby",
-      "cover_url":null,
-      "category":{
-        "id":"90913b93738c8a627129e49db32eeec3",
-        "name":"Technology",
-        "name_string":"Technology"
-      }
-    },
-    {
-      "id":"f106a6096665c9e13df7991d822a7a2a",
-      "name":"Javascript",
-      "name_string":"Javascript",
-      "cover_url":null,
-      "category":{
-        "id":"90913b93738c8a627129e49db32eeec3",
-        "name":"Technology",
-        "name_string":"Technology"
-      }
-    },
-    {
-      "id":"8535a728c9b79b3e32b7f19c1e149220",
-      "name":"iOS",
-      "name_string":"Ios",
-      "cover_url":null,
-      "category":{
-        "id":"90913b93738c8a627129e49db32eeec3",
-        "name":"Technology",
-        "name_string":"Technology"
-      }
-    },
-    {
-      "id":"ef92a210d2164bafc70faccefdac1200",
-      "name":"Linux",
-      "name_string":"Linux",
-      "cover_url":null,
-      "category":{
-        "id":"90913b93738c8a627129e49db32eeec3",
-        "name":"Technology",
-        "name_string":"Technology"
-      }
-    }
-  ],
-  "learning_skills":[
-    {
-      "id":"0a11fec715bee0125063606978b91b44",
-      "name":"CSS",
-      "name_string":"Css",
-      "cover_url":null,
-      "category":{
-        "id":"90913b93738c8a627129e49db32eeec3",
-        "name":"Technology",
-        "name_string":"Technology"
-      }
-    },
-    {
-      "id":"ba994ac6dba5bc71489ab75fd5b8574c",
-      "name":"Boxing",
-      "name_string":"Boxing",
-      "cover_url":null,
-      "category":{
-        "id":"cf292b334af37778c2f92612cb4aa4c2",
-        "name":"Sport",
-        "name_string":"Sport"
-      }
-    },
-    {
-      "id":"7106ab25a9e2170d278cbee3c5f0b247",
-      "name":"Cooking",
-      "name_string":"Cooking",
-      "cover_url":null,
-      "category":{
-        "id":"fd222e8393c0729d6008b07961f2ce9f",
-        "name":"Life Style",
-        "name_string":"Life style"
-      }
-    }
-  ],
+  <user>,
   "push_content":true,
   "phone_code":"86",
   "mobile":"15158161111",
   "pusher_id":"439ee7d09180529d3442bd25",
   "state":"active",
-  "state_string":"激活状态",
-  "providers":{
-    "github":true,
-    "dribbble":true,
-    "instagram":true
-  }
+  "state_string":"激活状态"
 }
 ```
 
@@ -1123,6 +915,7 @@ PATCH /api/v1/user
 | latitude | Float | 否 | 纬度 |
 | longitude | Float | 否 | 经度 |
 | push_content | Boolean | 否 | 标识推送时是推送消息内容还是推送通知，true 推送消息内容，false 推送通知 |
+| introduction | Text | 否 | 个人介绍 |
 
 #### 示例
 
@@ -1139,7 +932,8 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/user -F username=tumayun -F
   "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
   "latitude":26.331920,
   "longitude":168.3097112,
-  "push_content":false
+  "push_content":false,
+  "introduction":null
 }
 ```
 
@@ -1203,355 +997,12 @@ curl -X GET https://park.catchchatchina.com/api/v1/user/discover -d '{ "master_s
 {
   "users":[
     {
-      "id":"058555a359257b6d1b9e85ec425096b7",
-      "username":"user4",
-      "nickname":"user4",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "latitude":0.0,
-      "longitude":0.0,
+      <user>,
       "distance":"12646.761054269287",
-      "last_sign_in_at":"2015-03-24T05:43:05Z",
-      "last_sign_in_at_string":"2015年03月24日 05:43:05",
-      "master_skills":[
-        {
-          "id":"516055075accc1e4067dd5ff6b2682cd",
-          "name":"Drawing", // 技能名
-          "name_string":"Drawing" // 技能名翻译
-        },
-        {
-          "id":"90913b93738c8a627129e49db32eeec3",
-          "name":"Singing",
-          "name_string":"Singing"
-        },
-        {
-          "id":"cf292b334af37778c2f92612cb4aa4c2",
-          "name":"Piano",
-          "name_string":"Piano"
-        },
-        {
-          "id":"fd222e8393c0729d6008b07961f2ce9f",
-          "name":"Dancing",
-          "name_string":"Dancing"
-        },
-        {
-          "id":"a2692db13f2c2879f7ae118a46b62bd9",
-          "name":"Ruby",
-          "name_string":"Ruby"
-        },
-        {
-          "id":"f106a6096665c9e13df7991d822a7a2a",
-          "name":"Javascript",
-          "name_string":"Javascript"
-        },
-        {
-          "id":"8535a728c9b79b3e32b7f19c1e149220",
-          "name":"iOS",
-          "name_string":"Ios"
-        },
-        {
-          "id":"ef92a210d2164bafc70faccefdac1200",
-          "name":"Linux",
-          "name_string":"Linux"
-        }
-      ],
-      "learning_skills":[
-        {
-          "id":"0a11fec715bee0125063606978b91b44",
-          "name":"CSS",
-          "name_string":"Css"
-        },
-        {
-          "id":"ba994ac6dba5bc71489ab75fd5b8574c",
-          "name":"Boxing",
-          "name_string":"Boxing"
-        },
-        {
-          "id":"7106ab25a9e2170d278cbee3c5f0b247",
-          "name":"Cooking",
-          "name_string":"Cooking"
-        }
-      ]
     },
-    {
-      "id":"8d35d33fdd000da12ff35887daa7d428",
-      "username":"user1",
-      "nickname":"user1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "latitude":0.0,
-      "longitude":0.0,
-      "distance":"12646.761054269287",
-      "last_sign_in_at":"2015-03-24T05:43:03Z",
-      "last_sign_in_at_string":"2015年03月24日 05:43:03",
-      "master_skills":[
-        {
-          "id":"516055075accc1e4067dd5ff6b2682cd",
-          "name":"Drawing",
-          "name_string":"Drawing"
-        },
-        {
-          "id":"90913b93738c8a627129e49db32eeec3",
-          "name":"Singing",
-          "name_string":"Singing"
-        },
-        {
-          "id":"cf292b334af37778c2f92612cb4aa4c2",
-          "name":"Piano",
-          "name_string":"Piano"
-        },
-        {
-          "id":"fd222e8393c0729d6008b07961f2ce9f",
-          "name":"Dancing",
-          "name_string":"Dancing"
-        },
-        {
-          "id":"a2692db13f2c2879f7ae118a46b62bd9",
-          "name":"Ruby",
-          "name_string":"Ruby"
-        },
-        {
-          "id":"f106a6096665c9e13df7991d822a7a2a",
-          "name":"Javascript",
-          "name_string":"Javascript"
-        },
-        {
-          "id":"8535a728c9b79b3e32b7f19c1e149220",
-          "name":"iOS",
-          "name_string":"Ios"
-        },
-        {
-          "id":"ef92a210d2164bafc70faccefdac1200",
-          "name":"Linux",
-          "name_string":"Linux"
-        }
-      ],
-      "learning_skills":[
-        {
-          "id":"0a11fec715bee0125063606978b91b44",
-          "name":"CSS",
-          "name_string":"Css"
-        },
-        {
-          "id":"ba994ac6dba5bc71489ab75fd5b8574c",
-          "name":"Boxing",
-          "name_string":"Boxing"
-        },
-        {
-          "id":"7106ab25a9e2170d278cbee3c5f0b247",
-          "name":"Cooking",
-          "name_string":"Cooking"
-        }
-      ]
-    },
-    {
-      "id":"3cd8d8de0b3f732f4103cbd428f8ec92",
-      "username":"tumayun",
-      "nickname":"tumayun",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "latitude":28.3213,
-      "longitude":117.001,
-      "distance":"9.995235609898296",
-      "last_sign_in_at":"2015-03-24T05:43:02Z",
-      "last_sign_in_at_string":"2015年03月24日 05:43:02",
-      "master_skills":[
-        {
-          "id":"516055075accc1e4067dd5ff6b2682cd",
-          "name":"Drawing",
-          "name_string":"Drawing"
-        },
-        {
-          "id":"90913b93738c8a627129e49db32eeec3",
-          "name":"Singing",
-          "name_string":"Singing"
-        },
-        {
-          "id":"cf292b334af37778c2f92612cb4aa4c2",
-          "name":"Piano",
-          "name_string":"Piano"
-        },
-        {
-          "id":"fd222e8393c0729d6008b07961f2ce9f",
-          "name":"Dancing",
-          "name_string":"Dancing"
-        },
-        {
-          "id":"a2692db13f2c2879f7ae118a46b62bd9",
-          "name":"Ruby",
-          "name_string":"Ruby"
-        },
-        {
-          "id":"f106a6096665c9e13df7991d822a7a2a",
-          "name":"Javascript",
-          "name_string":"Javascript"
-        },
-        {
-          "id":"8535a728c9b79b3e32b7f19c1e149220",
-          "name":"iOS",
-          "name_string":"Ios"
-        },
-        {
-          "id":"ef92a210d2164bafc70faccefdac1200",
-          "name":"Linux",
-          "name_string":"Linux"
-        }
-      ],
-      "learning_skills":[
-        {
-          "id":"0a11fec715bee0125063606978b91b44",
-          "name":"CSS",
-          "name_string":"Css"
-        },
-        {
-          "id":"ba994ac6dba5bc71489ab75fd5b8574c",
-          "name":"Boxing",
-          "name_string":"Boxing"
-        },
-        {
-          "id":"7106ab25a9e2170d278cbee3c5f0b247",
-          "name":"Cooking",
-          "name_string":"Cooking"
-        }
-      ]
-    },
-    {
-      "id":"ff5405d3bdad237c7f572a58f65517a6",
-      "username":"ruanwz",
-      "nickname":"ruanwz",
-      "avatar_url":null,
-      "latitude":26.9211,
-      "longitude":118.969,
-      "distance":"238.93350644977318",
-      "last_sign_in_at":"2015-03-24T05:43:01Z",
-      "last_sign_in_at_string":"2015年03月24日 05:43:01",
-      "master_skills":[
-        {
-          "id":"516055075accc1e4067dd5ff6b2682cd",
-          "name":"Drawing",
-          "name_string":"Drawing"
-        },
-        {
-          "id":"90913b93738c8a627129e49db32eeec3",
-          "name":"Singing",
-          "name_string":"Singing"
-        },
-        {
-          "id":"cf292b334af37778c2f92612cb4aa4c2",
-          "name":"Piano",
-          "name_string":"Piano"
-        },
-        {
-          "id":"fd222e8393c0729d6008b07961f2ce9f",
-          "name":"Dancing",
-          "name_string":"Dancing"
-        },
-        {
-          "id":"a2692db13f2c2879f7ae118a46b62bd9",
-          "name":"Ruby",
-          "name_string":"Ruby"
-        },
-        {
-          "id":"f106a6096665c9e13df7991d822a7a2a",
-          "name":"Javascript",
-          "name_string":"Javascript"
-        },
-        {
-          "id":"8535a728c9b79b3e32b7f19c1e149220",
-          "name":"iOS",
-          "name_string":"Ios"
-        },
-        {
-          "id":"ef92a210d2164bafc70faccefdac1200",
-          "name":"Linux",
-          "name_string":"Linux"
-        }
-      ],
-      "learning_skills":[
-        {
-          "id":"0a11fec715bee0125063606978b91b44",
-          "name":"CSS",
-          "name_string":"Css"
-        },
-        {
-          "id":"ba994ac6dba5bc71489ab75fd5b8574c",
-          "name":"Boxing",
-          "name_string":"Boxing"
-        },
-        {
-          "id":"7106ab25a9e2170d278cbee3c5f0b247",
-          "name":"Cooking",
-          "name_string":"Cooking"
-        }
-      ]
-    },
-    {
-      "id":"6cf2c0fae5fb7048175fd80b8cc842a5",
-      "username":"user3",
-      "nickname":"user3",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      "latitude":0.0,
-      "longitude":0.0,
-      "distance":"12646.761054269287",
-      "last_sign_in_at":"2015-03-24T05:43:04Z",
-      "last_sign_in_at_string":"2015年03月24日 05:43:04",
-      "master_skills":[
-        {
-          "id":"516055075accc1e4067dd5ff6b2682cd",
-          "name":"Drawing",
-          "name_string":"Drawing"
-        },
-        {
-          "id":"90913b93738c8a627129e49db32eeec3",
-          "name":"Singing",
-          "name_string":"Singing"
-        },
-        {
-          "id":"cf292b334af37778c2f92612cb4aa4c2",
-          "name":"Piano",
-          "name_string":"Piano"
-        },
-        {
-          "id":"fd222e8393c0729d6008b07961f2ce9f",
-          "name":"Dancing",
-          "name_string":"Dancing"
-        },
-        {
-          "id":"a2692db13f2c2879f7ae118a46b62bd9",
-          "name":"Ruby",
-          "name_string":"Ruby"
-        },
-        {
-          "id":"f106a6096665c9e13df7991d822a7a2a",
-          "name":"Javascript",
-          "name_string":"Javascript"
-        },
-        {
-          "id":"8535a728c9b79b3e32b7f19c1e149220",
-          "name":"iOS",
-          "name_string":"Ios"
-        },
-        {
-          "id":"ef92a210d2164bafc70faccefdac1200",
-          "name":"Linux",
-          "name_string":"Linux"
-        }
-      ],
-      "learning_skills":[
-        {
-          "id":"0a11fec715bee0125063606978b91b44",
-          "name":"CSS",
-          "name_string":"Css"
-        },
-        {
-          "id":"ba994ac6dba5bc71489ab75fd5b8574c",
-          "name":"Boxing",
-          "name_string":"Boxing"
-        },
-        {
-          "id":"7106ab25a9e2170d278cbee3c5f0b247",
-          "name":"Cooking",
-          "name_string":"Cooking"
-        }
-      ]
-    }
+    .
+    .
+    .
   ],
   "current_page":1,
   "per_page":30,
@@ -1581,547 +1032,6 @@ curl https://park.catchchatchina.com/api/v1/user/github -H 'Authorization: Token
 
 github instagram dribbble 返回各不一样，从各平台拿到数据后原样返回，所以请参考各平台 API
 
-## Circle 公共群组
-
-### 获取加入了的所有公共群组
-
-```
-GET /api/v1/circles
-```
-
-#### 参数
-
-| 名称 | 类型 | 是否必需 | 描述 |
-|---|---|---|---|
-| page | Integer | 否 | 当前页码 |
-| pre_page | Integer | 否 | 每页显示数量 |
-
-#### 示例
-
-```
-curl -X GET https://park.catchchatchina.com/api/v1/circles -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
-```
-
-#### 响应
-
-```
-{
-  "circles":[
-    {
-      "id":1,
-      "name":"circle",
-      "created_at":"2015-01-29T09:43:35Z",
-      "created_at_string":"2015年01月29日 09:43:35",
-      "updated_at":"2015-01-29T09:43:35Z",
-      "updated_at_string":"2015年01月29日 09:43:35",
-      "owner":{
-        "id":1,
-        "username":"tumayun",
-        "nickname":"tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-      },
-      "members":[
-        {
-          "id":1,
-          "username":"tumayun",
-          "nickname":"tumayun",
-          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-        }
-        .
-        .
-        .
-      ]
-    },
-    {
-      "id":2,
-      "name":"公共群组",
-      "created_at":"2015-01-29T09:44:39Z",
-      "created_at_string":"2015年01月29日 09:44:39",
-      "updated_at":"2015-01-29T09:50:49Z",
-      "updated_at_string":"2015年01月29日 09:44:39",
-      "owner":{
-        "id":1,
-        "username":"tumayun",
-        "nickname":"tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-      },
-      "members":[
-        {
-          "id":1,
-          "username":"tumayun",
-          "nickname":"tumayun",
-          "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-        }
-        .
-        .
-        .
-      ]
-    }
-  ],
-  "current_page":1,
-  "per_page":30,
-  "count":2
-}
-```
-
-### 创建公共群组
-
-```
-POST /api/v1/circles
-```
-
-#### 参数
-
-| 名称 | 类型 | 是否必需 | 描述 |
-|---|---|---|---|
-| name | String | 是 | 公共群组名 |
-| members | String | 否 | 成员ID数组 |
-
-#### 示例
-
-```
-curl -i -X POST https://park.catchchatchina.com/api/v1/circles -d '{ "members": [3,4,5], "name": "群组" }' -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"' -H "Content-Type: application/json"
-```
-
-#### 响应
-
-```
-{
-  "id":2,
-  "name":"群组",
-  "created_at":"2015-01-29T09:44:38Z",
-  "created_at_string":"2015年01月29日 09:44:38",
-  "updated_at":"2015-01-29T09:44:38Z",
-  "updated_at_string":"2015年01月29日 09:44:38",
-  "owner":{
-    "id":3,
-    "username":"friend1"
-    "nickname":"friend1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-  },
-  "members":[
-    {
-      "id":3,
-      "username":"friend1",
-      "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-    },
-  	.
-  	.
-  	.
-  ]
-}
-```
-
-### 更新公共群组
-
-```
-PUT /api/v1/circles/:id
-```
-
-#### 参数
-
-| 名称 | 类型 | 是否必需 | 描述 |
-|---|---|---|---|
-| name | String | 是 | 公共群组名 |
-| id | Integer | 是 | 公共群组 ID |
-
-#### 示例
-
-```
-curl -X PUT https://park.catchchatchina.com/api/v1/circles/2 -d '{ "name": "公共群组" }' -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"' -H "Content-Type: application/json"
-```
-
-#### 响应
-
-```
-{
-  "id":2,
-  "name":"公共群组",
-  "created_at":"2015-01-29T09:44:39Z",
-  "created_at_string":"2015年01月29日 09:44:39",
-  "updated_at":"2015-01-29T09:50:49Z",
-  "updated_at_string":"2015年01月29日 09:44:39",
-  "owner":{
-    "id":3,
-    "username":"friend1",
-    "nickname":"friend1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-  },
-  "members":[
-    {
-      "id":3,
-      "username":"friend1",
-      "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-    },
-    .
-    .
-    .
-  ]
-}
-```
-
-#### 获取单个公共群组
-
-```
-GET /api/v1/circles/:id
-```
-
-#### 参数
-
-| 名称 | 类型 | 是否必需 | 描述 |
-|---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
-
-#### 示例
-
-```
-curl -X GET https://park.catchchatchina.com/api/v1/circles/2 -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"'
-```
-
-#### 响应
-
-```
-{
-  "id":2,
-  "name":"公共群组",
-  "created_at":"2015-01-29T09:44:39Z",
-  "created_at_string":"2015年01月29日 09:44:39",
-  "updated_at":"2015-01-29T09:50:49Z",
-  "updated_at_string":"2015年01月29日 09:44:39",
-  "owner":{
-    "id":3,
-    "username":"friend1",
-    "nickname":"friend1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-  },
-  "members":[
-    {
-      "id":3,
-      "username":"friend1",
-      "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-    },
-    .
-    .
-    .
-  ]
-}
-```
-I
-#### 加入公共群组
-
-```
-POST /api/v1/circles/:id/join
-```
-
-#### 参数
-
-| 名称 | 类型 | 是否必需 | 描述 |
-|---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
-
-#### 示例
-
-```
-curl -X POST https://park.catchchatchina.com/api/v1/circles/2/join -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
-```
-
-#### 响应
-
-```
-{
-  "id":2,
-  "name":"公共群组",
-  "created_at":"2015-01-29T09:44:39Z",
-  "created_at_string":"2015年01月29日 09:44:39",
-  "updated_at":"2015-01-29T09:50:49Z",
-  "updated_at_string":"2015年01月29日 09:44:39",
-  "owner":{
-    "id":1,
-    "username":"tumayun",
-    "nickname":"tumayun",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-  },
-  "members":[
-    {
-      "id":1,
-      "username":"tumayun",
-      "nickname":"tumayun",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg""
-    },
-    .
-    .
-    .
-  ]
-}
-```
-
-### 退出公共群组
-
-```
-DELETE /api/v1/circles/:id/leave
-```
-
-#### 参数
-
-| 名称 | 类型 | 是否必需 | 描述 |
-|---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
-
-#### 示例
-
-```
-curl -X DELETE https://park.catchchatchina.com/api/v1/circles/2/leave -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
-```
-
-#### 响应
-
-```
-{}
-```
-
-### 批量添加成员
-
-```
-POST /api/v1/circles/:id/batch_add
-```
-
-#### 参数
-
-| 名称 | 类型 | 是否必需 | 描述 |
-|---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
-| members | String | 否 | 要添加的成员ID数组 |
-
-#### 示例
-
-```
-curl -X POST https://park.catchchatchina.com/api/v1/circles/2/batch_add -d '{ "members": [4,5] }' -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"' -H "Content-Type: application/json"
-```
-
-#### 响应
-
-```
-{
-  "id":2,
-  "name":"公共群组",
-  "created_at":"2015-01-29T09:44:39Z",
-  "created_at_string":"2015年01月29日 09:44:39",
-  "updated_at":"2015-01-29T09:50:49Z",
-  "updated_at_string":"2015年01月29日 09:44:39",
-  "owner":{
-    "id":3,
-    "username":"friend1",
-    "nickname":"friend1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-  },
-  "members":[
-    {
-      "id":3,
-      "username":"friend1",
-      "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-    },
-    .
-    .
-    .
-  ]
-}
-```
-
-### 批量删除成员（只能是群 owner 才能删除成员）
-
-```
-DELETE /api/v1/circles/:id/batch_delete
-```
-
-#### 参数
-
-| 名称 | 类型 | 是否必需 | 描述 |
-|---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
-| members | String | 否 | 要删除的成员ID数组 |
-
-#### 示例
-
-```
-curl -X DELETE https://park.catchchatchina.com/api/v1/circles/2/batch_delete -d '{ "members": [4,5] }' -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"' -H "Content-Type: application/json"
-```
-
-#### 响应
-
-```
-{
-  "id":2,
-  "name":"公共群组",
-  "created_at":"2015-01-29T09:44:39Z",
-  "created_at_string":"2015年01月29日 09:44:39",
-  "updated_at":"2015-01-29T09:50:49Z",
-  "updated_at_string":"2015年01月29日 09:44:39",
-  "owner":{
-    "id":3,
-    "username":"friend1",
-    "nickname":"friend1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-  },
-  "members":[
-    {
-      "id":3,
-      "username":"friend1",
-      "nickname":"friend1",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-    },
-    .
-    .
-    .
-  ]
-}
-```
-
-### 公共群组未读消息
-
-```
-GET /api/v1/circles/:id/unread_messages
-```
-
-#### 参数
-
-| 名称 | 类型 | 是否必需 | 描述 |
-|---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
-
-#### 示例
-
-```
-curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H 'Authorization: Token token="QVXyAg6mpi14YDje9RSr1421656248.3836942"'
-```
-
-#### 响应
-
-```
-{
-  "messages":[
-    {
-      "id":4,
-      "recipient_id":2,
-      "recipient_type":"Circle",
-      "text_content":"Hello~",
-      "parent_id":0,
-      "longitude":null,
-      "latitude":null,
-      "battery_level":50,
-      "media_type":"image",
-      "media_type_string":"一张照片",
-      "state":"unread",
-      "state_string":"未读",
-      "created_at":"2015-01-29T10:58:07Z",
-      "created_at_string":"2015年01月29日 10:58:07",
-      "updated_at":"2015-01-29T10:58:27Z",
-      "updated_at_string":"2015年01月29日 10:58:07",
-      "sender":{
-        "id":1,
-        "username":"tumayun"
-        "nickname":"tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-        "remarked_name":"",
-        "contact_name":""
-      },
-      "circle":{
-        "id":2,
-        "name":"公共群组",
-        "created_at":"2015-01-29T09:44:39Z",
-        "created_at_string":"2015年01月29日 09:44:39",
-        "updated_at":"2015-01-29T09:50:49Z",
-        "updated_at_string":"2015年01月29日 09:44:39"
-      },
-      "attachments":[
-        {
-          "kind":"image",
-          "metadata":"metadata",
-          "file":{
-            "storage":"qiniu",
-            "expires_in":86400, // 单位：秒
-            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          }
-        },
-        {
-          "kind":"thumbnail",
-          "metadata":"metadata",
-          "file":{
-            "storage":"qiniu",
-            "expires_in":86400, // 单位：秒
-            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          }
-        }
-      ]
-    },
-    {
-      "id":5,
-      "recipient_id":2,
-      "recipient_type":"Circle",
-      "text_content":"Hello~",
-      "parent_id":0,
-      "longitude":null,
-      "latitude":null,
-      "battery_level":50,
-      "media_type":"image",
-      "media_type_string":"一张照片",
-      "state":"unread",
-      "state_string":"未读",
-      "created_at":"2015-01-29T11:00:07Z",
-      "created_at_string":"2015年01月29日 11:00:07",
-      "updated_at":"2015-01-29T11:02:51Z",
-      "updated_at_string":"2015年01月29日 11:00:07",
-      "sender":{
-        "id":1,
-        "username":"tumayun",
-        "nickname":"tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-        "remarked_name":"",
-        "contact_name":""
-      },
-      "circle":{
-        "id":2,
-        "name":"公共群组",
-        "created_at":"2015-01-29T09:44:39Z",
-        "created_at_string":"2015年01月29日 09:44:39",
-        "updated_at":"2015-01-29T09:50:49Z",
-        "updated_at_string":"2015年01月29日 09:44:39"
-      },
-      "attachments":[
-        {
-          "kind":"image",
-          "metadata":"metadata",
-          "file":{
-            "storage":"qiniu",
-            "expires_in":86400, // 单位：秒
-            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          }
-        },
-        {
-          "kind":"thumbnail",
-          "file":{
-            "storage":"qiniu",
-            "expires_in":86400, // 单位：秒
-            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          },
-          "fallback_file":{
-            "storage":"s3",
-            "expires_in":86400, // 单位：秒
-            "url":"https://ruanwz-test.s3.cn-north-1.amazonaws.com.cn/test-key?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20141208%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20141208T065428Z&X-Amz-Expires=86400&X-Amz-Signature=c2f80c4d07452ef937488139ef99aaec8ef00c77dd49e5464ab2609b9e1118f5&X-Amz-SignedHeaders=Host"
-          }
-        }
-      ]
-    }
-  ],
-  "current_page":1,
-  "per_page":30,
-  "count":2
-}
-```
-
 ## Contact 通讯录
 
 ### 上传通讯录并返回已注册的通讯录好友
@@ -2150,25 +1060,17 @@ curl htts://park.catchchatchina.com/api/v1/contacts/upload -F contacts="[{\"name
 {
   "registered_contacts":[
     {
-      "id":1,
-      "name":"abc",
-      "user":{
-        "id":13,
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-        "nickname":"user4",
-        "username":"user4",
-      }
-    },
-    {
-      "id":2,
       "name":"bac",
       "user":{
-        "id":14,
+        "id":<id>,
         "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
         "nickname":"user5",
         "username":"user5",
       }
-    }
+    },
+    .
+    .
+    .
   ]
 }
 ```
@@ -2199,10 +1101,7 @@ curl https://park.catchchatchina.com/api/v1/users/search\?q\=15158161111 -H 'Aut
 {
   "users":[
     {
-      "id":8,
-      "username":"tumayun",
-      "nickname":"tumayun",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+      <user>
     }
   ],
   "current_page":1,
@@ -2298,76 +1197,10 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
 {
   "messages":[
     {
-      "id":3,
-      "recipient_id":11,
-      "recipient_type":"User",
-      "text_content":"This is a test!",
-      "parent_id":0,
-      "longitude":null,
-      "latitude":null,
-      "battery_level":50,
-      "media_type":"text",
-      "media_type_string":"一段文字",
-      "state":"unread",
-      "state_string":"未读",
-      "created_at":"2015-01-30T07:07:19Z",
-      "created_at_string":"2015年01月30日 07:07:19",
-      "updated_at":"2015-01-30T07:07:19Z",
-      "updated_at_string":"2015年01月30日 07:07:19",
-      "sender":{
-        "id":8,
-        "username":"Tumayun",
-        "nickname":"Tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
-        "remarked_name":null,
-        "contact_name":null
-      },
-      "attachments":[
-
-      ]
-    },
-    {
-      "id":4,
-      "recipient_id":2,
+      "id":<id>,
+      "recipient_id":<id>,
       "recipient_type":"Circle",
-      "text_content":"This is a test!",
-      "parent_id":0,
-      "longitude":null,
-      "latitude":null,
-      "battery_level":50,
-      "media_type":"text",
-      "media_type_string":"一段文字",
-      "state":"unread",
-      "state_string":"未读",
-      "created_at":"2015-01-30T07:07:19Z",
-      "created_at_string":"2015年01月30日 07:07:19",
-      "updated_at":"2015-01-30T07:07:19Z",
-      "updated_at_string":"2015年01月30日 07:07:19",
-      "sender":{
-        "id":8,
-        "username":"Tumayun",
-        "nickname":"Tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
-        "remarked_name":"",
-        "contact_name":""
-      },
-      "circle":{
-        "id":2,
-        "name":"circle",
-        "created_at":"2015-01-30T07:07:19Z",
-        "created_at_string":"2015年01月30日 07:07:19",
-        "updated_at":"2015-01-30T07:07:19Z",
-        "updated_at_string":"2015年01月30日 07:07:19"
-      },
-      "attachments":[
-
-      ]
-    },
-    {
-      "id":5,
-      "recipient_id":2,
-      "recipient_type":"Circle",
-      "text_content":"This is a test!",
+      "text_content":"Hello~",
       "parent_id":0,
       "longitude":null,
       "latitude":null,
@@ -2376,51 +1209,51 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
       "media_type_string":"一张照片",
       "state":"unread",
       "state_string":"未读",
-      "created_at":"2015-01-30T09:29:29Z",
-      "created_at_string":"2015年01月30日 09:29:29",
-      "updated_at":"2015-01-30T09:32:04Z",
-      "updated_at_string":"2015年01月30日 09:29:29",
+      "created_at":"2015-01-29T10:58:07Z",
+      "created_at_string":"2015年01月29日 10:58:07",
+      "updated_at":"2015-01-29T10:58:27Z",
+      "updated_at_string":"2015年01月29日 10:58:07",
       "sender":{
-        "id":8,
-        "username":"Tumayun",
-        "nickname":"Tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
-        "remarked_name":"",
-        "contact_name":""
+        <user>,
+        "remarked_name":null,
+        "contact_name":null
       },
       "circle":{
-        "id":2,
-        "name":"circle",
-        "created_at":"2015-01-30T07:07:19Z",
-        "created_at_string":"2015年01月30日 07:07:19",
-        "updated_at":"2015-01-30T07:07:19Z",
-        "updated_at_string":"2015年01月30日 07:07:19"
+        "id":<id>,
+        "name":"公共群组",
+        "created_at":"2015-01-29T09:44:39Z",
+        "created_at_string":"2015年01月29日 09:44:39",
+        "updated_at":"2015-01-29T09:50:49Z",
+        "updated_at_string":"2015年01月29日 09:44:39"
       },
       "attachments":[
-        {
-          "kind":"thumbnail",
-          "metadata":"metadata",
-          "file":{
-            "storage":"qiniu",
-            "expires_in":86400,
-            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          }
-        },
         {
           "kind":"image",
           "metadata":"metadata",
           "file":{
             "storage":"qiniu",
-            "expires_in":86400,
+            "expires_in":86400, // 单位：秒
+            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+          }
+        },
+        {
+          "kind":"thumbnail",
+          "metadata":"metadata",
+          "file":{
+            "storage":"qiniu",
+            "expires_in":86400, // 单位：秒
             "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
           }
         }
       ]
-    }
+    },
+    .
+    .
+    .
   ],
   "current_page":1,
   "per_page":30,
-  "count":3
+  "count":2
 }
 ```
 
@@ -2446,10 +1279,10 @@ curl https://park.catchchatchina.com/api/v1/messages/4 -H 'Authorization: Token 
 
 ```
 {
-  "id":5,
-  "recipient_id":2,
+  "id":<id>,
+  "recipient_id":<id>,
   "recipient_type":"Circle",
-  "text_content":"This is a test!",
+  "text_content":"Hello~",
   "parent_id":0,
   "longitude":null,
   "latitude":null,
@@ -2458,42 +1291,39 @@ curl https://park.catchchatchina.com/api/v1/messages/4 -H 'Authorization: Token 
   "media_type_string":"一张照片",
   "state":"unread",
   "state_string":"未读",
-  "created_at":"2015-01-30T09:29:29Z",
-  "created_at_string":"2015年01月30日 09:29:29",
-  "updated_at":"2015-01-30T09:32:04Z",
-  "updated_at_string":"2015年01月30日 09:29:29",
+  "created_at":"2015-01-29T10:58:07Z",
+  "created_at_string":"2015年01月29日 10:58:07",
+  "updated_at":"2015-01-29T10:58:27Z",
+  "updated_at_string":"2015年01月29日 10:58:07",
   "sender":{
-    "id":8,
-    "username":"Tumayun",
-    "nickname":"Tumayun",
-    "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
-    "remarked_name":"",
-    "contact_name":""
+    <user>,
+    "remarked_name":null,
+    "contact_name":null
   },
   "circle":{
-    "id":2,
-    "name":"circle",
-    "created_at":"2015-01-30T07:07:19Z",
-    "created_at_string":"2015年01月30日 07:07:19",
-    "updated_at":"2015-01-30T07:07:19Z",
-    "updated_at_string":"2015年01月30日 07:07:19"
+    "id":<id>,
+    "name":"公共群组",
+    "created_at":"2015-01-29T09:44:39Z",
+    "created_at_string":"2015年01月29日 09:44:39",
+    "updated_at":"2015-01-29T09:50:49Z",
+    "updated_at_string":"2015年01月29日 09:44:39"
   },
   "attachments":[
-    {
-      "kind":"thumbnail",
-      "metadata":"metadata",
-      "file":{
-        "storage":"qiniu",
-        "expires_in":86400,
-        "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-      }
-    },
     {
       "kind":"image",
       "metadata":"metadata",
       "file":{
         "storage":"qiniu",
-        "expires_in":86400,
+        "expires_in":86400, // 单位：秒
+        "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+      }
+    },
+    {
+      "kind":"thumbnail",
+      "metadata":"metadata",
+      "file":{
+        "storage":"qiniu",
+        "expires_in":86400, // 单位：秒
         "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
       }
     }
@@ -2553,47 +1383,52 @@ curl -X POST https://park.catchchatchina.com/api/v1/messages -d '{ "recipient_id
 
 ```
 {
-  "id":"1a04b751fae4c7e0847450973e2bc36a",
-  "recipient_id":"90913b93738c8a627129e49db32eeec3",
-  "parent_id":"e8f3d46135cda79c413678e3ad91ddfc",
-  "recipient_type":"User",
-  "text_content":"This is a test!",
+  "id":<id>,
+  "recipient_id":<id>,
+  "recipient_type":"Circle",
+  "text_content":"Hello~",
+  "parent_id":0,
   "longitude":null,
   "latitude":null,
-  "battery_level":70,
+  "battery_level":50,
   "media_type":"image",
   "media_type_string":"一张照片",
   "state":"unread",
   "state_string":"未读",
-  "created_at":"2015-04-17T10:18:30Z",
-  "created_at_string":"2015年04月17日 10:18:30",
-  "updated_at":"2015-04-17T10:18:30Z",
-  "updated_at_string":"2015年04月17日 10:18:30",
+  "created_at":"2015-01-29T10:58:07Z",
+  "created_at_string":"2015年01月29日 10:58:07",
+  "updated_at":"2015-01-29T10:58:27Z",
+  "updated_at_string":"2015年01月29日 10:58:07",
   "sender":{
-    "id":"516055075accc1e4067dd5ff6b2682cd",
-    "username":null,
-    "nickname":"tumayun",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+    <user>,
     "remarked_name":null,
     "contact_name":null
+  },
+  "circle":{
+    "id":<id>,
+    "name":"公共群组",
+    "created_at":"2015-01-29T09:44:39Z",
+    "created_at_string":"2015年01月29日 09:44:39",
+    "updated_at":"2015-01-29T09:50:49Z",
+    "updated_at_string":"2015年01月29日 09:44:39"
   },
   "attachments":[
     {
       "kind":"image",
       "metadata":"metadata",
       "file":{
-        "storage":"s3",
-        "expires_in":86400,
-        "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/3e1b14f1-ee42-471e-96c2-2c46459f13c4?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20150417%2Fcn-north-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20150417T101831Z\u0026X-Amz-Expires=86400\u0026X-Amz-Signature=1823eca92a52eab3a22a33ccd82ec8d09278d85fa3a5be1d677843f5fdb8ebfb\u0026X-Amz-SignedHeaders=Host"
+        "storage":"qiniu",
+        "expires_in":86400, // 单位：秒
+        "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
       }
     },
     {
       "kind":"thumbnail",
       "metadata":"metadata",
       "file":{
-        "storage":"s3",
-        "expires_in":86400,
-        "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20150417%2Fcn-north-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20150417T101831Z\u0026X-Amz-Expires=86400\u0026X-Amz-Signature=206c17a7ef891e6832892db5526174ac96d94d9fc97f04646735cb4f4c863237\u0026X-Amz-SignedHeaders=Host"
+        "storage":"qiniu",
+        "expires_in":86400, // 单位：秒
+        "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
       }
     }
   ]
@@ -2623,7 +1458,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/messages/3/mark_as_read -H 
 ```
 {
   "recipient_type":"User",
-  "recipient_id":"1a04b751fae4c7e0847450973e2bc36a"
+  "recipient_id":<id>
 }
 ```
 
@@ -2728,9 +1563,9 @@ curl https://catchchatserver.com/api/v4/friend_requests/received/accepted -H 'Au
 {
   "friend_requests":[
     {
-      "id":3,
-      "user_id":1,
-      "friend_id":3,
+      "id":<id>,
+      "user_id":<id>,
+      "friend_id":<id>,
       "state":2,
       "state_string":"已接受",
       "created_at":"2014-11-22T17:08:07Z",
@@ -2738,11 +1573,8 @@ curl https://catchchatserver.com/api/v4/friend_requests/received/accepted -H 'Au
       "updated_at":"2014-11-22T17:09:42Z",
       "updated_at_string":"2014年11月22日 17:08:07",
       "friend":{
-        "id":1,
-        "username":"ruanwztest",
-        "nickname":"ruanwztest",
-        "name":"ruanwztest", // remarked_name || contact_name || nickname || username
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+        <user>,
+        "contact_name":"contact_name"
       }
     }
     .
@@ -2782,63 +1614,27 @@ curl https://park.catchchatchina.com/api/v1/friend_requests/sent/accepted -H 'Au
 {
   "friend_requests":[
     {
-      "id":9,
-      "user_id":8,
-      "friend_id":12,
-      "state":"accepted",
+      "id":<id>,
+      "user_id":<id>,
+      "friend_id":<id>,
+      "state":2,
       "state_string":"已接受",
-      "created_at":"2015-01-30T07:07:19Z",
-      "created_at_string":"2015年01月30日 07:07:19",
-      "updated_at":"2015-01-30T07:07:19Z",
-      "updated_at_string":"2015年01月30日 07:07:19",
+      "created_at":"2014-11-22T17:08:07Z",
+      "created_at_string":"2014年11月22日 17:08:07",
+      "updated_at":"2014-11-22T17:09:42Z",
+      "updated_at_string":"2014年11月22日 17:08:07",
       "friend":{
-        "id":12,
-        "username":"user3",
-        "nickname":"user3",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-        "contact_name":null
-      }
-    },
-    {
-      "id":8,
-      "user_id":8,
-      "friend_id":11,
-      "state":"accepted",
-      "state_string":"已接受",
-      "created_at":"2015-01-30T07:07:19Z",
-      "created_at_string":"2015年01月30日 07:07:19",
-      "updated_at":"2015-01-30T07:07:19Z",
-      "updated_at_string":"2015年01月30日 07:07:19",
-      "friend":{
-        "id":11,
-        "username":"user2",
-        "nickname":"user2",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-        "contact_name":null
-      }
-    },
-    {
-      "id":7,
-      "user_id":8,
-      "friend_id":10,
-      "state":"accepted",
-      "state_string":"已接受",
-      "created_at":"2015-01-30T07:07:19Z",
-      "created_at_string":"2015年01月30日 07:07:19",
-      "updated_at":"2015-01-30T07:07:19Z",
-      "updated_at_string":"2015年01月30日 07:07:19",
-      "friend":{
-        "id":10,
-        "username":"user1",
-        "nickname":"user1",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-        "contact_name":null
+        <user>,
+        "contact_name":"contact_name"
       }
     }
+    .
+    .
+    .
   ],
   "current_page":1,
   "per_page":30,
-  "count":3
+  "count":1
 }
 ```
 
@@ -2864,21 +1660,18 @@ curl -X POST https://park.catchchatchina.com/api/v1/friend_requests -F friend_id
 
 ```
 {
-  "id":7,
-  "user_id":8,
-  "friend_id":10,
-  "state":"pending",
+  "id":<id>,
+  "user_id":<id>,
+  "friend_id":<id>,
+  "state":1,
   "state_string":"等待中",
-  "created_at":"2015-01-30T07:07:19Z",
-  "created_at_string":"2015年01月30日 07:07:19",
-  "updated_at":"2015-01-30T07:07:19Z",
-  "updated_at_string":"2015年01月30日 07:07:19",
+  "created_at":"2014-11-22T17:08:07Z",
+  "created_at_string":"2014年11月22日 17:08:07",
+  "updated_at":"2014-11-22T17:09:42Z",
+  "updated_at_string":"2014年11月22日 17:08:07",
   "friend":{
-    "id":10,
-    "username":"user1",
-    "nickname":"user1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-    "contact_name":null
+    <user>,
+    "contact_name":"contact_name"
   }
 }
 ```
@@ -2905,21 +1698,18 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friend_requests/received/7/
 
 ```
 {
-  "id":7,
-  "user_id":8,
-  "friend_id":10,
-  "state":"accepted",
+  "id":<id>,
+  "user_id":<id>,
+  "friend_id":<id>,
+  "state":2,
   "state_string":"已接受",
-  "created_at":"2015-01-30T07:07:19Z",
-  "created_at_string":"2015年01月30日 07:07:19",
-  "updated_at":"2015-01-30T07:07:19Z",
-  "updated_at_string":"2015年01月30日 07:07:19",
+  "created_at":"2014-11-22T17:08:07Z",
+  "created_at_string":"2014年11月22日 17:08:07",
+  "updated_at":"2014-11-22T17:09:42Z",
+  "updated_at_string":"2014年11月22日 17:08:07",
   "friend":{
-    "id":10,
-    "username":"user1",
-    "nickname":"user1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-    "contact_name":null
+    <user>,
+    "contact_name":"contact_name"
   }
 }
 ```
@@ -2946,21 +1736,18 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friend_requests/received/7/
 
 ```
 {
-  "id":7,
-  "user_id":8,
-  "friend_id":10,
-  "state":"rejected",
+  "id":<id>,
+  "user_id":<id>,
+  "friend_id":<id>,
+  "state":3,
   "state_string":"已拒绝",
-  "created_at":"2015-01-30T07:07:19Z",
-  "created_at_string":"2015年01月30日 07:07:19",
-  "updated_at":"2015-01-30T07:07:19Z",
-  "updated_at_string":"2015年01月30日 07:07:19",
+  "created_at":"2014-11-22T17:08:07Z",
+  "created_at_string":"2014年11月22日 17:08:07",
+  "updated_at":"2014-11-22T17:09:42Z",
+  "updated_at_string":"2014年11月22日 17:08:07",
   "friend":{
-    "id":10,
-    "username":"user1",
-    "nickname":"user1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-    "contact_name":null
+    <user>,
+    "contact_name":"contact_name"
   }
 }
 ```
@@ -2987,21 +1774,18 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friend_requests/received/7/
 
 ```
 {
-  "id":7,
-  "user_id":8,
-  "friend_id":10,
-  "state":"blocked",
+  "id":<id>,
+  "user_id":<id>,
+  "friend_id":<id>,
+  "state":4,
   "state_string":"已禁止",
-  "created_at":"2015-01-30T07:07:19Z",
-  "created_at_string":"2015年01月30日 07:07:19",
-  "updated_at":"2015-01-30T07:07:19Z",
-  "updated_at_string":"2015年01月30日 07:07:19",
+  "created_at":"2014-11-22T17:08:07Z",
+  "created_at_string":"2014年11月22日 17:08:07",
+  "updated_at":"2014-11-22T17:09:42Z",
+  "updated_at_string":"2014年11月22日 17:08:07",
   "friend":{
-    "id":10,
-    "username":"user1",
-    "nickname":"user1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-    "contact_name":null
+    <user>,
+    "contact_name":"contact_name"
   }
 }
 ```
@@ -3031,9 +1815,9 @@ curl https://park.catchchatchina.com/api/v1/friendships\?page\=1\&per_page\=10 -
 {
   "friendships":[
     {
-      "id":13,
-      "user_id":8,
-      "friend_id":10,
+      "id":<id>,
+      "user_id":<id>,
+      "friend_id":<id>,
       "contact_name":null,
       "remarked_name":null,
       "favored":false,           // 标示是否星组成员
@@ -3045,96 +1829,12 @@ curl https://park.catchchatchina.com/api/v1/friendships\?page\=1\&per_page\=10 -
       "updated_at":"2015-01-30T07:07:19Z",
       "updated_at_string":"2015年01月30日 07:07:19",
       "friend":{
-        "id":10,
-        "username":"user1",
-        "nickname":"user1",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+        <user>
       }
     },
-    {
-      "id":15,
-      "user_id":8,
-      "friend_id":11,
-      "contact_name":null,
-      "remarked_name":null,
-      "favored":false,
-      "position":2,
-      "favored_position":null,
-      "name":"user2",
-      "created_at":"2015-01-30T07:07:19Z",
-      "created_at_string":"2015年01月30日 07:07:19",
-      "updated_at":"2015-01-30T07:07:19Z",
-      "updated_at_string":"2015年01月30日 07:07:19",
-      "friend":{
-        "id":11,
-        "username":"user2",
-        "nickname":"user2",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-      }
-    },
-    {
-      "id":17,
-      "user_id":8,
-      "friend_id":12,
-      "contact_name":null,
-      "remarked_name":null,
-      "favored":false,
-      "position":3,
-      "favored_position":null,
-      "name":"user3",
-      "created_at":"2015-01-30T07:07:19Z",
-      "created_at_string":"2015年01月30日 07:07:19",
-      "updated_at":"2015-01-30T07:07:19Z",
-      "updated_at_string":"2015年01月30日 07:07:19",
-      "friend":{
-        "id":12,
-        "username":"user3",
-        "nickname":"user3",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-      }
-    },
-    {
-      "id":25,
-      "user_id":8,
-      "friend_id":13,
-      "contact_name":"abc",
-      "remarked_name":null,
-      "favored":false,
-      "position":4,
-      "favored_position":null,
-      "name":"abc",
-      "created_at":"2015-01-30T07:17:07Z",
-      "created_at_string":"2015年01月30日 07:17:07",
-      "updated_at":"2015-01-30T07:17:07Z",
-      "updated_at_string":"2015年01月30日 07:17:07",
-      "friend":{
-        "id":13,
-        "username":"user4",
-        "nickname":"user4",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-      }
-    },
-    {
-      "id":27,
-      "user_id":8,
-      "friend_id":14,
-      "contact_name":"bac",
-      "remarked_name":null,
-      "favored":false,
-      "position":5,
-      "favored_position":null,
-      "name":"bac",
-      "created_at":"2015-01-30T07:17:07Z",
-      "created_at_string":"2015年01月30日 07:17:07",
-      "updated_at":"2015-01-30T07:17:07Z",
-      "updated_at_string":"2015年01月30日 07:17:07",
-      "friend":{
-        "id":14,
-        "username":"user5",
-        "nickname":"user5",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-      }
-    }
+    .
+    .
+    .
   ],
   "current_page":1,
   "per_page":10,
@@ -3166,33 +1866,30 @@ curl https://park.catchchatchina.com/api/v1/friendships/recent\?page\=1\&per_pag
 {
   "friendships":[
     {
-      "id":27,
-      "user_id":8,
-      "friend_id":14,
-      "contact_name":"bac",
+      "id":<id>,
+      "user_id":<id>,
+      "friend_id":<id>,
+      "contact_name":null,
       "remarked_name":null,
-      "favored":false,
-      "position":5,
+      "favored":false,           // 标示是否星组成员
+      "position":1,
       "favored_position":null,
-      "name":"bac",
-      "created_at":"2015-01-30T07:17:07Z",
-      "created_at_string":"2015年01月30日 07:17:07",
-      "updated_at":"2015-01-30T07:17:07Z",
-      "updated_at_string":"2015年01月30日 07:17:07",
+      "name":"user1",
+      "created_at":"2015-01-30T07:07:19Z",
+      "created_at_string":"2015年01月30日 07:07:19",
+      "updated_at":"2015-01-30T07:07:19Z",
+      "updated_at_string":"2015年01月30日 07:07:19",
       "friend":{
-        "id":14,
-        "username":"user5",
-        "nickname":"user5",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+        <user>
       }
-    }
+    },
     .
     .
     .
   ],
   "current_page":1,
   "per_page":10,
-  "count":1
+  "count":5
 }
 ```
 
@@ -3218,9 +1915,9 @@ curl https://park.catchchatchina.com/api/v1/friendships/27 -H 'Authorization: To
 
 ```
 {
-  "id":27,
-  "user_id":8,
-  "friend_id":14,
+  "id":<id>,
+  "user_id":<id>,
+  "friend_id":<id>,
   "contact_name":"bac",
   "remarked_name":null,
   "favored":false,
@@ -3232,10 +1929,7 @@ curl https://park.catchchatchina.com/api/v1/friendships/27 -H 'Authorization: To
   "updated_at":"2015-01-30T07:17:07Z",
   "updated_at_string":"2015年01月30日 07:17:07",
   "friend":{
-    "id":14,
-    "username":"user5",
-    "nickname":"user5",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    <user>
   }
 }
 ```
@@ -3262,9 +1956,9 @@ curl https://park.catchchatchina.com/api/v1/friendships/with/14 -H 'Authorizatio
 
 ```
 {
-  "id":27,
-  "user_id":8,
-  "friend_id":14,
+  "id":<id>,
+  "user_id":<id>,
+  "friend_id":<id>,
   "contact_name":"bac",
   "remarked_name":null,
   "favored":false,
@@ -3276,10 +1970,7 @@ curl https://park.catchchatchina.com/api/v1/friendships/with/14 -H 'Authorizatio
   "updated_at":"2015-01-30T07:17:07Z",
   "updated_at_string":"2015年01月30日 07:17:07",
   "friend":{
-    "id":14,
-    "username":"user5",
-    "nickname":"user5",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    <user>
   }
 }
 ```
@@ -3308,24 +1999,21 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/13 -F contact_n
 
 ```
 {
-  "id":13,
-  "user_id":8,
-  "friend_id":10,
-  "contact_name":"contact_name",
-  "remarked_name":"remarked_name",
+  "id":<id>,
+  "user_id":<id>,
+  "friend_id":<id>,
+  "contact_name":"bac",
+  "remarked_name":null,
   "favored":false,
-  "position":1,
+  "position":5,
   "favored_position":null,
-  "name":"remarked_name",
-  "created_at":"2015-01-30T07:07:19Z",
-  "created_at_string":"2015年01月30日 07:07:19",
-  "updated_at":"2015-01-30T08:59:30Z",
-  "updated_at_string":"2015年01月30日 07:07:19",
+  "name":"bac",
+  "created_at":"2015-01-30T07:17:07Z",
+  "created_at_string":"2015年01月30日 07:17:07",
+  "updated_at":"2015-01-30T07:17:07Z",
+  "updated_at_string":"2015年01月30日 07:17:07",
   "friend":{
-    "id":10,
-    "username":"user1",
-    "nickname":"user1",
-    "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+    <user>
   }
 }
 ```
@@ -3354,113 +2042,29 @@ curl https://park.catchchatchina.com/api/v1/friendships/search\?q\=1515816 -H 'A
 {
   "friendships":[
     {
-      "id":13,
-      "user_id":8,
-      "friend_id":10,
-      "contact_name":"contact_name",
-      "remarked_name":"remarked_name",
-      "favored":true,
+      "id":<id>,
+      "user_id":<id>,
+      "friend_id":<id>,
+      "contact_name":null,
+      "remarked_name":null,
+      "favored":false,           // 标示是否星组成员
       "position":1,
       "favored_position":null,
-      "name":"remarked_name",
-      "created_at":"2015-01-30T07:07:19Z",
-      "created_at_string":"2015年01月30日 07:07:19",
-      "updated_at":"2015-01-30T08:59:31Z",
-      "updated_at_string":"2015年01月30日 07:07:19",
-      "friend":{
-        "id":10,
-        "username":"user1",
-        "nickname":"user1",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-      }
-    },
-    {
-      "id":15,
-      "user_id":8,
-      "friend_id":11,
-      "contact_name":null,
-      "remarked_name":null,
-      "favored":false,
-      "position":2,
-      "favored_position":null,
-      "name":"user2",
+      "name":"user1",
       "created_at":"2015-01-30T07:07:19Z",
       "created_at_string":"2015年01月30日 07:07:19",
       "updated_at":"2015-01-30T07:07:19Z",
       "updated_at_string":"2015年01月30日 07:07:19",
       "friend":{
-        "id":11,
-        "username":"user2",
-        "nickname":"user2",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+        <user>
       }
     },
-    {
-      "id":17,
-      "user_id":8,
-      "friend_id":12,
-      "contact_name":null,
-      "remarked_name":null,
-      "favored":false,
-      "position":3,
-      "favored_position":null,
-      "name":"user3",
-      "created_at":"2015-01-30T07:07:19Z",
-      "created_at_string":"2015年01月30日 07:07:19",
-      "updated_at":"2015-01-30T07:07:19Z",
-      "updated_at_string":"2015年01月30日 07:07:19",
-      "friend":{
-        "id":12,
-        "username":"user3",
-        "nickname":"user3",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-      }
-    },
-    {
-      "id":25,
-      "user_id":8,
-      "friend_id":13,
-      "contact_name":"abc",
-      "remarked_name":null,
-      "favored":false,
-      "position":4,
-      "favored_position":null,
-      "name":"abc",
-      "created_at":"2015-01-30T07:17:07Z",
-      "created_at_string":"2015年01月30日 07:17:07",
-      "updated_at":"2015-01-30T07:17:07Z",
-      "updated_at_string":"2015年01月30日 07:17:07",
-      "friend":{
-        "id":13,
-        "username":"user4",
-        "nickname":"user4",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-      }
-    },
-    {
-      "id":27,
-      "user_id":8,
-      "friend_id":14,
-      "contact_name":"bac",
-      "remarked_name":null,
-      "favored":false,
-      "position":5,
-      "favored_position":null,
-      "name":"bac",
-      "created_at":"2015-01-30T07:17:07Z",
-      "created_at_string":"2015年01月30日 07:17:07",
-      "updated_at":"2015-01-30T07:17:07Z",
-      "updated_at_string":"2015年01月30日 07:17:07",
-      "friend":{
-        "id":14,
-        "username":"user5",
-        "nickname":"user5",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-      }
-    }
+    .
+    .
+    .
   ],
   "current_page":1,
-  "per_page":30,
+  "per_page":10,
   "count":5
 }
 ```
@@ -3514,69 +2118,27 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/batch_mark_as_f
 {
   "friendships":[
     {
-      "id":3,
-      "user_id":2,
-      "friend_id":5,
+      "id":<id>,
+      "user_id":<id>,
+      "friend_id":<id>,
       "contact_name":null,
       "remarked_name":null,
-      "favored":true,
-      "position":2,
-      "favored_position":0,
-      "name":"user2",
-      "created_at":"2015-02-02T08:06:19Z",
-      "created_at_string":"2015年02月02日 08:06:19",
-      "updated_at":"2015-02-02T08:06:19Z",
-      "updated_at_string":"2015年02月02日 08:06:19",
-      "friend":{
-        "id":5,
-        "username":"user2",
-        "nickname":"user2",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-      }
-    },
-    {
-      "id":5,
-      "user_id":2,
-      "friend_id":6,
-      "contact_name":null,
-      "remarked_name":null,
-      "favored":true,
-      "position":3,
-      "favored_position":1,
-      "name":"user3",
-      "created_at":"2015-02-02T08:06:19Z",
-      "created_at_string":"2015年02月02日 08:06:19",
-      "updated_at":"2015-02-02T08:06:19Z",
-      "updated_at_string":"2015年02月02日 08:06:19",
-      "friend":{
-        "id":6,
-        "username":"user3",
-        "nickname":"user3",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
-      }
-    },
-    {
-      "id":1,
-      "user_id":2,
-      "friend_id":4,
-      "contact_name":null,
-      "remarked_name":null,
-      "favored":true,
+      "favored":true,           // 标示是否星组成员
       "position":1,
-      "favored_position":2,
+      "favored_position":1,
       "name":"user1",
-      "created_at":"2015-02-02T08:06:19Z",
-      "created_at_string":"2015年02月02日 08:06:19",
-      "updated_at":"2015-02-02T08:06:19Z",
-      "updated_at_string":"2015年02月02日 08:06:19",
+      "created_at":"2015-01-30T07:07:19Z",
+      "created_at_string":"2015年01月30日 07:07:19",
+      "updated_at":"2015-01-30T07:07:19Z",
+      "updated_at_string":"2015年01月30日 07:07:19",
       "friend":{
-        "id":4,
-        "username":"user1",
-        "nickname":"user1",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+        <user>
       }
-    }
-  ]
+    },
+    .
+    .
+    .
+  ],
 }
 ```
 
@@ -3780,10 +2342,7 @@ curl -X GET https://park.catchchatchina.com/api/v1/blocked_users -H 'Authorizati
 {
   "blocked_users":[
     {
-      "id":"516055075accc1e4067dd5ff6b2682cd",
-      "username":"ruanwz",
-      "nickname":"ruanwz",
-      "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+      <user>
     }
   ],
   "current_page":1,
@@ -3813,11 +2372,8 @@ curl -X POST https://park.catchchatchina.com/api/v1/blocked_users -F user_id=516
 #### 响应
 
 ```
-{  
-  "id":"516055075accc1e4067dd5ff6b2682cd",
-  "username":"ruanwz",
-  "nickname":"ruanwz",
-  "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
+{
+  <user>
 }
 ```
 
@@ -3969,88 +2525,23 @@ curl https://park.catchchatchina.com/api/v1/skill_categories -H 'Authorization: 
 {
   "categories":[
     {
-      "id":"516055075accc1e4067dd5ff6b2682cd",
+      "id":<id>,
       "name":"Art", // 分类名
       "name_string":"Art", // 分类名翻译
       "skills":[
         {
-          "id":"516055075accc1e4067dd5ff6b2682cd",
+          "id":<id>,
           "name":"Drawing", // 技能名
           "name_string":"Drawing" // 技能名翻译
         },
-        {
-          "id":"90913b93738c8a627129e49db32eeec3",
-          "name":"Singing",
-          "name_string":"Singing"
-        },
-        {
-          "id":"cf292b334af37778c2f92612cb4aa4c2",
-          "name":"Piano",
-          "name_string":"Piano"
-        },
-        {
-          "id":"fd222e8393c0729d6008b07961f2ce9f",
-          "name":"Dancing",
-          "name_string":"Dancing"
-        }
+        .
+        .
+        .
       ]
     },
-    {
-      "id":"90913b93738c8a627129e49db32eeec3",
-      "name":"Technology",
-      "name_string":"Technology",
-      "skills":[
-        {
-          "id":"a2692db13f2c2879f7ae118a46b62bd9",
-          "name":"Ruby",
-          "name_string":"Ruby"
-        },
-        {
-          "id":"f106a6096665c9e13df7991d822a7a2a",
-          "name":"Javascript",
-          "name_string":"Javascript"
-        },
-        {
-          "id":"8535a728c9b79b3e32b7f19c1e149220",
-          "name":"iOS",
-          "name_string":"Ios"
-        },
-        {
-          "id":"ef92a210d2164bafc70faccefdac1200",
-          "name":"Linux",
-          "name_string":"Linux"
-        },
-        {
-          "id":"0a11fec715bee0125063606978b91b44",
-          "name":"CSS",
-          "name_string":"Css"
-        }
-      ]
-    },
-    {
-      "id":"cf292b334af37778c2f92612cb4aa4c2",
-      "name":"Sport",
-      "name_string":"Sport",
-      "skills":[
-        {
-          "id":"ba994ac6dba5bc71489ab75fd5b8574c",
-          "name":"Boxing",
-          "name_string":"Boxing"
-        }
-      ]
-    },
-    {
-      "id":"fd222e8393c0729d6008b07961f2ce9f",
-      "name":"Life Style",
-      "name_string":"Life style",
-      "skills":[
-        {
-          "id":"7106ab25a9e2170d278cbee3c5f0b247",
-          "name":"Cooking",
-          "name_string":"Cooking"
-        }
-      ]
-    }
+    .
+    .
+    .
   ]
 }
 ```
@@ -4079,5 +2570,5 @@ curl -X PATCH park-staging.catchchatchina.com/api/v1/skills/516055075accc1e4067d
 #### 响应
 
 ```
-{"id":"516055075accc1e4067dd5ff6b2682cd","cover_url":"https://s3.cn-north-1.amazonaws.com.cn/ruanwz-test-public/ruby-logo.png"}
+{"id":<id>,"cover_url":"https://s3.cn-north-1.amazonaws.com.cn/ruanwz-test-public/ruby-logo.png"}
 ```
