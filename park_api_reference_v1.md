@@ -142,59 +142,6 @@ X-RateLimit-Reset: 1377013266
 
 ----
 
-#### 账号和密码认证
-
-发送登录账号 (login) 和密码 (password)，可获取相应的 access_token。login 可以为邮箱或用户名。
-
-```
-POST /api/auth/token_by_login
-```
-
-| 参数 | 描述 |
-|--------|--------|
-| mobile | 手机号 |
-| phone_code | 国家代码 |
-| password | 密码 |
-| expiring | access_token 过期时间。单位为秒，设置为0表示永不过期，不设置默认一年过期 |
-| client | 用于推送, official=0, company=1, local=2 |
-
-cURL 请求范例：
-
-```
-curl -X POST -H "Content-Type: application/json" -d '{"phone_code":"86",
-"mobile":"12345678","password":"ruanwztest", "client": 2}'
-park.catchchatchina.com/api/v1/auth/token_by_login'
-```
-
-返回范例：
-
-```
-{
-  "access_token":"Bs2H_1hVWLseG7rDy5hz1422602902.8925965",
-  "user": {
-    "id":<id>,
-    "username":"ruanwz",
-    "nickname":"ruanwz",
-    "avatar_url":null,
-    "mobile":"12345678",
-    "phone_code":"86"
-  }
-}
-```
-
-cURL 请求范例（1小时过期）：
-
-```
-curl -X POST -H "Content-Type: application/json" -d '{"phone_code":"86",
-"mobile":"12345678","password":"ruanwztest", "client": 2, "expiring": 3600}'
-park.catchchatchina.com/api/v1/auth/token_by_login'
-```
-
-如果用户名密码错误，则返回 HTTP 401.
-{
-  error: "用户名密码错误"
-}
-
 #### 手机号和验证码认证
 
 **发送验证码到指定手机号。**
