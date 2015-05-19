@@ -146,33 +146,28 @@ X-RateLimit-Reset: 1377013266
 
 **发送验证码到指定手机号。**
 
-对于1个手机号，3600秒内只发送20次，24小时内只发送50次。
+对于1个手机号，1小时内只发送20次，24小时内只发送50次。
 
 ```
-POST /api/auth/send_verify_code
+POST /api/v1/sms_verification_codes
 ```
 
 | 参数 | 描述 |
 |--------|--------|
 | mobile | 手机号 |
 | phone_code | 国家代码 |
-
+| method | 发送方式，`sms` 短信方式，`call` 语音方式 |
 
 cURL 请求范例：
 
 ```
-curl -X POST   -H "Content-Type: application/json" -d '{"phone_code":"86",
-"mobile":"12345678"}'
-http://park.catchchatchina.com/api/v1/auth/send_verify_code
+curl -X POST -H "Content-Type: application/json" -d '{"phone_code":"86","mobile":"12345678","method":"sms"}' http://park.catchchatchina.com/api/v1/sms_verification_codes
 ```
 
 返回范例：
 
 ```
-{
-  "mobile":"12345678",
-  "status":"sms sent" // 发送成功返回 `sms sent`，失败返回 `failed`
-}
+{}
 ```
 
 如果发送次数过多，则返回 429 Too Many Requests 的错误。
@@ -251,7 +246,7 @@ POST   /api/v1/registration/create
 | nickname | 用户昵称 |
 | phone_code | 国家码 |
 | longitude | longitude |
-|latitude | latitude |
+| latitude | latitude |
 
 cURL 请求范例：
 
@@ -269,41 +264,8 @@ http://park.catchchatchina.com/api/v1/registration/create
   "nickname":"testnick",
   "mobile":"15626044835",
   "phone_code":"86"
-  "sent_sms": "{\"error\":0,\"msg\":\"ok\"}",
   "state":"blocked"
-}
-```
-
-### 重发送用户名,手机号码，发起注册,等待接收语音验证码
-
-```
-POST   /api/v1/registration/resend_verify_code_by_voice
-```
-
-| 参数 | 描述 |
-|--------|--------|
-| mobile | 手机号 |
-| nickname | 用户昵称 |
-| phone_code | 国家码 |
-
-cURL 请求范例：
-
-```
-curl -X POST -H "Content-Type: application/json" -d '{"phone_code":"86",
-"mobile":"15626044835", "nickname": "testnick"}'
-http://park.catchchatchina.com/api/v1/registration/resend_verify_code_by_voice
-```
-
-返回范例：
-
-```
-{
-  "username":"testnick",
-  "nickname":"testnick",
-  "mobile":"15626044835",
-  "phone_code":"86"
-  "sent_sms": "{\"error\":0,\"msg\":\"ok\"}",
-  "state":"blocked"
+  "sent_sms": true, // true 表示验证码发送正常，false 表示验证码发送失败
 }
 ```
 
@@ -884,6 +846,63 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/user -F username=tumayun -F
 }
 ```
 
+### 更新手机号流程
+
+1. 发送当前手机号验证码 (POST /api/v1/sms_verification_codes)
+2. 校验当前手机号验证码  (PATCH /api/v1/user/check_verify_code)
+3. 发送新手机号验证码 (POST /api/v1/user/send_update_mobile_code)
+4. 校验新手机号验证码，通关验证后更新手机号为新手机好 (PATCH /api/v1/user/update_mobile)
+
+### 验证更新手机号请求的验证码
+
+```
+PATCH /api/v1/user/check_verify_code
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| token | String | 是 | 短信验证码 |
+
+#### 示例
+
+```
+curl -X PATCH https://park.catchchatchina.com/api/v1/user/check_verify_code -F token=1234 -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+```
+
+#### 响应
+
+```
+{}
+```
+
+### 发送新手机号验证码
+
+```
+POST /api/v1/user/send_update_mobile_code
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| phone_code | String | 是 | 国家码 |
+| mobile | String | 是 | 手机号 |
+| method | String | 是 | 发送方式，`sms` 短信方式，`call` 语音方式 |
+
+#### 示例
+
+```
+curl -X POST -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"' -H "Content-Type: application/json" -d '{"phone_code":"86","mobile":"12345678","method":"sms"}' https://park.catchchatchina.com/api/v1/user/send_update_mobile_code
+```
+
+#### 响应
+
+```
+{}
+```
+
 ### 更新手机号
 
 ```
@@ -907,10 +926,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/user/update_mobile -F phone
 #### 响应
 
 ```
-{
-  "phone_code":"86",
-  "mobile":"15158166372"
-}
+{}
 ```
 
 ### Discover 发现
@@ -2519,3 +2535,4 @@ curl -X PATCH park-staging.catchchatchina.com/api/v1/skills/516055075accc1e4067d
 ```
 {"id":<id>,"cover_url":"https://s3.cn-north-1.amazonaws.com.cn/ruanwz-test-public/ruby-logo.png"}
 ```
+}
