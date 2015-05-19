@@ -79,6 +79,10 @@ X-RateLimit-Reset: 1377013266
 }
 ```
 
+### Response
+
+HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请求失败，失败会有错误信息，错误信息在 `error` 中。
+
 ### 字段模板
 
 为了方便 API 文档的阅读，将会用模板重用一些重复的字段结构。
@@ -269,7 +273,7 @@ http://park.catchchatchina.com/api/v1/registration/create
 }
 ```
 
-### 发手机验证码完成注册
+### 验证手机验证码完成注册
 
 ```
 PUT   /api/v1/registration/update
