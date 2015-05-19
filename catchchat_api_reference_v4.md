@@ -1804,7 +1804,7 @@ POST /api/v4/contacts/upload
 #### 示例
 
 ```
-curl -X POST https://catchchatserver.com/api/v4/contacts/upload -F contacts="[\"name\":\"涂马云\",\"number\":\"15158166372\"}]" -H 'Authorization: Token oken="possbdsrHyRhU_zmwsNy1417016499.200043"'
+curl -X POST https://catchchatserver.com/api/v4/contacts/upload -F contacts="[\"name\":\"涂马云\",\"number\":\"15158166372\"}]" -H 'Authorization: Token token="possbdsrHyRhU_zmwsNy1417016499.200043"'
 ```
 
 #### 响应
@@ -1903,7 +1903,7 @@ GET /api/v4/user
 #### 示例
 
 ```
-curl https://catchchatserver.com/api/v4/user -H 'Authorization: Token oken="kuH3PbRifgSATCanYwxd1418031570.162303"'
+curl https://catchchatserver.com/api/v4/user -H 'Authorization: Token token="kuH3PbRifgSATCanYwxd1418031570.162303"'
 ```
 
 #### 响应
@@ -1935,13 +1935,12 @@ PATCH /api/v4/user
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
 | nickname | String | 否 | 昵称 |
-| time_zone | String | 否 | 标准时区 |
 | avatar_url | String | 否 | 头像 URL |
 
 #### 示例
 
 ```
-curl -X PATCH https://catchchatserver.com/api/v4/user -F nickname=Tumayun -F ime_zone=Beijing -F avatar_url=http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+curl -X PATCH https://catchchatserver.com/api/v4/user -F nickname=Tumayun -F avatar_url=http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg -H 'Authorization: Token token="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
 ```
 
 #### 响应
@@ -1955,42 +1954,92 @@ curl -X PATCH https://catchchatserver.com/api/v4/user -F nickname=Tumayun -F ime
   "phone_code":"86",
   "mobile":"15158166372",
   "mobile_verified":true,
-  "time_zone":"Beijing",
   "state":1,
   "state_string":"活跃",
   "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg"
 }
 ```
 
-### 更新手机号
+### 更新手机号流程
+
+1. 发送当前手机号验证码 (POST /api/v4/auth/send_verify_code)
+2. 校验当前手机号验证码  (PATCH /api/v4/user/check_verify_code)
+3. 发送新手机号验证码 (POST /api/v4/user/send_update_mobile_code)
+4. 校验新手机号验证码，通关验证后更新手机号为新手机好 (PATCH /api/v1/user/update_mobile)
+
+### 验证更新手机号请求的验证码
 
 ```
-PATCH /api/v4/user/update_mobile
+PATCH /api/v4/user/check_verify_code
 ```
-
 
 #### 参数
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| phone_code | String | 是 | 手机号国家码，详见 [http://countrycode.org/](ttp://countrycode.org/) |
+| token | String | 是 | 短信验证码 |
+
+#### 示例
+
+```
+curl -X PATCH https://catchchatserver.com/api/v4/user/check_verify_code -F token=1234 -H 'Authorization: Token token="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+```
+
+#### 响应
+
+```
+{}
+```
+
+### 发送新手机号验证码
+
+```
+POST /api/v1/user/send_update_mobile_code
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| phone_code | String | 是 | 国家码 |
+| mobile | String | 是 | 手机号 |
+
+#### 示例
+
+```
+curl -X POST -H 'Authorization: Token token="E9PnSDQMRZvjzL84yBi21418033718.2053812"' -H "Content-Type: application/json" -d '{"phone_code":"86","mobile":"12345678"}' https://catchchatserver.com/api/v4/user/send_update_mobile_code
+```
+
+#### 响应
+
+```
+{}
+```
+
+### 更新手机号
+
+```
+PATCH /api/v1/user/update_mobile
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| phone_code | String | 是 | 手机号国家码，详见 [http://countrycode.org/](http://countrycode.org/) |
 | mobile | String | 是 | 手机号 |
 | token | String | 是 | 短信验证码 |
 
 #### 示例
 
 ```
-curl -X PATCH https://catchchatserver.com/api/v4/user/update_mobile -F phone_ode=86 -F mobile=15158166372 -F token=131421 -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+curl -X PATCH https://catchchatserver.com/api/v4/user/update_mobile -F phone_ode=86 -F mobile=15158166372 -F token=131421 -H 'Authorization: Token token="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
 ```
 
 #### 响应
 
 ```
-{
-  "phone_code":"86",
-  "mobile":"15158166372",
-  "mobile_verified":true
-}
+{}
 ```
 
 ## Users 用户
