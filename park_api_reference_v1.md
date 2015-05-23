@@ -1054,7 +1054,7 @@ GET api/v1/users/search
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| q | String | 是 | mobile 或者 username |
+| q | String | 是 | mobile|username|nickname，其中 username 和 nickname 是前缀匹配，mobile 则是全文匹配  |
 
 #### 示例
 
@@ -1069,6 +1069,7 @@ curl https://park.catchchatchina.com/api/v1/users/search\?q\=15158161111 -H 'Aut
   "users":[
     {
       <user>
+      distance: 10.1 // 距离，单位 km
     }
   ],
   "current_page":1,
