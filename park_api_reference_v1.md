@@ -2340,9 +2340,7 @@ curl -X POST https://park.catchchatchina.com/api/v1/blocked_users -F user_id=516
 #### 响应
 
 ```
-{
-  <user>
-}
+{}
 ```
 
 ### Unblock User
@@ -2541,3 +2539,84 @@ curl -X PATCH park-staging.catchchatchina.com/api/v1/skills/516055075accc1e4067d
 {"id":<id>,"cover_url":"https://s3.cn-north-1.amazonaws.com.cn/ruanwz-test-public/ruby-logo.png"}
 ```
 }
+
+## Do not disturb API (请勿打扰)
+
+### 设置为请勿打扰的用户列表
+
+```
+GET /api/:version/do_not_disturb_users
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl -X GET https://park.catchchatchina.com/api/v1/do_not_disturb_users -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+```
+
+#### 响应
+
+```
+{
+  "users":[
+    {
+      <user>
+    }
+  ],
+  "current_page":1,
+  "per_page":30,
+  "count":1
+}
+```
+
+### 设置请勿打扰
+
+```
+POST /api/:version/do_not_disturb_users
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+user_id | String | 是 | 需要设置为请勿打扰的用户 ID
+
+#### 示例
+
+```
+curl -X POST https://park.catchchatchina.com/api/v1/do_not_disturb_users -F user_id=516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+```
+
+#### 响应
+
+```
+{}
+```
+
+### 取消请勿打扰
+
+```
+DELETE /api/:version/do_not_disturb_users/:id
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+id | String | 是 | 需要取消设置请勿打扰的用户 ID
+
+#### 示例
+
+```
+curl -X DELETE https://park.catchchatchina.com/api/v1/do_not_disturb_users/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+```
+
+#### 响应
+
+```
+{}
+```
