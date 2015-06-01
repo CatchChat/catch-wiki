@@ -1025,15 +1025,10 @@ curl htts://park.catchchatchina.com/api/v1/contacts/upload -F contacts="[{\"name
 
 ```
 {
-  "registered_contacts":[
+  "registered_users":[
     {
-      "name":"bac",
-      "user":{
-        "id":<id>,
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-        "nickname":"user5",
-        "username":"user5",
-      }
+      "contact_name":"bac",
+      <user>
     },
     .
     .
