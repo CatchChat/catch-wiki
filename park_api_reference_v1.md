@@ -1028,7 +1028,8 @@ curl htts://park.catchchatchina.com/api/v1/contacts/upload -F contacts="[{\"name
   "registered_users":[
     {
       "contact_name":"bac",
-      <user>
+      <user>,
+      distance: 1234.5
     },
     .
     .
