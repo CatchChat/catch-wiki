@@ -2616,3 +2616,31 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/do_not_disturb_users/51605
 ```
 {}
 ```
+
+## 举报用户（user_report）
+
+### 举报用户
+
+```
+POST /api/:version/user_reports
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+recipient_id | String | 是 | 要举报的用户 ID
+report_type | Integer | 是 | 0 表示色情低俗, 1 表示广告骚扰, 2 表示诈骗, 3 表示其他
+reason | Text | 否 | 举报原因，当 report_type 为 3 时，reason 为必填
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/user_reports -F recipient_id=bc93fe60a44cf376edeb98a9d68d85b9 -F report_type=1 -F reason=test -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{}
+```
