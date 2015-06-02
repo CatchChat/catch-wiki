@@ -1137,6 +1137,30 @@ curl https://park.catchchatchina.com/api/v1/users/90913b93738c8a627129e49db32eee
 
 github instagram dribbble 返回各不一样，从各平台拿到数据后原样返回，所以请参考各平台 API
 
+### 获取指定用户信息
+
+```
+GET /api/:version/users/:id
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | String | 是 | user id |
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/users/90913b93738c8a627129e49db32eeec3 -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{ <user> }
+```
+
 ## Message 消息
 
 ### 获取所有未读消息
