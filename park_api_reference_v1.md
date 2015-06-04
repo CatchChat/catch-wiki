@@ -12,6 +12,7 @@
 ### 分页
 
 默认返回30条记录，可以通过 `per_page` 参数指定最多每次返回100条记录，但是有些 API 因为一些技术原因，会忽略 `per_page` 参数。页码用 `?page` 参数指定，从1开始。
+在`参数`中不再明确列出 `page` 和 `per_page` 参数，返回结果中包含 `current_page/per_page/count`，就表示支持分页功能。
 
 cURL 请求范例：
 
@@ -1242,6 +1243,35 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
   "current_page":1,
   "per_page":30,
   "count":2
+}
+```
+
+### 获取我发送的未读消息ID
+
+```
+GET /api/:version/messages/sent_unread
+```
+
+#### 参数
+
+无，且不支持分页，一次性返回所有结果
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/messages/sent_unread -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
+```
+
+#### 响应
+
+```
+{
+  message_ids: [
+    <id>,
+    .
+    .
+    .
+  }
 }
 ```
 
