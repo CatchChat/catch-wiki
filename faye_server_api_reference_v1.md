@@ -181,10 +181,8 @@
       "media_type_string":"一段文字",
       "state":"unread",
       "state_string":"未读",
-      "created_at":"2015-04-17T10:03:37Z",
-      "created_at_string":"2015年04月17日 10:03:37",
-      "updated_at":"2015-04-17T10:03:37Z",
-      "updated_at_string":"2015年04月17日 10:03:37",
+      "created_at":1433930183, // UNIX 时间戳
+      "updated_at":1433930183, // UNIX 时间戳
       "sender":{
         "id":"516055075accc1e4067dd5ff6b2682cd",
         "username":"tumayun",

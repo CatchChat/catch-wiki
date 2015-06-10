@@ -120,12 +120,9 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "latitude":28.3213,
 "longitude":117.001,
 "introduction":"",
-"last_sign_in_at":"2015-05-09T04:54:00Z",
-"last_sign_in_at_string":"2015年05月09日 04:54:00",
-"created_at":"2015-05-09T04:54:40Z",
-"created_at_string":"2015年05月09日 04:54:40",
-"updated_at":"2015-05-09T15:23:42Z",
-"updated_at_string":"2015年05月09日 15:23:42",
+"last_sign_in_at":1433930183, // UNIX 时间戳
+"created_at":1433930183, // UNIX 时间戳
+"updated_at":1433930183, // UNIX 时间戳
 "providers":{ // 第三方平台绑定情况
   "github":false,
   "dribbble":false,
@@ -354,10 +351,8 @@ curl -X GET https://park.catchchatchina.com/api/v1/circles -H 'Authorization: To
     {
       "id":<id>,
       "name":"circle",
-      "created_at":"2015-01-29T09:43:35Z",
-      "created_at_string":"2015年01月29日 09:43:35",
-      "updated_at":"2015-01-29T09:43:35Z",
-      "updated_at_string":"2015年01月29日 09:43:35",
+      "created_at":1433930183, // UNIX 时间戳
+      "updated_at":1433930183, // UNIX 时间戳
       "owner":{
         <user>
       },
@@ -405,10 +400,8 @@ curl -i -X POST https://park.catchchatchina.com/api/v1/circles -d '{ "members": 
 {
   "id":<id>,
   "name":"群组",
-  "created_at":"2015-01-29T09:44:38Z",
-  "created_at_string":"2015年01月29日 09:44:38",
-  "updated_at":"2015-01-29T09:44:38Z",
-  "updated_at_string":"2015年01月29日 09:44:38",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
   "owner":{
     <user>
   },
@@ -448,10 +441,8 @@ curl -X PUT https://park.catchchatchina.com/api/v1/circles/2 -d '{ "name": "公�
 {
   "id":<id>,
   "name":"公共群组",
-  "created_at":"2015-01-29T09:44:39Z",
-  "created_at_string":"2015年01月29日 09:44:39",
-  "updated_at":"2015-01-29T09:50:49Z",
-  "updated_at_string":"2015年01月29日 09:44:39",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
   "owner":{
     <user>
   },
@@ -490,10 +481,8 @@ curl -X GET https://park.catchchatchina.com/api/v1/circles/2 -H 'Authorization: 
 {
   "id":<id>,
   "name":"公共群组",
-  "created_at":"2015-01-29T09:44:39Z",
-  "created_at_string":"2015年01月29日 09:44:39",
-  "updated_at":"2015-01-29T09:50:49Z",
-  "updated_at_string":"2015年01月29日 09:44:39",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
   "owner":{
     <user>
   },
@@ -532,10 +521,8 @@ curl -X POST https://park.catchchatchina.com/api/v1/circles/2/join -H 'Authoriza
 {
   "id":<id>,
   "name":"公共群组",
-  "created_at":"2015-01-29T09:44:39Z",
-  "created_at_string":"2015年01月29日 09:44:39",
-  "updated_at":"2015-01-29T09:50:49Z",
-  "updated_at_string":"2015年01月29日 09:44:39",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
   "owner":{
     <user>
   },
@@ -599,10 +586,8 @@ curl -X POST https://park.catchchatchina.com/api/v1/circles/2/batch_add -d '{ "m
 {
   "id":<id>,
   "name":"公共群组",
-  "created_at":"2015-01-29T09:44:39Z",
-  "created_at_string":"2015年01月29日 09:44:39",
-  "updated_at":"2015-01-29T09:50:49Z",
-  "updated_at_string":"2015年01月29日 09:44:39",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
   "owner":{
     <user>
   },
@@ -642,10 +627,8 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/circles/2/batch_delete -d 
 {
   "id":<id>,
   "name":"公共群组",
-  "created_at":"2015-01-29T09:44:39Z",
-  "created_at_string":"2015年01月29日 09:44:39",
-  "updated_at":"2015-01-29T09:50:49Z",
-  "updated_at_string":"2015年01月29日 09:44:39",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
   "owner":{
     <user>
   },
@@ -696,10 +679,8 @@ curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H '
       "media_type_string":"一张照片",
       "state":"unread",
       "state_string":"未读",
-      "created_at":"2015-01-29T10:58:07Z",
-      "created_at_string":"2015年01月29日 10:58:07",
-      "updated_at":"2015-01-29T10:58:27Z",
-      "updated_at_string":"2015年01月29日 10:58:07",
+      "created_at":1433930183, // UNIX 时间戳
+      "updated_at":1433930183, // UNIX 时间戳
       "sender":{
         <user>,
         "remarked_name":null,
@@ -708,10 +689,8 @@ curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H '
       "circle":{
         "id":<id>,
         "name":"公共群组",
-        "created_at":"2015-01-29T09:44:39Z",
-        "created_at_string":"2015年01月29日 09:44:39",
-        "updated_at":"2015-01-29T09:50:49Z",
-        "updated_at_string":"2015年01月29日 09:44:39"
+        "created_at":1433930183, // UNIX 时间戳
+        "updated_at":1433930183, // UNIX 时间戳
       },
       "attachments":[
         {
@@ -1198,10 +1177,8 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
       "media_type_string":"一张照片",
       "state":"unread",
       "state_string":"未读",
-      "created_at":"2015-01-29T10:58:07Z",
-      "created_at_string":"2015年01月29日 10:58:07",
-      "updated_at":"2015-01-29T10:58:27Z",
-      "updated_at_string":"2015年01月29日 10:58:07",
+      "created_at":1433930183, // UNIX 时间戳
+      "updated_at":1433930183, // UNIX 时间戳
       "sender":{
         <user>,
         "remarked_name":null,
@@ -1210,10 +1187,8 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
       "circle":{
         "id":<id>,
         "name":"公共群组",
-        "created_at":"2015-01-29T09:44:39Z",
-        "created_at_string":"2015年01月29日 09:44:39",
-        "updated_at":"2015-01-29T09:50:49Z",
-        "updated_at_string":"2015年01月29日 09:44:39"
+        "created_at":1433930183, // UNIX 时间戳
+        "updated_at":1433930183, // UNIX 时间戳
       },
       "attachments":[
         {
@@ -1309,10 +1284,8 @@ curl https://park.catchchatchina.com/api/v1/messages/4 -H 'Authorization: Token 
   "media_type_string":"一张照片",
   "state":"unread",
   "state_string":"未读",
-  "created_at":"2015-01-29T10:58:07Z",
-  "created_at_string":"2015年01月29日 10:58:07",
-  "updated_at":"2015-01-29T10:58:27Z",
-  "updated_at_string":"2015年01月29日 10:58:07",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
   "sender":{
     <user>,
     "remarked_name":null,
@@ -1321,10 +1294,8 @@ curl https://park.catchchatchina.com/api/v1/messages/4 -H 'Authorization: Token 
   "circle":{
     "id":<id>,
     "name":"公共群组",
-    "created_at":"2015-01-29T09:44:39Z",
-    "created_at_string":"2015年01月29日 09:44:39",
-    "updated_at":"2015-01-29T09:50:49Z",
-    "updated_at_string":"2015年01月29日 09:44:39"
+    "created_at":1433930183, // UNIX 时间戳
+    "updated_at":1433930183, // UNIX 时间戳
   },
   "attachments":[
     {
@@ -1413,10 +1384,8 @@ curl -X POST https://park.catchchatchina.com/api/v1/messages -d '{ "recipient_id
   "media_type_string":"一张照片",
   "state":"unread",
   "state_string":"未读",
-  "created_at":"2015-01-29T10:58:07Z",
-  "created_at_string":"2015年01月29日 10:58:07",
-  "updated_at":"2015-01-29T10:58:27Z",
-  "updated_at_string":"2015年01月29日 10:58:07",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
   "sender":{
     <user>,
     "remarked_name":null,
@@ -1425,10 +1394,8 @@ curl -X POST https://park.catchchatchina.com/api/v1/messages -d '{ "recipient_id
   "circle":{
     "id":<id>,
     "name":"公共群组",
-    "created_at":"2015-01-29T09:44:39Z",
-    "created_at_string":"2015年01月29日 09:44:39",
-    "updated_at":"2015-01-29T09:50:49Z",
-    "updated_at_string":"2015年01月29日 09:44:39"
+    "created_at":1433930183, // UNIX 时间戳
+    "updated_at":1433930183, // UNIX 时间戳
   },
   "attachments":[
     {
@@ -1586,10 +1553,8 @@ curl https://catchchatserver.com/api/v4/friend_requests/received/accepted -H 'Au
       "friend_id":<id>,
       "state":2,
       "state_string":"已接受",
-      "created_at":"2014-11-22T17:08:07Z",
-      "created_at_string":"2014年11月22日 17:08:07",
-      "updated_at":"2014-11-22T17:09:42Z",
-      "updated_at_string":"2014年11月22日 17:08:07",
+      "created_at":1433930183, // UNIX 时间戳
+      "updated_at":1433930183, // UNIX 时间戳
       "friend":{
         <user>,
         "contact_name":"contact_name"
@@ -1637,10 +1602,8 @@ curl https://park.catchchatchina.com/api/v1/friend_requests/sent/accepted -H 'Au
       "friend_id":<id>,
       "state":2,
       "state_string":"已接受",
-      "created_at":"2014-11-22T17:08:07Z",
-      "created_at_string":"2014年11月22日 17:08:07",
-      "updated_at":"2014-11-22T17:09:42Z",
-      "updated_at_string":"2014年11月22日 17:08:07",
+      "created_at":1433930183, // UNIX 时间戳
+      "updated_at":1433930183, // UNIX 时间戳
       "friend":{
         <user>,
         "contact_name":"contact_name"
@@ -1683,10 +1646,8 @@ curl -X POST https://park.catchchatchina.com/api/v1/friend_requests -F friend_id
   "friend_id":<id>,
   "state":1,
   "state_string":"等待中",
-  "created_at":"2014-11-22T17:08:07Z",
-  "created_at_string":"2014年11月22日 17:08:07",
-  "updated_at":"2014-11-22T17:09:42Z",
-  "updated_at_string":"2014年11月22日 17:08:07",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
   "friend":{
     <user>,
     "contact_name":"contact_name"
@@ -1721,10 +1682,8 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friend_requests/received/7/
   "friend_id":<id>,
   "state":2,
   "state_string":"已接受",
-  "created_at":"2014-11-22T17:08:07Z",
-  "created_at_string":"2014年11月22日 17:08:07",
-  "updated_at":"2014-11-22T17:09:42Z",
-  "updated_at_string":"2014年11月22日 17:08:07",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
   "friend":{
     <user>,
     "contact_name":"contact_name"
@@ -1759,10 +1718,8 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friend_requests/received/7/
   "friend_id":<id>,
   "state":3,
   "state_string":"已拒绝",
-  "created_at":"2014-11-22T17:08:07Z",
-  "created_at_string":"2014年11月22日 17:08:07",
-  "updated_at":"2014-11-22T17:09:42Z",
-  "updated_at_string":"2014年11月22日 17:08:07",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
   "friend":{
     <user>,
     "contact_name":"contact_name"
@@ -1797,10 +1754,8 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friend_requests/received/7/
   "friend_id":<id>,
   "state":4,
   "state_string":"已禁止",
-  "created_at":"2014-11-22T17:08:07Z",
-  "created_at_string":"2014年11月22日 17:08:07",
-  "updated_at":"2014-11-22T17:09:42Z",
-  "updated_at_string":"2014年11月22日 17:08:07",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
   "friend":{
     <user>,
     "contact_name":"contact_name"
@@ -1842,10 +1797,8 @@ curl https://park.catchchatchina.com/api/v1/friendships\?page\=1\&per_page\=10 -
       "position":1,
       "favored_position":null,
       "name":"user1",
-      "created_at":"2015-01-30T07:07:19Z",
-      "created_at_string":"2015年01月30日 07:07:19",
-      "updated_at":"2015-01-30T07:07:19Z",
-      "updated_at_string":"2015年01月30日 07:07:19",
+      "created_at":1433930183, // UNIX 时间戳
+      "updated_at":1433930183, // UNIX 时间戳
       "friend":{
         <user>
       }
@@ -1893,10 +1846,8 @@ curl https://park.catchchatchina.com/api/v1/friendships/recent\?page\=1\&per_pag
       "position":1,
       "favored_position":null,
       "name":"user1",
-      "created_at":"2015-01-30T07:07:19Z",
-      "created_at_string":"2015年01月30日 07:07:19",
-      "updated_at":"2015-01-30T07:07:19Z",
-      "updated_at_string":"2015年01月30日 07:07:19",
+      "created_at":1433930183, // UNIX 时间戳
+      "updated_at":1433930183, // UNIX 时间戳
       "friend":{
         <user>
       }
@@ -1942,10 +1893,8 @@ curl https://park.catchchatchina.com/api/v1/friendships/27 -H 'Authorization: To
   "position":5,
   "favored_position":null,
   "name":"bac",
-  "created_at":"2015-01-30T07:17:07Z",
-  "created_at_string":"2015年01月30日 07:17:07",
-  "updated_at":"2015-01-30T07:17:07Z",
-  "updated_at_string":"2015年01月30日 07:17:07",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
   "friend":{
     <user>
   }
@@ -1983,10 +1932,8 @@ curl https://park.catchchatchina.com/api/v1/friendships/with/14 -H 'Authorizatio
   "position":5,
   "favored_position":null,
   "name":"bac",
-  "created_at":"2015-01-30T07:17:07Z",
-  "created_at_string":"2015年01月30日 07:17:07",
-  "updated_at":"2015-01-30T07:17:07Z",
-  "updated_at_string":"2015年01月30日 07:17:07",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
   "friend":{
     <user>
   }
@@ -2026,10 +1973,8 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/13 -F contact_n
   "position":5,
   "favored_position":null,
   "name":"bac",
-  "created_at":"2015-01-30T07:17:07Z",
-  "created_at_string":"2015年01月30日 07:17:07",
-  "updated_at":"2015-01-30T07:17:07Z",
-  "updated_at_string":"2015年01月30日 07:17:07",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
   "friend":{
     <user>
   }
@@ -2069,10 +2014,8 @@ curl https://park.catchchatchina.com/api/v1/friendships/search\?q\=1515816 -H 'A
       "position":1,
       "favored_position":null,
       "name":"user1",
-      "created_at":"2015-01-30T07:07:19Z",
-      "created_at_string":"2015年01月30日 07:07:19",
-      "updated_at":"2015-01-30T07:07:19Z",
-      "updated_at_string":"2015年01月30日 07:07:19",
+      "created_at":1433930183, // UNIX 时间戳
+      "updated_at":1433930183, // UNIX 时间戳
       "friend":{
         <user>
       }
@@ -2145,10 +2088,8 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/batch_mark_as_f
       "position":1,
       "favored_position":1,
       "name":"user1",
-      "created_at":"2015-01-30T07:07:19Z",
-      "created_at_string":"2015年01月30日 07:07:19",
-      "updated_at":"2015-01-30T07:07:19Z",
-      "updated_at_string":"2015年01月30日 07:07:19",
+      "created_at":1433930183, // UNIX 时间戳
+      "updated_at":1433930183, // UNIX 时间戳
       "friend":{
         <user>
       }
