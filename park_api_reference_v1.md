@@ -672,9 +672,6 @@ curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H '
       "recipient_type":"Circle",
       "text_content":"Hello~",
       "parent_id":0,
-      "longitude":null,
-      "latitude":null,
-      "battery_level":50,
       "media_type":"image",
       "media_type_string":"一张照片",
       "state":"unread",
@@ -1170,9 +1167,6 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
       "recipient_type":"Circle",
       "text_content":"Hello~",
       "parent_id":0,
-      "longitude":null,
-      "latitude":null,
-      "battery_level":50,
       "media_type":"image",
       "media_type_string":"一张照片",
       "state":"unread",
@@ -1277,9 +1271,6 @@ curl https://park.catchchatchina.com/api/v1/messages/4 -H 'Authorization: Token 
   "recipient_type":"Circle",
   "text_content":"Hello~",
   "parent_id":0,
-  "longitude":null,
-  "latitude":null,
-  "battery_level":50,
   "media_type":"image",
   "media_type_string":"一张照片",
   "state":"unread",
@@ -1335,9 +1326,6 @@ recipient_type | String | 是 | 接受者类型，只能是 User 或者 Circle
 media_type | String | 否 | 消息类型，text 表示文字, image 表示图片, video 表示视频, audio 表示语音, sticker 表示贴纸, location 表示位置, 默认是text
 text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
 parent_id | Integer | 否 | 回复的消息 ID，表示当前要发送的消息是回复哪条消息
-longitude | Float | 否 | 经度
-latitude | Float | 否 | 纬度
-battery_level | Integer | 否 | 电量，0 - 100 之间的值，默认为 50
 attachments | JSON | 否 | 如：{ "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] }
 
 media_type 可选值：
@@ -1365,7 +1353,7 @@ sticker | 附件是一副贴纸
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v1/messages -d '{ "recipient_id": 2, "recipient_type": "User", "text_content": "This is a test!", "battery_level": 70, "media_type": "image", "attachments": { "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] } }' -H 'Authorization: Token token="NDccv1Yvdi9UKtwPToxx1416921006.674603"' -H "Content-Type: application/json"
+curl -X POST https://park.catchchatchina.com/api/v1/messages -d '{ "recipient_id": 2, "recipient_type": "User", "text_content": "This is a test!", "media_type": "image", "attachments": { "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] } }' -H 'Authorization: Token token="NDccv1Yvdi9UKtwPToxx1416921006.674603"' -H "Content-Type: application/json"
 ```
 
 #### 响应
@@ -1377,9 +1365,6 @@ curl -X POST https://park.catchchatchina.com/api/v1/messages -d '{ "recipient_id
   "recipient_type":"Circle",
   "text_content":"Hello~",
   "parent_id":0,
-  "longitude":null,
-  "latitude":null,
-  "battery_level":50,
   "media_type":"image",
   "media_type_string":"一张照片",
   "state":"unread",
@@ -1487,32 +1472,6 @@ id | Integer | 是 | 消息 ID
 #### 示例
 
 curl -X POST https://park.catchchatchina.com/api/v1/messages/3/notify_screenshot -H 'Authorization: Token token="TKWsindneiDsFj3gUHs31416969554.7962759"'
-
-#### 响应
-
-```
-{}
-```
-
-## Report 消息举报
-
-### 举报
-
-```
-POST /api/v1/reports
-```
-
-#### 参数
-
-| 名称 | 类型 | 是否必需 | 描述 |
-|---|---|---|---|
-| message_id | Integer | 是 | 要举报的消息 ID |
-
-#### 示例
-
-```
-curl -X POST https://park.catchchatchina.com/api/v1/reports -F message_id=1 -H 'Authorization: Token token="6Y62Cc4FQ1GVw3ZiLqzq1418393864.8241951"'
-```
 
 #### 响应
 
