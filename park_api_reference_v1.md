@@ -913,7 +913,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/user/update_mobile -F phone
 ### Discover 发现
 
 ```
-GET /api/:version/user/discover
+GET /api/v1/user/discover
 ```
 
 如果传入`master_skills`和`learning_skills`参数，则按照传入参数匹配目标用户；
@@ -957,7 +957,7 @@ curl -X GET https://park.catchchatchina.com/api/v1/user/discover -d '{ "master_s
 ### 获取 provider 信息（github instagram dribbble）
 
 ```
-GET /api/:version/user/:provider
+GET /api/v1/user/:provider
 ```
 
 #### 参数
@@ -1094,7 +1094,7 @@ curl https://park.catchchatchina.com/api/v1/users/mobile_validate\?phone_code\=8
 ### 获取指定用户的 provider 信息（github instagram dribbble）
 
 ```
-GET /api/:version/users/:id/:provider
+GET /api/v1/users/:id/:provider
 ```
 
 #### 参数
@@ -1117,7 +1117,7 @@ github instagram dribbble 返回各不一样，从各平台拿到数据后原样
 ### 获取指定用户信息
 
 ```
-GET /api/:version/users/:id
+GET /api/v1/users/:id
 ```
 
 #### 参数
@@ -1218,7 +1218,7 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
 ### 获取我发送的未读消息ID
 
 ```
-GET /api/:version/messages/sent_unread
+GET /api/v1/messages/sent_unread
 ```
 
 #### 参数
@@ -2241,7 +2241,7 @@ curl -X GET https://park.catchchatchina.com/api/v1/attachments/s3_upload_form_fi
 ### 获取 Blocked Users
 
 ```
-GET /api/:version/blocked_users
+GET /api/v1/blocked_users
 ```
 
 #### 参数
@@ -2272,7 +2272,7 @@ curl -X GET https://park.catchchatchina.com/api/v1/blocked_users -H 'Authorizati
 ### Block User
 
 ```
-POST /api/:version/blocked_users
+POST /api/v1/blocked_users
 ```
 
 #### 参数
@@ -2296,7 +2296,7 @@ curl -X POST https://park.catchchatchina.com/api/v1/blocked_users -F user_id=516
 ### Unblock User
 
 ```
-DELETE /api/:version/blocked_users/:id
+DELETE /api/v1/blocked_users/:id
 ```
 
 #### 参数
@@ -2322,7 +2322,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/blocked_users/516055075acc
 ### 添加已有技能
 
 ```
-POST /api/:version/master_skills
+POST /api/v1/master_skills
 ```
 
 #### 参数
@@ -2346,7 +2346,7 @@ curl -X POST https://park.catchchatchina.com/api/v1/master_skills -F skill_id=51
 ### 移除已有技能
 
 ```
-DELETE /api/:version/master_skills/:id
+DELETE /api/v1/master_skills/:id
 ```
 
 #### 参数
@@ -2372,7 +2372,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/master_skills/516055075acc
 ### 添加想学的技能
 
 ```
-POST /api/:version/learning_skills
+POST /api/v1/learning_skills
 ```
 
 #### 参数
@@ -2396,7 +2396,7 @@ curl -X POST https://park.catchchatchina.com/api/v1/learning_skills -F skill_id=
 ### 移除想学的技能
 
 ```
-DELETE /api/:version/master_skills/:id
+DELETE /api/v1/master_skills/:id
 ```
 
 #### 参数
@@ -2422,7 +2422,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/learning_skills/516055075a
 ### 技能分类列表
 
 ```
-GET /api/:version/skill_categories
+GET /api/v1/skill_categories
 ```
 
 #### 参数
@@ -2467,7 +2467,7 @@ curl https://park.catchchatchina.com/api/v1/skill_categories -H 'Authorization: 
 ### 更新技能信息
 
 ```
-PATCH /api/:version/skills/:id
+PATCH /api/v1/skills/:id
 ```
 
 #### 参数
@@ -2495,7 +2495,7 @@ curl -X PATCH park-staging.catchchatchina.com/api/v1/skills/516055075accc1e4067d
 ### 设置为请勿打扰的用户列表
 
 ```
-GET /api/:version/do_not_disturb_users
+GET /api/v1/do_not_disturb_users
 ```
 
 #### 参数
@@ -2526,7 +2526,7 @@ curl -X GET https://park.catchchatchina.com/api/v1/do_not_disturb_users -H 'Auth
 ### 设置请勿打扰
 
 ```
-POST /api/:version/do_not_disturb_users
+POST /api/v1/do_not_disturb_users
 ```
 
 #### 参数
@@ -2550,7 +2550,7 @@ curl -X POST https://park.catchchatchina.com/api/v1/do_not_disturb_users -F user
 ### 取消请勿打扰
 
 ```
-DELETE /api/:version/do_not_disturb_users/:id
+DELETE /api/v1/do_not_disturb_users/:id
 ```
 
 #### 参数
@@ -2576,7 +2576,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/do_not_disturb_users/51605
 ### 举报用户
 
 ```
-POST /api/:version/user_reports
+POST /api/v1/user_reports
 ```
 
 #### 参数
@@ -2612,3 +2612,59 @@ curl https://park.catchchatchina.com/api/v1/user_reports -F recipient_id=bc93fe6
 
 1. URL 为 `https://park.catchchatchina.com/auth/success`，则说明绑定成功，其余 URL 都表示绑定失败
 2. URL 为 `https://park.catchchatchina.com/auth/failure`，绑定失败，且如果 URL 携带 `error` 参数，则表示失败原因
+
+## OfficialMessage（官方消息）
+
+### 流程
+
+1. 进入后台 `https://park.catchchatchina.com/admin/official_message`
+2. 创建一条官方消息
+3. 创建成功会发送推送到所有客户端，推送的 `extras` 中 `type` 是 `official_message`，`sub_type` 是消息的 `media_type` 字段
+4. 客户端收到推送后请求 `/api/v1/official_messages` API（注意：请求到的是最近两个月未读的官方消息）
+
+### 获取官方消息
+
+```
+GET /api/v1/official_messages
+```
+
+#### 参数
+
+无，且不支持分页
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/official_messages -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "sender":{
+    <user>
+  },
+  "official_messages":[
+    {
+      "id":<id>,
+      "media_type":"image",
+      "media_type_string":"一张照片",
+      "text_content":"Welcome~",
+      "created_at":1434680681.435,
+      "updated_at":1434680681.435,
+      "attachments":[
+        {
+          "kind":"image",
+          "metadata":"",
+          "file":{
+            "storage":"s3",
+            "expires_in":86400,
+            "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/23f245f0-b129-4f4f-9d6e-f920fab50c6d?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20150619%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20150619T022723Z&X-Amz-Expires=86400&X-Amz-Signature=f7158a3746f2b1852db0c725cf344d8acfbd477ff4b77714df34383e8baccb0d&X-Amz-SignedHeaders=Host"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
