@@ -671,6 +671,8 @@ curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H '
       "recipient_id":<id>,
       "recipient_type":"Circle",
       "text_content":"Hello~",
+      "latitude":113.033,
+      "longitude":24.1231,
       "parent_id":0,
       "media_type":"image",
       "media_type_string":"一张照片",
@@ -1135,7 +1137,11 @@ curl https://park.catchchatchina.com/api/v1/users/90913b93738c8a627129e49db32eee
 #### 响应
 
 ```
-{ <user> }
+{
+  <user>,
+  blocked: true,        // 当前用户是否 block 了 user<90913b93738c8a627129e49db32eeec3>
+  do_not_disturb: true  // 当前用户是否将 user<90913b93738c8a627129e49db32eeec3> 设置为请勿打扰了
+}
 ```
 
 ## Message 消息
@@ -1166,6 +1172,8 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
       "recipient_id":<id>,
       "recipient_type":"Circle",
       "text_content":"Hello~",
+      "latitude":113.033,
+      "longitude":24.1231,
       "parent_id":0,
       "media_type":"image",
       "media_type_string":"一张照片",
@@ -1270,6 +1278,8 @@ curl https://park.catchchatchina.com/api/v1/messages/4 -H 'Authorization: Token 
   "recipient_id":<id>,
   "recipient_type":"Circle",
   "text_content":"Hello~",
+  "latitude":113.033,
+  "longitude":24.1231,
   "parent_id":0,
   "media_type":"image",
   "media_type_string":"一张照片",
@@ -1364,6 +1374,8 @@ curl -X POST https://park.catchchatchina.com/api/v1/messages -d '{ "recipient_id
   "recipient_id":<id>,
   "recipient_type":"Circle",
   "text_content":"Hello~",
+  "latitude":113.033,
+  "longitude":24.1231,
   "parent_id":0,
   "media_type":"image",
   "media_type_string":"一张照片",
