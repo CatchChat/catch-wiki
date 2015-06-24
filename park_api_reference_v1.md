@@ -819,13 +819,13 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/user -F username=tumayun -F
 
 ```
 {
-  "nickname":"Tumayun",
-  "username":"tumayun",
-  "avatar_url":"http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg",
-  "latitude":26.331920,
-  "longitude":168.3097112,
-  "push_content":false,
-  "introduction":null
+  <user>,
+  "push_content":true,
+  "phone_code":"86",
+  "mobile":"15158161111",
+  "pusher_id":"439ee7d09180529d3442bd25",
+  "state":"active",
+  "state_string":"激活状态"
 }
 ```
 
