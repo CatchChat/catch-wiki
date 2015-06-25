@@ -1,5 +1,7 @@
 # Faye Server API Reference
 
+<!-- MarkdownTOC -->
+
 * Author: tumayun (tumayun@catch.la)
 
 ## 说明
