@@ -142,6 +142,13 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
   },
   ...
 ]
+"icon":{    // 如果未设置icon，则 icon: nil
+  "id": <id>,
+  "name": "icon",
+  "url": "http://icon.com/xxx",
+  "created_at":1433930183,
+  "updated_at":1433930183
+}
 ```
 
 ----
@@ -2679,6 +2686,43 @@ curl https://park.catchchatchina.com/api/v1/official_messages -H 'Authorization:
         }
       ]
     }
+  ]
+}
+```
+
+## Icon (图标)
+
+### 获取图标列表
+
+```
+GET /api/v1/icons
+```
+
+#### 参数
+
+无，不支持分页，始终返回所有 icon
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/icons -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "icons": [
+    {
+      "id": <id>,
+      "name": "icon",
+      "url": "http://icon.com/xxx",
+      "created_at":1433930183,
+      "updated_at":1433930183
+    },
+    .
+    .
+    .
   ]
 }
 ```

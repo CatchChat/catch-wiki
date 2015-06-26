@@ -171,27 +171,49 @@
   "data":{
     "message_type":"message",
     "message":{
-      "id":"317a0e603c9cddbdbcd626a18066ceaa",
-      "recipient_id":"516055075accc1e4067dd5ff6b2682cd",
-      "parent_id":"e8f3d46135cda79c413678e3ad91ddfc",
-      "recipient_type":"User",
-      "text_content":"This is a test.",
-      "media_type":"text",
-      "media_type_string":"一段文字",
+      "id":<id>,
+      "recipient_id":<id>,
+      "recipient_type":"Circle",
+      "text_content":"Hello~",
+      "latitude":113.033,
+      "longitude":24.1231,
+      "parent_id":0,
+      "media_type":"image",
+      "media_type_string":"一张照片",
       "state":"unread",
       "state_string":"未读",
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
       "sender":{
-        "id":"516055075accc1e4067dd5ff6b2682cd",
-        "username":"tumayun",
-        "nickname":"Tumayun",
-        "avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+        <user>,
         "remarked_name":null,
         "contact_name":null
       },
+      "circle":{
+        "id":<id>,
+        "name":"公共群组",
+        "created_at":1433930183, // UNIX 时间戳
+        "updated_at":1433930183, // UNIX 时间戳
+      },
       "attachments":[
-
+        {
+          "kind":"image",
+          "metadata":"metadata",
+          "file":{
+            "storage":"qiniu",
+            "expires_in":86400, // 单位：秒
+            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+          }
+        },
+        {
+          "kind":"thumbnail",
+          "metadata":"metadata",
+          "file":{
+            "storage":"qiniu",
+            "expires_in":86400, // 单位：秒
+            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+          }
+        }
       ]
     }
   }
