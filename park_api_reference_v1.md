@@ -817,11 +817,12 @@ PATCH /api/v1/user
 | longitude | Float | 否 | 经度 |
 | push_content | Boolean | 否 | 标识推送时是推送消息内容还是推送通知，true 推送消息内容，false 推送通知 |
 | introduction | Text | 否 | 个人介绍 |
+| icon_id | String | 否 | icon ID |
 
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v1/user -F username=tumayun -F latitude=26.331920 -F longitude=168.3097112 -F nickname=Tumayun -F avatar_url=http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg -F push_content=false -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+curl -X PATCH https://park.catchchatchina.com/api/v1/user -F icon_id=516055075accc1e4067dd5ff6b2682cd -F username=tumayun -F latitude=26.331920 -F longitude=168.3097112 -F nickname=Tumayun -F avatar_url=http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg -F push_content=false -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
 ```
 
 #### 响应
