@@ -938,7 +938,7 @@ GET /api/v1/user/discover
 #### 示例
 
 ```
-curl -X GET https://park.catchchatchina.com/api/v1/user/discover -d '{ "master_skills": ["ruby"], "learning_skills": ["singing"] }' -H 'Authorization: Token token="xfNa4ZYEQKLynYgbAfHB1427176878.549557"' -H 'Content-Type: application/json'
+curl -X GET https://park.catchchatchina.com/api/v1/user/discover -d '{ "master_skills": [<id>], "learning_skills": [<id>] }' -H 'Authorization: Token token="xfNa4ZYEQKLynYgbAfHB1427176878.549557"' -H 'Content-Type: application/json'
 ```
 
 #### 响应
