@@ -122,6 +122,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "latitude":28.3213,
 "longitude":117.001,
 "introduction":"",
+"badge":"apple",
 "last_sign_in_at":1433930183, // UNIX 时间戳
 "created_at":1433930183, // UNIX 时间戳
 "updated_at":1433930183, // UNIX 时间戳
@@ -142,13 +143,6 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
   },
   ...
 ]
-"icon":{    // 如果未设置icon，则 icon: nil
-  "id": <id>,
-  "name": "icon",
-  "url": "http://icon.com/xxx",
-  "created_at":1433930183,
-  "updated_at":1433930183
-}
 ```
 
 ----
@@ -817,12 +811,12 @@ PATCH /api/v1/user
 | longitude | Float | 否 | 经度 |
 | push_content | Boolean | 否 | 标识推送时是推送消息内容还是推送通知，true 推送消息内容，false 推送通知 |
 | introduction | Text | 否 | 个人介绍 |
-| icon_id | String | 否 | icon ID |
+| badge | String | 否 | 徽章，有：android apple ball bubble camera game heart music palette pet plane star steve tech wine |
 
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v1/user -F icon_id=516055075accc1e4067dd5ff6b2682cd -F username=tumayun -F latitude=26.331920 -F longitude=168.3097112 -F nickname=Tumayun -F avatar_url=http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg -F push_content=false -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+curl -X PATCH https://park.catchchatchina.com/api/v1/user -F badge=apple -F username=tumayun -F latitude=26.331920 -F longitude=168.3097112 -F nickname=Tumayun -F avatar_url=http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg -F push_content=false -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
 ```
 
 #### 响应
@@ -2687,43 +2681,6 @@ curl https://park.catchchatchina.com/api/v1/official_messages -H 'Authorization:
         }
       ]
     }
-  ]
-}
-```
-
-## Icon (图标)
-
-### 获取图标列表
-
-```
-GET /api/v1/icons
-```
-
-#### 参数
-
-无，不支持分页，始终返回所有 icon
-
-#### 示例
-
-```
-curl https://park.catchchatchina.com/api/v1/icons -H 'Authorization: Token token="test-token"'
-```
-
-#### 响应
-
-```
-{
-  "icons": [
-    {
-      "id": <id>,
-      "name": "icon",
-      "url": "http://icon.com/xxx",
-      "created_at":1433930183,
-      "updated_at":1433930183
-    },
-    .
-    .
-    .
   ]
 }
 ```
