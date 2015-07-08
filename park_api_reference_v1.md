@@ -1,7 +1,5 @@
 # Park API Reference
 
-<!-- MarkdownTOC -->
-
 * Author: Kgen (kgen@catch.la)
 
 ## 概述
@@ -147,7 +145,9 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 
 ----
 
-#### 手机号和验证码认证
+## 注册登录
+
+### 手机号和验证码认证
 
 **发送验证码到指定手机号。**
 
@@ -460,7 +460,7 @@ curl -X PUT https://park.catchchatchina.com/api/v1/circles/2 -d '{ "name": "公�
 }
 ```
 
-#### 获取单个公共群组
+### 获取单个公共群组
 
 ```
 GET /api/v1/circles/:id
@@ -499,8 +499,8 @@ curl -X GET https://park.catchchatchina.com/api/v1/circles/2 -H 'Authorization: 
   ]
 }
 ```
-I
-#### 加入公共群组
+
+### 加入公共群组
 
 ```
 POST /api/v1/circles/:id/join
