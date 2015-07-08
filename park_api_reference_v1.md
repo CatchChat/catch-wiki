@@ -1473,26 +1473,73 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/messages/3/deliver -H 'Auth
 {}
 ```
 
-### 通知消息被截图保存
+### 撤回已发送消息
+
+撤回成功会发送`message_deleted`类型的消息到 faye server，客户端收到消息后需要删除消息，faye server 消息体如下：
 
 ```
-POST /api/v1/messages/:id/notify_screenshot
+{
+  message_type: 'message_deleted',
+  message: {
+    "id":<id>,
+    "recipient_id":<id>,
+    "recipient_type":"User",
+    "sender":{
+      "id":<id>,
+      "username":"tumayun",
+      "nickname":"涂马云"
+    }
+  }
+}
+```
+
+并且有推送发出，客户端收到推送后需要删除消息，推送的`extras`为：
+
+```
+{
+  type: 'message_deleted',
+  message: {
+    "id":<id>,
+    "recipient_id":<id>,
+    "recipient_type":"User",
+    "sender":{
+      "id":<id>,
+      "username":"tumayun",
+      "nickname":"涂马云"
+    }
+  }
+}
+```
+
+```
+DELETE /api/v1/messages/:id
 ```
 
 #### 参数
 
-名称 | 类型 | 是否必须 | 描述
---- |--- |--- |--- |
-id | Integer | 是 | 消息 ID
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 消息 ID |
 
 #### 示例
 
-curl -X POST https://park.catchchatchina.com/api/v1/messages/3/notify_screenshot -H 'Authorization: Token token="TKWsindneiDsFj3gUHs31416969554.7962759"'
+```
+curl -X DELETE https://park.catchchatchina.com/api/v1/messages/<id> -H 'Authorization: Token token="yChytb7mKMbs5EZPK8jp1435855393.5408268"'
+```
 
 #### 响应
 
 ```
-{}
+{
+  "id":<id>,
+  "recipient_id":<id>,
+  "recipient_type":"User",
+  "sender":{
+    "id":<id>,
+    "username":"tumayun",
+    "nickname":"涂马云"
+  }
+}
 ```
 
 ## FriendRequest 好友请求

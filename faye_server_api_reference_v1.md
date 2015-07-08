@@ -219,3 +219,59 @@
   }
 }
 ```
+
+### 发布撤回消息请求
+
+该操作会将消息撤回，并且发送推送给接收者，推送的`extras`为：
+
+```
+{
+  type: 'message_deleted',
+  message: {
+    "id":<id>,
+    "recipient_id":<id>,
+    "recipient_type":"User",
+    "sender":{
+      "id":<id>,
+      "username":"tumayun",
+      "nickname":"涂马云"
+    }
+  }
+}
+```
+
+撤回消息请求如下：
+
+```
+{
+  "ext":{
+    "version":"v1",
+    "access_token":"jXgVN7qKwPrsZvrazr5o1429260353.954617"
+  },
+  "data":{
+    "message_type":"message_deleted", // 消息类型
+    "message": {
+      "id":<id> // 需要撤回的消息ID
+    }
+  }
+}
+```
+
+消息的接收者们会收到如下消息：
+```
+{
+  "data": {
+    "message_type":"message_deleted", // 表示有消息被撤回
+    "message": {
+      "id":<id>, // 被撤回的消息ID
+      "recipient_type":"User", // 接收者类型，User 表示是一对一消息，Circle 表示是群发消息，客户端可以借此确定要撤回的消息是在哪个聊天界面
+      "recipient_id":<id>, // 接收者ID
+      "sender": { // 消息发送者，也就是消息的撤回者
+        "id":<id>,
+        "username":"username",
+        "nickname":"nickname"
+      }
+    }
+  }
+}
+```
