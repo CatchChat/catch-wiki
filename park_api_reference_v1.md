@@ -100,12 +100,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "id":<id>,
 "name":"Singing",        // 技能名
 "name_string":"Singing", // 技能名翻译
-"cover_url":null,        // 封面图片URL
-"category":{
-  "id":<id>,
-  "name":"Art",          // 类别名
-  "name_string":"Art"    // 类别翻译
-}
+"cover_url":null,        // 技能封面图片URL
 ```
 
 #### 用户基本信息字段结构
@@ -2512,6 +2507,7 @@ curl https://park.catchchatchina.com/api/v1/skill_categories -H 'Authorization: 
           "id":<id>,
           "name":"Drawing", // 技能名
           "name_string":"Drawing" // 技能名翻译
+          "cover_url": "http://test.com" // 技能封面图片URL
         },
         .
         .
