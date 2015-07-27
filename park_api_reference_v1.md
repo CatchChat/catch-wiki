@@ -2738,3 +2738,30 @@ curl https://park.catchchatchina.com/api/v1/official_messages -H 'Authorization:
   ]
 }
 ```
+
+## Feedback (用户反馈)
+
+### 创建用户反馈
+
+```
+POST /api/v1/feedbacks
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+content | Text | 是 | 反馈内容
+device_info | String | 是 | 设备信息
+
+#### 示例
+
+```
+curl -X POST https://park.catchchatchina.com/api/v1/feedbacks -F content=test -F device_info=test -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{}
+```
