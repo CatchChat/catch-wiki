@@ -798,6 +798,8 @@ curl https://park.catchchatchina.com/api/v1/user -H 'Authorization: Token oken="
 
 ### 更新个人信息
 
+`mute_started_at_string` 和 `mute_ended_at_string` 都有值时，勿扰功能开启，都为空时，勿扰功能关闭。
+
 ```
 PATCH /api/v1/user
 ```
