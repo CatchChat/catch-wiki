@@ -791,8 +791,8 @@ curl https://park.catchchatchina.com/api/v1/user -H 'Authorization: Token oken="
   "pusher_id":"439ee7d09180529d3442bd25",
   "state":"active",
   "state_string":"激活状态",
-  "mute_started_at_string":"23:30", // 防打扰开始时间
-  "mute_ended_at_string":"07:30" // 防打扰结束时间
+  "mute_started_at_string":"23:30", // 防打扰开始时间, UTC 时间，需要转换成客户端当前时区后再显示
+  "mute_ended_at_string":"07:30" // 防打扰结束时间, UTC 时间，需要转换成客户端当前时区后再显示
 }
 ```
 
@@ -816,8 +816,8 @@ PATCH /api/v1/user
 | push_content | Boolean | 否 | 标识推送时是推送消息内容还是推送通知，true 推送消息内容，false 推送通知 |
 | introduction | Text | 否 | 个人介绍 |
 | badge | String | 否 | 徽章，有：android apple ball bubble camera game heart music palette pet plane star steve tech wine |
-| mute_started_at_string | String | 否 | 防打扰开始时间，如：23:30 |
-| mute_ended_at_string | String | 否 | 防打扰结束时间，如：07:30 |
+| mute_started_at_string | String | 否 | 防打扰开始时间，如：23:30，UTC 时间 |
+| mute_ended_at_string | String | 否 | 防打扰结束时间，如：07:30，UTC 时间 |
 
 #### 示例
 
@@ -836,8 +836,8 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/user -F badge=apple -F user
   "pusher_id":"439ee7d09180529d3442bd25",
   "state":"active",
   "state_string":"激活状态",
-  "mute_started_at_string":"23:30", // 防打扰开始时间
-  "mute_ended_at_string":"07:30" // 防打扰结束时间
+  "mute_started_at_string":"23:30", // 防打扰开始时间，UTC 时间
+  "mute_ended_at_string":"07:30" // 防打扰结束时间，UTC 时间
 }
 ```
 
