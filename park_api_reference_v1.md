@@ -1564,7 +1564,7 @@ GET /api/friend_requests/received/:state
 
 名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
-state | String | 是 | `:state` 是状态，可选：`pending`, `accepted`, `rejected`, `blocked`
+state | String | 是 | `:state` 是状态，可选：`pending`, `accepted`, `rejected`
 
 #### 示例
 
@@ -1613,7 +1613,7 @@ GET /api/friend_requests/sent/:state
 
 名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
-state | String | 是 | `:state` 是状态，可选：`pending`, `accepted`, `rejected`, `blocked`
+state | String | 是 | `:state` 是状态，可选：`pending`, `accepted`, `rejected`
 
 #### 示例
 
@@ -1748,42 +1748,6 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friend_requests/received/7/
   "friend_id":<id>,
   "state":3,
   "state_string":"已拒绝",
-  "created_at":1433930183, // UNIX 时间戳
-  "updated_at":1433930183, // UNIX 时间戳
-  "friend":{
-    <user>,
-    "contact_name":"contact_name"
-  }
-}
-```
-
-### 禁止好友请求
-
-```
-PATCH /api/friend_requests/received/:id/block
-```
-
-#### 参数
-
-名称 | 类型 | 是否必需 | 描述
---- |--- |--- |--- |
-id | Integer | 是 | friend_request ID
-
-#### 示例
-
-```
-curl -X PATCH https://park.catchchatchina.com/api/v1/friend_requests/received/7/block -H 'Authorization: Token token=XVVP8GpgezByNjhjWaEs1416648757.346672'
-```
-
-#### 响应
-
-```
-{
-  "id":<id>,
-  "user_id":<id>,
-  "friend_id":<id>,
-  "state":4,
-  "state_string":"已禁止",
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "friend":{
