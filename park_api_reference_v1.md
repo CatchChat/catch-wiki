@@ -1815,7 +1815,10 @@ curl https://park.catchchatchina.com/api/v1/friend_requests/with_user/ba994ac6db
 
 ```
 {
-   "received":{           // 指定用户没有向当前用户发起过好友请求，则返回 false； 指定用户向当前用户发起过好友请求，则返回好友请求数据给客户端，客户端展示好友在聊天界面，可以快捷同意！
+   "current_user_blocked_by_specified_user":false, // 表示指定用户是否将当前用户列入黑名单
+   "specified_user_blocked_by_current_user":false, // 表示当前用户是否将指定用户列入黑名单
+   "friend":false,        // 表示当前用户与指定用户是否是好友关系
+   "received":{           // 指定用户没有向当前用户发起过好友请求，则返回 null； 指定用户向当前用户发起过好友请求，则返回好友请求数据给客户端。
       "id":<id>,
       "user_id":<id>,
       "friend_id":<id>,
@@ -1824,7 +1827,15 @@ curl https://park.catchchatchina.com/api/v1/friend_requests/with_user/ba994ac6db
       "updated_at":1439783441,
       "created_at":1439783441
    },
-   "sent":true           // 当前用户发起是否向指定用户发起过好友请求，值只为 false|true。
+   "sent":"received":{    // 当前用户没有向指定用户发起过好友请求，则返回 null；指定用户向当前用户发起过好友请求，则返回好友请求数据给客户端。
+      "id":<id>,
+      "user_id":<id>,
+      "friend_id":<id>,
+      "state":"pending",
+      "state_string":"等待中",
+      "updated_at":1439783441,
+      "created_at":1439783441
+   }
 }
 ```
 
