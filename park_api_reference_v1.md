@@ -1793,6 +1793,41 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friend_requests/received/7/
 }
 ```
 
+### 查询当前用户是否发送或者接收过指定用户的好友请求
+
+```
+GET /api/v1/friend_requests/with_user/:user_id
+```
+
+### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+user_id | String | 是 | User ID
+
+### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/friend_requests/with_user/ba994ac6dba5bc71489ab75fd5b8574c -H 'Authorization: Token token="test-token"'
+```
+
+### 响应
+
+```
+{
+   "received":{           // 指定用户没有向当前用户发起过好友请求，则返回 false； 指定用户向当前用户发起过好友请求，则返回好友请求数据给客户端，客户端展示好友在聊天界面，可以快捷同意！
+      "id":<id>,
+      "user_id":<id>,
+      "friend_id":<id>,
+      "state":"pending",
+      "state_string":"等待中",
+      "updated_at":1439783441,
+      "created_at":1439783441
+   },
+   "sent":true           // 当前用户发起是否向指定用户发起过好友请求，值只为 false|true。
+}
+```
+
 ## Friendship 好友关系
 
 ### 所有好友
@@ -2767,3 +2802,4 @@ curl -X POST https://park.catchchatchina.com/api/v1/feedbacks -F content=test -F
 ```
 {}
 ```
+   "received":{           // 当前用户有接收到知道用户发起的好友请求，则返回好友请求数据给客户端，客户端展示好友
