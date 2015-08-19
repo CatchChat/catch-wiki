@@ -1349,6 +1349,8 @@ media_type | String | 否 | 消息类型，text 表示文字, image 表示图片
 text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
 parent_id | Integer | 否 | 回复的消息 ID，表示当前要发送的消息是回复哪条消息
 attachments | JSON | 否 | 如：{ "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] }
+longitude | Float | 否 | 只有位置消息才需要
+latitude | Float | 否 | 只有位置消息才需要
 
 media_type 可选值：
 
