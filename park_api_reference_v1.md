@@ -2268,7 +2268,7 @@ curl -X GET https://park.catchchatchina.com/api/v1/attachments/qiniu_upload_toke
 [S3文档](http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html)
 
 ```
-POST /api/v1/attachments/s3_upload_form_fields
+GET /api/v1/attachments/s3_upload_form_fields
 ```
 
 cURL 请求范例：
