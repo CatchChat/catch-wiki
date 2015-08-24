@@ -143,6 +143,44 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 ]
 ```
 
+### 推送
+
+推送 extras 说明
+
+#### 新消息
+
+| key | value |
+|--------|--------|
+| type | message |
+| subtype | 消息的 media_type 值，可能值为：`text`， `image`， `video`， `audio`， `sticker`， `location` |
+
+#### 消息撤回
+
+| key | value |
+|--------|--------|
+| type | message_deleted |
+| message | { "id":<id>, "recipient_id":<id>, "recipient_type":"User", "sender":{ "id":<id>, "username":"tumayun", "nickname":"涂马云" } } |
+
+#### 官方消息
+
+| key | value |
+|--------|--------|
+| type | official_message |
+| subtype | 消息的 media_type 值消息的 media_type 值，可能值为：`text`， `image`， `video`， `audio`， `sticker`， `location` |
+
+#### 有通讯录好友加入
+
+| key | value |
+|--------|--------|
+| type | contact_join |
+
+#### 好友请求
+
+| key | value |
+|--------|--------|
+| type | friend_request |
+| subtype | 可能的值为 `pending`， `accepted`， `rejected`，分别表示有好友请求，好友请求被接受，好友请求被拒绝 |
+
 ----
 
 ## 注册登录
