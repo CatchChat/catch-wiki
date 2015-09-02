@@ -19,7 +19,7 @@ cURL 请求范例：
 ```
 curl https://www.catchchatserver.com/api/friendships?page=2&per_page=100
 ```
-
+<!--
 分页信息包含在 [Link header](http://tools.ietf.org/html/rfc5988) 中。
 
 ```
@@ -37,7 +37,14 @@ Link: <https://www.catchchatserver.com/api/friendships?page=3&per_page=100>; rel
 | last | 显示最后一页结果 |
 | first | 显示第一页结果 |
 | prev | 显示上一页结果 |
+-->
 
+### 设置本地化语言
+
+客户端通过 HTTP Header `Accept-Language` 来设置当前本地化语言。
+默认本地化语言为`zh-CN`（中文）,如果想设置成英语，需要设置 HTTP Header `Accept-Language` 为 `en`。
+
+<!---
 ### 请求速率
 
 1小时支持5000次请求，你能通过 HTTP Header 了解到请求速率的限制：
@@ -79,6 +86,7 @@ X-RateLimit-Reset: 1377013266
     error: "来自 xxx.xxx.xxx.xxx 的 API 请求已经超过限制"
 }
 ```
+--->
 
 ### Response
 
