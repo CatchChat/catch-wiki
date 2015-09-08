@@ -856,7 +856,7 @@ PATCH /api/v1/user
 |---|---|---|---|
 | nickname | String | 否 | 昵称 |
 | avatar_url | String | 否 | 头像 URL |
-| username | String | 否 | 用户名，必须唯一 |
+| username | String | 否 | 用户名，必须唯一（忽略大小写），只能是由字母、数字、下划线组成，长度为4到16个字符 |
 | latitude | Float | 否 | 纬度 |
 | longitude | Float | 否 | 经度 |
 | push_content | Boolean | 否 | 标识推送时是推送消息内容还是推送通知，true 推送消息内容，false 推送通知 |
@@ -1174,7 +1174,7 @@ curl https://park.catchchatchina.com/api/v1/users/90913b93738c8a627129e49db32eee
 
 github instagram dribbble 返回各不一样，从各平台拿到数据后原样返回，所以请参考各平台 API
 
-### 获取指定用户信息
+### 获取指定用户信息（by id）
 
 ```
 GET /api/v1/users/:id
@@ -1196,7 +1196,64 @@ curl https://park.catchchatchina.com/api/v1/users/90913b93738c8a627129e49db32eee
 
 ```
 {
-  <user>,
+  <user>
+}
+```
+
+### 获取指定用户信息（by username）
+
+**支持 JSONP，分享用户 profile 页专用！**
+
+```
+GET /api/v1/users/:username/profile
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| username | String | 是 | username |
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/users/tumayun/profile -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  <user>
+}
+```
+
+### 获取指定用户与当前用户之间的设置
+
+设置包括:
+1. 当前用户是否屏蔽指定用户
+2. 当前用户是否将指定用户设置为免打扰
+
+```
+GET /api/v1/users/:id/settings_with_current_user
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | String | 是 | user id |
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/90913b93738c8a627129e49db32eeec3/settings_with_current_user -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
   blocked: true,        // 当前用户是否 block 了 user<90913b93738c8a627129e49db32eeec3>
   do_not_disturb: true  // 当前用户是否将 user<90913b93738c8a627129e49db32eeec3> 设置为请勿打扰了
 }
