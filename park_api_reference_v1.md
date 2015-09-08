@@ -1202,7 +1202,7 @@ curl https://park.catchchatchina.com/api/v1/users/90913b93738c8a627129e49db32eee
 
 ### 获取指定用户信息（by username）
 
-**支持 JSONP，分享用户 profile 页专用！**
+**支持 JSONP，分享用户 profile 页专用，无需登录！**
 
 ```
 GET /api/v1/users/:username/profile
@@ -1217,7 +1217,7 @@ GET /api/v1/users/:username/profile
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v1/users/tumayun/profile -H 'Authorization: Token token="test-token"'
+curl https://park.catchchatchina.com/api/v1/users/tumayun/profile
 ```
 
 #### 响应
