@@ -118,6 +118,24 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 
 #### 用户基本信息字段结构
 
+在 API 返回用户信息时，将会以 `<mini_user>` 替代如下结构：
+
+```
+"id":<id>,
+"username":"asdaasd",
+"nickname":"user9",
+"avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+"latitude":0.0,
+"longitude":0.0,
+"introduction":"",
+"badge":null,
+"created_at":1441347808,
+"updated_at":1441693888,
+"last_sign_in_at":1441347780
+```
+
+#### 用户信息字段结构
+
 在 API 返回用户信息时，将会以 `<user>` 替代如下结构：
 
 ```
@@ -2451,7 +2469,7 @@ curl -X GET https://park.catchchatchina.com/api/v1/blocked_users -H 'Authorizati
 {
   "blocked_users":[
     {
-      <user>
+      <mini_user>
     }
   ],
   "current_page":1,
