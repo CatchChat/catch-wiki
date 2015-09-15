@@ -1224,7 +1224,12 @@ curl https://park.catchchatchina.com/api/v1/users/tumayun/profile
 
 ```
 {
-  <user>
+  <user>,
+  providers: {
+    github: <provider_data>, // 格式同 provider_data API
+    dribbble: <provider_data>, // 格式同 provider_data API
+    instagram: <provider_data>  // 格式同 provider_data API
+  }
 }
 ```
 
