@@ -572,7 +572,25 @@ curl -X POST https://park.catchchatchina.com/api/v1/circles/2/join -H 'Authoriza
 
 #### 响应
 
-不返回数据，只返回状态码
+```
+{
+  "id":<id>,
+  "name":"公共群组",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
+  "owner":{
+    <mini_user>
+  },
+  "members":[
+    {
+      <mini_user>
+    },
+    .
+    .
+    .
+  ]
+}
+```
 
 ### 退出公共群组
 
@@ -617,7 +635,25 @@ curl -X POST https://park.catchchatchina.com/api/v1/circles/2/batch_add -d '{ "m
 
 #### 响应
 
-不返回数据，只返回状态码
+```
+{
+  "id":<id>,
+  "name":"公共群组",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
+  "owner":{
+    <mini_user>
+  },
+  "members":[
+    {
+      <mini_user>
+    },
+    .
+    .
+    .
+  ]
+}
+```
 
 ### 批量删除成员（只能是群 owner 才能删除成员）
 
@@ -640,7 +676,25 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/circles/2/batch_delete -d 
 
 #### 响应
 
-不返回数据，只返回状态码
+```
+{
+  "id":<id>,
+  "name":"公共群组",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
+  "owner":{
+    <mini_user>
+  },
+  "members":[
+    {
+      <mini_user>
+    },
+    .
+    .
+    .
+  ]
+}
+```
 
 ### 公共群组未读消息
 
