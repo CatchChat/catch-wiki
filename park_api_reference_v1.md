@@ -393,6 +393,8 @@ HTTP Token: Access denied.
 
 ### 获取加入了的所有公共群组
 
+** 此 API 不会返回群组成员，客户端在用户进入某个群的聊天界面后，请求 `获取单个公共群组` API，可以拿到群组信息以及成员信息 **
+
 ```
 GET /api/v1/circles
 ```
@@ -417,17 +419,6 @@ curl -X GET https://park.catchchatchina.com/api/v1/circles -H 'Authorization: To
       "name":"circle",
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
-      "owner":{
-        <user>
-      },
-      "members":[
-        {
-          <user>
-        },
-        .
-        .
-        .
-      ]
     },
     .
     .
@@ -450,7 +441,7 @@ POST /api/v1/circles
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
 | name | String | 是 | 公共群组名 |
-| members | String | 否 | 成员ID数组 |
+| members | JSON | 否 | 成员ID数组 |
 
 #### 示例
 
@@ -467,11 +458,11 @@ curl -i -X POST https://park.catchchatchina.com/api/v1/circles -d '{ "members": 
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "owner":{
-    <user>
+    <mini_user>
   },
   "members":[
     {
-      <user>
+      <mini_user>
     },
     .
     .
@@ -508,11 +499,11 @@ curl -X PUT https://park.catchchatchina.com/api/v1/circles/2 -d '{ "name": "公�
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "owner":{
-    <user>
+    <mini_user>
   },
   "members":[
     {
-      <user>
+      <mini_user>
     },
     .
     .
@@ -548,11 +539,11 @@ curl -X GET https://park.catchchatchina.com/api/v1/circles/2 -H 'Authorization: 
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "owner":{
-    <user>
+    <mini_user>
   },
   "members":[
     {
-      <user>
+      <mini_user>
     },
     .
     .
@@ -581,25 +572,7 @@ curl -X POST https://park.catchchatchina.com/api/v1/circles/2/join -H 'Authoriza
 
 #### 响应
 
-```
-{
-  "id":<id>,
-  "name":"公共群组",
-  "created_at":1433930183, // UNIX 时间戳
-  "updated_at":1433930183, // UNIX 时间戳
-  "owner":{
-    <user>
-  },
-  "members":[
-    {
-      <user>
-    },
-    .
-    .
-    .
-  ]
-}
-```
+不返回数据，只返回状态码
 
 ### 退出公共群组
 
@@ -621,9 +594,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/circles/2/leave -H 'Author
 
 #### 响应
 
-```
-{}
-```
+不返回数据，只返回状态码
 
 ### 批量添加成员
 
@@ -646,25 +617,7 @@ curl -X POST https://park.catchchatchina.com/api/v1/circles/2/batch_add -d '{ "m
 
 #### 响应
 
-```
-{
-  "id":<id>,
-  "name":"公共群组",
-  "created_at":1433930183, // UNIX 时间戳
-  "updated_at":1433930183, // UNIX 时间戳
-  "owner":{
-    <user>
-  },
-  "members":[
-    {
-      <user>
-    },
-    .
-    .
-    .
-  ]
-}
-```
+不返回数据，只返回状态码
 
 ### 批量删除成员（只能是群 owner 才能删除成员）
 
@@ -687,25 +640,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/circles/2/batch_delete -d 
 
 #### 响应
 
-```
-{
-  "id":<id>,
-  "name":"公共群组",
-  "created_at":1433930183, // UNIX 时间戳
-  "updated_at":1433930183, // UNIX 时间戳
-  "owner":{
-    <user>
-  },
-  "members":[
-    {
-      <user>
-    },
-    .
-    .
-    .
-  ]
-}
-```
+不返回数据，只返回状态码
 
 ### 公共群组未读消息
 
