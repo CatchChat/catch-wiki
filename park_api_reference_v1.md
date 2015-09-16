@@ -734,7 +734,7 @@ curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H '
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
       "sender":{
-        <user>,
+        <mini_user>,
         "remarked_name":null,
         "contact_name":null
       },
@@ -799,7 +799,7 @@ curl https://park.catchchatchina.com/api/v1/user/may_know_friends -H Authorizati
 {
   "friends":[
     {
-      <user>,
+      <mini_user>,
       "common_friend_names":[
         "friend2",
         "friend3",
@@ -1004,7 +1004,7 @@ curl -X GET https://park.catchchatchina.com/api/v1/user/discover -d '{ "master_s
 {
   "users":[
     {
-      <user>,
+      <mini_user>,
       "distance":"12646.761054269287",
     },
     .
@@ -1068,7 +1068,7 @@ curl htts://park.catchchatchina.com/api/v1/contacts/upload -F contacts="[{\"name
   "registered_users":[
     {
       "contact_name":"bac",
-      <user>,
+      <mini_user>,
       distance: 1234.5
     },
     .
@@ -1104,7 +1104,7 @@ curl https://park.catchchatchina.com/api/v1/users/search\?q\=15158161111 -H 'Aut
 {
   "users":[
     {
-      <user>
+      <mini_user>
       distance: 10.1 // 距离，单位 km
     }
   ],
@@ -1305,7 +1305,7 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
       "sender":{
-        <user>,
+        <mini_user>,
         "remarked_name":null,
         "contact_name":null
       },
@@ -1411,7 +1411,7 @@ curl https://park.catchchatchina.com/api/v1/messages/4 -H 'Authorization: Token 
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "sender":{
-    <user>,
+    <mini_user>,
     "remarked_name":null,
     "contact_name":null
   },
@@ -1509,7 +1509,7 @@ curl -X POST https://park.catchchatchina.com/api/v1/messages -d '{ "recipient_id
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "sender":{
-    <user>,
+    <mini_user>,
     "remarked_name":null,
     "contact_name":null
   },
@@ -1699,7 +1699,7 @@ curl https://catchchatserver.com/api/v4/friend_requests/received/accepted -H 'Au
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
       "friend":{
-        <user>,
+        <mini_user>,
         "contact_name":"contact_name"
       }
     }
@@ -1748,7 +1748,7 @@ curl https://park.catchchatchina.com/api/v1/friend_requests/sent/accepted -H 'Au
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
       "friend":{
-        <user>,
+        <mini_user>,
         "contact_name":"contact_name"
       }
     }
@@ -1792,7 +1792,7 @@ curl -X POST https://park.catchchatchina.com/api/v1/friend_requests -F friend_id
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "friend":{
-    <user>,
+    <mini_user>,
     "contact_name":"contact_name"
   }
 }
@@ -1828,7 +1828,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friend_requests/received/7/
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "friend":{
-    <user>,
+    <mini_user>,
     "contact_name":"contact_name"
   }
 }
@@ -1864,7 +1864,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friend_requests/received/7/
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "friend":{
-    <user>,
+    <mini_user>,
     "contact_name":"contact_name"
   }
 }
@@ -1953,7 +1953,7 @@ curl https://park.catchchatchina.com/api/v1/friendships\?page\=1\&per_page\=10 -
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
       "friend":{
-        <user>
+        <mini_user>
       }
     },
     .
@@ -2002,7 +2002,7 @@ curl https://park.catchchatchina.com/api/v1/friendships/recent\?page\=1\&per_pag
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
       "friend":{
-        <user>
+        <mini_user>
       }
     },
     .
@@ -2049,7 +2049,7 @@ curl https://park.catchchatchina.com/api/v1/friendships/27 -H 'Authorization: To
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "friend":{
-    <user>
+    <mini_user>
   }
 }
 ```
@@ -2088,7 +2088,7 @@ curl https://park.catchchatchina.com/api/v1/friendships/with/14 -H 'Authorizatio
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "friend":{
-    <user>
+    <mini_user>
   }
 }
 ```
@@ -2129,7 +2129,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/13 -F contact_n
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "friend":{
-    <user>
+    <mini_user>
   }
 }
 ```
@@ -2170,7 +2170,7 @@ curl https://park.catchchatchina.com/api/v1/friendships/search\?q\=1515816 -H 'A
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
       "friend":{
-        <user>
+        <mini_user>
       }
     },
     .
@@ -2244,7 +2244,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/batch_mark_as_f
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
       "friend":{
-        <user>
+        <mini_user>
       }
     },
     .
@@ -2454,7 +2454,7 @@ curl -X GET https://park.catchchatchina.com/api/v1/blocked_users -H 'Authorizati
 {
   "blocked_users":[
     {
-      <user>
+      <mini_user>
     }
   ],
   "current_page":1,
@@ -2709,7 +2709,7 @@ curl -X GET https://park.catchchatchina.com/api/v1/do_not_disturb_users -H 'Auth
 {
   "users":[
     {
-      <user>
+      <mini_user>
     }
   ],
   "current_page":1,
@@ -2838,7 +2838,7 @@ curl https://park.catchchatchina.com/api/v1/official_messages -H 'Authorization:
 ```
 {
   "sender":{
-    <user>
+    <mini_user>
   },
   "official_messages":[
     {
