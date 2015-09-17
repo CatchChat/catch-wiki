@@ -89,7 +89,6 @@ X-RateLimit-Reset: 1377013266
 
 | header | 说明 |
 |--------|--------|
-| X-Faye-Version | 当前客户端使用的 Faye Server 版本号 |
 | Accept-Language | 当前客户端所使用的语言，目前只支持 `en-US` 和 `zh-CN`，无效的设置将默认为 `en-US` |
 
 ### Response
