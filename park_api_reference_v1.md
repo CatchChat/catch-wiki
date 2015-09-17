@@ -39,11 +39,6 @@ Link: <https://www.catchchatserver.com/api/friendships?page=3&per_page=100>; rel
 | prev | 显示上一页结果 |
 -->
 
-### 设置本地化语言
-
-客户端通过 HTTP Header `Accept-Language` 来设置当前本地化语言。
-默认本地化语言为`zh-CN`（中文）,如果想设置成英语，需要设置 HTTP Header `Accept-Language` 为 `en`。
-
 <!---
 ### 请求速率
 
@@ -87,6 +82,15 @@ X-RateLimit-Reset: 1377013266
 }
 ```
 --->
+
+### Header
+
+所有 API 请求都需要包含如下 headers:
+
+| header | 说明 |
+|--------|--------|
+| X-Faye-Version | 当前客户端使用的 Faye Server 版本号 |
+| Accept-Language | 当前客户端所使用的语言，目前只支持 `en-US` 和 `zh-CN`，无效的设置将默认为 `en-US` |
 
 ### Response
 
@@ -393,7 +397,7 @@ HTTP Token: Access denied.
 
 ### 获取加入了的所有公共群组
 
-** 此 API 不会返回群组成员，客户端在用户进入某个群的聊天界面后，请求 `获取单个公共群组` API，可以拿到群组信息以及成员信息 **
+* 此 API 不会返回群组成员，客户端在用户进入某个群的聊天界面后，请求 `获取单个公共群组` API，可以拿到群组信息以及成员信息 *
 
 ```
 GET /api/v1/circles
