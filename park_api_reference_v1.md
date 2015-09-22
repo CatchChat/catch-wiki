@@ -2351,19 +2351,21 @@ curl -X GET -H "Content-Type: application/json" -H 'Authorization: Token token="
     "callback_body":"key=$(key)\u0026bucket=$(bucket)\u0026message_id=$(x:message_id)"
   }
 } 
--->
 
 ```
+-->
+
 ### 获取S3头像附件上传 token
 
 ```
-GET /api/v1/attachments/s3\_upload\_public\_form_fields
+GET /api/v1/attachments/s3_upload_public\_form_fields
 ```
 
 cURL 请求范例：
 
 ```
 curl -X GET -H 'Authorization: Token token="test-token"' -H "Content-Type: application/json" https://park.catchchatchina.com/api/v1/attachments/s3_upload_public_form_fields
+
 ```
 返回范例：
 
