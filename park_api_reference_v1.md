@@ -1457,8 +1457,8 @@ POST /api/v1/messages
 
 名称 | 类型 | 是否必须 | 描述
 --- |--- |--- |--- |
-recipient_id | Integer | 是 | 接收者 ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
-recipient_type | String | 是 | 接受者类型，只能是 User 或者 Circle
+recipient_id | Integer | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
+recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 User 或者 Circle
 media_type | String | 否 | 消息类型，text 表示文字, image 表示图片, video 表示视频, audio 表示语音, sticker 表示贴纸, location 表示位置, 默认是text
 text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
 parent_id | Integer | 否 | 回复的消息 ID，表示当前要发送的消息是回复哪条消息
@@ -1572,6 +1572,41 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/messages/3/mark_as_read -H 
 }
 ```
 
+### 标记一个聊天窗口的多条消息为已读
+
+```
+PATCH /api/v1/messages/batch_mark_as_read
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+recipient_id | Integer | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID
+recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 User 或者 Circle
+last_read_at | Float | 是 | 最后读消息的时间，Unix 时间戳
+
+#### 示例
+
+```
+curl -X PATCH https://park.catchchatchina.com/api/v1/messages/batch_mark_as_read -H 'Authorization: Token token="test-token"' -F recipient_id=516055075accc1e4067dd5ff6b2682cd -F recipient_type=User -F last_read_at=1442896313.813362
+```
+
+#### 响应
+
+```
+{
+  "recipient_type":"User",
+  "recipient_id":<id>,
+  "message_ids":[ // 本次标记为已读的消息 ID
+    <id>,
+    <id>,
+    .
+    .
+    .
+  ]
+}
+```
 
 ### 标记消息已收到
 
