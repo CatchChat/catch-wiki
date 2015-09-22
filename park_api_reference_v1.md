@@ -1608,6 +1608,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/messages/batch_mark_as_read
 }
 ```
 
+<!--
 ### 标记消息已收到
 
 ```
@@ -1631,6 +1632,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/messages/3/deliver -H 'Auth
 ```
 {}
 ```
+-->
 
 ### 撤回已发送消息
 
@@ -1914,19 +1916,19 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friend_requests/received/7/
 GET /api/v1/friend_requests/with_user/:user_id
 ```
 
-### 参数
+#### 参数
 
 名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
 user_id | String | 是 | User ID
 
-### 示例
+#### 示例
 
 ```
 curl https://park.catchchatchina.com/api/v1/friend_requests/with_user/ba994ac6dba5bc71489ab75fd5b8574c -H 'Authorization: Token token="test-token"'
 ```
 
-### 响应
+#### 响应
 
 ```
 {
@@ -2243,7 +2245,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/3/move_to_top -
 ```
 {}
 ```
-
+<!--
 ### 批量设置星组好友
 
 ```
@@ -2291,6 +2293,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/friendships/batch_mark_as_f
   ],
 }
 ```
+-->
 
 ## UnfriendRequest 解除好友请求
 
@@ -2320,6 +2323,7 @@ curl -X POST https://park.catchchatchina.com/api/v1/unfriend_requests -F friend_
 
 ## Attachment 附件
 
+<!--
 ### 获取七牛头像附件上传 token
 
 GET /api/v1/attachments/qiniu_public\_upload\_token
@@ -2347,6 +2351,7 @@ curl -X GET -H "Content-Type: application/json" -H 'Authorization: Token token="
     "callback_body":"key=$(key)\u0026bucket=$(bucket)\u0026message_id=$(x:message_id)"
   }
 } 
+-->
 
 ```
 ### 获取S3头像附件上传 token
@@ -2369,6 +2374,7 @@ curl -X GET -H 'Authorization: Token token="test-token"' -H "Content-Type: appli
 
 ### 获取Message附件上传 token
 
+<!--
 #### 七牛
 ```
 GET /api/v1/attachments/qiniu_upload_token
@@ -2410,6 +2416,7 @@ curl -X GET https://park.catchchatchina.com/api/v1/attachments/qiniu_upload_toke
 | key | String | 文件名 |
 | callback_url | String | callback url|
 | callback_body | String | callback body|
+-->
 
 #### S3
 
