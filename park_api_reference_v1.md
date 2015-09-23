@@ -178,7 +178,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 
 #### 新消息
 
-**新消息推送已经支持 `category` 参数，参数值为 `YepMessageNotification`，方便用户之间在推送中回复消息。**
+**新消息推送已经支持 `category` 参数，参数值为 `YepMessageNotification`，方便用户直接在推送中回复消息。**
 
 | key | value |
 |--------|--------|
