@@ -178,10 +178,14 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 
 #### 新消息
 
+**新消息推送已经支持 `category` 参数，参数值为 `YepMessageNotification`，方便用户之间在推送中回复消息。**
+
 | key | value |
 |--------|--------|
 | type | message |
 | subtype | 消息的 media_type 值，可能值为：`text`， `image`， `video`， `audio`， `sticker`， `location` |
+| recipient_id | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
+| recipient_type | 接受者（聊天对象）类型，只能是 User 或者 Circle |
 
 #### 消息撤回
 
