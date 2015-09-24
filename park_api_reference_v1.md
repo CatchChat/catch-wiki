@@ -703,85 +703,6 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/circles/2/batch_delete -d 
 }
 ```
 
-### 公共群组未读消息
-
-```
-GET /api/v1/circles/:id/unread_messages
-```
-
-#### 参数
-
-| 名称 | 类型 | 是否必需 | 描述 |
-|---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
-
-#### 示例
-
-```
-curl -X GET http://park.catchchatchina.com/api/v1/circles/2/unread_messages -H 'Authorization: Token token="QVXyAg6mpi14YDje9RSr1421656248.3836942"'
-```
-
-#### 响应
-
-```
-{
-  "messages":[
-    {
-      "id":<id>,
-      "recipient_id":<id>,
-      "recipient_type":"Circle",
-      "text_content":"Hello~",
-      "latitude":113.033,
-      "longitude":24.1231,
-      "parent_id":0,
-      "media_type":"image",
-      "media_type_string":"一张照片",
-      "state":"unread",
-      "state_string":"未读",
-      "created_at":1433930183, // UNIX 时间戳
-      "updated_at":1433930183, // UNIX 时间戳
-      "sender":{
-        <mini_user>,
-        "remarked_name":null,
-        "contact_name":null
-      },
-      "circle":{
-        "id":<id>,
-        "name":"公共群组",
-        "created_at":1433930183, // UNIX 时间戳
-        "updated_at":1433930183, // UNIX 时间戳
-      },
-      "attachments":[
-        {
-          "kind":"image",
-          "metadata":"metadata",
-          "file":{
-            "storage":"qiniu",
-            "expires_in":86400, // 单位：秒
-            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          }
-        },
-        {
-          "kind":"thumbnail",
-          "metadata":"metadata",
-          "file":{
-            "storage":"qiniu",
-            "expires_in":86400, // 单位：秒
-            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          }
-        }
-      ]
-    },
-    .
-    .
-    .
-  ],
-  "current_page":1,
-  "per_page":30,
-  "count":2
-}
-```
-
 ## User 个人信息 API
 
 ### 可能认识的好友
@@ -1278,13 +1199,18 @@ curl https://park.catchchatchina.com/api/v1/90913b93738c8a627129e49db32eeec3/set
 
 ### 获取所有未读消息
 
+**按创建时间倒序返回**
+
 ```
 GET /api/v1/messages/unread
 ```
 
 #### 参数
 
-无
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| max_id | String | 否 | 将返回 `id` 比 `max_id` 小的未读消息，**在向上翻页的时候必须带上 max_id** |
+| min_id | String | 否 | 将返回 `id` 比 `min_id` 大的未读消息，**在向下翻页的时候必须带上 min_id** |
 
 #### 示例
 
@@ -1397,7 +1323,7 @@ GET /api/v1/messages/:id
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v1/messages/4 -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
+curl https://park.catchchatchina.com/api/v1/messages/<id> -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
 ```
 
 #### 响应
@@ -1451,17 +1377,17 @@ curl https://park.catchchatchina.com/api/v1/messages/4 -H 'Authorization: Token 
 }
 ```
 
-### 新建消息
+### 发送消息
 
 ```
-POST /api/v1/messages
+POST /api/v1/:recipient_type/:recipient_id/messages
 ```
 
 #### 参数
 
 名称 | 类型 | 是否必须 | 描述
 --- |--- |--- |--- |
-recipient_id | Integer | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
+recipient_id | String | 是 | 接收者（聊天对象）ID，接收者只有两，User 或者 Circle，所以是 User ID 或者 Circle ID |
 recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 User 或者 Circle
 media_type | String | 否 | 消息类型，text 表示文字, image 表示图片, video 表示视频, audio 表示语音, sticker 表示贴纸, location 表示位置, 默认是text
 text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
@@ -1495,7 +1421,7 @@ sticker | 附件是一副贴纸
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v1/messages -d '{ "recipient_id": 2, "recipient_type": "User", "text_content": "This is a test!", "media_type": "image", "attachments": { "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] } }' -H 'Authorization: Token token="NDccv1Yvdi9UKtwPToxx1416921006.674603"' -H "Content-Type: application/json"
+curl -X POST https://park.catchchatchina.com/api/v1/User/<id>/messages -d '{ "text_content": "This is a test!", "media_type": "image", "attachments": { "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] } }' -H 'Authorization: Token token="NDccv1Yvdi9UKtwPToxx1416921006.674603"' -H "Content-Type: application/json"
 ```
 
 #### 响应
@@ -1564,7 +1490,7 @@ id | Integer | 是 | 消息 ID
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v1/messages/3/mark_as_read -H 'Authorization: Token token="TKWsindneiDsFj3gUHs31416969554.7962759"'
+curl -X PATCH https://park.catchchatchina.com/api/v1/messages/<id>/mark_as_read -H 'Authorization: Token token="TKWsindneiDsFj3gUHs31416969554.7962759"'
 ```
 
 #### 响应
@@ -1576,24 +1502,24 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/messages/3/mark_as_read -H 
 }
 ```
 
-### 标记一个聊天窗口的多条消息为已读
+### 标记指定聊天窗口的多条消息为已读
 
 ```
-PATCH /api/v1/messages/batch_mark_as_read
+PATCH /api/v1/:recipient_type/:recipient_id/messages/batch_mark_as_read
 ```
 
 #### 参数
 
 名称 | 类型 | 是否必须 | 描述
 --- |--- |--- |--- |
-recipient_id | Integer | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID
+recipient_id | String | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID
 recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 User 或者 Circle
 last_read_at | Float | 是 | 最后读消息的时间，Unix 时间戳
 
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v1/messages/batch_mark_as_read -H 'Authorization: Token token="test-token"' -F recipient_id=516055075accc1e4067dd5ff6b2682cd -F recipient_type=User -F last_read_at=1442896313.813362
+curl -X PATCH https://park.catchchatchina.com/api/v1/User/<id>/messages/batch_mark_as_read -H 'Authorization: Token token="test-token"' -F last_read_at=1442896313.813362
 ```
 
 #### 响应
@@ -1628,7 +1554,7 @@ id | Integer | 是 | 消息 ID
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v1/messages/3/deliver -H 'Authorization: Token token="TKWsindneiDsFj3gUHs31416969554.7962759"'
+curl -X PATCH https://park.catchchatchina.com/api/v1/messages/<id>/deliver -H 'Authorization: Token token="TKWsindneiDsFj3gUHs31416969554.7962759"'
 ```
 
 #### 响应
@@ -1706,6 +1632,85 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/messages/<id> -H 'Authoriz
   }
 }
 ```
+
+### 获取指定聊天窗口的消息历史
+
+**按创建时间倒序返回**
+
+```
+GET /api/v1/:recipient_type/:recipient_id/messages
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| recipient_id | String | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
+| recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 User 或者 Circle |
+| max_id | String | 否 | 将返回 `id` 比 `max_id` 小的未读消息，**在向上翻页的时候必须带上 max_id** |
+| min_id | String | 否 | 将返回 `id` 比 `min_id` 大的未读消息，**在向下翻页的时候必须带上 min_id** |
+
+#### 示例
+
+```
+curl -X GET https://park.catchchatchina.com/api/v1/User/<id>/messages -H 'Authorization: Token token="yChytb7mKMbs5EZPK8jp1435855393.5408268"'
+```
+
+#### 响应
+
+同`GET /api/v1/messages/unread`
+
+### 获取指定聊天窗口的未读消息
+
+**按创建时间倒序返回**
+
+```
+GET /api/:version/:recipient_type/:recipient_id/messages/unread
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| recipient_id | String | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
+| recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 User 或者 Circle |
+| max_id | String | 否 | 将返回 `id` 比 `max_id` 小的未读消息，**在向上翻页的时候必须带上 max_id** |
+| min_id | String | 否 | 将返回 `id` 比 `min_id` 大的未读消息，**在向下翻页的时候必须带上 min_id** |
+
+#### 示例
+
+```
+curl -X GET https://park.catchchatchina.com/api/v1/User/<id>/messages/unread -H 'Authorization: Token token="yChytb7mKMbs5EZPK8jp1435855393.5408268"'
+```
+
+#### 响应
+
+同`GET /api/v1/messages/unread
+
+### 获取我在指定聊天窗口发送的未读消息ID
+
+```
+GET /api/:version/:recipient_type/:recipient_id/messages/sent_unread
+```
+
+#### 参数
+
+不支持分页，一次性返回所有结果
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+| recipient_id | String | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
+| recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 User 或者 Circle |
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/User/<id>/messages/sent_unread -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
+```
+
+#### 响应
+
+同 `GET /api/v1/messages/sent_unread`
 
 ## FriendRequest 好友请求
 
@@ -2941,4 +2946,3 @@ curl -X POST https://park.catchchatchina.com/api/v1/feedbacks -F content=test -F
 ```
 {}
 ```
-   "received":{           // 当前用户有接收到知道用户发起的好友请求，则返回好友请求数据给客户端，客户端展示好友
