@@ -19,25 +19,6 @@ cURL 请求范例：
 ```
 curl https://www.catchchatserver.com/api/friendships?page=2&per_page=100
 ```
-<!--
-分页信息包含在 [Link header](http://tools.ietf.org/html/rfc5988) 中。
-
-```
-Link: <https://www.catchchatserver.com/api/friendships?page=3&per_page=100>; rel="next",
-  <https://www.catchchatserver.com/api/friendships?page=50&per_page=100>; rel="last",
-  <https://www.catchchatserver.com/api/friendships?page=1&per_page=100>; rel="first",
-  <https://www.catchchatserver.com/api/friendships?page=1&per_page=100>; rel="prev"
-```
-
-参数 `rel` 包含如下取值：
-
-| Header 字段 | 描述 |
-|---|---|
-| next | 显示下一页结果 |
-| last | 显示最后一页结果 |
-| first | 显示第一页结果 |
-| prev | 显示上一页结果 |
--->
 
 <!---
 ### 请求速率
@@ -424,6 +405,7 @@ curl -X GET https://park.catchchatchina.com/api/v1/circles -H 'Authorization: To
     {
       "id":<id>,
       "name":"circle",
+      "active":true, // 是否允许发送消息
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
     },
@@ -462,6 +444,7 @@ curl -i -X POST https://park.catchchatchina.com/api/v1/circles -d '{ "members": 
 {
   "id":<id>,
   "name":"群组",
+  "active":true, // 是否允许发送消息
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "owner":{
@@ -503,6 +486,7 @@ curl -X PUT https://park.catchchatchina.com/api/v1/circles/2 -d '{ "name": "公�
 {
   "id":<id>,
   "name":"公共群组",
+  "active":true, // 是否允许发送消息
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "owner":{
@@ -543,6 +527,7 @@ curl -X GET https://park.catchchatchina.com/api/v1/circles/2 -H 'Authorization: 
 {
   "id":<id>,
   "name":"公共群组",
+  "active":true, // 是否允许发送消息
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "owner":{
@@ -583,6 +568,7 @@ curl -X POST https://park.catchchatchina.com/api/v1/circles/2/join -H 'Authoriza
 {
   "id":<id>,
   "name":"公共群组",
+  "active":true, // 是否允许发送消息
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "owner":{
@@ -646,6 +632,7 @@ curl -X POST https://park.catchchatchina.com/api/v1/circles/2/batch_add -d '{ "m
 {
   "id":<id>,
   "name":"公共群组",
+  "active":true, // 是否允许发送消息
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "owner":{
@@ -687,6 +674,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/circles/2/batch_delete -d 
 {
   "id":<id>,
   "name":"公共群组",
+  "active":true, // 是否允许发送消息
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "owner":{
@@ -933,7 +921,7 @@ curl -X GET https://park.catchchatchina.com/api/v1/user/discover -d '{ "master_s
   "users":[
     {
       <mini_user>,
-      "distance":"12646.761054269287",
+      "distance":12646.8,
     },
     .
     .
@@ -1245,6 +1233,7 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
       "circle":{
         "id":<id>,
         "name":"公共群组",
+        "active":true // 是否允许发送消息
         "created_at":1433930183, // UNIX 时间戳
         "updated_at":1433930183, // UNIX 时间戳
       },
@@ -1351,6 +1340,7 @@ curl https://park.catchchatchina.com/api/v1/messages/<id> -H 'Authorization: Tok
   "circle":{
     "id":<id>,
     "name":"公共群组",
+    "active":true, // 是否允许发送消息
     "created_at":1433930183, // UNIX 时间戳
     "updated_at":1433930183, // UNIX 时间戳
   },
@@ -1449,6 +1439,7 @@ curl -X POST https://park.catchchatchina.com/api/v1/User/<id>/messages -d '{ "te
   "circle":{
     "id":<id>,
     "name":"公共群组",
+    "active":true, // 是否允许发送消息
     "created_at":1433930183, // UNIX 时间戳
     "updated_at":1433930183, // UNIX 时间戳
   },
@@ -2946,3 +2937,283 @@ curl -X POST https://park.catchchatchina.com/api/v1/feedbacks -F content=test -F
 ```
 {}
 ```
+
+## Topics (Feeds)
+
+### 获取所有我发的帖子
+
+```
+GET /api/v1/topics
+```
+
+### 参数
+
+无
+
+### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/topics -H 'Authorization: Token token="test-token"'
+```
+
+### 响应
+
+```
+{
+  "count": 1,
+  "current_page": 1,
+  "per_page": 30,
+  "topics": [
+    {
+      "id": "516055075accc1e4067dd5ff6b2682cd",
+      "allow_comment": true, // 是否允许评论
+      "body": "test", // 帖子内容
+      "message_count": 0, // 评论消息数
+      "created_at": 1443278450.465,
+      "updated_at": 1443278450.465,
+      "user": <mini_user>,
+      "skill": { // 注意：skill 可能为 null
+        "id": "cee89797007ab6db9f356f53edd0174a",
+        "name": "Reading",
+        "name_string": "Reading",
+        "cover_url": null
+      },
+      "circle":{
+        "id":<id>,
+        "name":"公共群组",
+        "active":true, // 是否允许发送消息
+        "created_at":1433930183, // UNIX 时间戳
+        "updated_at":1433930183, // UNIX 时间戳
+      },
+      "attachments":[
+        {
+          "kind":"image",
+          "metadata":"",
+          "file":{
+            "storage":"s3",
+            "expires_in":86400,
+            "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/23f245f0-b129-4f4f-9d6e-f920fab50c6d?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20150619%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20150619T022723Z&X-Amz-Expires=86400&X-Amz-Signature=f7158a3746f2b1852db0c725cf344d8acfbd477ff4b77714df34383e8baccb0d&X-Amz-SignedHeaders=Host"
+          }
+        }
+      ]
+    },
+    .
+    .
+    .
+  ]
+}
+```
+
+### 发现帖子 (Feeds)
+
+```
+GET /api/v1/topics/discover
+```
+
+### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| sort | String | 否 | 排序字段，目前支持 distance 和 time。distance 表示按距离倒序展示，time 表示两周内的 topics 按发帖时间倒序展示。默认值为 distance |
+
+### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/topics/discover -H 'Authorization: Token token="test-token"'
+```
+
+### 响应
+
+```
+{
+  "count": 1,
+  "current_page": 1,
+  "per_page": 30,
+  "topics": [
+    {
+      "id": "516055075accc1e4067dd5ff6b2682cd",
+      "allow_comment": true, // 是否允许评论
+      "body": "test", // 帖子内容
+      "message_count": 0, // 评论消息数
+      "distance": 642.7,  // 距离 km
+      "created_at": 1443278450.465,
+      "updated_at": 1443278450.465,
+      "user": <mini_user>,
+      "skill": { // 注意：skill 可能为 null
+        "id": "cee89797007ab6db9f356f53edd0174a",
+        "name": "Reading",
+        "name_string": "Reading",
+        "cover_url": null
+      },
+      "circle":{
+        "id":<id>,
+        "name":"公共群组",
+        "active":true, // 是否允许发送消息
+        "created_at":1433930183, // UNIX 时间戳
+        "updated_at":1433930183, // UNIX 时间戳
+      },
+      "attachments":[
+        {
+          "kind":"image",
+          "metadata":"",
+          "file":{
+            "storage":"s3",
+            "expires_in":86400,
+            "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/23f245f0-b129-4f4f-9d6e-f920fab50c6d?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20150619%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20150619T022723Z&X-Amz-Expires=86400&X-Amz-Signature=f7158a3746f2b1852db0c725cf344d8acfbd477ff4b77714df34383e8baccb0d&X-Amz-SignedHeaders=Host"
+          }
+        }
+      ]
+    },
+    .
+    .
+    .
+  ]
+}
+```
+
+### 发布帖子
+
+```
+POST /api/v1/topics
+```
+
+### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| body | Text | 是 | 帖子内容 |
+| latitude | Float | 是 | latitude |
+| longitude | Float | 是 | longitude |
+| allow_comment | Boolean | 否 | 是否允许评论，允许评论则会创建 circle，默认为 true |
+| skill_id | String | 否 | 技能ID |
+| attachments | JSON | 否 | 如：{ "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] }
+
+attachments 中 `file` 表示 S3 返回的文件 key，`metadata` 是附件的元数据。
+attachments key 的可选值：
+
+可选值 | 解释
+--- | --- |
+image | 附件是一张图片
+thumbnail | 附件是一张缩略图
+audio | 附件是一段声音
+video | 附件是一段视频
+
+### 示例
+
+```
+curl -XPOST 0.0.0.0:3000/api/v1/topics -F body=test -F latitude=11.11 -F longitude=22.22 -F allow_comment=true -F skill_id=cee89797007ab6db9f356f53edd0174a -H 'Authorization: Token token="test-token"'
+```
+
+### 响应
+
+```
+{
+  "id": "516055075accc1e4067dd5ff6b2682cd",
+  "allow_comment": true, // 是否允许评论
+  "body": "test", // 帖子内容
+  "message_count": 0, // 评论消息数
+  "created_at": 1443278450.465,
+  "updated_at": 1443278450.465,
+  "user": <mini_user>,
+  "skill": { // 注意：skill 可能为 null
+    "id": "cee89797007ab6db9f356f53edd0174a",
+    "name": "Reading",
+    "name_string": "Reading",
+    "cover_url": null
+  },
+  "circle":{
+    "id":<id>,
+    "name":"公共群组",
+    "active":true, // 是否允许发送消息
+    "created_at":1433930183, // UNIX 时间戳
+    "updated_at":1433930183, // UNIX 时间戳
+  },
+  "attachments":[
+    {
+      "kind":"image",
+      "metadata":"",
+      "file":{
+        "storage":"s3",
+        "expires_in":86400,
+        "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/23f245f0-b129-4f4f-9d6e-f920fab50c6d?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20150619%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20150619T022723Z&X-Amz-Expires=86400&X-Amz-Signature=f7158a3746f2b1852db0c725cf344d8acfbd477ff4b77714df34383e8baccb0d&X-Amz-SignedHeaders=Host"
+      }
+    }
+  ]
+}
+```
+
+### 更新帖子
+
+```
+PUT /api/:version/topics/:id
+```
+
+### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| allow_comment | Boolean | 否 | 是否允许评论 |
+
+### 示例
+
+```
+curl -XPATCH 0.0.0.0:3000/api/v1/topics/516055075accc1e4067dd5ff6b2682cd -F allow_comment=true -H 'Authorization: Token token="test-token"'
+```
+
+### 响应
+
+```
+{
+  "id": "516055075accc1e4067dd5ff6b2682cd",
+  "allow_comment": true, // 是否允许评论
+  "body": "test", // 帖子内容
+  "message_count": 0, // 评论消息数
+  "created_at": 1443278450.465,
+  "updated_at": 1443278450.465,
+  "user": <mini_user>,
+  "skill": { // 注意：skill 可能为 null
+    "id": "cee89797007ab6db9f356f53edd0174a",
+    "name": "Reading",
+    "name_string": "Reading",
+    "cover_url": null
+  },
+  "circle":{
+    "id":<id>,
+    "name":"公共群组",
+    "active":true, // 是否允许发送消息
+    "created_at":1433930183, // UNIX 时间戳
+    "updated_at":1433930183, // UNIX 时间戳
+  },
+  "attachments":[
+    {
+      "kind":"image",
+      "metadata":"",
+      "file":{
+        "storage":"s3",
+        "expires_in":86400,
+        "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/23f245f0-b129-4f4f-9d6e-f920fab50c6d?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20150619%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20150619T022723Z&X-Amz-Expires=86400&X-Amz-Signature=f7158a3746f2b1852db0c725cf344d8acfbd477ff4b77714df34383e8baccb0d&X-Amz-SignedHeaders=Host"
+      }
+    }
+  ]
+}
+```
+
+### 删除帖子
+
+```
+DELETE /api/:version/topics/:id
+```
+
+### 参数
+
+无
+
+### 示例
+
+```
+curl -XDELETE https://park.catchchatchina.com/api/v1/topics/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="test-token"'
+```
+
+### 响应
+
+不返回数据，只返回状态码
