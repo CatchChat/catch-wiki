@@ -1185,9 +1185,9 @@ curl https://park.catchchatchina.com/api/v1/90913b93738c8a627129e49db32eeec3/set
 
 ## Message 消息
 
-### 获取所有未读消息
+### 获取最新未读消息
 
-**按创建时间倒序返回**
+每个聊天窗口至多返回10条未读消息，进入聊天窗口后想要获取更多消息可以请求消息历史API
 
 ```
 GET /api/v1/messages/unread
@@ -1195,15 +1195,12 @@ GET /api/v1/messages/unread
 
 #### 参数
 
-| 名称 | 类型 | 是否必需 | 描述 |
-|---|---|---|---|
-| max_id | String | 否 | 将返回 `id` 比 `max_id` 小的未读消息，**在向上翻页的时候必须带上 max_id** |
-| min_id | String | 否 | 将返回 `id` 比 `min_id` 大的未读消息，**在向下翻页的时候必须带上 min_id** |
+**无，且不支持分页**
 
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"' -k
+curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
 ```
 
 #### 响应
@@ -1261,10 +1258,7 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
     .
     .
     .
-  ],
-  "current_page":1,
-  "per_page":30,
-  "count":2
+  ]
 }
 ```
 
