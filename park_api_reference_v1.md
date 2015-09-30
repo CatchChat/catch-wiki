@@ -2317,104 +2317,7 @@ curl -X POST https://park.catchchatchina.com/api/v1/unfriend_requests -F friend_
 
 ## Attachment 附件
 
-<!--
-### 获取七牛头像附件上传 token
-
-GET /api/v1/attachments/qiniu_public\_upload\_token
-
-cURL 请求范例：
-
-```
-curl -X GET -H "Content-Type: application/json" -H 'Authorization: Token token="_mPSDhsxxYpJyVGc7qrU1422539900.9699185"' https://park.catchchatchina.com/api/v1/attachments/qiniu_public_upload_token
-```
-
-返回范例：
-
-```
-
-{ 
-  "provider":"qiniu",
-  "options":{
-    "token":"TJozzjvlXhkyA_OVOzHKYCavv2wq4L_afDTeYnhp:NlrhtV17EshCBuC8MsmH6QMHNSc=:eyJzY29wZSI6ImNhdGNoLWF2YXRhcnM6NDBiMmMwMzktZmNiZC00Y2EzLWIyNjAtNjBiNmRiZDUwY2RmIiwiY2FsbGJhY2tVcmwiOiJodHRwOi8vcGFyay5jYXRjaGNoYXRjaGluYS5jb20vYXBpL3Y0L2F0dGFjaG1lbnRzL3B1YmxpY19jYWxsYmFjay9xaW5pdSIsImNhbGxiYWNrQm9keSI6ImtleT0kKGtleSlcdTAwMjZidWNrZXQ9JChidWNrZXQpXHUwMDI2bWVzc2FnZV9pZD0kKHg6bWVzc2FnZV9pZCkiLCJkZWFkbGluZSI6MTQyMjU0Mzc3NX0=",
-    "bucket":"catch-avatars",
-    "key":"40b2c039-fcbd-4ca3-b260-60b6dbd50cdf",
-    "download_url":"http://catch-avatars.qiniudn.com/40b2c039-fcbd-4ca3-b260-60b6dbd50cdf",
-    "file_path":null,
-    "file_length":null,
-    "callback_url":"http://park.catchchatchina.com/api/v1/attachments/public_callback/qiniu",
-    "callback_body":"key=$(key)\u0026bucket=$(bucket)\u0026message_id=$(x:message_id)"
-  }
-} 
-
-```
--->
-
-### 获取S3头像附件上传 token
-
-```
-GET /api/v1/attachments/s3_upload_public\_form_fields
-```
-
-cURL 请求范例：
-
-```
-curl -X GET -H 'Authorization: Token token="test-token"' -H "Content-Type: application/json" https://park.catchchatchina.com/api/v1/attachments/s3_upload_public_form_fields
-
-```
-返回范例：
-
-```
-{"provider":"s3","options":{"bucket":null,"key":"61e861c2-be37-4033-9c85-685347657481","url":"https://.s3.cn-north-1.amazonaws.com.cn/","policy":{"expiration":"2015-03-20T08:48:20.000Z","conditions":[{"bucket":null},{"key":"61e861c2-be37-4033-9c85-685347657481"},{"acl":"private"},{"x-amz-credential":"AKIAOGBVMZAU5EZPGPIQ/20150320/cn-north-1/s3/aws4_request"},{"x-amz-algorithm":"AWS4-HMAC-SHA256"},{"x-amz-date":"20150320T074820Z"}]},"encoded_policy":"eyJleHBpcmF0aW9uIjoiMjAxNS0wMy0yMFQwODo0ODoyMC4wMDBaIiwiY29uZGl0aW9ucyI6W3siYnVja2V0IjpudWxsfSx7ImtleSI6IjYxZTg2MWMyLWJlMzctNDAzMy05Yzg1LTY4NTM0NzY1NzQ4MSJ9LHsiYWNsIjoicHJpdmF0ZSJ9LHsieC1hbXotY3JlZGVudGlhbCI6IkFLSUFPR0JWTVpBVTVFWlBHUElRLzIwMTUwMzIwL2NuLW5vcnRoLTEvczMvYXdzNF9yZXF1ZXN0In0seyJ4LWFtei1hbGdvcml0aG0iOiJBV1M0LUhNQUMtU0hBMjU2In0seyJ4LWFtei1kYXRlIjoiMjAxNTAzMjBUMDc0ODIwWiJ9XX0=","signature":"60165b75396f9ab5f32c22014cef9de576da2d7423de872fc6ce1e20dd8ab5a8"}}
-
-```
-
-### 获取Message附件上传 token
-
-<!--
-#### 七牛
-```
-GET /api/v1/attachments/qiniu_upload_token
-```
-
-cURL 请求范例：
-
-```
-curl -X GET https://park.catchchatchina.com/api/v1/attachments/qiniu_upload_token -H 'Authorization: Token token="_mPSDhsxxYpJyVGc7qrU1422539900.9699185"''
-```
-返回范例：
-
-```
-{
-  "provider":"qiniu",
-  "options":{
-    "token":"TJozzjvlXhkyA_OVOzHKYCavv2wq4L_afDTeYnhp:bNlrNprAnqTVtOt-j4aKmd2aARw=:eyJzY29wZSI6ImNhdGNoOmJmZWU0ZDQwLTZjYmMtNDMwNC05NmQzLTk2YzMwYThlNTBhYyIsImNhbGxiYWNrVXJsIjoiaHR0cDovL3BhcmsuY2F0Y2hjaGF0Y2hpbmEuY29tL2FwaS92NC9hdHRhY2htZW50cy9jYWxsYmFjay9xaW5pdSIsImNhbGxiYWNrQm9keSI6ImtleT0kKGtleSlcdTAwMjZidWNrZXQ9JChidWNrZXQpXHUwMDI2bWVzc2FnZV9pZD0kKHg6bWVzc2FnZV9pZCkiLCJkZWFkbGluZSI6MTQyMjU0NTM2MX0=",
-    "bucket":"catch",
-    "key":"bfee4d40-6cbc-4304-96d3-96c30a8e50ac",
-    "file_path":null,
-    "file_length":null,
-    "callback_url":"http://park.catchchatchina.com/api/v1/attachments/callback/qiniu",
-    "callback_body":"key=$(key)\u0026bucket=$(bucket)\u0026message_id=$(x:message_id)",
-    "notify_url":null
-  }
-}
-
-```
-
-获取上传 token 后，根据 provider 上传到相应的云存储，options 中包含了客户端上传所需要的参数。
-
-七牛参数：
-
-| 名称 | 类型 | 描述 |
-|---|---|---|
-| token | String | 上传凭证 |
-| bucket | String | Bucket 的名称 |
-| message\_id | String | Message ID|
-| key | String | 文件名 |
-| callback_url | String | callback url|
-| callback_body | String | callback body|
--->
-
-#### S3
+### 获取附件上传表单参数
 
 获得S3上传所需的提交的form的参数
 
@@ -2422,12 +2325,20 @@ curl -X GET https://park.catchchatchina.com/api/v1/attachments/qiniu_upload_toke
 [S3文档](http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html)
 
 ```
-GET /api/v1/attachments/s3_upload_form_fields
+GET /api/v1/attachments/:kind/s3_upload_form_fields
 ```
+
+kind 可能值为：
+
+| kind | 说明 |
+|---|---|
+| message | 消息附件 |
+| topic | feed 附件 |
+| avatar | 头像 |
 
 cURL 请求范例：
 ```
-curl -X GET https://park.catchchatchina.com/api/v1/attachments/s3_upload_form_fields -H 'Authorization: Token token="DdPnWxQy6z5axwxZfsjs1427718553.7476008"'
+curl -X GET https://park.catchchatchina.com/api/v1/attachments/message/s3_upload_form_fields -H 'Authorization: Token token="DdPnWxQy6z5axwxZfsjs1427718553.7476008"'
 ```
 
 返回范例：
