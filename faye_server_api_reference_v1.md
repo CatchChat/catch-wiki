@@ -13,7 +13,12 @@
 * 订阅消息
 * 发布消息
 
-订阅/发布消息的频道有：
+订阅消息的频道有（对应各版本的 Faye Server）：
+
+* Direct message `/v1/users/:user_id/messages`
+* Group message `/v1/circles/:circle_id/messages`
+
+发布消息的频道有（各版本 Faye Server 发布消息频道均一致）：
 
 * Direct message `/users/:user_id/messages`
 * Group message `/circles/:circle_id/messages`
