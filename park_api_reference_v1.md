@@ -93,6 +93,12 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "name":"Singing",        // 技能名
 "name_string":"Singing", // 技能名翻译
 "cover_url":null,        // 技能封面图片URL
+```
+
+在 API 返回技能信息时，将会以 `<skill_with_category>` 替代如下结构：
+
+```
+<skill>
 "category":{
   "id":<id>,
   "name":"Art",          // 类别名
@@ -141,13 +147,13 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 },
 "master_skills":[
   {
-    <skill>
+    <skill_with_category>
   },
   ...
 ],
 "learning_skills":[
   {
-    <skill>
+    <skill_with_category>
   },
   ...
 ]
@@ -922,6 +928,13 @@ curl -X GET https://park.catchchatchina.com/api/v1/user/discover -d '{ "master_s
     {
       <mini_user>,
       "distance":12646.8,
+      "recently_updated_provider":"github", // 最近更新的 provider，值为 github | dribbble | instagram
+      "master_skills":[
+        <skill>,
+        .
+        .
+        .
+      ]
     },
     .
     .
@@ -2877,12 +2890,7 @@ curl https://park.catchchatchina.com/api/v1/topics -H 'Authorization: Token toke
       "created_at": 1443278450.465,
       "updated_at": 1443278450.465,
       "user": <mini_user>,
-      "skill": { // 注意：skill 可能为 null
-        "id": "cee89797007ab6db9f356f53edd0174a",
-        "name": "Reading",
-        "name_string": "Reading",
-        "cover_url": null
-      },
+      "skill": <skill>, // 注意：skill 可能为 null
       "circle":{
         "id":<id>,
         "name":"公共群组",
@@ -2944,12 +2952,7 @@ curl https://park.catchchatchina.com/api/v1/topics/discover -H 'Authorization: T
       "created_at": 1443278450.465,
       "updated_at": 1443278450.465,
       "user": <mini_user>,
-      "skill": { // 注意：skill 可能为 null
-        "id": "cee89797007ab6db9f356f53edd0174a",
-        "name": "Reading",
-        "name_string": "Reading",
-        "cover_url": null
-      },
+      "skill": <skill>, // 注意：skill 可能为 null
       "circle":{
         "id":<id>,
         "name":"公共群组",
@@ -3020,12 +3023,7 @@ curl -XPOST 0.0.0.0:3000/api/v1/topics -F body=test -F latitude=11.11 -F longitu
   "created_at": 1443278450.465,
   "updated_at": 1443278450.465,
   "user": <mini_user>,
-  "skill": { // 注意：skill 可能为 null
-    "id": "cee89797007ab6db9f356f53edd0174a",
-    "name": "Reading",
-    "name_string": "Reading",
-    "cover_url": null
-  },
+  "skill": <skill>, // 注意：skill 可能为 null
   "circle":{
     "id":<id>,
     "name":"公共群组",
@@ -3076,12 +3074,7 @@ curl -XPATCH 0.0.0.0:3000/api/v1/topics/516055075accc1e4067dd5ff6b2682cd -F allo
   "created_at": 1443278450.465,
   "updated_at": 1443278450.465,
   "user": <mini_user>,
-  "skill": { // 注意：skill 可能为 null
-    "id": "cee89797007ab6db9f356f53edd0174a",
-    "name": "Reading",
-    "name_string": "Reading",
-    "cover_url": null
-  },
+  "skill": <skill>, // 注意：skill 可能为 null
   "circle":{
     "id":<id>,
     "name":"公共群组",
