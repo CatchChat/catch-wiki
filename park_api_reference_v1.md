@@ -1384,8 +1384,8 @@ POST /api/v1/:recipient_type/:recipient_id/messages
 
 名称 | 类型 | 是否必须 | 描述
 --- |--- |--- |--- |
-recipient_id | String | 是 | 接收者（聊天对象）ID，接收者只有两，User 或者 Circle，所以是 User ID 或者 Circle ID |
-recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 User 或者 Circle
+recipient_id | String | 是 | 接收者（聊天对象）ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
+recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 users 或者 circles
 media_type | String | 否 | 消息类型，text 表示文字, image 表示图片, video 表示视频, audio 表示语音, sticker 表示贴纸, location 表示位置, 默认是text
 text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
 parent_id | Integer | 否 | 回复的消息 ID，表示当前要发送的消息是回复哪条消息
@@ -1418,7 +1418,7 @@ sticker | 附件是一副贴纸
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v1/User/<id>/messages -d '{ "text_content": "This is a test!", "media_type": "image", "attachments": { "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] } }' -H 'Authorization: Token token="NDccv1Yvdi9UKtwPToxx1416921006.674603"' -H "Content-Type: application/json"
+curl -X POST https://park.catchchatchina.com/api/v1/users/<id>/messages -d '{ "text_content": "This is a test!", "media_type": "image", "attachments": { "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] } }' -H 'Authorization: Token token="NDccv1Yvdi9UKtwPToxx1416921006.674603"' -H "Content-Type: application/json"
 ```
 
 #### 响应
@@ -1511,13 +1511,13 @@ PATCH /api/v1/:recipient_type/:recipient_id/messages/batch_mark_as_read
 名称 | 类型 | 是否必须 | 描述
 --- |--- |--- |--- |
 recipient_id | String | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID
-recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 User 或者 Circle
+recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 users 或者 circles
 last_read_at | Float | 是 | 最后读消息的时间，Unix 时间戳
 
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v1/User/<id>/messages/batch_mark_as_read -H 'Authorization: Token token="test-token"' -F last_read_at=1442896313.813362
+curl -X PATCH https://park.catchchatchina.com/api/v1/users/<id>/messages/batch_mark_as_read -H 'Authorization: Token token="test-token"' -F last_read_at=1442896313.813362
 ```
 
 #### 响应
@@ -1644,14 +1644,14 @@ GET /api/v1/:recipient_type/:recipient_id/messages
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
 | recipient_id | String | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
-| recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 User 或者 Circle |
+| recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 users 或者 circles |
 | max_id | String | 否 | 将返回 `id` 比 `max_id` 小的未读消息，**在向上翻页的时候必须带上 max_id** |
 | min_id | String | 否 | 将返回 `id` 比 `min_id` 大的未读消息，**在向下翻页的时候必须带上 min_id** |
 
 #### 示例
 
 ```
-curl -X GET https://park.catchchatchina.com/api/v1/User/<id>/messages -H 'Authorization: Token token="yChytb7mKMbs5EZPK8jp1435855393.5408268"'
+curl -X GET https://park.catchchatchina.com/api/v1/users/<id>/messages -H 'Authorization: Token token="yChytb7mKMbs5EZPK8jp1435855393.5408268"'
 ```
 
 #### 响应
@@ -1671,14 +1671,14 @@ GET /api/:version/:recipient_type/:recipient_id/messages/unread
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
 | recipient_id | String | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
-| recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 User 或者 Circle |
+| recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 users 或者 circles |
 | max_id | String | 否 | 将返回 `id` 比 `max_id` 小的未读消息，**在向上翻页的时候必须带上 max_id** |
 | min_id | String | 否 | 将返回 `id` 比 `min_id` 大的未读消息，**在向下翻页的时候必须带上 min_id** |
 
 #### 示例
 
 ```
-curl -X GET https://park.catchchatchina.com/api/v1/User/<id>/messages/unread -H 'Authorization: Token token="yChytb7mKMbs5EZPK8jp1435855393.5408268"'
+curl -X GET https://park.catchchatchina.com/api/v1/users/<id>/messages/unread -H 'Authorization: Token token="yChytb7mKMbs5EZPK8jp1435855393.5408268"'
 ```
 
 #### 响应
@@ -1698,7 +1698,7 @@ GET /api/:version/:recipient_type/:recipient_id/messages/sent_unread
 名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
 | recipient_id | String | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
-| recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 User 或者 Circle |
+| recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 users 或者 circles |
 
 #### 示例
 
