@@ -91,7 +91,8 @@
 
 ### 发布已读确认消息
 
-**已读确认消息应该是接收者收到消息后发送给发送者（是个人而不是群组）的，该消息在后台将被标记为已读，且发送一条已读确认消息给发送者。已读确认消息可能会重复 ，应该在收到第一个已读确认后，忽略掉该条消息的其他已读确认消息**
+**已读确认消息应该是接收者收到消息后发送给发送者（是个人而不是群组）的，该消息在后台将被标记为已读，且发送一条已读确认消息给发送者。已读确认消息可能会重复 ，应该在客户端标记已读后，忽略掉该条消息的其他已读确认消息**
+
 
 客户端A发送给客户端B如下消息：
 
@@ -104,7 +105,9 @@
   "data":{
     "message_type":"mark_as_read", // 消息类型，此处为已读确认消息
     "message":{
-      "id":"516055075accc1e4067dd5ff6b2682cd" // message id，这条消息将会在后台被标记为已读，且会发送给客户端B一条已读确认消息
+      "max_id":"516055075accc1e4067dd5ff6b2682cd",
+      "recipient_id":<id>, // 客户端 B 的 user id
+      "recipient_type":"User"
     }
   }
 }
@@ -113,13 +116,14 @@
 客户端B将会接收到如下消息：
 
 ```
+// 客户端可以通过 recipient_id 和 recipient_type 确定聊天窗口，然后将聊天窗口中的 max_id 以及 max_id 前的消息都标记为已读。
 {
   "data":{
     "message_type":"mark_as_read", // 消息类型，此处为已读确认消息
     "message":{
-      "id":"516055075accc1e4067dd5ff6b2682cd" // message id
-      "recipient_type":"User", // 可能出现的值为 User 或者 Circle，表示该消息是个人消息还是群组消息
-      "recipient_id":"516055075accc1e4067dd5ff6b2682cd" // 接收者 ID
+      "max_id":"516055075accc1e4067dd5ff6b2682cd" // message id
+      "recipient_type":"User",
+      "recipient_id":<id> // 客户端 A 的 user id
     }
   }
 }

@@ -1275,7 +1275,7 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
 }
 ```
 
-### 获取我发送的未读消息ID
+### 获取所有我发送的未读消息ID
 
 ```
 GET /api/v1/messages/sent_unread
@@ -1301,76 +1301,6 @@ curl https://park.catchchatchina.com/api/v1/messages/sent_unread -H 'Authorizati
     .
     .
   }
-}
-```
-
-### 获取收到的单条消息
-
-```
-GET /api/v1/messages/:id
-```
-
-#### 参数
-
-| 名称 | 类型 | 是否必需 | 描述 |
-|---|---|---|---|
-| id | Integer | 是 | 消息 ID |
-
-#### 示例
-
-```
-curl https://park.catchchatchina.com/api/v1/messages/<id> -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
-```
-
-#### 响应
-
-```
-{
-  "id":<id>,
-  "recipient_id":<id>,
-  "recipient_type":"Circle",
-  "text_content":"Hello~",
-  "latitude":113.033,
-  "longitude":24.1231,
-  "parent_id":0,
-  "media_type":"image",
-  "media_type_string":"一张照片",
-  "state":"unread",
-  "state_string":"未读",
-  "created_at":1433930183, // UNIX 时间戳
-  "updated_at":1433930183, // UNIX 时间戳
-  "sender":{
-    <mini_user>,
-    "remarked_name":null,
-    "contact_name":null
-  },
-  "circle":{
-    "id":<id>,
-    "name":"公共群组",
-    "active":true, // 是否允许发送消息
-    "created_at":1433930183, // UNIX 时间戳
-    "updated_at":1433930183, // UNIX 时间戳
-  },
-  "attachments":[
-    {
-      "kind":"image",
-      "metadata":"metadata",
-      "file":{
-        "storage":"qiniu",
-        "expires_in":86400, // 单位：秒
-        "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-      }
-    },
-    {
-      "kind":"thumbnail",
-      "metadata":"metadata",
-      "file":{
-        "storage":"qiniu",
-        "expires_in":86400, // 单位：秒
-        "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-      }
-    }
-  ]
 }
 ```
 
@@ -1473,34 +1403,23 @@ curl -X POST https://park.catchchatchina.com/api/v1/users/<id>/messages -d '{ "t
 }
 ```
 
-### 标记消息为已读
+### 标记指定聊天窗口的多条消息为已读
+
+将 max_id 提交上去后，会将此聊天窗口中在 max_id 之前的所有消息标记为已读。单聊群聊都适用，唯一的区别是单聊会通过 faye server 发送已读通知给消息的发送者，而群聊不会。
+
+faye server 的已读确认消息结构如下：
 
 ```
-PATCH /api/v1/messages/:id/mark_as_read
-```
-
-#### 参数
-
-名称 | 类型 | 是否必须 | 描述
---- |--- |--- |--- |
-id | Integer | 是 | 消息 ID
-
-#### 示例
-
-```
-curl -X PATCH https://park.catchchatchina.com/api/v1/messages/<id>/mark_as_read -H 'Authorization: Token token="TKWsindneiDsFj3gUHs31416969554.7962759"'
-```
-
-#### 响应
-
-```
+// 客户端可以通过 recipient_id 和 recipient_type 确定聊天窗口，然后将 max_id 以及 max_id 前的消息都标记为已读。
 {
-  "recipient_type":"User",
-  "recipient_id":<id>
+  message_type: 'mark_as_read',
+  message: {
+    "max_id":<id>,
+    "recipient_id":<id>,
+    "recipient_type":"User"
+  }
 }
 ```
-
-### 标记指定聊天窗口的多条消息为已读
 
 ```
 PATCH /api/v1/:recipient_type/:recipient_id/messages/batch_mark_as_read
@@ -1512,7 +1431,7 @@ PATCH /api/v1/:recipient_type/:recipient_id/messages/batch_mark_as_read
 --- |--- |--- |--- |
 recipient_id | String | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID
 recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 users 或者 circles
-last_read_at | Float | 是 | 最后读消息的时间，Unix 时间戳
+max_id | String | 是 | 最新读取的消息 ID
 
 #### 示例
 
@@ -1522,45 +1441,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/users/<id>/messages/batch_m
 
 #### 响应
 
-```
-{
-  "recipient_type":"User",
-  "recipient_id":<id>,
-  "message_ids":[ // 本次标记为已读的消息 ID
-    <id>,
-    <id>,
-    .
-    .
-    .
-  ]
-}
-```
-
-<!--
-### 标记消息已收到
-
-```
-PATCH /api/v1/messages/:id/deliver
-```
-
-#### 参数
-
-名称 | 类型 | 是否必须 | 描述
---- |--- |--- |--- |
-id | Integer | 是 | 消息 ID
-
-#### 示例
-
-```
-curl -X PATCH https://park.catchchatchina.com/api/v1/messages/<id>/deliver -H 'Authorization: Token token="TKWsindneiDsFj3gUHs31416969554.7962759"'
-```
-
-#### 响应
-
-```
-{}
-```
--->
+只返回状态码
 
 ### 撤回已发送消息
 
