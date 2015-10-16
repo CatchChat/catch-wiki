@@ -108,7 +108,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 
 #### 用户基本信息字段结构
 
-在 API 返回用户信息时，将会以 `<mini_user>` 替代如下结构：
+在 API 返回基本的用户信息时，将会以 `<mini_user>` 替代如下结构：
 
 ```
 "id":<id>,
@@ -124,7 +124,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "last_sign_in_at":1441347780
 ```
 
-#### 用户基本信息字段结构
+#### 用户信息字段结构
 
 在 API 返回用户信息时，将会以 `<user>` 替代如下结构：
 
@@ -157,6 +157,46 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
   },
   ...
 ]
+```
+
+#### 公共群组字段模板
+
+在 API 返回公共群组信息时，将会以 `<circle>` 替代如下结构：
+
+```
+"id":<id>,
+"topic_id":<id>
+"name":"circle",
+"active":true, // 是否允许发送消息
+"created_at":1433930183, // UNIX 时间戳
+"updated_at":1433930183, // UNIX 时间戳
+```
+
+#### Topic 字段模板
+
+在 API 返回 topic 信息时，将会以 `<topic>` 替代如下结构：
+
+```
+"id": <id>,
+"allow_comment": true, // 是否允许评论
+"body": "test", // 帖子内容
+"message_count": 0, // 评论消息数
+"created_at": 1443278450.465,
+"updated_at": 1443278450.465
+```
+
+#### Attachment 字段模板
+
+在 API 返回 attachment 信息时，将会以 `<attachment>` 替代如下结构：
+
+```
+"kind":"image",
+"metadata":"metadata",
+"file":{
+  "storage":"qiniu",
+  "expires_in":86400, // 单位：秒
+  "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+}
 ```
 
 ### 推送
@@ -409,12 +449,11 @@ curl -X GET https://park.catchchatchina.com/api/v1/circles -H 'Authorization: To
 {
   "circles":[
     {
-      "id":<id>,
-      "name":"circle",
-      "active":true, // 是否允许发送消息
-      "created_at":1433930183, // UNIX 时间戳
-      "updated_at":1433930183, // UNIX 时间戳
-    },
+      <circle>,
+      "topic":{
+        <topic>
+      }
+    }
     .
     .
     .
@@ -448,11 +487,10 @@ curl -i -X POST https://park.catchchatchina.com/api/v1/circles -d '{ "members": 
 
 ```
 {
-  "id":<id>,
-  "name":"群组",
-  "active":true, // 是否允许发送消息
-  "created_at":1433930183, // UNIX 时间戳
-  "updated_at":1433930183, // UNIX 时间戳
+  <circle>,
+  "topic":{
+    <topic>
+  },
   "owner":{
     <mini_user>
   },
@@ -490,11 +528,10 @@ curl -X PUT https://park.catchchatchina.com/api/v1/circles/2 -d '{ "name": "公�
 
 ```
 {
-  "id":<id>,
-  "name":"公共群组",
-  "active":true, // 是否允许发送消息
-  "created_at":1433930183, // UNIX 时间戳
-  "updated_at":1433930183, // UNIX 时间戳
+  <circle>,
+  "topic":{
+    <topic>
+  },
   "owner":{
     <mini_user>
   },
@@ -531,11 +568,10 @@ curl -X GET https://park.catchchatchina.com/api/v1/circles/2 -H 'Authorization: 
 
 ```
 {
-  "id":<id>,
-  "name":"公共群组",
-  "active":true, // 是否允许发送消息
-  "created_at":1433930183, // UNIX 时间戳
-  "updated_at":1433930183, // UNIX 时间戳
+  <circle>,
+  "topic":{
+    <topic>
+  },
   "owner":{
     <mini_user>
   },
@@ -572,11 +608,10 @@ curl -X POST https://park.catchchatchina.com/api/v1/circles/2/join -H 'Authoriza
 
 ```
 {
-  "id":<id>,
-  "name":"公共群组",
-  "active":true, // 是否允许发送消息
-  "created_at":1433930183, // UNIX 时间戳
-  "updated_at":1433930183, // UNIX 时间戳
+  <circle>,
+  "topic":{
+    <topic>
+  },
   "owner":{
     <mini_user>
   },
@@ -636,11 +671,10 @@ curl -X POST https://park.catchchatchina.com/api/v1/circles/2/batch_add -d '{ "m
 
 ```
 {
-  "id":<id>,
-  "name":"公共群组",
-  "active":true, // 是否允许发送消息
-  "created_at":1433930183, // UNIX 时间戳
-  "updated_at":1433930183, // UNIX 时间戳
+  <circle>,
+  "topic":{
+    <topic>
+  },
   "owner":{
     <mini_user>
   },
@@ -678,11 +712,10 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/circles/2/batch_delete -d 
 
 ```
 {
-  "id":<id>,
-  "name":"公共群组",
-  "active":true, // 是否允许发送消息
-  "created_at":1433930183, // UNIX 时间戳
-  "updated_at":1433930183, // UNIX 时间戳
+  <circle>,
+  "topic":{
+    <topic>
+  },
   "owner":{
     <mini_user>
   },
@@ -1240,32 +1273,11 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
         "remarked_name":null,
         "contact_name":null
       },
-      "circle":{
-        "id":<id>,
-        "name":"公共群组",
-        "active":true // 是否允许发送消息
-        "created_at":1433930183, // UNIX 时间戳
-        "updated_at":1433930183, // UNIX 时间戳
-      },
       "attachments":[
-        {
-          "kind":"image",
-          "metadata":"metadata",
-          "file":{
-            "storage":"qiniu",
-            "expires_in":86400, // 单位：秒
-            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          }
-        },
-        {
-          "kind":"thumbnail",
-          "metadata":"metadata",
-          "file":{
-            "storage":"qiniu",
-            "expires_in":86400, // 单位：秒
-            "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-          }
-        }
+        <attachment>,
+        .
+        .
+        .
       ]
     },
     .
@@ -1373,32 +1385,11 @@ curl -X POST https://park.catchchatchina.com/api/v1/users/<id>/messages -d '{ "t
     "remarked_name":null,
     "contact_name":null
   },
-  "circle":{
-    "id":<id>,
-    "name":"公共群组",
-    "active":true, // 是否允许发送消息
-    "created_at":1433930183, // UNIX 时间戳
-    "updated_at":1433930183, // UNIX 时间戳
-  },
   "attachments":[
-    {
-      "kind":"image",
-      "metadata":"metadata",
-      "file":{
-        "storage":"qiniu",
-        "expires_in":86400, // 单位：秒
-        "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-      }
-    },
-    {
-      "kind":"thumbnail",
-      "metadata":"metadata",
-      "file":{
-        "storage":"qiniu",
-        "expires_in":86400, // 单位：秒
-        "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-      }
-    }
+    <attachment>,
+    .
+    .
+    .
   ]
 }
 ```
@@ -2695,15 +2686,10 @@ curl https://park.catchchatchina.com/api/v1/official_messages -H 'Authorization:
       "created_at":1434680681.435,
       "updated_at":1434680681.435,
       "attachments":[
-        {
-          "kind":"image",
-          "metadata":"",
-          "file":{
-            "storage":"s3",
-            "expires_in":86400,
-            "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/23f245f0-b129-4f4f-9d6e-f920fab50c6d?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20150619%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20150619T022723Z&X-Amz-Expires=86400&X-Amz-Signature=f7158a3746f2b1852db0c725cf344d8acfbd477ff4b77714df34383e8baccb0d&X-Amz-SignedHeaders=Host"
-          }
-        }
+        <attachment>,
+        .
+        .
+        .
       ]
     }
   ]
@@ -2764,31 +2750,17 @@ curl https://park.catchchatchina.com/api/v1/topics -H 'Authorization: Token toke
   "per_page": 30,
   "topics": [
     {
-      "id": "516055075accc1e4067dd5ff6b2682cd",
-      "allow_comment": true, // 是否允许评论
-      "body": "test", // 帖子内容
-      "message_count": 0, // 评论消息数
-      "created_at": 1443278450.465,
-      "updated_at": 1443278450.465,
+      <topic>,
       "user": <mini_user>,
       "skill": <skill>, // 注意：skill 可能为 null
       "circle":{
-        "id":<id>,
-        "name":"公共群组",
-        "active":true, // 是否允许发送消息
-        "created_at":1433930183, // UNIX 时间戳
-        "updated_at":1433930183, // UNIX 时间戳
+        <circle>
       },
       "attachments":[
-        {
-          "kind":"image",
-          "metadata":"",
-          "file":{
-            "storage":"s3",
-            "expires_in":86400,
-            "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/23f245f0-b129-4f4f-9d6e-f920fab50c6d?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20150619%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20150619T022723Z&X-Amz-Expires=86400&X-Amz-Signature=f7158a3746f2b1852db0c725cf344d8acfbd477ff4b77714df34383e8baccb0d&X-Amz-SignedHeaders=Host"
-          }
-        }
+        <attachment>,
+        .
+        .
+        .
       ]
     },
     .
@@ -2825,32 +2797,17 @@ curl https://park.catchchatchina.com/api/v1/topics/discover -H 'Authorization: T
   "per_page": 30,
   "topics": [
     {
-      "id": "516055075accc1e4067dd5ff6b2682cd",
-      "allow_comment": true, // 是否允许评论
-      "body": "test", // 帖子内容
-      "message_count": 0, // 评论消息数
-      "distance": 642.7,  // 距离 km
-      "created_at": 1443278450.465,
-      "updated_at": 1443278450.465,
+      <topic>,
       "user": <mini_user>,
       "skill": <skill>, // 注意：skill 可能为 null
       "circle":{
-        "id":<id>,
-        "name":"公共群组",
-        "active":true, // 是否允许发送消息
-        "created_at":1433930183, // UNIX 时间戳
-        "updated_at":1433930183, // UNIX 时间戳
+        <circle>
       },
       "attachments":[
-        {
-          "kind":"image",
-          "metadata":"",
-          "file":{
-            "storage":"s3",
-            "expires_in":86400,
-            "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/23f245f0-b129-4f4f-9d6e-f920fab50c6d?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20150619%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20150619T022723Z&X-Amz-Expires=86400&X-Amz-Signature=f7158a3746f2b1852db0c725cf344d8acfbd477ff4b77714df34383e8baccb0d&X-Amz-SignedHeaders=Host"
-          }
-        }
+        <attachment>,
+        .
+        .
+        .
       ]
     },
     .
@@ -2897,31 +2854,17 @@ curl -XPOST 0.0.0.0:3000/api/v1/topics -F body=test -F latitude=11.11 -F longitu
 
 ```
 {
-  "id": "516055075accc1e4067dd5ff6b2682cd",
-  "allow_comment": true, // 是否允许评论
-  "body": "test", // 帖子内容
-  "message_count": 0, // 评论消息数
-  "created_at": 1443278450.465,
-  "updated_at": 1443278450.465,
+  <topic>,
   "user": <mini_user>,
   "skill": <skill>, // 注意：skill 可能为 null
   "circle":{
-    "id":<id>,
-    "name":"公共群组",
-    "active":true, // 是否允许发送消息
-    "created_at":1433930183, // UNIX 时间戳
-    "updated_at":1433930183, // UNIX 时间戳
+    <circle>
   },
   "attachments":[
-    {
-      "kind":"image",
-      "metadata":"",
-      "file":{
-        "storage":"s3",
-        "expires_in":86400,
-        "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/23f245f0-b129-4f4f-9d6e-f920fab50c6d?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20150619%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20150619T022723Z&X-Amz-Expires=86400&X-Amz-Signature=f7158a3746f2b1852db0c725cf344d8acfbd477ff4b77714df34383e8baccb0d&X-Amz-SignedHeaders=Host"
-      }
-    }
+    <attachment>,
+    .
+    .
+    .
   ]
 }
 ```
@@ -2948,31 +2891,17 @@ curl -XPATCH 0.0.0.0:3000/api/v1/topics/516055075accc1e4067dd5ff6b2682cd -F allo
 
 ```
 {
-  "id": "516055075accc1e4067dd5ff6b2682cd",
-  "allow_comment": true, // 是否允许评论
-  "body": "test", // 帖子内容
-  "message_count": 0, // 评论消息数
-  "created_at": 1443278450.465,
-  "updated_at": 1443278450.465,
+  <topic>,
   "user": <mini_user>,
   "skill": <skill>, // 注意：skill 可能为 null
   "circle":{
-    "id":<id>,
-    "name":"公共群组",
-    "active":true, // 是否允许发送消息
-    "created_at":1433930183, // UNIX 时间戳
-    "updated_at":1433930183, // UNIX 时间戳
+    <circle>
   },
   "attachments":[
-    {
-      "kind":"image",
-      "metadata":"",
-      "file":{
-        "storage":"s3",
-        "expires_in":86400,
-        "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/23f245f0-b129-4f4f-9d6e-f920fab50c6d?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAOGBVMZAU5EZPGPIQ%2F20150619%2Fcn-north-1%2Fs3%2Faws4_request&X-Amz-Date=20150619T022723Z&X-Amz-Expires=86400&X-Amz-Signature=f7158a3746f2b1852db0c725cf344d8acfbd477ff4b77714df34383e8baccb0d&X-Amz-SignedHeaders=Host"
-      }
-    }
+    <attachment>,
+    .
+    .
+    .
   ]
 }
 ```
