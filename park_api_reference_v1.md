@@ -1427,7 +1427,7 @@ max_id | String | 是 | 最新读取的消息 ID
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v1/users/<id>/messages/batch_mark_as_read -H 'Authorization: Token token="test-token"' -F last_read_at=1442896313.813362
+curl -X PATCH https://park.catchchatchina.com/api/v1/users/<id>/messages/batch_mark_as_read -H 'Authorization: Token token="test-token"' -F max_id=<id>
 ```
 
 #### 响应
