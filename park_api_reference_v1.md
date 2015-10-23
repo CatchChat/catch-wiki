@@ -1287,35 +1287,6 @@ curl https://park.catchchatchina.com/api/v1/messages/unread -H 'Authorization: T
 }
 ```
 
-### 获取所有我发送的未读消息ID
-
-```
-GET /api/v1/messages/sent_unread
-```
-
-#### 参数
-
-无，且不支持分页，一次性返回所有结果
-
-#### 示例
-
-```
-curl https://park.catchchatchina.com/api/v1/messages/sent_unread -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
-```
-
-#### 响应
-
-```
-{
-  message_ids: [
-    <id>,
-    .
-    .
-    .
-  }
-}
-```
-
 ### 发送消息
 
 ```
@@ -1401,11 +1372,11 @@ curl -X POST https://park.catchchatchina.com/api/v1/users/<id>/messages -d '{ "t
 faye server 的已读确认消息结构如下：
 
 ```
-// 客户端可以通过 recipient_id 和 recipient_type 确定聊天窗口，然后将 max_id 以及 max_id 前的消息都标记为已读。
+// 客户端可以通过 recipient_id 和 recipient_type 确定聊天窗口，然后将聊天窗口我发送消息中的 `created_at` 小于等于 `last_read_at` 的都标记为已读。
 {
   message_type: 'mark_as_read',
   message: {
-    "max_id":<id>,
+    "last_read_at":1445596604.144, // max_id 对应消息的 created_at 值
     "recipient_id":<id>,
     "recipient_type":"User"
   }
@@ -1432,7 +1403,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v1/users/<id>/messages/batch_m
 
 #### 响应
 
-只返回状态码
+{ "last_read_at":1445596604.144 }
 
 ### 撤回已发送消息
 
@@ -1555,17 +1526,17 @@ curl -X GET https://park.catchchatchina.com/api/v1/users/<id>/messages/unread -H
 
 #### 响应
 
-同`GET /api/v1/messages/unread
+同`GET /api/v1/messages/unread`
 
-### 获取我在指定聊天窗口发送的未读消息ID
+### 获取我在指定聊天窗口发送的消息被对方最后读取的时间
+
+用获取到的最后读取时间与发送消息的 `created_at` 对比，小于等于最后读取时间的消息全都标记为已读
 
 ```
-GET /api/:version/:recipient_type/:recipient_id/messages/sent_unread
+GET /api/:version/:recipient_type/:recipient_id/messages/sent_last_read_at
 ```
 
 #### 参数
-
-不支持分页，一次性返回所有结果
 
 名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
@@ -1575,12 +1546,12 @@ GET /api/:version/:recipient_type/:recipient_id/messages/sent_unread
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v1/User/<id>/messages/sent_unread -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
+curl https://park.catchchatchina.com/api/v1/users/<id>/messages/sent_last_read_at -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
 ```
 
 #### 响应
 
-同 `GET /api/v1/messages/sent_unread`
+{ "last_read_at":1445596604.144 }
 
 ## FriendRequest 好友请求
 

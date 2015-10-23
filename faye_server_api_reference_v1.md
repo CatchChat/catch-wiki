@@ -116,12 +116,12 @@
 客户端B将会接收到如下消息：
 
 ```
-// 客户端可以通过 recipient_id 和 recipient_type 确定聊天窗口，然后将聊天窗口中的 max_id 以及 max_id 前的消息都标记为已读。
+// 客户端可以通过 recipient_id 和 recipient_type 确定聊天窗口，然后将聊天窗口我发送消息中的 `created_at` 小于等于 `last_read_at` 的都标记为已读。
 {
   "data":{
     "message_type":"mark_as_read", // 消息类型，此处为已读确认消息
     "message":{
-      "max_id":"516055075accc1e4067dd5ff6b2682cd" // message id
+      "last_read_at":1445596604.144 // 最后读取的时间，其实是 max_id 对应消息的 created_at 值
       "recipient_type":"User",
       "recipient_id":<id> // 客户端 A 的 user id
     }
