@@ -2752,6 +2752,7 @@ GET /api/v1/topics/discover
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
 | sort | String | 否 | 排序字段，目前支持 distance 和 time。distance 表示按距离倒序展示，time 表示两周内的 topics 按发帖时间倒序展示。默认值为 distance |
+| skill_id | String | 否 | 技能ID，支持按技能过滤 |
 
 ### 示例
 
