@@ -730,6 +730,100 @@ curl -X DELETE https://park.catchchatchina.com/api/v1/circles/2/batch_delete -d 
 }
 ```
 
+### 获取分享链接
+
+```
+POST /api/v1/circles/:id/share
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl -X POST https://park.catchchatchina.com/api/v1/circles/516055075accc1e4067dd5ff6b2682cd/share -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{ url: 'http://soyep.com/groups/share?token=qRLyR3jBQslCQlgADuevpwlEDLBTm28vI-t1eAioHvg=' }
+```
+
+### 获取分享的群组消息
+
+**无需登录，获取分享时最近的 25 条消息，支持 jsonp**
+
+```
+GET /api/v1/circles/shared_messages
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| token | String | 是 | 分享链接带的 token 值 |
+
+#### 示例
+
+```
+curl -X GET https://park.catchchatchina.com/api/v1/circles/shared_messages?token=qRLyR3jBQslCQlgADuevpwlEDLBTm28vI-t1eAioHvg=
+```
+
+#### 响应
+
+```
+{
+  "circle":{
+    <circle>
+  },
+  "topic":{
+    <topic>,
+    "user": <mini_user>,
+    "skill": <skill>, // 注意：skill 可能为 null
+    "attachments":[
+      <attachment>,
+      .
+      .
+      .
+    ]
+  },
+  "messages":[
+    {
+      "id":<id>,
+      "recipient_id":<id>,
+      "recipient_type":"Circle",
+      "text_content":"Hello~",
+      "latitude":113.033,
+      "longitude":24.1231,
+      "parent_id":0,
+      "media_type":"image",
+      "media_type_string":"一张照片",
+      "state":"unread",
+      "state_string":"未读",
+      "created_at":1433930183, // UNIX 时间戳
+      "updated_at":1433930183, // UNIX 时间戳
+      "sender":{
+        <mini_user>,
+        "remarked_name":null,
+        "contact_name":null
+      },
+      "attachments":[
+        <attachment>,
+        .
+        .
+        .
+      ]
+    },
+    .
+    .
+    .
+  ]
+}
+```
+
 ## User 个人信息 API
 
 ### 可能认识的好友
