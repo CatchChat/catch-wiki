@@ -2845,7 +2845,7 @@ GET /api/v1/topics/discover
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| sort | String | 否 | 排序字段，目前支持 distance 和 time。distance 表示按距离倒序展示，time 表示两周内的 topics 按发帖时间倒序展示。默认值为 distance |
+| sort | String | 否 | 排序方式，目前支持 default|distance|time。default 表示按技能相关性排序（learning 优先），distance 表示按距离倒序展示，time 表示两周内的 topics 按发帖时间倒序展示。默认值为 default |
 | skill_id | String | 否 | 技能ID，支持按技能过滤 |
 
 ### 示例
@@ -2864,6 +2864,7 @@ curl https://park.catchchatchina.com/api/v1/topics/discover -H 'Authorization: T
   "topics": [
     {
       <topic>,
+      distance: 245.3, // km
       "user": <mini_user>,
       "skill": <skill>, // 注意：skill 可能为 null
       "circle":{
