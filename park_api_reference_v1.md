@@ -738,7 +738,9 @@ POST /api/v1/circles/:id/share
 
 #### 参数
 
-无
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 公共群组 ID |
 
 #### 示例
 
@@ -822,6 +824,74 @@ curl -X GET https://park.catchchatchina.com/api/v1/circles/shared_messages?token
     .
   ]
 }
+```
+
+### 当前用户设置指定群组为免打扰
+
+```
+POST /api/v1/circles/:id/dnd
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 公共群组 ID |
+
+#### 示例
+
+```
+curl -XPOST https://park.catchchatchina.com/api/v1/circles/2/dnd -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+只返回状态码
+
+### 当前用户取消设置指定群组为免打扰
+
+```
+DELETE /api/v1/circles/:id/dnd
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 公共群组 ID |
+
+#### 示例
+
+```
+curl -XDELETE https://park.catchchatchina.com/api/v1/circles/2/dnd -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+只返回状态码
+
+### 获取当前用户对指定群组的免打扰设置
+
+```
+GET /api/v1/circles/:id/dnd
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | Integer | 是 | 公共群组 ID |
+
+#### 示例
+
+```
+curl -XGET https://park.catchchatchina.com/api/v1/circles/2/dnd -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{ "dnd": true } // dnd 为 true 表示已设置为免打扰，false 表示未设置为免打扰
 ```
 
 ## User 个人信息 API
@@ -1311,17 +1381,61 @@ GET /api/v1/users/:id/settings_with_current_user
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v1/90913b93738c8a627129e49db32eeec3/settings_with_current_user -H 'Authorization: Token token="test-token"'
+curl https://park.catchchatchina.com/api/v1/users/90913b93738c8a627129e49db32eeec3/settings_with_current_user -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
 
 ```
 {
-  blocked: true,        // 当前用户是否 block 了 user<90913b93738c8a627129e49db32eeec3>
-  do_not_disturb: true  // 当前用户是否将 user<90913b93738c8a627129e49db32eeec3> 设置为请勿打扰了
+  blocked: true,   // 当前用户是否 block 了 user<90913b93738c8a627129e49db32eeec3>
+  dnd: true        // 当前用户是否将 user<90913b93738c8a627129e49db32eeec3> 设置为请勿打扰了
 }
 ```
+
+### 当前登录用户设置指定用户为免打扰
+
+```
+POST /api/v1/users/:id/dnd
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | String | 是 | user id |
+
+#### 示例
+
+```
+curl -XPOST https://park.catchchatchina.com/api/v1/users/90913b93738c8a627129e49db32eeec3/dnd -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+只返回状态码
+
+### 当前登录用户取消设置指定用户为免打扰
+
+```
+DELETE /api/v1/users/:id/dnd
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | String | 是 | user id |
+
+#### 示例
+
+```
+curl -XDELETE https://park.catchchatchina.com/api/v1/users/90913b93738c8a627129e49db32eeec3/dnd -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+只返回状态码
 
 ## Message 消息
 
@@ -2586,87 +2700,6 @@ curl -X PATCH park-staging.catchchatchina.com/api/v1/skills/516055075accc1e4067d
 {"id":<id>,"cover_url":"https://s3.cn-north-1.amazonaws.com.cn/ruanwz-test-public/ruby-logo.png"}
 ```
 }
-
-## Do not disturb API (请勿打扰)
-
-### 设置为请勿打扰的用户列表
-
-```
-GET /api/v1/do_not_disturb_users
-```
-
-#### 参数
-
-无
-
-#### 示例
-
-```
-curl -X GET https://park.catchchatchina.com/api/v1/do_not_disturb_users -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
-```
-
-#### 响应
-
-```
-{
-  "users":[
-    {
-      <mini_user>
-    }
-  ],
-  "current_page":1,
-  "per_page":30,
-  "count":1
-}
-```
-
-### 设置请勿打扰
-
-```
-POST /api/v1/do_not_disturb_users
-```
-
-#### 参数
-
-名称 | 类型 | 是否必需 | 描述
---- |--- |--- |--- |
-user_id | String | 是 | 需要设置为请勿打扰的用户 ID
-
-#### 示例
-
-```
-curl -X POST https://park.catchchatchina.com/api/v1/do_not_disturb_users -F user_id=516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
-```
-
-#### 响应
-
-```
-{}
-```
-
-### 取消请勿打扰
-
-```
-DELETE /api/v1/do_not_disturb_users/:id
-```
-
-#### 参数
-
-名称 | 类型 | 是否必需 | 描述
---- |--- |--- |--- |
-id | String | 是 | 需要取消设置请勿打扰的用户 ID
-
-#### 示例
-
-```
-curl -X DELETE https://park.catchchatchina.com/api/v1/do_not_disturb_users/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
-```
-
-#### 响应
-
-```
-{}
-```
 
 ## 举报用户（user_report）
 
