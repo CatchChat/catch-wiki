@@ -2733,15 +2733,15 @@ curl https://park.catchchatchina.com/api/v1/user_reports -F recipient_id=bc93fe6
 
 ### 流程
 
-1. 客户端通过 WebView 发起请求`https://park.catchchatchina.com/auth/:provider`，并且带上`Authorization: Token token=":token"`
-2. 检测 WebView 中 URL 的变化，判断绑定是否成功，或者失败
+1. 客户端通过 WebView 发起请求`https://park.catchchatchina.com/auth/:provider?_tkn=test-token`，其中`_tkn`为`access_token`值
+2. 客户端等待接收绑定是否成功的通知
 
 ### 判断绑定结果
 
 在一系列跳转结束后
 
-1. URL 为 `https://park.catchchatchina.com/auth/success`，则说明绑定成功，其余 URL 都表示绑定失败
-2. URL 为 `https://park.catchchatchina.com/auth/failure`，绑定失败，且如果 URL 携带 `error` 参数，则表示失败原因
+1. URL 为 `yep://auth/success`，则说明绑定成功，其余 URL 都表示绑定失败
+2. URL 为 `yep://auth/failure`，绑定失败，且如果 URL 携带 `error` 参数，则表示失败原因
 
 ## OfficialMessage（官方消息）
 
