@@ -2701,33 +2701,55 @@ curl -X PATCH park-staging.catchchatchina.com/api/v1/skills/516055075accc1e4067d
 ```
 }
 
-## 举报用户（user_report）
+## 举报（reports）
 
 ### 举报用户
 
 ```
-POST /api/v1/user_reports
+POST /api/v1/users/:id/reports
 ```
 
 #### 参数
 
 名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
-recipient_id | String | 是 | 要举报的用户 ID
+id | String | 是 | 要举报的用户 ID
 report_type | Integer | 是 | 0 表示色情低俗, 1 表示广告骚扰, 2 表示诈骗, 3 表示其他
 reason | Text | 否 | 举报原因，当 report_type 为 3 时，reason 为必填
 
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v1/user_reports -F recipient_id=bc93fe60a44cf376edeb98a9d68d85b9 -F report_type=1 -F reason=test -H 'Authorization: Token token="test-token"'
+curl -X POST https://park.catchchatchina.com/api/v1/users/bc93fe60a44cf376edeb98a9d68d85b9/reports -F report_type=1 -F reason=test -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
 
+只返回 http code
+
+### 举报话题
+
 ```
-{}
+POST /api/v1/topics/:id/reports
 ```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+id | String | 是 | 要举报的话题 ID
+report_type | Integer | 是 | 0 表示色情低俗, 1 表示广告骚扰, 2 表示诈骗, 3 表示其他
+reason | Text | 否 | 举报原因，当 report_type 为 3 时，reason 为必填
+
+#### 示例
+
+```
+curl -X POST https://park.catchchatchina.com/api/v1/topics/bc93fe60a44cf376edeb98a9d68d85b9/reports -F report_type=1 -F reason=test -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+只返回 http code
 
 ## Oauth (绑定第三方平台账号)
 
