@@ -1437,6 +1437,70 @@ curl -XDELETE https://park.catchchatchina.com/api/v1/users/90913b93738c8a627129e
 
 只返回状态码
 
+### 获取擅长指定技能的用户
+
+```
+GET api/v1/master_skills/:skill_id/users
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/master_skills/90913b93738c8a627129e49db32eeec3/users -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "users":[
+    {
+      <mini_user>
+      distance: 10.1 // 距离，单位 km
+    }
+  ],
+  "current_page":1,
+  "per_page":30,
+  "count":1
+}
+```
+
+### 获取正在学习指定技能的用户
+
+```
+GET api/v1/learning_skills/:skill_id/users
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v1/learning_skills/90913b93738c8a627129e49db32eeec3/users -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "users":[
+    {
+      <mini_user>
+      distance: 10.1 // 距离，单位 km
+    }
+  ],
+  "current_page":1,
+  "per_page":30,
+  "count":1
+}
+```
+
 ## Message 消息
 
 ### 获取最新未读消息
