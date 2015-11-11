@@ -2937,17 +2937,17 @@ curl -X POST https://park.catchchatchina.com/api/v1/feedbacks -F content=test -F
 GET /api/v1/topics
 ```
 
-### 参数
+#### 参数
 
 无
 
-### 示例
+#### 示例
 
 ```
 curl https://park.catchchatchina.com/api/v1/topics -H 'Authorization: Token token="test-token"'
 ```
 
-### 响应
+#### 响应
 
 ```
 {
@@ -2982,7 +2982,7 @@ curl https://park.catchchatchina.com/api/v1/topics -H 'Authorization: Token toke
 GET /api/v1/topics/discover
 ```
 
-### 参数
+#### 参数
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
@@ -2990,13 +2990,13 @@ GET /api/v1/topics/discover
 | skill_id | String | 否 | 技能ID，支持按技能过滤 |
 | max_id | String | 否 | 仅当 sort 值为 time 时有效，表示 ID 获取小于 max_id 的话题。当带有 max_id 参数时，应该不传 page 参数或者始终置为 1 |
 
-### 示例
+#### 示例
 
 ```
 curl https://park.catchchatchina.com/api/v1/topics/discover -H 'Authorization: Token token="test-token"'
 ```
 
-### 响应
+#### 响应
 
 ```
 {
@@ -3032,7 +3032,7 @@ curl https://park.catchchatchina.com/api/v1/topics/discover -H 'Authorization: T
 POST /api/v1/topics
 ```
 
-### 参数
+#### 参数
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
@@ -3053,13 +3053,13 @@ thumbnail | 附件是一张缩略图
 audio | 附件是一段声音
 video | 附件是一段视频
 
-### 示例
+#### 示例
 
 ```
 curl -XPOST 0.0.0.0:3000/api/v1/topics -F body=test -F latitude=11.11 -F longitude=22.22 -F allow_comment=true -F skill_id=cee89797007ab6db9f356f53edd0174a -H 'Authorization: Token token="test-token"'
 ```
 
-### 响应
+#### 响应
 
 ```
 {
@@ -3084,19 +3084,19 @@ curl -XPOST 0.0.0.0:3000/api/v1/topics -F body=test -F latitude=11.11 -F longitu
 PUT /api/:version/topics/:id
 ```
 
-### 参数
+#### 参数
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
 | allow_comment | Boolean | 否 | 是否允许评论 |
 
-### 示例
+#### 示例
 
 ```
 curl -XPATCH 0.0.0.0:3000/api/v1/topics/516055075accc1e4067dd5ff6b2682cd -F allow_comment=true -H 'Authorization: Token token="test-token"'
 ```
 
-### 响应
+#### 响应
 
 ```
 {
@@ -3121,16 +3121,16 @@ curl -XPATCH 0.0.0.0:3000/api/v1/topics/516055075accc1e4067dd5ff6b2682cd -F allo
 DELETE /api/:version/topics/:id
 ```
 
-### 参数
+#### 参数
 
 无
 
-### 示例
+#### 示例
 
 ```
 curl -XDELETE https://park.catchchatchina.com/api/v1/topics/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="test-token"'
 ```
 
-### 响应
+#### 响应
 
 不返回数据，只返回状态码
