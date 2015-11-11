@@ -172,6 +172,15 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "updated_at":1433930183, // UNIX 时间戳
 ```
 
+在 API 返回公共群组信息时，将会以 `<circle_with_topic>` 替代如下结构：
+
+```
+<circle>
+"topic":{
+  <topic>
+}
+```
+
 #### Topic 字段模板
 
 在 API 返回 topic 信息时，将会以 `<topic>` 替代如下结构：
@@ -179,10 +188,34 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 ```
 "id": <id>,
 "allow_comment": true, // 是否允许评论
+"kind": "normal" // 帖子类型，目前有 normal|apple_music|apple_movie|apple_ebook
 "body": "test", // 帖子内容
 "message_count": 0, // 评论消息数
 "created_at": 1443278450.465,
 "updated_at": 1443278450.465
+"user":{ // 帖子创建者
+  <mini_user>
+},
+"skill":{ // 注意：skill 可能为 null
+  <skill>
+},
+"circle":{ // 注意：circle 可能为 null
+  <circle>
+},
+"apple_media":{ // 注意：只有 kind 为 apple_music|apple_movie|apple_ebook 才会有 apple_media，并且 apple_media 的类型对应为 music|movie|ebook
+  "title":"Upside Down",
+  "description":"Sing-a-Longs and Lullabies for the Film Curious George",
+  "poster":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewAlbum?i=120954025&id=120954021&s=143441",
+  "media_url":"http://a1.itunes.apple.com/r10/Music/3b/6a/33/mzi.qzdqwsel.100x100-75.jpg",
+  "preview_url":"http://a1099.itunes.apple.com/r10/Music/f9/54/43/mzi.gqvqlvcq.aac.p.m4p",
+  "time_millis":210743
+},
+"attachments":[
+  <attachment>,
+  .
+  .
+  .
+]
 ```
 
 #### Attachment 字段模板
@@ -196,6 +229,39 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
   "storage":"qiniu",
   "expires_in":86400, // 单位：秒
   "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+}
+```
+
+#### Message 字段模板
+
+在 API 返回 message 信息时，将会以 `<message>` 替代如下结构：
+
+```
+{
+  "id":<id>,
+  "recipient_id":<id>,
+  "recipient_type":"Circle",
+  "text_content":"Hello~",
+  "latitude":113.033,
+  "longitude":24.1231,
+  "parent_id":0,
+  "media_type":"image",
+  "media_type_string":"一张照片",
+  "state":"unread",
+  "state_string":"未读",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
+  "sender":{
+    <mini_user>,
+    "remarked_name":null,
+    "contact_name":null
+  },
+  "attachments":[
+    <attachment>,
+    .
+    .
+    .
+  ]
 }
 ```
 
@@ -449,10 +515,7 @@ curl -X GET https://park.catchchatchina.com/api/v2/circles -H 'Authorization: To
 {
   "circles":[
     {
-      <circle>,
-      "topic":{
-        <topic>
-      }
+      <circle_with_topic>,
     }
     .
     .
@@ -487,10 +550,7 @@ curl -i -X POST https://park.catchchatchina.com/api/v2/circles -d '{ "members": 
 
 ```
 {
-  <circle>,
-  "topic":{
-    <topic>
-  },
+  <circle_with_topic>,
   "owner":{
     <mini_user>
   },
@@ -528,10 +588,7 @@ curl -X PUT https://park.catchchatchina.com/api/v2/circles/2 -d '{ "name": "公�
 
 ```
 {
-  <circle>,
-  "topic":{
-    <topic>
-  },
+  <circle_with_topic>,
   "owner":{
     <mini_user>
   },
@@ -568,10 +625,7 @@ curl -X GET https://park.catchchatchina.com/api/v2/circles/2 -H 'Authorization: 
 
 ```
 {
-  <circle>,
-  "topic":{
-    <topic>
-  },
+  <circle_with_topic>,
   "owner":{
     <mini_user>
   },
@@ -608,10 +662,7 @@ curl -X POST https://park.catchchatchina.com/api/v2/circles/2/join -H 'Authoriza
 
 ```
 {
-  <circle>,
-  "topic":{
-    <topic>
-  },
+  <circle_with_topic>,
   "owner":{
     <mini_user>
   },
@@ -671,10 +722,7 @@ curl -X POST https://park.catchchatchina.com/api/v2/circles/2/batch_add -d '{ "m
 
 ```
 {
-  <circle>,
-  "topic":{
-    <topic>
-  },
+  <circle_with_topic>,
   "owner":{
     <mini_user>
   },
@@ -712,10 +760,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v2/circles/2/batch_delete -d 
 
 ```
 {
-  <circle>,
-  "topic":{
-    <topic>
-  },
+  <circle_with_topic>,
   "owner":{
     <mini_user>
   },
@@ -782,46 +827,10 @@ curl -X GET https://park.catchchatchina.com/api/v2/circles/shared_messages?token
     <circle>
   },
   "topic":{
-    <topic>,
-    "user": <mini_user>,
-    "skill": <skill>, // 注意：skill 可能为 null
-    "attachments":[
-      <attachment>,
-      .
-      .
-      .
-    ]
+    <topic>
   },
   "messages":[
-    {
-      "id":<id>,
-      "recipient_id":<id>,
-      "recipient_type":"Circle",
-      "text_content":"Hello~",
-      "latitude":113.033,
-      "longitude":24.1231,
-      "parent_id":0,
-      "media_type":"image",
-      "media_type_string":"一张照片",
-      "state":"unread",
-      "state_string":"未读",
-      "created_at":1433930183, // UNIX 时间戳
-      "updated_at":1433930183, // UNIX 时间戳
-      "sender":{
-        <mini_user>,
-        "remarked_name":null,
-        "contact_name":null
-      },
-      "attachments":[
-        <attachment>,
-        .
-        .
-        .
-      ]
-    },
-    .
-    .
-    .
+    <message>
   ]
 }
 ```
@@ -1525,36 +1534,17 @@ curl https://park.catchchatchina.com/api/v2/messages/unread -H 'Authorization: T
 
 ```
 {
-  "messages":[
+  "conversations":[
     {
-      "id":<id>,
-      "recipient_id":<id>,
-      "recipient_type":"Circle",
-      "text_content":"Hello~",
-      "latitude":113.033,
-      "longitude":24.1231,
-      "parent_id":0,
-      "media_type":"image",
-      "media_type_string":"一张照片",
-      "state":"unread",
-      "state_string":"未读",
-      "created_at":1433930183, // UNIX 时间戳
-      "updated_at":1433930183, // UNIX 时间戳
-      "sender":{
-        <mini_user>,
-        "remarked_name":null,
-        "contact_name":null
+      "conversation_type":"User" // 聊天窗口类型，值可能为 User 或者 Circle，分别表示单聊和群聊
+      "conversation":{ // 根据 conversation_type 的不同，可能是 user 或者 circle
+        <mini_user>|<circle_with_topic>,
       },
-      "attachments":[
-        <attachment>,
-        .
-        .
-        .
-      ]
-    },
-    .
-    .
-    .
+      "messages":[    // 未读消息
+        <message>
+      ],
+      "count":100     // 未读总数
+    }
   ]
 }
 ```
@@ -1609,32 +1599,7 @@ curl -X POST https://park.catchchatchina.com/api/v2/users/<id>/messages -d '{ "t
 #### 响应
 
 ```
-{
-  "id":<id>,
-  "recipient_id":<id>,
-  "recipient_type":"Circle",
-  "text_content":"Hello~",
-  "latitude":113.033,
-  "longitude":24.1231,
-  "parent_id":0,
-  "media_type":"image",
-  "media_type_string":"一张照片",
-  "state":"unread",
-  "state_string":"未读",
-  "created_at":1433930183, // UNIX 时间戳
-  "updated_at":1433930183, // UNIX 时间戳
-  "sender":{
-    <mini_user>,
-    "remarked_name":null,
-    "contact_name":null
-  },
-  "attachments":[
-    <attachment>,
-    .
-    .
-    .
-  ]
-}
+<message>
 ```
 
 ### 标记指定聊天窗口的多条消息为已读
@@ -1798,7 +1763,16 @@ curl -X GET https://park.catchchatchina.com/api/v2/users/<id>/messages/unread -H
 
 #### 响应
 
-同`GET /api/v2/messages/unread`
+```
+{
+  "messages":[
+    <message>
+  ],
+  "current_page": 1,
+  "per_page": 25,
+  "count": 100
+}
+```
 
 ### 获取我在指定聊天窗口发送的消息被对方最后读取的时间
 
@@ -2934,18 +2908,7 @@ curl https://park.catchchatchina.com/api/v2/topics -H 'Authorization: Token toke
   "per_page": 30,
   "topics": [
     {
-      <topic>,
-      "user": <mini_user>,
-      "skill": <skill>, // 注意：skill 可能为 null
-      "circle":{
-        <circle>
-      },
-      "attachments":[
-        <attachment>,
-        .
-        .
-        .
-      ]
+      <topic>
     },
     .
     .
@@ -2985,17 +2948,6 @@ curl https://park.catchchatchina.com/api/v2/topics/discover -H 'Authorization: T
     {
       <topic>,
       distance: 245.3, // km
-      "user": <mini_user>,
-      "skill": <skill>, // 注意：skill 可能为 null
-      "circle":{
-        <circle>
-      },
-      "attachments":[
-        <attachment>,
-        .
-        .
-        .
-      ]
     },
     .
     .
@@ -3014,12 +2966,23 @@ POST /api/v2/topics
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
+| kind | String | 是 | 帖子类型 |
 | body | Text | 是 | 帖子内容 |
 | latitude | Float | 是 | latitude |
 | longitude | Float | 是 | longitude |
 | allow_comment | Boolean | 否 | 是否允许评论，允许评论则会创建 circle，默认为 true |
 | skill_id | String | 否 | 技能ID |
 | attachments | JSON | 否 | 如：{ "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] }
+| apple_media | JSON | 否 | {"title":"Upside Down","description":"Sing-a-Longs and Lullabies for the Film Curious George","poster":"http://a1.itunes.apple.com/r10/Music/3b/6a/33/mzi.qzdqwsel.100x100-75.jpg","media_url":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewAlbum?i=120954025&id=120954021&s=143441","preview_url":"http://a1099.itunes.apple.com/r10/Music/f9/54/43/mzi.gqvqlvcq.aac.p.m4p","time_millis":210743}
+
+kind 可选值为：
+
+可选值 | 解释
+--- | --- |
+normal | 普通的帖子，此时可以带上 attachments
+apple_music | apple music 分享帖，此时 apple_media 为必填
+apple_movie | apple movie 分享贴，此时 apple_media 为必填
+apple_ebook | apple ebook 分享贴，此时 apple_media 为必填
 
 attachments 中 `file` 表示 S3 返回的文件 key，`metadata` 是附件的元数据。
 attachments key 的可选值：
@@ -3041,18 +3004,7 @@ curl -XPOST 0.0.0.0:3000/api/v2/topics -F body=test -F latitude=11.11 -F longitu
 
 ```
 {
-  <topic>,
-  "user": <mini_user>,
-  "skill": <skill>, // 注意：skill 可能为 null
-  "circle":{
-    <circle>
-  },
-  "attachments":[
-    <attachment>,
-    .
-    .
-    .
-  ]
+  <topic>
 }
 ```
 
@@ -3078,18 +3030,7 @@ curl -XPATCH 0.0.0.0:3000/api/v2/topics/516055075accc1e4067dd5ff6b2682cd -F allo
 
 ```
 {
-  <topic>,
-  "user": <mini_user>,
-  "skill": <skill>, // 注意：skill 可能为 null
-  "circle":{
-    <circle>
-  },
-  "attachments":[
-    <attachment>,
-    .
-    .
-    .
-  ]
+  <topic>
 }
 ```
 
