@@ -177,7 +177,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 ```
 <circle>
 "topic":{
-  <topic>
+  <topic> // 由于已经有了 circle 信息，此时 topic 中就不会再有 circle 的信息
 }
 ```
 
@@ -2897,6 +2897,40 @@ GET /api/v2/topics
 
 ```
 curl https://park.catchchatchina.com/api/v2/topics -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "count": 1,
+  "current_page": 1,
+  "per_page": 30,
+  "topics": [
+    {
+      <topic>
+    },
+    .
+    .
+    .
+  ]
+}
+```
+
+### 获取指定用户发的帖子
+
+```
+GET /api/v2/users/:user_id/topics
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v2/users/516055075accc1e4067dd5ff6b2682cd/topics -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
