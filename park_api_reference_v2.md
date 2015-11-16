@@ -166,6 +166,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 ```
 "id":<id>,
 "topic_id":<id>
+"kind":"Circle", // kind 为 Circle 表示普通群聊，TopicCircle 表示 Feed 群聊
 "name":"circle",
 "active":true, // 是否允许发送消息
 "created_at":1433930183, // UNIX 时间戳
@@ -202,7 +203,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "circle":{ // 注意：circle 可能为 null
   <circle>
 },
-"apple_media":{ // 注意：只有 kind 为 apple_music|apple_movie|apple_ebook 才会有 apple_media，并且 apple_media 的类型对应为 music|movie|ebook
+"shared_stuff":{ // 注意：只有 kind 为 apple_music|apple_movie|apple_ebook 才会有 shared_stuff，并且 shared_stuff 的类型对应为 music|movie|ebook
   "title":"Upside Down",
   "description":"Sing-a-Longs and Lullabies for the Film Curious George",
   "poster":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewAlbum?i=120954025&id=120954021&s=143441",
@@ -3007,21 +3008,32 @@ POST /api/v2/topics
 | allow_comment | Boolean | 否 | 是否允许评论，允许评论则会创建 circle，默认为 true |
 | skill_id | String | 否 | 技能ID |
 | attachments | JSON | 否 | 如：{ "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] }
-| apple_media | JSON | 否 | {"title":"Upside Down","description":"Sing-a-Longs and Lullabies for the Film Curious George","poster":"http://a1.itunes.apple.com/r10/Music/3b/6a/33/mzi.qzdqwsel.100x100-75.jpg","media_url":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewAlbum?i=120954025&id=120954021&s=143441","preview_url":"http://a1099.itunes.apple.com/r10/Music/f9/54/43/mzi.gqvqlvcq.aac.p.m4p","time_millis":210743}
+| shared_stuff | JSON | 否 | {"title":"Upside Down","description":"Sing-a-Longs and Lullabies for the Film Curious George","poster":"http://a1.itunes.apple.com/r10/Music/3b/6a/33/mzi.qzdqwsel.100x100-75.jpg","media_url":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewAlbum?i=120954025&id=120954021&s=143441","preview_url":"http://a1099.itunes.apple.com/r10/Music/f9/54/43/mzi.gqvqlvcq.aac.p.m4p","time_millis":210743}
 
 kind 可选值为：
 
-可选值 | 解释
+可选值 | 描述
 --- | --- |
 normal | 普通的帖子，此时可以带上 attachments
-apple_music | apple music 分享帖，此时 apple_media 为必填
-apple_movie | apple movie 分享贴，此时 apple_media 为必填
-apple_ebook | apple ebook 分享贴，此时 apple_media 为必填
+apple_music | apple music 分享帖，此时 shared_stuff 为必填
+apple_movie | apple movie 分享贴，此时 shared_stuff 为必填
+apple_ebook | apple ebook 分享贴，此时 shared_stuff 为必填
+
+kind 为 apple_music|apple_movie|apple_ebook 时，shared_stuff 参数如下：
+
+名称 | 描述
+--- | --- |
+title | 标题
+description | 描述
+poster | 封面
+media_url | 媒体网页地址
+preview_url | 预览地址
+time_millis | 时长
 
 attachments 中 `file` 表示 S3 返回的文件 key，`metadata` 是附件的元数据。
 attachments key 的可选值：
 
-可选值 | 解释
+可选值 | 描述
 --- | --- |
 image | 附件是一张图片
 thumbnail | 附件是一张缩略图
