@@ -1175,6 +1175,32 @@ curl https://park.catchchatchina.com/api/v2/user/github -H 'Authorization: Token
 
 github instagram dribbble 返回各不一样，从各平台拿到数据后原样返回，所以请参考各平台 API
 
+### 获取 provider tokens
+
+```
+GET /api/v2/user/provider_tokens
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://park.catchchatchina.com/api/v2/user/provider_tokens -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "github":"token",
+  "instagram":"token",
+  "dribbble":"token"
+}
+```
+
 ## Contact 通讯录
 
 ### 上传通讯录并返回已注册的通讯录好友
