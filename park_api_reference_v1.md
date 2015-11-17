@@ -2935,6 +2935,7 @@ curl https://park.catchchatchina.com/api/v1/topics -H 'Authorization: Token toke
   "topics": [
     {
       <topic>,
+      "distance":12.3, //距离 km
       "user": <mini_user>,
       "skill": <skill>, // 注意：skill 可能为 null
       "circle":{
@@ -3042,6 +3043,7 @@ curl -XPOST 0.0.0.0:3000/api/v1/topics -F body=test -F latitude=11.11 -F longitu
 ```
 {
   <topic>,
+  "distance":12.3, //距离 km
   "user": <mini_user>,
   "skill": <skill>, // 注意：skill 可能为 null
   "circle":{
@@ -3079,6 +3081,7 @@ curl -XPATCH 0.0.0.0:3000/api/v1/topics/516055075accc1e4067dd5ff6b2682cd -F allo
 ```
 {
   <topic>,
+  "distance":12.3, //距离 km
   "user": <mini_user>,
   "skill": <skill>, // 注意：skill 可能为 null
   "circle":{

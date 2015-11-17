@@ -2969,7 +2969,8 @@ curl https://park.catchchatchina.com/api/v2/users/516055075accc1e4067dd5ff6b2682
   "per_page": 30,
   "topics": [
     {
-      <topic>
+      <topic>,
+      "distance":12.3 //距离 km
     },
     .
     .
@@ -3076,7 +3077,8 @@ curl -XPOST 0.0.0.0:3000/api/v2/topics -F body=test -F latitude=11.11 -F longitu
 
 ```
 {
-  <topic>
+  <topic>,
+  "distance":12.3 //距离 km
 }
 ```
 
@@ -3102,7 +3104,8 @@ curl -XPATCH 0.0.0.0:3000/api/v2/topics/516055075accc1e4067dd5ff6b2682cd -F allo
 
 ```
 {
-  <topic>
+  <topic>,
+  "distance":12.3 //距离 km
 }
 ```
 
