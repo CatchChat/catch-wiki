@@ -189,7 +189,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 ```
 "id": <id>,
 "allow_comment": true, // 是否允许评论
-"kind": "normal" // 帖子类型，目前有 normal|apple_music|apple_movie|apple_ebook
+"kind": "normal" // 帖子类型，目前有 normal|apple_music|apple_movie|apple_ebook|github|dribbble
 "body": "test", // 帖子内容
 "message_count": 0, // 评论消息数
 "created_at": 1443278450.465,
@@ -3042,6 +3042,8 @@ kind 可选值为：
 可选值 | 描述
 --- | --- |
 normal | 普通的帖子，此时可以带上 attachments
+github | github 分享贴
+dribbble | dribbble 分享贴
 apple_music | apple music 分享帖，此时 shared_stuff 为必填
 apple_movie | apple movie 分享贴，此时 shared_stuff 为必填
 apple_ebook | apple ebook 分享贴，此时 shared_stuff 为必填
