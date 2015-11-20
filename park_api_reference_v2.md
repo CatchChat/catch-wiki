@@ -182,6 +182,111 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 }
 ```
 
+#### Topic Attachment 字段模板
+
+在 API 返回 topic 的附件信息时，将会以 `<topic_attachment>` 替代如下结构：
+
+`kind` 为 image 时，格式如下：
+
+```
+"kind":"image",
+"metadata":"metadata",
+"file":{
+  "storage":"qiniu",
+  "expires_in":86400, // 单位：秒
+  "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+}
+```
+
+`kind` 为 video 时，格式如下：
+
+```
+"kind":"video",
+"metadata":"metadata",
+"file":{
+  "storage":"qiniu",
+  "expires_in":86400, // 单位：秒
+  "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+}
+```
+
+`kind` 为 audio 时，格式如下：
+
+```
+"kind":"audio",
+"metadata":"metadata",
+"file":{
+  "storage":"qiniu",
+  "expires_in":86400, // 单位：秒
+  "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+}
+```
+
+`kind` 为 apple_music 时，格式如下：
+
+```
+"kind":"apple_music",
+"title":"Upside Down",
+"description":"Sing-a-Longs and Lullabies for the Film Curious George",
+"poster":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewAlbum?i=120954025&id=120954021&s=143441",
+"media_url":"http://a1.itunes.apple.com/r10/Music/3b/6a/33/mzi.qzdqwsel.100x100-75.jpg",
+"preview_url":"http://a1099.itunes.apple.com/r10/Music/f9/54/43/mzi.gqvqlvcq.aac.p.m4p",
+"time_millis":210743
+```
+
+`kind` 为 apple_movie 时，格式如下：
+
+```
+"kind":"apple_music",
+"title":"Upside Down",
+"description":"Sing-a-Longs and Lullabies for the Film Curious George",
+"poster":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewAlbum?i=120954025&id=120954021&s=143441",
+"media_url":"http://a1.itunes.apple.com/r10/Music/3b/6a/33/mzi.qzdqwsel.100x100-75.jpg",
+"preview_url":"http://a1099.itunes.apple.com/r10/Music/f9/54/43/mzi.gqvqlvcq.aac.p.m4p",
+"time_millis":210743
+```
+
+`kind` 为 apple_ebook 时，格式如下：
+
+```
+"kind":"apple_music",
+"title":"Upside Down",
+"description":"Sing-a-Longs and Lullabies for the Film Curious George",
+"poster":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewAlbum?i=120954025&id=120954021&s=143441",
+"media_url":"http://a1.itunes.apple.com/r10/Music/3b/6a/33/mzi.qzdqwsel.100x100-75.jpg",
+"preview_url":"http://a1099.itunes.apple.com/r10/Music/f9/54/43/mzi.gqvqlvcq.aac.p.m4p",
+"time_millis":null
+```
+
+`kind` 为 location 时，格式如下：
+
+```
+"kind":"location",
+"place":"NanChange",
+"latitude":11.11,
+"longitude":22.22
+```
+
+`kind` 为 github 时，格式如下：
+
+```
+"kind":"github",
+"name":"ttafu_attribute",
+"full_name":"tumayun/ttafu_attribute",
+"description":"Update the updated_at field when the specified fields has changed"
+"url":"https://github.com/tumayun/ttafu_attribute"
+```
+
+`kind` 为 dribbble 时，格式如下：
+
+```
+"kind":"dribbble",
+"title":"Sasquatch",
+"description":"<p>Quick, messy, five minute sketch of something that might become a fictional something.</p>",
+"media_url":"https://d13yacurqjgara.cloudfront.net/users/1/screenshots/471756/sasquatch.png",
+"url":"https://dribbble.com/shots/471756-Sasquatch"
+```
+
 #### Topic 字段模板
 
 在 API 返回 topic 信息时，将会以 `<topic>` 替代如下结构：
@@ -203,16 +308,8 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "circle":{ // 注意：circle 可能为 null
   <circle>
 },
-"shared_stuff":{ // 注意：只有 kind 为 apple_music|apple_movie|apple_ebook 才会有 shared_stuff，并且 shared_stuff 的类型对应为 music|movie|ebook
-  "title":"Upside Down",
-  "description":"Sing-a-Longs and Lullabies for the Film Curious George",
-  "poster":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewAlbum?i=120954025&id=120954021&s=143441",
-  "media_url":"http://a1.itunes.apple.com/r10/Music/3b/6a/33/mzi.qzdqwsel.100x100-75.jpg",
-  "preview_url":"http://a1099.itunes.apple.com/r10/Music/f9/54/43/mzi.gqvqlvcq.aac.p.m4p",
-  "time_millis":210743
-},
 "attachments":[
-  <attachment>,
+  <topic_attachment>,
   .
   .
   .
@@ -3035,39 +3132,21 @@ POST /api/v2/topics
 | allow_comment | Boolean | 否 | 是否允许评论，允许评论则会创建 circle，默认为 true |
 | skill_id | String | 否 | 技能ID |
 | attachments | JSON | 否 | 如：{ "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] }
-| shared_stuff | JSON | 否 | {"title":"Upside Down","description":"Sing-a-Longs and Lullabies for the Film Curious George","poster":"http://a1.itunes.apple.com/r10/Music/3b/6a/33/mzi.qzdqwsel.100x100-75.jpg","media_url":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewAlbum?i=120954025&id=120954021&s=143441","preview_url":"http://a1099.itunes.apple.com/r10/Music/f9/54/43/mzi.gqvqlvcq.aac.p.m4p","time_millis":210743}
 
 kind 可选值为：
 
-可选值 | 描述
+可选值 | 描述 | attachments 格式
 --- | --- |
-normal | 普通的帖子，此时可以带上 attachments
-github | github 分享贴
-dribbble | dribbble 分享贴
-apple_music | apple music 分享帖，此时 shared_stuff 为必填
-apple_movie | apple movie 分享贴，此时 shared_stuff 为必填
-apple_ebook | apple ebook 分享贴，此时 shared_stuff 为必填
-
-kind 为 apple_music|apple_movie|apple_ebook 时，shared_stuff 参数如下：
-
-名称 | 描述
---- | --- |
-title | 标题
-description | 描述
-poster | 封面
-media_url | 媒体网页地址
-preview_url | 预览地址
-time_millis | 时长
-
-attachments 中 `file` 表示 S3 返回的文件 key，`metadata` 是附件的元数据。
-attachments key 的可选值：
-
-可选值 | 描述
---- | --- |
-image | 附件是一张图片
-thumbnail | 附件是一张缩略图
-audio | 附件是一段声音
-video | 附件是一段视频
+text        | 文字类型帖子        | null
+image       | 含图片的帖子        | {"image":[{"file":"图片文件名","metadata":"元数据"}]}，可以有最多 9 张图片
+video       | 含视频的帖子        | {"video":[{"file":"视频文件名","metadata":"元数据"}]}，最多一段视频
+audio       | 含声音的帖子        | {"audio":[{"file":"声音文件名","metadata":"元数据"}]}，最多一段声音
+location    | 位置分享贴          | {"location":[{"place":"地名","latitude":11.11,"longitude":22.22}]}，最多一个位置
+github      | github 分享贴       | {"github":[{"name":"name","full_name":"full_name","description":"description","url":"url"}]}，最多一个 github 分享
+dribbble    | dribbble 分享贴     | {"dribbble":[{"title":"标题","description":"描述","media_url":"media_url","url":"url"}]}，最多一个 dribbble 分享
+apple_music | apple music 分享帖  | {"apple_music":[{"title":"标题","description":"描述","poster":"封面","media_url":"媒体网页地址","preview_url":"预览地址","time_millis":123.123//时长}]}，最多一个 apple music 分享
+apple_movie | apple movie 分享贴  | {"apple_movie":[{"title":"标题","description":"描述","poster":"封面","media_url":"媒体网页地址","preview_url":"预览地址","time_millis":123.123//时长}]}，最多一个 apple movie 分享
+apple_ebook | apple ebook 分享贴  | {"apple_ebook":[{"title":"标题","description":"描述","poster":"封面","media_url":"媒体网页地址","preview_url":"预览地址","time_millis":123.123//时长}]}，最多一个 apple ebook 分享
 
 #### 示例
 
