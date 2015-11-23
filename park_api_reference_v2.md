@@ -3146,8 +3146,8 @@ image       | 含图片的帖子        | {"image":[{"file":"图片文件名","m
 video       | 含视频的帖子        | {"video":[{"file":"视频文件名","metadata":"元数据"}]}，最多一段视频
 audio       | 含声音的帖子        | {"audio":[{"file":"声音文件名","metadata":"元数据"}]}，最多一段声音
 location    | 位置分享贴          | {"location":[{"place":"地名","latitude":11.11,"longitude":22.22}]}，最多一个位置
-github      | github 分享贴       | {"github":[{"repo_id":1,"name":"name","full_name":"full_name","description":"description","url":"url",created_at:'2011-01-26T19:01:12Z'}]}，最多一个 github 分享
-dribbble    | dribbble 分享贴     | {"dribbble":[{"shot_id":1,"title":"标题","description":"描述","media_url":"media_url","url":"url",created_at:'2011-01-26T19:01:12Z'}]}，最多一个 dribbble 分享
+github      | github 分享贴       | {"github":[{"repo_id":1,"name":"name","full_name":"full_name","description":"description","url":"url",created_at:1296068472.0}]}，最多一个 github 分享
+dribbble    | dribbble 分享贴     | {"dribbble":[{"shot_id":1,"title":"标题","description":"描述","media_url":"media_url","url":"url",created_at:1296068472.0}]}，最多一个 dribbble 分享
 apple_music | apple music 分享帖  | {"apple_music":[{"title":"标题","description":"描述","poster":"封面","media_url":"媒体网页地址","preview_url":"预览地址","time_millis":123.123//时长}]}，最多一个 apple music 分享
 apple_movie | apple movie 分享贴  | {"apple_movie":[{"title":"标题","description":"描述","poster":"封面","media_url":"媒体网页地址","preview_url":"预览地址","time_millis":123.123//时长}]}，最多一个 apple movie 分享
 apple_ebook | apple ebook 分享贴  | {"apple_ebook":[{"title":"标题","description":"描述","poster":"封面","media_url":"媒体网页地址","preview_url":"预览地址","time_millis":123.123//时长}]}，最多一个 apple ebook 分享
