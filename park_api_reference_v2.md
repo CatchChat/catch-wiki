@@ -96,7 +96,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "cover_url":null,        // 技能封面图片URL
 ```
 
-在 API 返回技能分类信息时，将会以 `<skill_category>` 替代如下结构：
+在 API 返回技能信息时，将会以 `<skill_category>` 替代如下结构：
 
 ```
 "id":<id>,
@@ -105,7 +105,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "name_cn":"艺术",    // 中文翻译
 ```
 
-在 API 返回技能与分类信息时，将会以 `<skill_with_category>` 替代如下结构：
+在 API 返回技能信息时，将会以 `<skill_with_category>` 替代如下结构：
 
 ```
 <skill>
