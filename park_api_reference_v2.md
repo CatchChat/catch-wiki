@@ -91,26 +91,18 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 ```
 "id":<id>,
 "name":"Singing",        // 技能名
-"name_en":"Singing",     // 英文翻译
-"name_cn":"唱歌",        // 中文翻译
+"name_string":"Singing", // 技能名翻译
 "cover_url":null,        // 技能封面图片URL
-```
-
-在 API 返回技能信息时，将会以 `<skill_category>` 替代如下结构：
-
-```
-"id":<id>,
-"name":"Art",        // 类别名
-"name_en":"Art",     // 英文翻译
-"name_cn":"艺术",    // 中文翻译
 ```
 
 在 API 返回技能信息时，将会以 `<skill_with_category>` 替代如下结构：
 
 ```
 <skill>
-category: {
-  <skill_category>
+"category":{
+  "id":<id>,
+  "name":"Art",          // 类别名
+  "name_string":"Art"    // 类别翻译
 }
 ```
 
@@ -2825,10 +2817,15 @@ curl https://park.catchchatchina.com/api/v2/skill_categories -H 'Authorization: 
 {
   "categories":[
     {
-      <skill_category>,
+      "id":<id>,
+      "name":"Art", // 分类名
+      "name_string":"Art", // 分类名翻译
       "skills":[
         {
-          <skill>
+          "id":<id>,
+          "name":"Drawing", // 技能名
+          "name_string":"Drawing" // 技能名翻译
+          "cover_url": "http://test.com" // 技能封面图片URL
         },
         .
         .
