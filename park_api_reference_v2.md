@@ -949,6 +949,28 @@ curl -X GET https://park.catchchatchina.com/api/v2/circles/shared_messages?token
 }
 ```
 
+### 检查当前用户是否在指定群组中
+
+```
+GET /api/v2/circles/:id/check_me_exist
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl -X GET https://park.catchchatchina.com/api/v2/circles/516055075accc1e4067dd5ff6b2682cd/check_me_exist -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{ "exist": true } // exist 为 true 表示在群组中，false 表示不再群组中
+```
+
 ### 当前用户设置指定群组为免打扰
 
 ```
