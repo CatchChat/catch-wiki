@@ -165,9 +165,9 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 ]
 ```
 
-#### 公共群组字段模板
+#### 群组字段模板
 
-在 API 返回公共群组信息时，将会以 `<circle>` 替代如下结构：
+在 API 返回群组信息时，将会以 `<circle>` 替代如下结构：
 
 ```
 "id":<id>,
@@ -179,7 +179,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "updated_at":1433930183, // UNIX 时间戳
 ```
 
-在 API 返回公共群组信息时，将会以 `<circle_with_topic>` 替代如下结构：
+在 API 返回群组信息时，将会以 `<circle_with_topic>` 替代如下结构：
 
 ```
 <circle>
@@ -597,11 +597,11 @@ curl https://park.catchchatchina.com/api/v2/xxx  -H 'Authorization: Token token=
 
 HTTP Token: Access denied.
 
-## Circle 公共群组
+## Circle 群组
 
-### 获取加入了的所有公共群组
+### 获取加入了的所有群组
 
-* 此 API 不会返回群组成员，客户端在用户进入某个群的聊天界面后，请求 `获取单个公共群组` API，可以拿到群组信息以及成员信息 *
+* 此 API 不会返回群组成员，客户端在用户进入某个群的聊天界面后，请求 `获取单个群组` API，可以拿到群组信息以及成员信息 *
 
 ```
 GET /api/v2/circles
@@ -635,7 +635,7 @@ curl -X GET https://park.catchchatchina.com/api/v2/circles -H 'Authorization: To
 }
 ```
 
-### 创建公共群组
+### 创建群组
 
 ```
 POST /api/v2/circles
@@ -645,7 +645,7 @@ POST /api/v2/circles
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| name | String | 是 | 公共群组名 |
+| name | String | 是 | 群组名 |
 | members | JSON | 否 | 成员ID数组 |
 
 #### 示例
@@ -657,6 +657,7 @@ curl -i -X POST https://park.catchchatchina.com/api/v2/circles -d '{ "members": 
 #### 响应
 
 ```
+//!! Topic Circle 不返回 owner 和 members
 {
   <circle_with_topic>,
   "owner":{
@@ -673,7 +674,7 @@ curl -i -X POST https://park.catchchatchina.com/api/v2/circles -d '{ "members": 
 }
 ```
 
-### 更新公共群组
+### 更新群组
 
 ```
 PUT /api/v2/circles/:id
@@ -683,18 +684,19 @@ PUT /api/v2/circles/:id
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| name | String | 是 | 公共群组名 |
-| id | Integer | 是 | 公共群组 ID |
+| name | String | 是 | 群组名 |
+| id | Integer | 是 | 群组 ID |
 
 #### 示例
 
 ```
-curl -X PUT https://park.catchchatchina.com/api/v2/circles/2 -d '{ "name": "公共群组" }' -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"' -H "Content-Type: application/json"
+curl -X PUT https://park.catchchatchina.com/api/v2/circles/2 -d '{ "name": "群组" }' -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"' -H "Content-Type: application/json"
 ```
 
 #### 响应
 
 ```
+//!! Topic Circle 不返回 owner 和 members
 {
   <circle_with_topic>,
   "owner":{
@@ -711,7 +713,7 @@ curl -X PUT https://park.catchchatchina.com/api/v2/circles/2 -d '{ "name": "公�
 }
 ```
 
-### 获取单个公共群组
+### 获取单个群组
 
 ```
 GET /api/v2/circles/:id
@@ -721,7 +723,7 @@ GET /api/v2/circles/:id
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
+| id | Integer | 是 | 群组 ID |
 
 #### 示例
 
@@ -732,6 +734,7 @@ curl -X GET https://park.catchchatchina.com/api/v2/circles/2 -H 'Authorization: 
 #### 响应
 
 ```
+//!! Topic Circle 不返回 owner 和 members
 {
   <circle_with_topic>,
   "owner":{
@@ -748,7 +751,7 @@ curl -X GET https://park.catchchatchina.com/api/v2/circles/2 -H 'Authorization: 
 }
 ```
 
-### 加入公共群组
+### 加入群组
 
 ```
 POST /api/v2/circles/:id/join
@@ -758,7 +761,7 @@ POST /api/v2/circles/:id/join
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
+| id | Integer | 是 | 群组 ID |
 
 #### 示例
 
@@ -769,6 +772,7 @@ curl -X POST https://park.catchchatchina.com/api/v2/circles/2/join -H 'Authoriza
 #### 响应
 
 ```
+//!! Topic Circle 不返回 owner 和 members
 {
   <circle_with_topic>,
   "owner":{
@@ -785,7 +789,7 @@ curl -X POST https://park.catchchatchina.com/api/v2/circles/2/join -H 'Authoriza
 }
 ```
 
-### 退出公共群组
+### 退出群组
 
 ```
 DELETE /api/v2/circles/:id/leave
@@ -795,7 +799,7 @@ DELETE /api/v2/circles/:id/leave
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
+| id | Integer | 是 | 群组 ID |
 
 #### 示例
 
@@ -817,7 +821,7 @@ POST /api/v2/circles/:id/batch_add
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
+| id | Integer | 是 | 群组 ID |
 | members | String | 否 | 要添加的成员ID数组 |
 
 #### 示例
@@ -829,6 +833,7 @@ curl -X POST https://park.catchchatchina.com/api/v2/circles/2/batch_add -d '{ "m
 #### 响应
 
 ```
+//!! Topic Circle 不返回 owner 和 members
 {
   <circle_with_topic>,
   "owner":{
@@ -855,7 +860,7 @@ DELETE /api/v2/circles/:id/batch_delete
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
+| id | Integer | 是 | 群组 ID |
 | members | String | 否 | 要删除的成员ID数组 |
 
 #### 示例
@@ -867,6 +872,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v2/circles/2/batch_delete -d 
 #### 响应
 
 ```
+//!! Topic Circle 不返回 owner 和 members
 {
   <circle_with_topic>,
   "owner":{
@@ -893,7 +899,7 @@ POST /api/v2/circles/:id/share
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
+| id | Integer | 是 | 群组 ID |
 
 #### 示例
 
@@ -953,7 +959,7 @@ POST /api/v2/circles/:id/dnd
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
+| id | Integer | 是 | 群组 ID |
 
 #### 示例
 
@@ -975,7 +981,7 @@ DELETE /api/v2/circles/:id/dnd
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
+| id | Integer | 是 | 群组 ID |
 
 #### 示例
 
@@ -997,7 +1003,7 @@ GET /api/v2/circles/:id/dnd
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| id | Integer | 是 | 公共群组 ID |
+| id | Integer | 是 | 群组 ID |
 
 #### 示例
 
