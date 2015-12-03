@@ -462,7 +462,7 @@ Status: 429 Too Many Requests
 **发送手机号 (mobile) 和验证码 (verify_code)，可获取相应的 access_token。**
 
 ```
-POST /api/auth/token_by_mobile
+POST /api/v2/auth/token_by_mobile
 ```
 
 | 参数 | 描述 |
