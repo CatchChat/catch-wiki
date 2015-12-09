@@ -2592,27 +2592,27 @@ curl -X POST https://park.catchchatchina.com/api/v2/unfriend_requests -F friend_
 GET /api/v2/attachments/:kind/s3_upload_form_fields
 ```
 
-kind 可能值为：
+#### 参数
 
-| kind | 说明 |
-|---|---|
-| message | 消息附件 |
-| topic | feed 附件 |
-| avatar | 头像 |
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+extname | String | 是 | 要上传文件的后缀
+kind | String | 是 | 可选值为：message|topic|avatar，分别对应 消息附件|feed 附件|头像
 
-cURL 请求范例：
+#### 示例
+
 ```
-curl -X GET https://park.catchchatchina.com/api/v2/attachments/message/s3_upload_form_fields -H 'Authorization: Token token="DdPnWxQy6z5axwxZfsjs1427718553.7476008"'
+curl -X GET https://park.catchchatchina.com/api/v2/attachments/message/s3_upload_form_fields?extname=mp4 -H 'Authorization: Token token="DdPnWxQy6z5axwxZfsjs1427718553.7476008"'
 ```
 
-返回范例：
+#### 响应
 
 ```
 {
   "provider":"s3",
   "options":{
     "bucket":"park-message-attachments",
-    "key":"73d63ba7-d481-49b0-b78d-0a8f6e1dd031",
+    "key":"73d63ba7-d481-49b0-b78d-0a8f6e1dd031.mp4",
     "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/",
     "policy":{
       "expiration":"2015-03-30T13:30:44.000Z",
@@ -2621,7 +2621,7 @@ curl -X GET https://park.catchchatchina.com/api/v2/attachments/message/s3_upload
           "bucket":"park-message-attachments"
         },
         {
-          "key":"73d63ba7-d481-49b0-b78d-0a8f6e1dd031"
+          "key":"73d63ba7-d481-49b0-b78d-0a8f6e1dd031.mp4"
         },
         {
           "acl":"private"
