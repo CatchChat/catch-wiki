@@ -3169,7 +3169,7 @@ POST /api/v2/topics
 kind 可选值为：
 
 可选值 | 描述 | attachments 格式
---- | --- |
+--- | --- |---
 text        | 文字类型帖子        | null
 image       | 含图片的帖子        | {"image":[{"file":"图片文件名","metadata":"元数据"}]}，可以有最多 9 张图片
 video       | 含视频的帖子        | {"video":[{"file":"视频文件名","metadata":"元数据"}]}，最多一段视频
