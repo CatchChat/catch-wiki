@@ -2950,7 +2950,7 @@ curl -X POST https://api.soyep.com/v1/topics/bc93fe60a44cf376edeb98a9d68d85b9/re
 
 ### 流程
 
-1. 客户端通过 WebView 发起请求`https://park.catchchatchina.com/auth/:provider?_tkn=test-token`，其中`_tkn`为`access_token`值
+1. 客户端通过 WebView 发起请求`https://soyep.com/auth/:provider?_tkn=test-token`，其中`_tkn`为`access_token`值
 2. 客户端等待接收绑定是否成功的通知
 
 ### 判断绑定结果
@@ -2964,7 +2964,7 @@ curl -X POST https://api.soyep.com/v1/topics/bc93fe60a44cf376edeb98a9d68d85b9/re
 
 ### 流程
 
-1. 进入后台 `https://park.catchchatchina.com/admin/official_message`
+1. 进入后台 `https://soyep.com/admin/official_message`
 2. 创建一条官方消息
 3. 创建成功会发送推送到所有客户端，推送的 `extras` 中 `type` 是 `official_message`，`sub_type` 是消息的 `media_type` 字段
 4. 客户端收到推送后请求 `/api/v1/official_messages` API（注意：请求到的是最近两个月未读的官方消息）
