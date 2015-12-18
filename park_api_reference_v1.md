@@ -426,7 +426,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 对于1个手机号，1小时内只发送20次，24小时内只发送50次。
 
 ```
-POST /api/v1/sms_verification_codes
+POST /v1/sms_verification_codes
 ```
 
 | 参数 | 描述 |
@@ -462,7 +462,7 @@ Status: 429 Too Many Requests
 **发送手机号 (mobile) 和验证码 (verify_code)，可获取相应的 access_token。**
 
 ```
-POST /api/v1/auth/token_by_mobile
+POST /v1/auth/token_by_mobile
 ```
 
 | 参数 | 描述 |
@@ -514,7 +514,7 @@ http://api.soyep.com/v1/auth/token_by_mobile
 ### 发送用户名,手机号码，发起注册,等待接收手机验证码
 
 ```
-POST   /api/v1/registration/create
+POST   /v1/registration/create
 ```
 
 | 参数 | 描述 |
@@ -549,7 +549,7 @@ http://api.soyep.com/v1/registration/create
 ### 验证手机验证码完成注册
 
 ```
-PUT   /api/v1/registration/update
+PUT   /v1/registration/update
 ```
 | 参数 | 描述 |
 |--------|--------|
@@ -584,7 +584,7 @@ cURL 请求范例：
 现在你可以通过 **access_token** 来调用其他 API 了，比如：
 
 ```
-GET /api/v1/xxx
+GET /v1/xxx
 ```
 
 cURL 请求范例：
@@ -604,7 +604,7 @@ HTTP Token: Access denied.
 * 此 API 不会返回群组成员，客户端在用户进入某个群的聊天界面后，请求 `获取单个群组` API，可以拿到群组信息以及成员信息 *
 
 ```
-GET /api/v1/circles
+GET /v1/circles
 ```
 
 #### 参数
@@ -638,7 +638,7 @@ curl -X GET https://api.soyep.com/v1/circles -H 'Authorization: Token token="g5z
 ### 创建群组
 
 ```
-POST /api/v1/circles
+POST /v1/circles
 ```
 
 #### 参数
@@ -677,7 +677,7 @@ curl -i -X POST https://api.soyep.com/v1/circles -d '{ "members": [3,4,5], "name
 ### 更新群组
 
 ```
-PUT /api/v1/circles/:id
+PUT /v1/circles/:id
 ```
 
 #### 参数
@@ -716,7 +716,7 @@ curl -X PUT https://api.soyep.com/v1/circles/2 -d '{ "name": "群组" }' -H 'Aut
 ### 获取单个群组
 
 ```
-GET /api/v1/circles/:id
+GET /v1/circles/:id
 ```
 
 #### 参数
@@ -754,7 +754,7 @@ curl -X GET https://api.soyep.com/v1/circles/2 -H 'Authorization: Token token="r
 ### 加入群组
 
 ```
-POST /api/v1/circles/:id/join
+POST /v1/circles/:id/join
 ```
 
 #### 参数
@@ -792,7 +792,7 @@ curl -X POST https://api.soyep.com/v1/circles/2/join -H 'Authorization: Token to
 ### 退出群组
 
 ```
-DELETE /api/v1/circles/:id/leave
+DELETE /v1/circles/:id/leave
 ```
 
 #### 参数
@@ -814,7 +814,7 @@ curl -X DELETE https://api.soyep.com/v1/circles/2/leave -H 'Authorization: Token
 ### 批量添加成员
 
 ```
-POST /api/v1/circles/:id/batch_add
+POST /v1/circles/:id/batch_add
 ```
 
 #### 参数
@@ -853,7 +853,7 @@ curl -X POST https://api.soyep.com/v1/circles/2/batch_add -d '{ "members": [4,5]
 ### 批量删除成员（只能是群 owner 才能删除成员）
 
 ```
-DELETE /api/v1/circles/:id/batch_delete
+DELETE /v1/circles/:id/batch_delete
 ```
 
 #### 参数
@@ -892,7 +892,7 @@ curl -X DELETE https://api.soyep.com/v1/circles/2/batch_delete -d '{ "members": 
 ### 获取分享链接
 
 ```
-POST /api/v1/circles/:id/share
+POST /v1/circles/:id/share
 ```
 
 #### 参数
@@ -918,7 +918,7 @@ curl -X POST https://api.soyep.com/v1/circles/516055075accc1e4067dd5ff6b2682cd/s
 **无需登录，获取分享时最近的 25 条消息，支持 jsonp**
 
 ```
-GET /api/v1/circles/shared_messages
+GET /v1/circles/shared_messages
 ```
 
 #### 参数
@@ -952,7 +952,7 @@ curl -X GET https://api.soyep.com/v1/circles/shared_messages?token=qRLyR3jBQslCQ
 ### 检查当前用户是否在指定群组中
 
 ```
-GET /api/v1/circles/:id/check_me_exist
+GET /v1/circles/:id/check_me_exist
 ```
 
 #### 参数
@@ -974,7 +974,7 @@ curl -X GET https://api.soyep.com/v1/circles/516055075accc1e4067dd5ff6b2682cd/ch
 ### 当前用户设置指定群组为免打扰
 
 ```
-POST /api/v1/circles/:id/dnd
+POST /v1/circles/:id/dnd
 ```
 
 #### 参数
@@ -996,7 +996,7 @@ curl -XPOST https://api.soyep.com/v1/circles/2/dnd -H 'Authorization: Token toke
 ### 当前用户取消设置指定群组为免打扰
 
 ```
-DELETE /api/v1/circles/:id/dnd
+DELETE /v1/circles/:id/dnd
 ```
 
 #### 参数
@@ -1018,7 +1018,7 @@ curl -XDELETE https://api.soyep.com/v1/circles/2/dnd -H 'Authorization: Token to
 ### 获取当前用户对指定群组的免打扰设置
 
 ```
-GET /api/v1/circles/:id/dnd
+GET /v1/circles/:id/dnd
 ```
 
 #### 参数
@@ -1044,7 +1044,7 @@ curl -XGET https://api.soyep.com/v1/circles/2/dnd -H 'Authorization: Token token
 ### 可能认识的好友
 
 ```
-GET /api/v1/user/may_know_friends
+GET /v1/user/may_know_friends
 ```
 
 #### 参数
@@ -1081,7 +1081,7 @@ curl https://api.soyep.com/v1/user/may_know_friends -H Authorization: Token toke
 ### 获取个人信息
 
 ```
-GET /api/v1/user
+GET /v1/user
 ```
 
 #### 参数
@@ -1115,7 +1115,7 @@ curl https://api.soyep.com/v1/user -H 'Authorization: Token oken="kuH3PbRifgSATC
 `mute_started_at_string` 和 `mute_ended_at_string` 都有值时，勿扰功能开启，都为空时，勿扰功能关闭。
 
 ```
-PATCH /api/v1/user
+PATCH /v1/user
 ```
 
 #### 参数
@@ -1157,15 +1157,15 @@ curl -X PATCH https://api.soyep.com/v1/user -F badge=apple -F username=tumayun -
 
 ### 更新手机号流程
 
-1. 发送当前手机号验证码 (POST /api/v1/sms_verification_codes)
-2. 校验当前手机号验证码  (PATCH /api/v1/user/check_verify_code)
-3. 发送新手机号验证码 (POST /api/v1/user/send_update_mobile_code)
-4. 校验新手机号验证码，通关验证后更新手机号为新手机好 (PATCH /api/v1/user/update_mobile)
+1. 发送当前手机号验证码 (POST /v1/sms_verification_codes)
+2. 校验当前手机号验证码  (PATCH /v1/user/check_verify_code)
+3. 发送新手机号验证码 (POST /v1/user/send_update_mobile_code)
+4. 校验新手机号验证码，通关验证后更新手机号为新手机好 (PATCH /v1/user/update_mobile)
 
 ### 验证更新手机号请求的验证码
 
 ```
-PATCH /api/v1/user/check_verify_code
+PATCH /v1/user/check_verify_code
 ```
 
 #### 参数
@@ -1189,7 +1189,7 @@ curl -X PATCH https://api.soyep.com/v1/user/check_verify_code -F token=1234 -H '
 ### 发送新手机号验证码
 
 ```
-POST /api/v1/user/send_update_mobile_code
+POST /v1/user/send_update_mobile_code
 ```
 
 #### 参数
@@ -1215,7 +1215,7 @@ curl -X POST -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.20538
 ### 更新手机号
 
 ```
-PATCH /api/v1/user/update_mobile
+PATCH /v1/user/update_mobile
 ```
 
 #### 参数
@@ -1241,7 +1241,7 @@ curl -X PATCH https://api.soyep.com/v1/user/update_mobile -F phone_ode=86 -F mob
 ### Discover 发现
 
 ```
-GET /api/v1/user/discover
+GET /v1/user/discover
 ```
 
 如果传入`master_skills`和`learning_skills`参数，则按照传入参数匹配目标用户；
@@ -1291,7 +1291,7 @@ curl -X GET https://api.soyep.com/v1/user/discover -d '{ "master_skills": [<id>]
 ### 获取 provider 信息（github instagram dribbble）
 
 ```
-GET /api/v1/user/:provider
+GET /v1/user/:provider
 ```
 
 #### 参数
@@ -1313,7 +1313,7 @@ github instagram dribbble 返回各不一样，从各平台拿到数据后原样
 ### 获取 provider tokens
 
 ```
-GET /api/v1/user/provider_tokens
+GET /v1/user/provider_tokens
 ```
 
 #### 参数
@@ -1343,7 +1343,7 @@ curl https://api.soyep.com/v1/user/provider_tokens -H 'Authorization: Token toke
 **覆盖式上传，上传后会删除之前的通讯录，返回已注册的通讯录好友，并且自动添加好友**
 
 ```
-POST /api/v1/contacts/upload
+POST /v1/contacts/upload
 ```
 
 #### 参数
@@ -1380,7 +1380,7 @@ curl htts://api.soyep.com/v1/contacts/upload -F contacts="[{\"name\":\"abc\",\"n
 ### 搜索用户
 
 ```
-GET api/v1/users/search
+GET v1/users/search
 ```
 
 #### 参数
@@ -1414,7 +1414,7 @@ curl https://api.soyep.com/v1/users/search\?q\=15158161111 -H 'Authorization: To
 ### 校验手机号是否可用（无需登录）
 
 ```
-GET api/v1/users/mobile_validate
+GET v1/users/mobile_validate
 ```
 ** phone code 合法, mobile 合法，且具有唯一性    
 在设置中修改手机号时，不能拿当前手机号去校验，否则会返回手机号已经被使用**
@@ -1454,7 +1454,7 @@ curl https://api.soyep.com/v1/users/mobile_validate\?phone_code\=86\&mobile\=151
 ### 获取指定用户的 provider 信息（github instagram dribbble）
 
 ```
-GET /api/v1/users/:id/:provider
+GET /v1/users/:id/:provider
 ```
 
 #### 参数
@@ -1477,7 +1477,7 @@ github instagram dribbble 返回各不一样，从各平台拿到数据后原样
 ### 获取指定用户信息（by id）
 
 ```
-GET /api/v1/users/:id
+GET /v1/users/:id
 ```
 
 #### 参数
@@ -1505,7 +1505,7 @@ curl https://api.soyep.com/v1/users/90913b93738c8a627129e49db32eeec3 -H 'Authori
 **支持 JSONP，分享用户 profile 页专用，无需登录！**
 
 ```
-GET /api/v1/users/:username/profile
+GET /v1/users/:username/profile
 ```
 
 #### 参数
@@ -1540,7 +1540,7 @@ curl https://api.soyep.com/v1/users/tumayun/profile
 2. 当前用户是否将指定用户设置为免打扰
 
 ```
-GET /api/v1/users/:id/settings_with_current_user
+GET /v1/users/:id/settings_with_current_user
 ```
 
 #### 参数
@@ -1567,7 +1567,7 @@ curl https://api.soyep.com/v1/users/90913b93738c8a627129e49db32eeec3/settings_wi
 ### 当前登录用户设置指定用户为免打扰
 
 ```
-POST /api/v1/users/:id/dnd
+POST /v1/users/:id/dnd
 ```
 
 #### 参数
@@ -1589,7 +1589,7 @@ curl -XPOST https://api.soyep.com/v1/users/90913b93738c8a627129e49db32eeec3/dnd 
 ### 当前登录用户取消设置指定用户为免打扰
 
 ```
-DELETE /api/v1/users/:id/dnd
+DELETE /v1/users/:id/dnd
 ```
 
 #### 参数
@@ -1611,7 +1611,7 @@ curl -XDELETE https://api.soyep.com/v1/users/90913b93738c8a627129e49db32eeec3/dn
 ### 获取擅长指定技能的用户
 
 ```
-GET api/v1/master_skills/:skill_id/users
+GET v1/master_skills/:skill_id/users
 ```
 
 #### 参数
@@ -1643,7 +1643,7 @@ curl https://api.soyep.com/v1/master_skills/90913b93738c8a627129e49db32eeec3/use
 ### 获取正在学习指定技能的用户
 
 ```
-GET api/v1/learning_skills/:skill_id/users
+GET v1/learning_skills/:skill_id/users
 ```
 
 #### 参数
@@ -1679,7 +1679,7 @@ curl https://api.soyep.com/v1/learning_skills/90913b93738c8a627129e49db32eeec3/u
 每个聊天窗口至多返回10条未读消息，进入聊天窗口后想要获取更多消息可以请求消息历史API
 
 ```
-GET /api/v1/messages/unread
+GET /v1/messages/unread
 ```
 
 #### 参数
@@ -1714,7 +1714,7 @@ curl https://api.soyep.com/v1/messages/unread -H 'Authorization: Token token="nH
 ### 发送消息
 
 ```
-POST /api/v1/:recipient_type/:recipient_id/messages
+POST /v1/:recipient_type/:recipient_id/messages
 ```
 
 #### 参数
@@ -1783,7 +1783,7 @@ faye server 的已读确认消息结构如下：
 ```
 
 ```
-PATCH /api/v1/:recipient_type/:recipient_id/messages/batch_mark_as_read
+PATCH /v1/:recipient_type/:recipient_id/messages/batch_mark_as_read
 ```
 
 #### 参数
@@ -1843,7 +1843,7 @@ curl -X PATCH https://api.soyep.com/v1/users/<id>/messages/batch_mark_as_read -H
 ```
 
 ```
-DELETE /api/v1/messages/:id
+DELETE /v1/messages/:id
 ```
 
 #### 参数
@@ -1878,7 +1878,7 @@ curl -X DELETE https://api.soyep.com/v1/messages/<id> -H 'Authorization: Token t
 **按创建时间倒序返回**
 
 ```
-GET /api/v1/:recipient_type/:recipient_id/messages
+GET /v1/:recipient_type/:recipient_id/messages
 ```
 
 #### 参数
@@ -1898,14 +1898,14 @@ curl -X GET https://api.soyep.com/v1/users/<id>/messages -H 'Authorization: Toke
 
 #### 响应
 
-同`GET /api/v1/messages/unread`
+同`GET /v1/messages/unread`
 
 ### 获取指定聊天窗口的未读消息
 
 **按创建时间倒序返回**
 
 ```
-GET /api/:version/:recipient_type/:recipient_id/messages/unread
+GET /:version/:recipient_type/:recipient_id/messages/unread
 ```
 
 #### 参数
@@ -1941,7 +1941,7 @@ curl -X GET https://api.soyep.com/v1/users/<id>/messages/unread -H 'Authorizatio
 用获取到的最后读取时间与发送消息的 `created_at` 对比，小于等于最后读取时间的消息全都标记为已读
 
 ```
-GET /api/:version/:recipient_type/:recipient_id/messages/sent_last_read_at
+GET /:version/:recipient_type/:recipient_id/messages/sent_last_read_at
 ```
 
 #### 参数
@@ -1968,7 +1968,7 @@ curl https://api.soyep.com/v1/users/<id>/messages/sent_last_read_at -H 'Authoriz
 按创建时间倒序排
 
 ```
-GET /api/friend_requests/received/:state
+GET /friend_requests/received/:state
 ```
 
 #### 参数
@@ -2017,7 +2017,7 @@ curl https://api.soyep.cim/v1/friend_requests/received/accepted -H 'Authorizatio
 按创建时间倒序排
 
 ```
-GET /api/friend_requests/sent/:state
+GET /friend_requests/sent/:state
 ```
 
 #### 参数
@@ -2063,7 +2063,7 @@ curl https://api.soyep.com/v1/friend_requests/sent/accepted -H 'Authorization: T
 ### 新建好友请求
 
 ```
-POST /api/friend_requests
+POST /friend_requests
 ```
 
 #### 参数
@@ -2099,7 +2099,7 @@ curl -X POST https://api.soyep.com/v1/friend_requests -F friend_id=8 -H 'Authori
 ### 同意好友请求
 
 ```
-PATCH /api/friend_requests/received/:id/accept
+PATCH /friend_requests/received/:id/accept
 ```
 
 #### 参数
@@ -2135,7 +2135,7 @@ curl -X PATCH https://api.soyep.com/v1/friend_requests/received/7/accept  -H 'Au
 ### 拒绝好友请求
 
 ```
-PATCH /api/friend_requests/received/:id/reject
+PATCH /friend_requests/received/:id/reject
 ```
 
 #### 参数
@@ -2171,7 +2171,7 @@ curl -X PATCH https://api.soyep.com/v1/friend_requests/received/7/reject -H 'Aut
 ### 查询当前用户是否发送或者接收过指定用户的好友请求
 
 ```
-GET /api/v1/friend_requests/with_user/:user_id
+GET /v1/friend_requests/with_user/:user_id
 ```
 
 #### 参数
@@ -2221,7 +2221,7 @@ curl https://api.soyep.com/v1/friend_requests/with_user/ba994ac6dba5bc71489ab75f
 按照 position 升序排列，最近联系过的好友越靠前 
 
 ```
-GET /api/v1/friendships
+GET /v1/friendships
 ```
 #### 参数
 
@@ -2269,7 +2269,7 @@ curl https://api.soyep.com/v1/friendships\?page\=1\&per_page\=10 -H 'Authorizati
 最近三天有过联系的好友，包括发送消息给我的和我发过消息的好友
 
 ```
-GET /api/v1/friendships/recent
+GET /v1/friendships/recent
 ```
 
 #### 参数
@@ -2316,7 +2316,7 @@ curl https://api.soyep.com/v1/friendships/recent\?page\=1\&per_page\=10 -H 'Auth
 ### 某一好友的详细信息(by friendship id)
 
 ```
-GET /api/v1/friendships/:id
+GET /v1/friendships/:id
 ```
 
 #### 参数
@@ -2355,7 +2355,7 @@ curl https://api.soyep.com/v1/friendships/27 -H 'Authorization: Token token="8ni
 ### 某一好友的详细信息(by friend id)
 
 ```
-GET /api/v1/friendships/with/:friend_id
+GET /v1/friendships/with/:friend_id
 ```
 
 #### 参数
@@ -2394,7 +2394,7 @@ curl https://api.soyep.com/v1/friendships/with/14 -H 'Authorization: Token token
 ### 更新好友信息
 
 ```
-PATCH /api/v1/friendships/:id
+PATCH /v1/friendships/:id
 ```
 
 #### 参数
@@ -2435,7 +2435,7 @@ curl -X PATCH https://api.soyep.com/v1/friendships/13 -F contact_name=contact_na
 ### 搜索好友
 
 ```
-GET /api/friendships/search?q=keyword
+GET /friendships/search?q=keyword
 ```
 
 #### 参数
@@ -2484,7 +2484,7 @@ curl https://api.soyep.com/v1/friendships/search\?q\=1515816 -H 'Authorization: 
 ### 好友置顶
 
 ```
-PATCH /api/v1/friendships/:id/move_to_top
+PATCH /v1/friendships/:id/move_to_top
 ```
 #### 参数
 
@@ -2507,7 +2507,7 @@ curl -X PATCH https://api.soyep.com/v1/friendships/3/move_to_top -H 'Authorizati
 ### 批量设置星组好友
 
 ```
-PATCH /api/v1/friendships/batch_mark_as_favored
+PATCH /v1/friendships/batch_mark_as_favored
 ```
 
 **按照提交的ID顺序覆盖式设置星组好友**
@@ -2558,7 +2558,7 @@ curl -X PATCH https://api.soyep.com/v1/friendships/batch_mark_as_favored -d '{ "
 ### 新建请求解除好友关系
 
 ```
-POST /api/v1/unfriend_requests
+POST /v1/unfriend_requests
 ```
 
 #### 参数
@@ -2589,7 +2589,7 @@ curl -X POST https://api.soyep.com/v1/unfriend_requests -F friend_id=2 -H 'Autho
 [S3文档](http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html)
 
 ```
-GET /api/v1/attachments/:kind/s3_upload_form_fields
+GET /v1/attachments/:kind/s3_upload_form_fields
 ```
 
 #### 参数
@@ -2651,7 +2651,7 @@ curl -X GET https://api.soyep.com/v1/attachments/message/s3_upload_form_fields?e
 ### 获取 Blocked Users
 
 ```
-GET /api/v1/blocked_users
+GET /v1/blocked_users
 ```
 
 #### 参数
@@ -2682,7 +2682,7 @@ curl -X GET https://api.soyep.com/v1/blocked_users -H 'Authorization: Token toke
 ### Block User
 
 ```
-POST /api/v1/blocked_users
+POST /v1/blocked_users
 ```
 
 #### 参数
@@ -2706,7 +2706,7 @@ curl -X POST https://api.soyep.com/v1/blocked_users -F user_id=516055075accc1e40
 ### Unblock User
 
 ```
-DELETE /api/v1/blocked_users/:id
+DELETE /v1/blocked_users/:id
 ```
 
 #### 参数
@@ -2732,7 +2732,7 @@ curl -X DELETE https://api.soyep.com/v1/blocked_users/516055075accc1e4067dd5ff6b
 ### 添加已有技能
 
 ```
-POST /api/v1/master_skills
+POST /v1/master_skills
 ```
 
 #### 参数
@@ -2756,7 +2756,7 @@ curl -X POST https://api.soyep.com/v1/master_skills -F skill_id=516055075accc1e4
 ### 移除已有技能
 
 ```
-DELETE /api/v1/master_skills/:id
+DELETE /v1/master_skills/:id
 ```
 
 #### 参数
@@ -2782,7 +2782,7 @@ curl -X DELETE https://api.soyep.com/v1/master_skills/516055075accc1e4067dd5ff6b
 ### 添加想学的技能
 
 ```
-POST /api/v1/learning_skills
+POST /v1/learning_skills
 ```
 
 #### 参数
@@ -2806,7 +2806,7 @@ curl -X POST https://api.soyep.com/v1/learning_skills -F skill_id=516055075accc1
 ### 移除想学的技能
 
 ```
-DELETE /api/v1/master_skills/:id
+DELETE /v1/master_skills/:id
 ```
 
 #### 参数
@@ -2832,7 +2832,7 @@ curl -X DELETE https://api.soyep.com/v1/learning_skills/516055075accc1e4067dd5ff
 ### 技能分类列表
 
 ```
-GET /api/v1/skill_categories
+GET /v1/skill_categories
 ```
 
 #### 参数
@@ -2873,7 +2873,7 @@ curl https://api.soyep.com/v1/skill_categories -H 'Authorization: Token token="_
 ### 更新技能信息
 
 ```
-PATCH /api/v1/skills/:id
+PATCH /v1/skills/:id
 ```
 
 #### 参数
@@ -2886,7 +2886,7 @@ cover_url | String | 否 | 技能封面图片地址
 #### 示例
 
 ```
-curl -X PATCH park-staging.catchchatchina.com/api/v1/skills/516055075accc1e4067dd5ff6b2682cd -F cover_url=https://s3.cn-north-1.amazonaws.com.cn/ruanwz-test-public/ruby-logo.png -H 'Authorization: Token token="test-token”'
+curl -X PATCH https://api.soyep.com/v1/skills/516055075accc1e4067dd5ff6b2682cd -F cover_url=https://s3.cn-north-1.amazonaws.com.cn/ruanwz-test-public/ruby-logo.png -H 'Authorization: Token token="test-token”'
 ```
 
 #### 响应
@@ -2901,7 +2901,7 @@ curl -X PATCH park-staging.catchchatchina.com/api/v1/skills/516055075accc1e4067d
 ### 举报用户
 
 ```
-POST /api/v1/users/:id/reports
+POST /v1/users/:id/reports
 ```
 
 #### 参数
@@ -2925,7 +2925,7 @@ curl -X POST https://api.soyep.com/v1/users/bc93fe60a44cf376edeb98a9d68d85b9/rep
 ### 举报话题
 
 ```
-POST /api/v1/topics/:id/reports
+POST /v1/topics/:id/reports
 ```
 
 #### 参数
@@ -2967,12 +2967,12 @@ curl -X POST https://api.soyep.com/v1/topics/bc93fe60a44cf376edeb98a9d68d85b9/re
 1. 进入后台 `https://soyep.com/admin/official_message`
 2. 创建一条官方消息
 3. 创建成功会发送推送到所有客户端，推送的 `extras` 中 `type` 是 `official_message`，`sub_type` 是消息的 `media_type` 字段
-4. 客户端收到推送后请求 `/api/v1/official_messages` API（注意：请求到的是最近两个月未读的官方消息）
+4. 客户端收到推送后请求 `/v1/official_messages` API（注意：请求到的是最近两个月未读的官方消息）
 
 ### 获取官方消息
 
 ```
-GET /api/v1/official_messages
+GET /v1/official_messages
 ```
 
 #### 参数
@@ -3016,7 +3016,7 @@ curl https://api.soyep.com/v1/official_messages -H 'Authorization: Token token="
 ### 创建用户反馈
 
 ```
-POST /api/v1/feedbacks
+POST /v1/feedbacks
 ```
 
 #### 参数
@@ -3043,7 +3043,7 @@ curl -X POST https://api.soyep.com/v1/feedbacks -F content=test -F device_info=t
 ### 获取所有我发的帖子
 
 ```
-GET /api/v1/topics
+GET /v1/topics
 ```
 
 #### 参数
@@ -3077,7 +3077,7 @@ curl https://api.soyep.com/v1/topics -H 'Authorization: Token token="test-token"
 ### 获取指定用户发的帖子
 
 ```
-GET /api/v1/users/:user_id/topics
+GET /v1/users/:user_id/topics
 ```
 
 #### 参数
@@ -3112,7 +3112,7 @@ curl https://api.soyep.com/v1/users/516055075accc1e4067dd5ff6b2682cd/topics -H '
 ### 发现帖子 (Feeds)
 
 ```
-GET /api/v1/topics/discover
+GET /v1/topics/discover
 ```
 
 #### 参数
@@ -3151,7 +3151,7 @@ curl https://api.soyep.com/v1/topics/discover -H 'Authorization: Token token="te
 ### 发布帖子
 
 ```
-POST /api/v1/topics
+POST /v1/topics
 ```
 
 #### 参数
@@ -3199,7 +3199,7 @@ curl -XPOST https://api.soyep.com/v1/topics -F body=test -F latitude=11.11 -F lo
 ### 更新帖子
 
 ```
-PUT /api/:version/topics/:id
+PUT /:version/topics/:id
 ```
 
 #### 参数
@@ -3226,7 +3226,7 @@ curl -XPATCH https://api.soyep.com/v1/topics/516055075accc1e4067dd5ff6b2682cd -F
 ### 删除帖子
 
 ```
-DELETE /api/:version/topics/:id
+DELETE /:version/topics/:id
 ```
 
 #### 参数
