@@ -120,7 +120,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "id":<id>,
 "username":"asdaasd",
 "nickname":"user9",
-"avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+"avatar":{"url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg","thumb_url":""http://catch-avatars.qiniudn.com/thumb_sJAUYG6nc84glXkq.jpg""},
 "latitude":0.0,
 "longitude":0.0,
 "introduction":"",
@@ -138,7 +138,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "id":<id>,
 "username":"tumayun",
 "nickname":"tumayun",
-"avatar_url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+"avatar":{"url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg","thumb_url":""http://catch-avatars.qiniudn.com/thumb_sJAUYG6nc84glXkq.jpg""},
 "latitude":28.3213,
 "longitude":117.001,
 "introduction":"",
@@ -192,38 +192,37 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 
 在 API 返回 topic 的附件信息时，将会以 `<topic_attachment>` 替代如下结构：
 
-`kind` 为 image 时，格式如下：
+Topic `kind` 为 image 时，格式如下：
 
-```
-"kind":"image",
+```,
 "metadata":"metadata",
 "file":{
-  "storage":"qiniu",
-  "expires_in":86400, // 单位：秒
+  "expires_in":86400, // URL 过期时间，0 表示不会过期，单位：秒
   "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+  // 注意：thumb_url 可能没有，因为服务器是 background 方式生成缩略图的
+  "thumb_url":"http://catch.qiniudn.com/thumb_BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
 }
 ```
 
-`kind` 为 video 时，格式如下：
+Topic `kind` 为 video 时，格式如下：
 
 ```
-"kind":"video",
 "metadata":"metadata",
 "file":{
-  "storage":"qiniu",
-  "expires_in":86400, // 单位：秒
+  "expires_in":86400, // URL 过期时间，0 表示不会过期，单位：秒
   "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+  // 注意：thumb_url 可能没有，因为服务器是 background 方式生成缩略图的
+  "thumb_url":"http://catch.qiniudn.com/thumb_BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
 }
 ```
 
-`kind` 为 audio 时，格式如下：
+Topic `kind` 为 audio 时，格式如下：
 
 ```
-"kind":"audio",
+// audio 没有缩略图
 "metadata":"metadata",
 "file":{
-  "storage":"qiniu",
-  "expires_in":86400, // 单位：秒
+  "expires_in":86400, // URL 过期时间，0 表示不会过期，单位：秒
   "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
 }
 ```
@@ -304,7 +303,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 ```
 "id": <id>,
 "allow_comment": true, // 是否允许评论
-"kind": "normal" // 帖子类型，目前有 normal|apple_music|apple_movie|apple_ebook|github|dribbble
+"kind": "normal" // 帖子类型，目前有 apple_music|apple_movie|apple_ebook|text|image|video|audio|location|github|dribbble
 "body": "test", // 帖子内容
 "message_count": 0, // 评论消息数
 "created_at": 1443278450.465,
@@ -326,17 +325,17 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 ]
 ```
 
-#### Attachment 字段模板
+#### Message Attachment 字段模板
 
 在 API 返回 attachment 信息时，将会以 `<attachment>` 替代如下结构：
 
 ```
-"kind":"image",
 "metadata":"metadata",
 "file":{
-  "storage":"qiniu",
-  "expires_in":86400, // 单位：秒
+  "expires_in":86400, // URL 过期时间，0 表示不会过期，单位：秒
   "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
+  // 注意：thumb_url 可能没有，因为服务器是 background 方式生成缩略图的
+  "thumb_url":"http://catch.qiniudn.com/thumb_BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
 }
 ```
 
@@ -354,15 +353,11 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
   "longitude":24.1231,
   "parent_id":0,
   "media_type":"image",
-  "media_type_string":"一张照片",
   "state":"unread",
-  "state_string":"未读",
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "sender":{
-    <mini_user>,
-    "remarked_name":null,
-    "contact_name":null
+    <mini_user>
   },
   "attachments":[
     <attachment>,
@@ -1104,7 +1099,6 @@ curl https://api.soyep.com/v1/user -H 'Authorization: Token oken="kuH3PbRifgSATC
   "mobile":"15158161111",
   "pusher_id":"439ee7d09180529d3442bd25",
   "state":"active",
-  "state_string":"激活状态",
   "mute_started_at_string":"23:30", // 防打扰开始时间, UTC 时间，需要转换成客户端当前时区后再显示
   "mute_ended_at_string":"07:30" // 防打扰结束时间, UTC 时间，需要转换成客户端当前时区后再显示
 }
@@ -1123,7 +1117,6 @@ PATCH /v1/user
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
 | nickname | String | 否 | 昵称 |
-| avatar_url | String | 否 | 头像 URL |
 | username | String | 否 | 用户名，必须唯一（忽略大小写），只能是由字母、数字、下划线组成，长度为4到16个字符 |
 | latitude | Float | 否 | 纬度 |
 | longitude | Float | 否 | 经度 |
@@ -1149,7 +1142,6 @@ curl -X PATCH https://api.soyep.com/v1/user -F badge=apple -F username=tumayun -
   "mobile":"15158161111",
   "pusher_id":"439ee7d09180529d3442bd25",
   "state":"active",
-  "state_string":"激活状态",
   "mute_started_at_string":"23:30", // 防打扰开始时间，UTC 时间
   "mute_ended_at_string":"07:30" // 防打扰结束时间，UTC 时间
 }
@@ -1993,7 +1985,6 @@ curl https://api.soyep.cim/v1/friend_requests/received/accepted -H 'Authorizatio
       "user_id":<id>,
       "friend_id":<id>,
       "state":2,
-      "state_string":"已接受",
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
       "friend":{
@@ -2042,7 +2033,6 @@ curl https://api.soyep.com/v1/friend_requests/sent/accepted -H 'Authorization: T
       "user_id":<id>,
       "friend_id":<id>,
       "state":2,
-      "state_string":"已接受",
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
       "friend":{
@@ -2086,7 +2076,6 @@ curl -X POST https://api.soyep.com/v1/friend_requests -F friend_id=8 -H 'Authori
   "user_id":<id>,
   "friend_id":<id>,
   "state":1,
-  "state_string":"等待中",
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "friend":{
@@ -2122,7 +2111,6 @@ curl -X PATCH https://api.soyep.com/v1/friend_requests/received/7/accept  -H 'Au
   "user_id":<id>,
   "friend_id":<id>,
   "state":2,
-  "state_string":"已接受",
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "friend":{
@@ -2158,7 +2146,6 @@ curl -X PATCH https://api.soyep.com/v1/friend_requests/received/7/reject -H 'Aut
   "user_id":<id>,
   "friend_id":<id>,
   "state":3,
-  "state_string":"已拒绝",
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
   "friend":{
@@ -2198,7 +2185,6 @@ curl https://api.soyep.com/v1/friend_requests/with_user/ba994ac6dba5bc71489ab75f
       "user_id":<id>,
       "friend_id":<id>,
       "state":"pending",
-      "state_string":"等待中",
       "updated_at":1439783441,
       "created_at":1439783441
    },
@@ -2207,7 +2193,6 @@ curl https://api.soyep.com/v1/friend_requests/with_user/ba994ac6dba5bc71489ab75f
       "user_id":<id>,
       "friend_id":<id>,
       "state":"pending",
-      "state_string":"等待中",
       "updated_at":1439783441,
       "created_at":1439783441
    }
@@ -2503,55 +2488,6 @@ curl -X PATCH https://api.soyep.com/v1/friendships/3/move_to_top -H 'Authorizati
 ```
 {}
 ```
-<!--
-### 批量设置星组好友
-
-```
-PATCH /v1/friendships/batch_mark_as_favored
-```
-
-**按照提交的ID顺序覆盖式设置星组好友**
-
-#### 参数
-
-名称 | 类型 | 是否必需 | 描述
---- |--- |--- |--- |
-ids | Integer | 是 | friendship ids
-
-#### 示例
-
-```
-curl -X PATCH https://api.soyep.com/v1/friendships/batch_mark_as_favored -d '{ "ids": [3,5,1] }' -H "Content-Type: application/json" -H 'Authorization: Token token="wcdyPGTv3HqZ76vZt5VR1422869949.0730119"'
-```
-
-#### 响应
-
-```
-{
-  "friendships":[
-    {
-      "id":<id>,
-      "user_id":<id>,
-      "friend_id":<id>,
-      "contact_name":null,
-      "remarked_name":null,
-      "favored":true,           // 标示是否星组成员
-      "position":1,
-      "favored_position":1,
-      "name":"user1",
-      "created_at":1433930183, // UNIX 时间戳
-      "updated_at":1433930183, // UNIX 时间戳
-      "friend":{
-        <mini_user>
-      }
-    },
-    .
-    .
-    .
-  ],
-}
-```
--->
 
 ## UnfriendRequest 解除好友请求
 
@@ -2581,69 +2517,6 @@ curl -X POST https://api.soyep.com/v1/unfriend_requests -F friend_id=2 -H 'Autho
 
 ## Attachment 附件
 
-### 获取附件上传表单参数
-
-获得S3上传所需的提交的form的参数
-
-具体S3上传需要的格式可参考S3文档或Rails里的上传例子
-[S3文档](http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html)
-
-```
-GET /v1/attachments/:kind/s3_upload_form_fields
-```
-
-#### 参数
-
-名称 | 类型 | 是否必需 | 描述
---- |--- |--- |--- |
-extname | String | 是 | 要上传文件的后缀
-kind | String | 是 | 可选值为：message|topic|avatar，分别对应 消息附件|feed 附件|头像
-
-#### 示例
-
-```
-curl -X GET https://api.soyep.com/v1/attachments/message/s3_upload_form_fields?extname=mp4 -H 'Authorization: Token token="DdPnWxQy6z5axwxZfsjs1427718553.7476008"'
-```
-
-#### 响应
-
-```
-{
-  "provider":"s3",
-  "options":{
-    "bucket":"park-message-attachments",
-    "key":"73d63ba7-d481-49b0-b78d-0a8f6e1dd031.mp4",
-    "url":"https://park-message-attachments.s3.cn-north-1.amazonaws.com.cn/",
-    "policy":{
-      "expiration":"2015-03-30T13:30:44.000Z",
-      "conditions":[
-        {
-          "bucket":"park-message-attachments"
-        },
-        {
-          "key":"73d63ba7-d481-49b0-b78d-0a8f6e1dd031.mp4"
-        },
-        {
-          "acl":"private"
-        },
-        {
-          "x-amz-credential":"AKIAOGBVMZAU5EZPGPIQ/20150330/cn-north-1/s3/aws4_request"
-        },
-        {
-          "x-amz-algorithm":"AWS4-HMAC-SHA256"
-        },
-        {
-          "x-amz-date":"20150330T123044Z"
-        }
-      ]
-    },
-    "encoded_policy":"eyJleHBpcmF0aW9uIjoiMjAxNS0wMy0zMFQxMzozMDo0NC4wMDBaIiwiY29uZGl0aW9ucyI6W3siYnVja2V0IjoicGFyay1tZXNzYWdlLWF0dGFjaG1lbnRzIn0seyJrZXkiOiI3M2Q2M2JhNy1kNDgxLTQ5YjAtYjc4ZC0wYThmNmUxZGQwMzEifSx7ImFjbCI6InByaXZhdGUifSx7IngtYW16LWNyZWRlbnRpYWwiOiJBS0lBT0dCVk1aQVU1RVpQR1BJUS8yMDE1MDMzMC9jbi1ub3J0aC0xL3MzL2F3czRfcmVxdWVzdCJ9LHsieC1hbXotYWxnb3JpdGhtIjoiQVdTNC1ITUFDLVNIQTI1NiJ9LHsieC1hbXotZGF0ZSI6IjIwMTUwMzMwVDEyMzA0NFoifV19",
-    "signature":"fd5fd80aabef5e59b60b0405726dd03958401d60da19cf135dcb9e9f307ac3fd"
-  }
-}
-```
-
-获取上传 form 所需参数后，上传到S3, 拿到 key，在创建消息的时候提交，详见 `POST messages` API
 
 ## Block User API（拒绝接收对方消息）
 
@@ -2996,7 +2869,6 @@ curl https://api.soyep.com/v1/official_messages -H 'Authorization: Token token="
     {
       "id":<id>,
       "media_type":"image",
-      "media_type_string":"一张照片",
       "text_content":"Welcome~",
       "created_at":1434680681.435,
       "updated_at":1434680681.435,
@@ -3185,33 +3057,6 @@ apple_ebook | apple ebook 分享贴  | {"apple_ebook":[{"title":"标题","descri
 
 ```
 curl -XPOST https://api.soyep.com/v1/topics -F body=test -F latitude=11.11 -F longitude=22.22 -F allow_comment=true -F skill_id=cee89797007ab6db9f356f53edd0174a -H 'Authorization: Token token="test-token"'
-```
-
-#### 响应
-
-```
-{
-  <topic>,
-  "distance":12.3 //距离 km
-}
-```
-
-### 更新帖子
-
-```
-PUT /:version/topics/:id
-```
-
-#### 参数
-
-| 名称 | 类型 | 是否必需 | 描述 |
-|---|---|---|---|
-| allow_comment | Boolean | 否 | 是否允许评论 |
-
-#### 示例
-
-```
-curl -XPATCH https://api.soyep.com/v1/topics/516055075accc1e4067dd5ff6b2682cd -F allow_comment=true -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
