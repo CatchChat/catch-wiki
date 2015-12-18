@@ -17,7 +17,7 @@
 cURL 请求范例：
 
 ```
-curl https://www.catchchatserver.com/api/friendships?page=2&per_page=100
+curl https://api.soyep.com/v1/friendships?page=2&per_page=100
 ```
 
 <!---
@@ -28,7 +28,7 @@ curl https://www.catchchatserver.com/api/friendships?page=2&per_page=100
 cURL 请求范例：
 
 ```
-curl -i https://www.catchchatserver.com/api/friendships
+curl -i https://api.soyep.cim/v1/friendships
 ```
 
 返回范例：
@@ -426,7 +426,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 对于1个手机号，1小时内只发送20次，24小时内只发送50次。
 
 ```
-POST /api/v2/sms_verification_codes
+POST /api/v1/sms_verification_codes
 ```
 
 | 参数 | 描述 |
@@ -438,7 +438,7 @@ POST /api/v2/sms_verification_codes
 cURL 请求范例：
 
 ```
-curl -X POST -H "Content-Type: application/json" -d '{"phone_code":"86","mobile":"12345678","method":"sms"}' http://park.catchchatchina.com/api/v2/sms_verification_codes
+curl -X POST -H "Content-Type: application/json" -d '{"phone_code":"86","mobile":"12345678","method":"sms"}' http://api.soyep.com/v1/sms_verification_codes
 ```
 
 返回范例：
@@ -462,7 +462,7 @@ Status: 429 Too Many Requests
 **发送手机号 (mobile) 和验证码 (verify_code)，可获取相应的 access_token。**
 
 ```
-POST /api/v2/auth/token_by_mobile
+POST /api/v1/auth/token_by_mobile
 ```
 
 | 参数 | 描述 |
@@ -478,7 +478,7 @@ cURL 请求范例：
 ```
 curl -X POST   -H "Content-Type: application/json" -d '{"phone_code":"86",
 "mobile":"12345678", "verify_code": "23397"}'
-http://park.catchchatchina.com/api/v2/auth/token_by_mobile
+http://api.soyep.com/v1/auth/token_by_mobile
 ```
 
 返回范例：
@@ -503,7 +503,7 @@ cURL 请求范例（1小时过期）：
 
 curl -X POST -H "Content-Type: application/json" -d '{"phone_code":"86",
 "mobile":"12345678", "verify_code": "23397", "expiring": 3600}'
-http://park.catchchatchina.com/api/v2/auth/token_by_mobile
+http://api.soyep.com/v1/auth/token_by_mobile
 ```
 
 如果手机号和验证码错误，或验证码已经过期，则返回 HTTP 401.
@@ -514,7 +514,7 @@ http://park.catchchatchina.com/api/v2/auth/token_by_mobile
 ### 发送用户名,手机号码，发起注册,等待接收手机验证码
 
 ```
-POST   /api/v2/registration/create
+POST   /api/v1/registration/create
 ```
 
 | 参数 | 描述 |
@@ -530,7 +530,7 @@ cURL 请求范例：
 ```
 curl -X POST -H "Content-Type: application/json" -d '{"phone_code":"86",
 "mobile":"15626044835", "nickname": "testnick", "latitude": 123.123, "longitude": 23.23}'
-http://park.catchchatchina.com/api/v2/registration/create
+http://api.soyep.com/v1/registration/create
 ```
 
 返回范例：
@@ -549,7 +549,7 @@ http://park.catchchatchina.com/api/v2/registration/create
 ### 验证手机验证码完成注册
 
 ```
-PUT   /api/v2/registration/update
+PUT   /api/v1/registration/update
 ```
 | 参数 | 描述 |
 |--------|--------|
@@ -561,7 +561,7 @@ PUT   /api/v2/registration/update
 
 cURL 请求范例：
 ```
- curl -X PUT -H "Content-Type: application/json" -d '{"phone_code":"86","mobile":"15626044835", "token": 70215}' http://park.catchchatchina.com/api/v2/registration/update
+ curl -X PUT -H "Content-Type: application/json" -d '{"phone_code":"86","mobile":"15626044835", "token": 70215}' http://api.soyep.com/v1/registration/update
 
 ```
 返回范例：
@@ -584,13 +584,13 @@ cURL 请求范例：
 现在你可以通过 **access_token** 来调用其他 API 了，比如：
 
 ```
-GET /api/v2/xxx
+GET /api/v1/xxx
 ```
 
 cURL 请求范例：
 
 ```
-curl https://park.catchchatchina.com/api/v2/xxx  -H 'Authorization: Token token="p7DvqB4MoT5ux-B1xg"'
+curl https://api.soyep.com/v1/xxx  -H 'Authorization: Token token="p7DvqB4MoT5ux-B1xg"'
 ```
 
 如果 access_token 不存在或过期了，则返回 HTTP 401
@@ -604,7 +604,7 @@ HTTP Token: Access denied.
 * 此 API 不会返回群组成员，客户端在用户进入某个群的聊天界面后，请求 `获取单个群组` API，可以拿到群组信息以及成员信息 *
 
 ```
-GET /api/v2/circles
+GET /api/v1/circles
 ```
 
 #### 参数
@@ -614,7 +614,7 @@ GET /api/v2/circles
 #### 示例
 
 ```
-curl -X GET https://park.catchchatchina.com/api/v2/circles -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
+curl -X GET https://api.soyep.com/v1/circles -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
 ```
 
 #### 响应
@@ -638,7 +638,7 @@ curl -X GET https://park.catchchatchina.com/api/v2/circles -H 'Authorization: To
 ### 创建群组
 
 ```
-POST /api/v2/circles
+POST /api/v1/circles
 ```
 
 #### 参数
@@ -651,7 +651,7 @@ POST /api/v2/circles
 #### 示例
 
 ```
-curl -i -X POST https://park.catchchatchina.com/api/v2/circles -d '{ "members": [3,4,5], "name": "群组" }' -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"' -H "Content-Type: application/json"
+curl -i -X POST https://api.soyep.com/v1/circles -d '{ "members": [3,4,5], "name": "群组" }' -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"' -H "Content-Type: application/json"
 ```
 
 #### 响应
@@ -677,7 +677,7 @@ curl -i -X POST https://park.catchchatchina.com/api/v2/circles -d '{ "members": 
 ### 更新群组
 
 ```
-PUT /api/v2/circles/:id
+PUT /api/v1/circles/:id
 ```
 
 #### 参数
@@ -690,7 +690,7 @@ PUT /api/v2/circles/:id
 #### 示例
 
 ```
-curl -X PUT https://park.catchchatchina.com/api/v2/circles/2 -d '{ "name": "群组" }' -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"' -H "Content-Type: application/json"
+curl -X PUT https://api.soyep.com/v1/circles/2 -d '{ "name": "群组" }' -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"' -H "Content-Type: application/json"
 ```
 
 #### 响应
@@ -716,7 +716,7 @@ curl -X PUT https://park.catchchatchina.com/api/v2/circles/2 -d '{ "name": "群�
 ### 获取单个群组
 
 ```
-GET /api/v2/circles/:id
+GET /api/v1/circles/:id
 ```
 
 #### 参数
@@ -728,7 +728,7 @@ GET /api/v2/circles/:id
 #### 示例
 
 ```
-curl -X GET https://park.catchchatchina.com/api/v2/circles/2 -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"'
+curl -X GET https://api.soyep.com/v1/circles/2 -H 'Authorization: Token token="r6yCiGr4N2oYyMzL65sr1422524661.762872"'
 ```
 
 #### 响应
@@ -754,7 +754,7 @@ curl -X GET https://park.catchchatchina.com/api/v2/circles/2 -H 'Authorization: 
 ### 加入群组
 
 ```
-POST /api/v2/circles/:id/join
+POST /api/v1/circles/:id/join
 ```
 
 #### 参数
@@ -766,7 +766,7 @@ POST /api/v2/circles/:id/join
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v2/circles/2/join -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
+curl -X POST https://api.soyep.com/v1/circles/2/join -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
 ```
 
 #### 响应
@@ -792,7 +792,7 @@ curl -X POST https://park.catchchatchina.com/api/v2/circles/2/join -H 'Authoriza
 ### 退出群组
 
 ```
-DELETE /api/v2/circles/:id/leave
+DELETE /api/v1/circles/:id/leave
 ```
 
 #### 参数
@@ -804,7 +804,7 @@ DELETE /api/v2/circles/:id/leave
 #### 示例
 
 ```
-curl -X DELETE https://park.catchchatchina.com/api/v2/circles/2/leave -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
+curl -X DELETE https://api.soyep.com/v1/circles/2/leave -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
 ```
 
 #### 响应
@@ -814,7 +814,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v2/circles/2/leave -H 'Author
 ### 批量添加成员
 
 ```
-POST /api/v2/circles/:id/batch_add
+POST /api/v1/circles/:id/batch_add
 ```
 
 #### 参数
@@ -827,7 +827,7 @@ POST /api/v2/circles/:id/batch_add
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v2/circles/2/batch_add -d '{ "members": [4,5] }' -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"' -H "Content-Type: application/json"
+curl -X POST https://api.soyep.com/v1/circles/2/batch_add -d '{ "members": [4,5] }' -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"' -H "Content-Type: application/json"
 ```
 
 #### 响应
@@ -853,7 +853,7 @@ curl -X POST https://park.catchchatchina.com/api/v2/circles/2/batch_add -d '{ "m
 ### 批量删除成员（只能是群 owner 才能删除成员）
 
 ```
-DELETE /api/v2/circles/:id/batch_delete
+DELETE /api/v1/circles/:id/batch_delete
 ```
 
 #### 参数
@@ -866,7 +866,7 @@ DELETE /api/v2/circles/:id/batch_delete
 #### 示例
 
 ```
-curl -X DELETE https://park.catchchatchina.com/api/v2/circles/2/batch_delete -d '{ "members": [4,5] }' -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"' -H "Content-Type: application/json"
+curl -X DELETE https://api.soyep.com/v1/circles/2/batch_delete -d '{ "members": [4,5] }' -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"' -H "Content-Type: application/json"
 ```
 
 #### 响应
@@ -892,7 +892,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v2/circles/2/batch_delete -d 
 ### 获取分享链接
 
 ```
-POST /api/v2/circles/:id/share
+POST /api/v1/circles/:id/share
 ```
 
 #### 参数
@@ -904,7 +904,7 @@ POST /api/v2/circles/:id/share
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v2/circles/516055075accc1e4067dd5ff6b2682cd/share -H 'Authorization: Token token="test-token"'
+curl -X POST https://api.soyep.com/v1/circles/516055075accc1e4067dd5ff6b2682cd/share -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -918,7 +918,7 @@ curl -X POST https://park.catchchatchina.com/api/v2/circles/516055075accc1e4067d
 **无需登录，获取分享时最近的 25 条消息，支持 jsonp**
 
 ```
-GET /api/v2/circles/shared_messages
+GET /api/v1/circles/shared_messages
 ```
 
 #### 参数
@@ -930,7 +930,7 @@ GET /api/v2/circles/shared_messages
 #### 示例
 
 ```
-curl -X GET https://park.catchchatchina.com/api/v2/circles/shared_messages?token=qRLyR3jBQslCQlgADuevpwlEDLBTm28vI-t1eAioHvg=
+curl -X GET https://api.soyep.com/v1/circles/shared_messages?token=qRLyR3jBQslCQlgADuevpwlEDLBTm28vI-t1eAioHvg=
 ```
 
 #### 响应
@@ -952,7 +952,7 @@ curl -X GET https://park.catchchatchina.com/api/v2/circles/shared_messages?token
 ### 检查当前用户是否在指定群组中
 
 ```
-GET /api/v2/circles/:id/check_me_exist
+GET /api/v1/circles/:id/check_me_exist
 ```
 
 #### 参数
@@ -962,7 +962,7 @@ GET /api/v2/circles/:id/check_me_exist
 #### 示例
 
 ```
-curl -X GET https://park.catchchatchina.com/api/v2/circles/516055075accc1e4067dd5ff6b2682cd/check_me_exist -H 'Authorization: Token token="test-token"'
+curl -X GET https://api.soyep.com/v1/circles/516055075accc1e4067dd5ff6b2682cd/check_me_exist -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -974,7 +974,7 @@ curl -X GET https://park.catchchatchina.com/api/v2/circles/516055075accc1e4067dd
 ### 当前用户设置指定群组为免打扰
 
 ```
-POST /api/v2/circles/:id/dnd
+POST /api/v1/circles/:id/dnd
 ```
 
 #### 参数
@@ -986,7 +986,7 @@ POST /api/v2/circles/:id/dnd
 #### 示例
 
 ```
-curl -XPOST https://park.catchchatchina.com/api/v2/circles/2/dnd -H 'Authorization: Token token="test-token"'
+curl -XPOST https://api.soyep.com/v1/circles/2/dnd -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -996,7 +996,7 @@ curl -XPOST https://park.catchchatchina.com/api/v2/circles/2/dnd -H 'Authorizati
 ### 当前用户取消设置指定群组为免打扰
 
 ```
-DELETE /api/v2/circles/:id/dnd
+DELETE /api/v1/circles/:id/dnd
 ```
 
 #### 参数
@@ -1008,7 +1008,7 @@ DELETE /api/v2/circles/:id/dnd
 #### 示例
 
 ```
-curl -XDELETE https://park.catchchatchina.com/api/v2/circles/2/dnd -H 'Authorization: Token token="test-token"'
+curl -XDELETE https://api.soyep.com/v1/circles/2/dnd -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -1018,7 +1018,7 @@ curl -XDELETE https://park.catchchatchina.com/api/v2/circles/2/dnd -H 'Authoriza
 ### 获取当前用户对指定群组的免打扰设置
 
 ```
-GET /api/v2/circles/:id/dnd
+GET /api/v1/circles/:id/dnd
 ```
 
 #### 参数
@@ -1030,7 +1030,7 @@ GET /api/v2/circles/:id/dnd
 #### 示例
 
 ```
-curl -XGET https://park.catchchatchina.com/api/v2/circles/2/dnd -H 'Authorization: Token token="test-token"'
+curl -XGET https://api.soyep.com/v1/circles/2/dnd -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -1044,7 +1044,7 @@ curl -XGET https://park.catchchatchina.com/api/v2/circles/2/dnd -H 'Authorizatio
 ### 可能认识的好友
 
 ```
-GET /api/v2/user/may_know_friends
+GET /api/v1/user/may_know_friends
 ```
 
 #### 参数
@@ -1054,7 +1054,7 @@ GET /api/v2/user/may_know_friends
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/user/may_know_friends -H Authorization: Token token="kuH3PbRifgSATCanYwxd1418031570.162303"'
+curl https://api.soyep.com/v1/user/may_know_friends -H Authorization: Token token="kuH3PbRifgSATCanYwxd1418031570.162303"'
 ```
 
 #### 响应
@@ -1081,7 +1081,7 @@ curl https://park.catchchatchina.com/api/v2/user/may_know_friends -H Authorizati
 ### 获取个人信息
 
 ```
-GET /api/v2/user
+GET /api/v1/user
 ```
 
 #### 参数
@@ -1091,7 +1091,7 @@ GET /api/v2/user
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/user -H 'Authorization: Token oken="kuH3PbRifgSATCanYwxd1418031570.162303"'
+curl https://api.soyep.com/v1/user -H 'Authorization: Token oken="kuH3PbRifgSATCanYwxd1418031570.162303"'
 ```
 
 #### 响应
@@ -1115,7 +1115,7 @@ curl https://park.catchchatchina.com/api/v2/user -H 'Authorization: Token oken="
 `mute_started_at_string` 和 `mute_ended_at_string` 都有值时，勿扰功能开启，都为空时，勿扰功能关闭。
 
 ```
-PATCH /api/v2/user
+PATCH /api/v1/user
 ```
 
 #### 参数
@@ -1136,7 +1136,7 @@ PATCH /api/v2/user
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v2/user -F badge=apple -F username=tumayun -F latitude=26.331920 -F longitude=168.3097112 -F nickname=Tumayun -F avatar_url=http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg -F push_content=false -F mute_started_at_string=23:30 -F mute_ended_at_string=07:30 -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+curl -X PATCH https://api.soyep.com/v1/user -F badge=apple -F username=tumayun -F latitude=26.331920 -F longitude=168.3097112 -F nickname=Tumayun -F avatar_url=http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg -F push_content=false -F mute_started_at_string=23:30 -F mute_ended_at_string=07:30 -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
 ```
 
 #### 响应
@@ -1157,15 +1157,15 @@ curl -X PATCH https://park.catchchatchina.com/api/v2/user -F badge=apple -F user
 
 ### 更新手机号流程
 
-1. 发送当前手机号验证码 (POST /api/v2/sms_verification_codes)
-2. 校验当前手机号验证码  (PATCH /api/v2/user/check_verify_code)
-3. 发送新手机号验证码 (POST /api/v2/user/send_update_mobile_code)
-4. 校验新手机号验证码，通关验证后更新手机号为新手机好 (PATCH /api/v2/user/update_mobile)
+1. 发送当前手机号验证码 (POST /api/v1/sms_verification_codes)
+2. 校验当前手机号验证码  (PATCH /api/v1/user/check_verify_code)
+3. 发送新手机号验证码 (POST /api/v1/user/send_update_mobile_code)
+4. 校验新手机号验证码，通关验证后更新手机号为新手机好 (PATCH /api/v1/user/update_mobile)
 
 ### 验证更新手机号请求的验证码
 
 ```
-PATCH /api/v2/user/check_verify_code
+PATCH /api/v1/user/check_verify_code
 ```
 
 #### 参数
@@ -1177,7 +1177,7 @@ PATCH /api/v2/user/check_verify_code
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v2/user/check_verify_code -F token=1234 -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+curl -X PATCH https://api.soyep.com/v1/user/check_verify_code -F token=1234 -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
 ```
 
 #### 响应
@@ -1189,7 +1189,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v2/user/check_verify_code -F t
 ### 发送新手机号验证码
 
 ```
-POST /api/v2/user/send_update_mobile_code
+POST /api/v1/user/send_update_mobile_code
 ```
 
 #### 参数
@@ -1203,7 +1203,7 @@ POST /api/v2/user/send_update_mobile_code
 #### 示例
 
 ```
-curl -X POST -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"' -H "Content-Type: application/json" -d '{"phone_code":"86","mobile":"12345678","method":"sms"}' https://park.catchchatchina.com/api/v2/user/send_update_mobile_code
+curl -X POST -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"' -H "Content-Type: application/json" -d '{"phone_code":"86","mobile":"12345678","method":"sms"}' https://api.soyep.com/v1/user/send_update_mobile_code
 ```
 
 #### 响应
@@ -1215,7 +1215,7 @@ curl -X POST -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.20538
 ### 更新手机号
 
 ```
-PATCH /api/v2/user/update_mobile
+PATCH /api/v1/user/update_mobile
 ```
 
 #### 参数
@@ -1229,7 +1229,7 @@ PATCH /api/v2/user/update_mobile
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v2/user/update_mobile -F phone_ode=86 -F mobile=15158166372 -F token=131421 -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+curl -X PATCH https://api.soyep.com/v1/user/update_mobile -F phone_ode=86 -F mobile=15158166372 -F token=131421 -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
 ```
 
 #### 响应
@@ -1241,7 +1241,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v2/user/update_mobile -F phone
 ### Discover 发现
 
 ```
-GET /api/v2/user/discover
+GET /api/v1/user/discover
 ```
 
 如果传入`master_skills`和`learning_skills`参数，则按照传入参数匹配目标用户；
@@ -1259,7 +1259,7 @@ GET /api/v2/user/discover
 #### 示例
 
 ```
-curl -X GET https://park.catchchatchina.com/api/v2/user/discover -d '{ "master_skills": [<id>], "learning_skills": [<id>] }' -H 'Authorization: Token token="xfNa4ZYEQKLynYgbAfHB1427176878.549557"' -H 'Content-Type: application/json'
+curl -X GET https://api.soyep.com/v1/user/discover -d '{ "master_skills": [<id>], "learning_skills": [<id>] }' -H 'Authorization: Token token="xfNa4ZYEQKLynYgbAfHB1427176878.549557"' -H 'Content-Type: application/json'
 ```
 
 #### 响应
@@ -1291,7 +1291,7 @@ curl -X GET https://park.catchchatchina.com/api/v2/user/discover -d '{ "master_s
 ### 获取 provider 信息（github instagram dribbble）
 
 ```
-GET /api/v2/user/:provider
+GET /api/v1/user/:provider
 ```
 
 #### 参数
@@ -1303,7 +1303,7 @@ GET /api/v2/user/:provider
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/user/github -H 'Authorization: Token token="test-token"'
+curl https://api.soyep.com/v1/user/github -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -1313,7 +1313,7 @@ github instagram dribbble 返回各不一样，从各平台拿到数据后原样
 ### 获取 provider tokens
 
 ```
-GET /api/v2/user/provider_tokens
+GET /api/v1/user/provider_tokens
 ```
 
 #### 参数
@@ -1323,7 +1323,7 @@ GET /api/v2/user/provider_tokens
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/user/provider_tokens -H 'Authorization: Token token="test-token"'
+curl https://api.soyep.com/v1/user/provider_tokens -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -1343,7 +1343,7 @@ curl https://park.catchchatchina.com/api/v2/user/provider_tokens -H 'Authorizati
 **覆盖式上传，上传后会删除之前的通讯录，返回已注册的通讯录好友，并且自动添加好友**
 
 ```
-POST /api/v2/contacts/upload
+POST /api/v1/contacts/upload
 ```
 
 #### 参数
@@ -1355,7 +1355,7 @@ POST /api/v2/contacts/upload
 #### 示例
 
 ```
-curl htts://park.catchchatchina.com/api/v2/contacts/upload -F contacts="[{\"name\":\"abc\",\"number\":\"15158160004\"},{\"name\":\"bac\",\"number\":\"15158160005\"}]" -H 'Authorization: Token token="sVNxda9nywMLZkuzUqf31422601654.468095"'
+curl htts://api.soyep.com/v1/contacts/upload -F contacts="[{\"name\":\"abc\",\"number\":\"15158160004\"},{\"name\":\"bac\",\"number\":\"15158160005\"}]" -H 'Authorization: Token token="sVNxda9nywMLZkuzUqf31422601654.468095"'
 ```
 
 #### 响应
@@ -1380,7 +1380,7 @@ curl htts://park.catchchatchina.com/api/v2/contacts/upload -F contacts="[{\"name
 ### 搜索用户
 
 ```
-GET api/v2/users/search
+GET api/v1/users/search
 ```
 
 #### 参数
@@ -1392,7 +1392,7 @@ GET api/v2/users/search
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/users/search\?q\=15158161111 -H 'Authorization: Token token="EtErCK18xN9pxakiCPp61418029033.582837"'
+curl https://api.soyep.com/v1/users/search\?q\=15158161111 -H 'Authorization: Token token="EtErCK18xN9pxakiCPp61418029033.582837"'
 ```
 
 #### 响应
@@ -1414,7 +1414,7 @@ curl https://park.catchchatchina.com/api/v2/users/search\?q\=15158161111 -H 'Aut
 ### 校验手机号是否可用（无需登录）
 
 ```
-GET api/v2/users/mobile_validate
+GET api/v1/users/mobile_validate
 ```
 ** phone code 合法, mobile 合法，且具有唯一性    
 在设置中修改手机号时，不能拿当前手机号去校验，否则会返回手机号已经被使用**
@@ -1429,7 +1429,7 @@ GET api/v2/users/mobile_validate
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/users/mobile_validate\?phone_code\=86\&mobile\=15158166372
+curl https://api.soyep.com/v1/users/mobile_validate\?phone_code\=86\&mobile\=15158166372
 ```
 
 #### 响应
@@ -1454,7 +1454,7 @@ curl https://park.catchchatchina.com/api/v2/users/mobile_validate\?phone_code\=8
 ### 获取指定用户的 provider 信息（github instagram dribbble）
 
 ```
-GET /api/v2/users/:id/:provider
+GET /api/v1/users/:id/:provider
 ```
 
 #### 参数
@@ -1467,7 +1467,7 @@ GET /api/v2/users/:id/:provider
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/users/90913b93738c8a627129e49db32eeec3/github -H 'Authorization: Token token="test-token"'
+curl https://api.soyep.com/v1/users/90913b93738c8a627129e49db32eeec3/github -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -1477,7 +1477,7 @@ github instagram dribbble 返回各不一样，从各平台拿到数据后原样
 ### 获取指定用户信息（by id）
 
 ```
-GET /api/v2/users/:id
+GET /api/v1/users/:id
 ```
 
 #### 参数
@@ -1489,7 +1489,7 @@ GET /api/v2/users/:id
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/users/90913b93738c8a627129e49db32eeec3 -H 'Authorization: Token token="test-token"'
+curl https://api.soyep.com/v1/users/90913b93738c8a627129e49db32eeec3 -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -1505,7 +1505,7 @@ curl https://park.catchchatchina.com/api/v2/users/90913b93738c8a627129e49db32eee
 **支持 JSONP，分享用户 profile 页专用，无需登录！**
 
 ```
-GET /api/v2/users/:username/profile
+GET /api/v1/users/:username/profile
 ```
 
 #### 参数
@@ -1517,7 +1517,7 @@ GET /api/v2/users/:username/profile
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/users/tumayun/profile
+curl https://api.soyep.com/v1/users/tumayun/profile
 ```
 
 #### 响应
@@ -1540,7 +1540,7 @@ curl https://park.catchchatchina.com/api/v2/users/tumayun/profile
 2. 当前用户是否将指定用户设置为免打扰
 
 ```
-GET /api/v2/users/:id/settings_with_current_user
+GET /api/v1/users/:id/settings_with_current_user
 ```
 
 #### 参数
@@ -1552,7 +1552,7 @@ GET /api/v2/users/:id/settings_with_current_user
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/users/90913b93738c8a627129e49db32eeec3/settings_with_current_user -H 'Authorization: Token token="test-token"'
+curl https://api.soyep.com/v1/users/90913b93738c8a627129e49db32eeec3/settings_with_current_user -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -1567,7 +1567,7 @@ curl https://park.catchchatchina.com/api/v2/users/90913b93738c8a627129e49db32eee
 ### 当前登录用户设置指定用户为免打扰
 
 ```
-POST /api/v2/users/:id/dnd
+POST /api/v1/users/:id/dnd
 ```
 
 #### 参数
@@ -1579,7 +1579,7 @@ POST /api/v2/users/:id/dnd
 #### 示例
 
 ```
-curl -XPOST https://park.catchchatchina.com/api/v2/users/90913b93738c8a627129e49db32eeec3/dnd -H 'Authorization: Token token="test-token"'
+curl -XPOST https://api.soyep.com/v1/users/90913b93738c8a627129e49db32eeec3/dnd -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -1589,7 +1589,7 @@ curl -XPOST https://park.catchchatchina.com/api/v2/users/90913b93738c8a627129e49
 ### 当前登录用户取消设置指定用户为免打扰
 
 ```
-DELETE /api/v2/users/:id/dnd
+DELETE /api/v1/users/:id/dnd
 ```
 
 #### 参数
@@ -1601,7 +1601,7 @@ DELETE /api/v2/users/:id/dnd
 #### 示例
 
 ```
-curl -XDELETE https://park.catchchatchina.com/api/v2/users/90913b93738c8a627129e49db32eeec3/dnd -H 'Authorization: Token token="test-token"'
+curl -XDELETE https://api.soyep.com/v1/users/90913b93738c8a627129e49db32eeec3/dnd -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -1611,7 +1611,7 @@ curl -XDELETE https://park.catchchatchina.com/api/v2/users/90913b93738c8a627129e
 ### 获取擅长指定技能的用户
 
 ```
-GET api/v2/master_skills/:skill_id/users
+GET api/v1/master_skills/:skill_id/users
 ```
 
 #### 参数
@@ -1621,7 +1621,7 @@ GET api/v2/master_skills/:skill_id/users
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/master_skills/90913b93738c8a627129e49db32eeec3/users -H 'Authorization: Token token="test-token"'
+curl https://api.soyep.com/v1/master_skills/90913b93738c8a627129e49db32eeec3/users -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -1643,7 +1643,7 @@ curl https://park.catchchatchina.com/api/v2/master_skills/90913b93738c8a627129e4
 ### 获取正在学习指定技能的用户
 
 ```
-GET api/v2/learning_skills/:skill_id/users
+GET api/v1/learning_skills/:skill_id/users
 ```
 
 #### 参数
@@ -1653,7 +1653,7 @@ GET api/v2/learning_skills/:skill_id/users
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/learning_skills/90913b93738c8a627129e49db32eeec3/users -H 'Authorization: Token token="test-token"'
+curl https://api.soyep.com/v1/learning_skills/90913b93738c8a627129e49db32eeec3/users -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -1679,7 +1679,7 @@ curl https://park.catchchatchina.com/api/v2/learning_skills/90913b93738c8a627129
 每个聊天窗口至多返回10条未读消息，进入聊天窗口后想要获取更多消息可以请求消息历史API
 
 ```
-GET /api/v2/messages/unread
+GET /api/v1/messages/unread
 ```
 
 #### 参数
@@ -1689,7 +1689,7 @@ GET /api/v2/messages/unread
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/messages/unread -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
+curl https://api.soyep.com/v1/messages/unread -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
 ```
 
 #### 响应
@@ -1714,7 +1714,7 @@ curl https://park.catchchatchina.com/api/v2/messages/unread -H 'Authorization: T
 ### 发送消息
 
 ```
-POST /api/v2/:recipient_type/:recipient_id/messages
+POST /api/v1/:recipient_type/:recipient_id/messages
 ```
 
 #### 参数
@@ -1755,7 +1755,7 @@ sticker | 附件是一副贴纸
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v2/users/<id>/messages -d '{ "text_content": "This is a test!", "media_type": "image", "attachments": { "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] } }' -H 'Authorization: Token token="NDccv1Yvdi9UKtwPToxx1416921006.674603"' -H "Content-Type: application/json"
+curl -X POST https://api.soyep.com/v1/users/<id>/messages -d '{ "text_content": "This is a test!", "media_type": "image", "attachments": { "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] } }' -H 'Authorization: Token token="NDccv1Yvdi9UKtwPToxx1416921006.674603"' -H "Content-Type: application/json"
 ```
 
 #### 响应
@@ -1783,7 +1783,7 @@ faye server 的已读确认消息结构如下：
 ```
 
 ```
-PATCH /api/v2/:recipient_type/:recipient_id/messages/batch_mark_as_read
+PATCH /api/v1/:recipient_type/:recipient_id/messages/batch_mark_as_read
 ```
 
 #### 参数
@@ -1797,7 +1797,7 @@ max_id | String | 是 | 最新读取的消息 ID
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v2/users/<id>/messages/batch_mark_as_read -H 'Authorization: Token token="test-token"' -F max_id=<id>
+curl -X PATCH https://api.soyep.com/v1/users/<id>/messages/batch_mark_as_read -H 'Authorization: Token token="test-token"' -F max_id=<id>
 ```
 
 #### 响应
@@ -1843,7 +1843,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v2/users/<id>/messages/batch_m
 ```
 
 ```
-DELETE /api/v2/messages/:id
+DELETE /api/v1/messages/:id
 ```
 
 #### 参数
@@ -1855,7 +1855,7 @@ DELETE /api/v2/messages/:id
 #### 示例
 
 ```
-curl -X DELETE https://park.catchchatchina.com/api/v2/messages/<id> -H 'Authorization: Token token="yChytb7mKMbs5EZPK8jp1435855393.5408268"'
+curl -X DELETE https://api.soyep.com/v1/messages/<id> -H 'Authorization: Token token="yChytb7mKMbs5EZPK8jp1435855393.5408268"'
 ```
 
 #### 响应
@@ -1878,7 +1878,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v2/messages/<id> -H 'Authoriz
 **按创建时间倒序返回**
 
 ```
-GET /api/v2/:recipient_type/:recipient_id/messages
+GET /api/v1/:recipient_type/:recipient_id/messages
 ```
 
 #### 参数
@@ -1893,12 +1893,12 @@ GET /api/v2/:recipient_type/:recipient_id/messages
 #### 示例
 
 ```
-curl -X GET https://park.catchchatchina.com/api/v2/users/<id>/messages -H 'Authorization: Token token="yChytb7mKMbs5EZPK8jp1435855393.5408268"'
+curl -X GET https://api.soyep.com/v1/users/<id>/messages -H 'Authorization: Token token="yChytb7mKMbs5EZPK8jp1435855393.5408268"'
 ```
 
 #### 响应
 
-同`GET /api/v2/messages/unread`
+同`GET /api/v1/messages/unread`
 
 ### 获取指定聊天窗口的未读消息
 
@@ -1920,7 +1920,7 @@ GET /api/:version/:recipient_type/:recipient_id/messages/unread
 #### 示例
 
 ```
-curl -X GET https://park.catchchatchina.com/api/v2/users/<id>/messages/unread -H 'Authorization: Token token="yChytb7mKMbs5EZPK8jp1435855393.5408268"'
+curl -X GET https://api.soyep.com/v1/users/<id>/messages/unread -H 'Authorization: Token token="yChytb7mKMbs5EZPK8jp1435855393.5408268"'
 ```
 
 #### 响应
@@ -1954,7 +1954,7 @@ GET /api/:version/:recipient_type/:recipient_id/messages/sent_last_read_at
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/users/<id>/messages/sent_last_read_at -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
+curl https://api.soyep.com/v1/users/<id>/messages/sent_last_read_at -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
 ```
 
 #### 响应
@@ -1980,7 +1980,7 @@ state | String | 是 | `:state` 是状态，可选：`pending`, `accepted`, `rej
 #### 示例
 
 ```
-curl https://catchchatserver.com/api/v4/friend_requests/received/accepted -H 'Authorization: Token token=DR-2ye_k9HzcMHZKEaHe1416646800.2446852'
+curl https://api.soyep.cim/v1/friend_requests/received/accepted -H 'Authorization: Token token=DR-2ye_k9HzcMHZKEaHe1416646800.2446852'
 ```
 
 #### 响应
@@ -2029,7 +2029,7 @@ state | String | 是 | `:state` 是状态，可选：`pending`, `accepted`, `rej
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/friend_requests/sent/accepted -H 'Authorization: Token token="s96vf4aWCz6i3nzwaS_Z1422855236.287788"'
+curl https://api.soyep.com/v1/friend_requests/sent/accepted -H 'Authorization: Token token="s96vf4aWCz6i3nzwaS_Z1422855236.287788"'
 ```
 
 #### 响应
@@ -2075,7 +2075,7 @@ friend_id | Integer | 是 | 要添加的好友ID
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v2/friend_requests -F friend_id=8 -H 'Authorization: Token token=ZV5HH2XzrBQTgzL1NW1v1416645756.998624'
+curl -X POST https://api.soyep.com/v1/friend_requests -F friend_id=8 -H 'Authorization: Token token=ZV5HH2XzrBQTgzL1NW1v1416645756.998624'
 ```
 
 #### 响应
@@ -2111,7 +2111,7 @@ id | Integer | 是 | friend_request ID
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v2/friend_requests/received/7/accept  -H 'Authorization: Token token=ZV5HH2XzrBQTgzL1NW1v1416645756.998624'
+curl -X PATCH https://api.soyep.com/v1/friend_requests/received/7/accept  -H 'Authorization: Token token=ZV5HH2XzrBQTgzL1NW1v1416645756.998624'
 ```
 
 #### 响应
@@ -2147,7 +2147,7 @@ id | Integer | 是 | friend_request ID
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v2/friend_requests/received/7/reject -H 'Authorization: Token token=XVVP8GpgezByNjhjWaEs1416648757.346672'
+curl -X PATCH https://api.soyep.com/v1/friend_requests/received/7/reject -H 'Authorization: Token token=XVVP8GpgezByNjhjWaEs1416648757.346672'
 ```
 
 #### 响应
@@ -2171,7 +2171,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v2/friend_requests/received/7/
 ### 查询当前用户是否发送或者接收过指定用户的好友请求
 
 ```
-GET /api/v2/friend_requests/with_user/:user_id
+GET /api/v1/friend_requests/with_user/:user_id
 ```
 
 #### 参数
@@ -2183,7 +2183,7 @@ user_id | String | 是 | User ID
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/friend_requests/with_user/ba994ac6dba5bc71489ab75fd5b8574c -H 'Authorization: Token token="test-token"'
+curl https://api.soyep.com/v1/friend_requests/with_user/ba994ac6dba5bc71489ab75fd5b8574c -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -2221,7 +2221,7 @@ curl https://park.catchchatchina.com/api/v2/friend_requests/with_user/ba994ac6db
 按照 position 升序排列，最近联系过的好友越靠前 
 
 ```
-GET /api/v2/friendships
+GET /api/v1/friendships
 ```
 #### 参数
 
@@ -2230,7 +2230,7 @@ GET /api/v2/friendships
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/friendships\?page\=1\&per_page\=10 -H 'Authorization: Token token=8ni89Uirfva2Zyyzq1ou1416506910.739525'
+curl https://api.soyep.com/v1/friendships\?page\=1\&per_page\=10 -H 'Authorization: Token token=8ni89Uirfva2Zyyzq1ou1416506910.739525'
 ```
 
 #### 响应
@@ -2269,7 +2269,7 @@ curl https://park.catchchatchina.com/api/v2/friendships\?page\=1\&per_page\=10 -
 最近三天有过联系的好友，包括发送消息给我的和我发过消息的好友
 
 ```
-GET /api/v2/friendships/recent
+GET /api/v1/friendships/recent
 ```
 
 #### 参数
@@ -2279,7 +2279,7 @@ GET /api/v2/friendships/recent
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/friendships/recent\?page\=1\&per_page\=10 -H 'Authorization: Token token=8ni89Uirfva2Zyyzq1ou1416506910.739525'
+curl https://api.soyep.com/v1/friendships/recent\?page\=1\&per_page\=10 -H 'Authorization: Token token=8ni89Uirfva2Zyyzq1ou1416506910.739525'
 ```
 
 #### 响应
@@ -2316,7 +2316,7 @@ curl https://park.catchchatchina.com/api/v2/friendships/recent\?page\=1\&per_pag
 ### 某一好友的详细信息(by friendship id)
 
 ```
-GET /api/v2/friendships/:id
+GET /api/v1/friendships/:id
 ```
 
 #### 参数
@@ -2328,7 +2328,7 @@ id | Integer | 是 | friendship id
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/friendships/27 -H 'Authorization: Token token="8ni89Uirfva2Zyyzq1ou1416506910.739525"'
+curl https://api.soyep.com/v1/friendships/27 -H 'Authorization: Token token="8ni89Uirfva2Zyyzq1ou1416506910.739525"'
 ```
 
 #### 响应
@@ -2355,7 +2355,7 @@ curl https://park.catchchatchina.com/api/v2/friendships/27 -H 'Authorization: To
 ### 某一好友的详细信息(by friend id)
 
 ```
-GET /api/v2/friendships/with/:friend_id
+GET /api/v1/friendships/with/:friend_id
 ```
 
 #### 参数
@@ -2367,7 +2367,7 @@ friend_id | Integer | 是 | friend id
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/friendships/with/14 -H 'Authorization: Token token="8ni89Uirfva2Zyyzq1ou1416506910.739525"'
+curl https://api.soyep.com/v1/friendships/with/14 -H 'Authorization: Token token="8ni89Uirfva2Zyyzq1ou1416506910.739525"'
 ```
 
 #### 响应
@@ -2394,7 +2394,7 @@ curl https://park.catchchatchina.com/api/v2/friendships/with/14 -H 'Authorizatio
 ### 更新好友信息
 
 ```
-PATCH /api/v2/friendships/:id
+PATCH /api/v1/friendships/:id
 ```
 
 #### 参数
@@ -2408,7 +2408,7 @@ contact_name | String | 否 | 通讯录名
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v2/friendships/13 -F contact_name=contact_name -F remarked_name=remarked_name -H 'Authorization: Token token="sVNxda9nywMLZkuzUqf31422601654.468095"'
+curl -X PATCH https://api.soyep.com/v1/friendships/13 -F contact_name=contact_name -F remarked_name=remarked_name -H 'Authorization: Token token="sVNxda9nywMLZkuzUqf31422601654.468095"'
 ```
 
 #### 响应
@@ -2447,7 +2447,7 @@ q | String | 是 | remarked_name 或者 contact_name 或者 nickname 或者 mobi
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/friendships/search\?q\=1515816 -H 'Authorization: Token token="8ni89Uirfva2Zyyzq1ou1416506910.739525"'
+curl https://api.soyep.com/v1/friendships/search\?q\=1515816 -H 'Authorization: Token token="8ni89Uirfva2Zyyzq1ou1416506910.739525"'
 ```
 
 #### 响应
@@ -2484,7 +2484,7 @@ curl https://park.catchchatchina.com/api/v2/friendships/search\?q\=1515816 -H 'A
 ### 好友置顶
 
 ```
-PATCH /api/v2/friendships/:id/move_to_top
+PATCH /api/v1/friendships/:id/move_to_top
 ```
 #### 参数
 
@@ -2495,7 +2495,7 @@ id | Integer | 是 | friendship id
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v2/friendships/3/move_to_top -H 'Authorization: Token token="8ni89Uirfva2Zyyzq1ou1416506910.739525"'
+curl -X PATCH https://api.soyep.com/v1/friendships/3/move_to_top -H 'Authorization: Token token="8ni89Uirfva2Zyyzq1ou1416506910.739525"'
 ```
 
 #### 响应
@@ -2507,7 +2507,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v2/friendships/3/move_to_top -
 ### 批量设置星组好友
 
 ```
-PATCH /api/v2/friendships/batch_mark_as_favored
+PATCH /api/v1/friendships/batch_mark_as_favored
 ```
 
 **按照提交的ID顺序覆盖式设置星组好友**
@@ -2521,7 +2521,7 @@ ids | Integer | 是 | friendship ids
 #### 示例
 
 ```
-curl -X PATCH https://park.catchchatchina.com/api/v2/friendships/batch_mark_as_favored -d '{ "ids": [3,5,1] }' -H "Content-Type: application/json" -H 'Authorization: Token token="wcdyPGTv3HqZ76vZt5VR1422869949.0730119"'
+curl -X PATCH https://api.soyep.com/v1/friendships/batch_mark_as_favored -d '{ "ids": [3,5,1] }' -H "Content-Type: application/json" -H 'Authorization: Token token="wcdyPGTv3HqZ76vZt5VR1422869949.0730119"'
 ```
 
 #### 响应
@@ -2558,7 +2558,7 @@ curl -X PATCH https://park.catchchatchina.com/api/v2/friendships/batch_mark_as_f
 ### 新建请求解除好友关系
 
 ```
-POST /api/v2/unfriend_requests
+POST /api/v1/unfriend_requests
 ```
 
 #### 参数
@@ -2570,7 +2570,7 @@ POST /api/v2/unfriend_requests
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v2/unfriend_requests -F friend_id=2 -H 'Authorization: Token token="yZp5UZMeCB8yKBUy_ae81416827431.104971"'
+curl -X POST https://api.soyep.com/v1/unfriend_requests -F friend_id=2 -H 'Authorization: Token token="yZp5UZMeCB8yKBUy_ae81416827431.104971"'
 ```
 
 #### 响应
@@ -2589,7 +2589,7 @@ curl -X POST https://park.catchchatchina.com/api/v2/unfriend_requests -F friend_
 [S3文档](http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html)
 
 ```
-GET /api/v2/attachments/:kind/s3_upload_form_fields
+GET /api/v1/attachments/:kind/s3_upload_form_fields
 ```
 
 #### 参数
@@ -2602,7 +2602,7 @@ kind | String | 是 | 可选值为：message|topic|avatar，分别对应 消息�
 #### 示例
 
 ```
-curl -X GET https://park.catchchatchina.com/api/v2/attachments/message/s3_upload_form_fields?extname=mp4 -H 'Authorization: Token token="DdPnWxQy6z5axwxZfsjs1427718553.7476008"'
+curl -X GET https://api.soyep.com/v1/attachments/message/s3_upload_form_fields?extname=mp4 -H 'Authorization: Token token="DdPnWxQy6z5axwxZfsjs1427718553.7476008"'
 ```
 
 #### 响应
@@ -2651,7 +2651,7 @@ curl -X GET https://park.catchchatchina.com/api/v2/attachments/message/s3_upload
 ### 获取 Blocked Users
 
 ```
-GET /api/v2/blocked_users
+GET /api/v1/blocked_users
 ```
 
 #### 参数
@@ -2661,7 +2661,7 @@ GET /api/v2/blocked_users
 #### 示例
 
 ```
-curl -X GET https://park.catchchatchina.com/api/v2/blocked_users -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+curl -X GET https://api.soyep.com/v1/blocked_users -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
 ```
 
 #### 响应
@@ -2682,7 +2682,7 @@ curl -X GET https://park.catchchatchina.com/api/v2/blocked_users -H 'Authorizati
 ### Block User
 
 ```
-POST /api/v2/blocked_users
+POST /api/v1/blocked_users
 ```
 
 #### 参数
@@ -2694,7 +2694,7 @@ user_id | String | 是 | 想要 block 的用户 ID
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v2/blocked_users -F user_id=516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+curl -X POST https://api.soyep.com/v1/blocked_users -F user_id=516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
 ```
 
 #### 响应
@@ -2706,7 +2706,7 @@ curl -X POST https://park.catchchatchina.com/api/v2/blocked_users -F user_id=516
 ### Unblock User
 
 ```
-DELETE /api/v2/blocked_users/:id
+DELETE /api/v1/blocked_users/:id
 ```
 
 #### 参数
@@ -2718,7 +2718,7 @@ id | String | 是 | 想要 unblock 的用户 ID
 #### 示例
 
 ```
-curl -X DELETE https://park.catchchatchina.com/api/v2/blocked_users/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+curl -X DELETE https://api.soyep.com/v1/blocked_users/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
 ```
 
 #### 响应
@@ -2732,7 +2732,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v2/blocked_users/516055075acc
 ### 添加已有技能
 
 ```
-POST /api/v2/master_skills
+POST /api/v1/master_skills
 ```
 
 #### 参数
@@ -2744,7 +2744,7 @@ skill_id | String | 是 | 技能 ID
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v2/master_skills -F skill_id=516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+curl -X POST https://api.soyep.com/v1/master_skills -F skill_id=516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
 ```
 
 #### 响应
@@ -2756,7 +2756,7 @@ curl -X POST https://park.catchchatchina.com/api/v2/master_skills -F skill_id=51
 ### 移除已有技能
 
 ```
-DELETE /api/v2/master_skills/:id
+DELETE /api/v1/master_skills/:id
 ```
 
 #### 参数
@@ -2768,7 +2768,7 @@ id | String | 是 | 技能 ID
 #### 示例
 
 ```
-curl -X DELETE https://park.catchchatchina.com/api/v2/master_skills/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+curl -X DELETE https://api.soyep.com/v1/master_skills/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
 ```
 
 #### 响应
@@ -2782,7 +2782,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v2/master_skills/516055075acc
 ### 添加想学的技能
 
 ```
-POST /api/v2/learning_skills
+POST /api/v1/learning_skills
 ```
 
 #### 参数
@@ -2794,7 +2794,7 @@ skill_id | String | 是 | 技能 ID
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v2/learning_skills -F skill_id=516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+curl -X POST https://api.soyep.com/v1/learning_skills -F skill_id=516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
 ```
 
 #### 响应
@@ -2806,7 +2806,7 @@ curl -X POST https://park.catchchatchina.com/api/v2/learning_skills -F skill_id=
 ### 移除想学的技能
 
 ```
-DELETE /api/v2/master_skills/:id
+DELETE /api/v1/master_skills/:id
 ```
 
 #### 参数
@@ -2818,7 +2818,7 @@ id | String | 是 | 技能 ID
 #### 示例
 
 ```
-curl -X DELETE https://park.catchchatchina.com/api/v2/learning_skills/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+curl -X DELETE https://api.soyep.com/v1/learning_skills/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
 ```
 
 #### 响应
@@ -2832,7 +2832,7 @@ curl -X DELETE https://park.catchchatchina.com/api/v2/learning_skills/516055075a
 ### 技能分类列表
 
 ```
-GET /api/v2/skill_categories
+GET /api/v1/skill_categories
 ```
 
 #### 参数
@@ -2842,7 +2842,7 @@ GET /api/v2/skill_categories
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/skill_categories -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+curl https://api.soyep.com/v1/skill_categories -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
 ```
 
 #### 响应
@@ -2873,7 +2873,7 @@ curl https://park.catchchatchina.com/api/v2/skill_categories -H 'Authorization: 
 ### 更新技能信息
 
 ```
-PATCH /api/v2/skills/:id
+PATCH /api/v1/skills/:id
 ```
 
 #### 参数
@@ -2886,7 +2886,7 @@ cover_url | String | 否 | 技能封面图片地址
 #### 示例
 
 ```
-curl -X PATCH park-staging.catchchatchina.com/api/v2/skills/516055075accc1e4067dd5ff6b2682cd -F cover_url=https://s3.cn-north-1.amazonaws.com.cn/ruanwz-test-public/ruby-logo.png -H 'Authorization: Token token="test-token”'
+curl -X PATCH park-staging.catchchatchina.com/api/v1/skills/516055075accc1e4067dd5ff6b2682cd -F cover_url=https://s3.cn-north-1.amazonaws.com.cn/ruanwz-test-public/ruby-logo.png -H 'Authorization: Token token="test-token”'
 ```
 
 #### 响应
@@ -2901,7 +2901,7 @@ curl -X PATCH park-staging.catchchatchina.com/api/v2/skills/516055075accc1e4067d
 ### 举报用户
 
 ```
-POST /api/v2/users/:id/reports
+POST /api/v1/users/:id/reports
 ```
 
 #### 参数
@@ -2915,7 +2915,7 @@ reason | Text | 否 | 举报原因，当 report_type 为 3 时，reason 为必�
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v2/users/bc93fe60a44cf376edeb98a9d68d85b9/reports -F report_type=1 -F reason=test -H 'Authorization: Token token="test-token"'
+curl -X POST https://api.soyep.com/v1/users/bc93fe60a44cf376edeb98a9d68d85b9/reports -F report_type=1 -F reason=test -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -2925,7 +2925,7 @@ curl -X POST https://park.catchchatchina.com/api/v2/users/bc93fe60a44cf376edeb98
 ### 举报话题
 
 ```
-POST /api/v2/topics/:id/reports
+POST /api/v1/topics/:id/reports
 ```
 
 #### 参数
@@ -2939,7 +2939,7 @@ reason | Text | 否 | 举报原因，当 report_type 为 3 时，reason 为必�
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v2/topics/bc93fe60a44cf376edeb98a9d68d85b9/reports -F report_type=1 -F reason=test -H 'Authorization: Token token="test-token"'
+curl -X POST https://api.soyep.com/v1/topics/bc93fe60a44cf376edeb98a9d68d85b9/reports -F report_type=1 -F reason=test -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -2967,12 +2967,12 @@ curl -X POST https://park.catchchatchina.com/api/v2/topics/bc93fe60a44cf376edeb9
 1. 进入后台 `https://park.catchchatchina.com/admin/official_message`
 2. 创建一条官方消息
 3. 创建成功会发送推送到所有客户端，推送的 `extras` 中 `type` 是 `official_message`，`sub_type` 是消息的 `media_type` 字段
-4. 客户端收到推送后请求 `/api/v2/official_messages` API（注意：请求到的是最近两个月未读的官方消息）
+4. 客户端收到推送后请求 `/api/v1/official_messages` API（注意：请求到的是最近两个月未读的官方消息）
 
 ### 获取官方消息
 
 ```
-GET /api/v2/official_messages
+GET /api/v1/official_messages
 ```
 
 #### 参数
@@ -2982,7 +2982,7 @@ GET /api/v2/official_messages
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/official_messages -H 'Authorization: Token token="test-token"'
+curl https://api.soyep.com/v1/official_messages -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -3016,7 +3016,7 @@ curl https://park.catchchatchina.com/api/v2/official_messages -H 'Authorization:
 ### 创建用户反馈
 
 ```
-POST /api/v2/feedbacks
+POST /api/v1/feedbacks
 ```
 
 #### 参数
@@ -3029,7 +3029,7 @@ device_info | String | 是 | 设备信息
 #### 示例
 
 ```
-curl -X POST https://park.catchchatchina.com/api/v2/feedbacks -F content=test -F device_info=test -H 'Authorization: Token token="test-token"'
+curl -X POST https://api.soyep.com/v1/feedbacks -F content=test -F device_info=test -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -3043,7 +3043,7 @@ curl -X POST https://park.catchchatchina.com/api/v2/feedbacks -F content=test -F
 ### 获取所有我发的帖子
 
 ```
-GET /api/v2/topics
+GET /api/v1/topics
 ```
 
 #### 参数
@@ -3053,7 +3053,7 @@ GET /api/v2/topics
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/topics -H 'Authorization: Token token="test-token"'
+curl https://api.soyep.com/v1/topics -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -3077,7 +3077,7 @@ curl https://park.catchchatchina.com/api/v2/topics -H 'Authorization: Token toke
 ### 获取指定用户发的帖子
 
 ```
-GET /api/v2/users/:user_id/topics
+GET /api/v1/users/:user_id/topics
 ```
 
 #### 参数
@@ -3087,7 +3087,7 @@ GET /api/v2/users/:user_id/topics
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/users/516055075accc1e4067dd5ff6b2682cd/topics -H 'Authorization: Token token="test-token"'
+curl https://api.soyep.com/v1/users/516055075accc1e4067dd5ff6b2682cd/topics -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -3112,7 +3112,7 @@ curl https://park.catchchatchina.com/api/v2/users/516055075accc1e4067dd5ff6b2682
 ### 发现帖子 (Feeds)
 
 ```
-GET /api/v2/topics/discover
+GET /api/v1/topics/discover
 ```
 
 #### 参数
@@ -3126,7 +3126,7 @@ GET /api/v2/topics/discover
 #### 示例
 
 ```
-curl https://park.catchchatchina.com/api/v2/topics/discover -H 'Authorization: Token token="test-token"'
+curl https://api.soyep.com/v1/topics/discover -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -3151,7 +3151,7 @@ curl https://park.catchchatchina.com/api/v2/topics/discover -H 'Authorization: T
 ### 发布帖子
 
 ```
-POST /api/v2/topics
+POST /api/v1/topics
 ```
 
 #### 参数
@@ -3184,7 +3184,7 @@ apple_ebook | apple ebook 分享贴  | {"apple_ebook":[{"title":"标题","descri
 #### 示例
 
 ```
-curl -XPOST 0.0.0.0:3000/api/v2/topics -F body=test -F latitude=11.11 -F longitude=22.22 -F allow_comment=true -F skill_id=cee89797007ab6db9f356f53edd0174a -H 'Authorization: Token token="test-token"'
+curl -XPOST https://api.soyep.com/v1/topics -F body=test -F latitude=11.11 -F longitude=22.22 -F allow_comment=true -F skill_id=cee89797007ab6db9f356f53edd0174a -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -3211,7 +3211,7 @@ PUT /api/:version/topics/:id
 #### 示例
 
 ```
-curl -XPATCH 0.0.0.0:3000/api/v2/topics/516055075accc1e4067dd5ff6b2682cd -F allow_comment=true -H 'Authorization: Token token="test-token"'
+curl -XPATCH https://api.soyep.com/v1/topics/516055075accc1e4067dd5ff6b2682cd -F allow_comment=true -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -3236,7 +3236,7 @@ DELETE /api/:version/topics/:id
 #### 示例
 
 ```
-curl -XDELETE https://park.catchchatchina.com/api/v2/topics/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="test-token"'
+curl -XDELETE https://api.soyep.com/v1/topics/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
