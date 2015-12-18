@@ -120,7 +120,11 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "id":<id>,
 "username":"asdaasd",
 "nickname":"user9",
-"avatar":{"url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg","thumb_url":""http://catch-avatars.qiniudn.com/thumb_sJAUYG6nc84glXkq.jpg""},
+"avatar":{
+  "url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+  // 有可能没有 thumb_url，因为是 background 方式生成缩略图的
+  "thumb_url":"http://catch-avatars.qiniudn.com/thumb_sJAUYG6nc84glXkq.jpg"
+},
 "latitude":0.0,
 "longitude":0.0,
 "introduction":"",
@@ -138,7 +142,11 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "id":<id>,
 "username":"tumayun",
 "nickname":"tumayun",
-"avatar":{"url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg","thumb_url":""http://catch-avatars.qiniudn.com/thumb_sJAUYG6nc84glXkq.jpg""},
+"avatar":{
+  "url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+  // 有可能没有 thumb_url，因为是 background 方式生成缩略图的
+  "thumb_url":"http://catch-avatars.qiniudn.com/thumb_sJAUYG6nc84glXkq.jpg"
+},
 "latitude":28.3213,
 "longitude":117.001,
 "introduction":"",
@@ -485,7 +493,11 @@ http://api.soyep.com/v1/auth/token_by_mobile
     "id":<id>,
     "username":"ruanwz",
     "nickname":"ruanwz",
-    "avatar_url":null,
+    "avatar":{
+      "url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+      // 有可能没有 thumb_url，因为是 background 方式生成缩略图的
+      "thumb_url":"http://catch-avatars.qiniudn.com/thumb_sJAUYG6nc84glXkq.jpg"
+    },
     "mobile":"12345678",
     "phone_code":"86"
   }
@@ -567,7 +579,11 @@ cURL 请求范例：
     "id":<id>,
     "username":"testnick",
     "nickname":"testnick",
-    "avatar_url":null,
+    "avatar":{
+      "url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
+      // 有可能没有 thumb_url，因为是 background 方式生成缩略图的
+      "thumb_url":"http://catch-avatars.qiniudn.com/thumb_sJAUYG6nc84glXkq.jpg"
+    },
     "mobile":"15626044835",
     "phone_code":"86",
     "state":"active"
@@ -1129,7 +1145,7 @@ PATCH /v1/user
 #### 示例
 
 ```
-curl -X PATCH https://api.soyep.com/v1/user -F badge=apple -F username=tumayun -F latitude=26.331920 -F longitude=168.3097112 -F nickname=Tumayun -F avatar_url=http://catch-avatars.qiniudn.om/sJAUYG6nc84glXkq.jpg -F push_content=false -F mute_started_at_string=23:30 -F mute_ended_at_string=07:30 -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
+curl -X PATCH https://api.soyep.com/v1/user -F badge=apple -F username=tumayun -F latitude=26.331920 -F longitude=168.3097112 -F nickname=Tumayun -F push_content=false -F mute_started_at_string=23:30 -F mute_ended_at_string=07:30 -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
 ```
 
 #### 响应
@@ -1145,6 +1161,30 @@ curl -X PATCH https://api.soyep.com/v1/user -F badge=apple -F username=tumayun -
   "mute_started_at_string":"23:30", // 防打扰开始时间，UTC 时间
   "mute_ended_at_string":"07:30" // 防打扰结束时间，UTC 时间
 }
+```
+
+### 设置头像
+
+```
+PATCH /v1/user/set_avatar
+```
+
+### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| avatar | File | 是 | 头像，目前只支持 jpg |
+
+### 示例
+
+```
+curl -XPATCH https://api.soyep.com/v1/user/avatar -F avatar=@/Users/tumayun/workspcae/park_server/spec/fixtures/image.jpg -H 'Authorization: Token token="test-token"'
+```
+
+### 响应
+
+```
+{"avatar":{"url":"https://s3.cn-north-1.amazonaws.com.cn/ruanwz-test-public/a2692db13f2c2879f7ae118a46b62bd9/image.jpg"}}
 ```
 
 ### 更新手机号流程
@@ -1705,6 +1745,8 @@ curl https://api.soyep.com/v1/messages/unread -H 'Authorization: Token token="nH
 
 ### 发送消息
 
+发送图片视频语音消息时，需要先上传附件，拿到附件ID后再请求发送消息API
+
 ```
 POST /v1/:recipient_type/:recipient_id/messages
 ```
@@ -1717,8 +1759,8 @@ recipient_id | String | 是 | 接收者（聊天对象）ID，接收者只有两
 recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 users 或者 circles
 media_type | String | 否 | 消息类型，text 表示文字, image 表示图片, video 表示视频, audio 表示语音, sticker 表示贴纸, location 表示位置, 默认是text
 text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
-parent_id | Integer | 否 | 回复的消息 ID，表示当前要发送的消息是回复哪条消息
-attachments | JSON | 否 | 如：{ "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] }
+parent_id | String | 否 | 回复的消息 ID，表示当前要发送的消息是回复哪条消息
+attachment_id | String | 否 | 附件 ID }
 longitude | Float | 否 | 只有位置消息才需要
 latitude | Float | 否 | 只有位置消息才需要
 
@@ -1733,21 +1775,10 @@ audio | 语音消息
 sticker | 贴纸消息
 location | 位置消息
 
-attachments 中 `file` 表示 S3 返回的文件 key，`metadata` 是附件的元数据。
-attachments key 的可选值：
-
-可选值 | 解释
---- | --- |
-image | 附件一张图片
-thumbnail | 附件一张缩略图
-audio | 附件是一段声音
-video | 附件是一段视频
-sticker | 附件是一副贴纸
-
 #### 示例
 
 ```
-curl -X POST https://api.soyep.com/v1/users/<id>/messages -d '{ "text_content": "This is a test!", "media_type": "image", "attachments": { "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] } }' -H 'Authorization: Token token="NDccv1Yvdi9UKtwPToxx1416921006.674603"' -H "Content-Type: application/json"
+curl -X POST https://api.soyep.com/v1/users/<id>/messages -d '{ "text_content": "This is a test!", "media_type": "image", "attachment_id": <id> }' -H 'Authorization: Token token="NDccv1Yvdi9UKtwPToxx1416921006.674603"' -H "Content-Type: application/json"
 ```
 
 #### 响应
@@ -1767,6 +1798,7 @@ faye server 的已读确认消息结构如下：
 {
   message_type: 'mark_as_read',
   message: {
+    "last_read_id":<id>, // 最后读取的消息 ID
     "last_read_at":1445596604.144, // max_id 对应消息的 created_at 值
     "recipient_id":<id>,
     "recipient_type":"User"
@@ -2517,9 +2549,35 @@ curl -X POST https://api.soyep.com/v1/unfriend_requests -F friend_id=2 -H 'Autho
 
 ## Attachment 附件
 
+### 上传附件
+
+上传附件后，会拿到附件ID，在发消息和发帖子的时候带上此ID就可以了
+
+```
+POST /v1/attachments
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| file | File | 是 | 需要上传的文件，图片支持 jpg，视频支持 mp4，音频支持 m4a|aac |
+| attachable_type | String | 是 | 可选值：Message|Topic，分别表示上传 Message 附件和 Topic 附件 |
+| metadata | String | 否 | metadata |
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/attachments -F file=@/Users/tumayun/Downloads/20150512\ 205219.m4a -F attachable_type=Message -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{"id":"fef50241350066923aaa548b056e59c2"}
+```
 
 ## Block User API（拒绝接收对方消息）
-
 
 ### 获取 Blocked Users
 
@@ -3022,6 +3080,8 @@ curl https://api.soyep.com/v1/topics/discover -H 'Authorization: Token token="te
 
 ### 发布帖子
 
+如果发布含有图片声音视频的帖子，需要先上传附件，拿到附件ID后在请求发布帖子API
+
 ```
 POST /v1/topics
 ```
@@ -3030,28 +3090,28 @@ POST /v1/topics
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| kind | String | 是 | 帖子类型 |
+| kind | String | 是 | 帖子类型，目前有 apple_music|apple_movie|apple_ebook|text|image|video|audio|location|github|dribbble |
 | body | Text | 是 | 帖子内容 |
 | latitude | Float | 是 | latitude |
 | longitude | Float | 是 | longitude |
 | allow_comment | Boolean | 否 | 是否允许评论，允许评论则会创建 circle，默认为 true |
 | skill_id | String | 否 | 技能ID |
-| attachments | JSON | 否 | 如：{ "image": [{ "file": "3e1b14f1-ee42-471e-96c2-2c46459f13c4", "metadata": "metadata" }], "thumbnail": [{ "file": "99e3c1b0-adfe-4a35-b4e9-aee1117d9c6c", "metadata": "metadata" }] }
+| attachments | JSON | 否 | 如：[{"id":'attachment_id'}] |
 
 kind 可选值为：
 
 可选值 | 描述 | attachments 格式
 --- | --- |---
 text        | 文字类型帖子        | null
-image       | 含图片的帖子        | {"image":[{"file":"图片文件名","metadata":"元数据"}]}，可以有最多 9 张图片
-video       | 含视频的帖子        | {"video":[{"file":"视频文件名","metadata":"元数据"}]}，最多一段视频
-audio       | 含声音的帖子        | {"audio":[{"file":"声音文件名","metadata":"元数据"}]}，最多一段声音
-location    | 位置分享贴          | {"location":[{"place":"地名","latitude":11.11,"longitude":22.22}]}，最多一个位置
-github      | github 分享贴       | {"github":[{"repo_id":1,"name":"name","full_name":"full_name","description":"description","url":"url",created_at:1296068472.0}]}，最多一个 github 分享
-dribbble    | dribbble 分享贴     | {"dribbble":[{"shot_id":1,"title":"标题","description":"描述","media_url":"media_url","url":"url",created_at:1296068472.0}]}，最多一个 dribbble 分享
-apple_music | apple music 分享帖  | {"apple_music":[{"title":"标题","description":"描述","poster":"封面","media_url":"媒体网页地址","preview_url":"预览地址","time_millis":123.123//时长}]}，最多一个 apple music 分享
-apple_movie | apple movie 分享贴  | {"apple_movie":[{"title":"标题","description":"描述","poster":"封面","media_url":"媒体网页地址","preview_url":"预览地址","time_millis":123.123//时长}]}，最多一个 apple movie 分享
-apple_ebook | apple ebook 分享贴  | {"apple_ebook":[{"title":"标题","description":"描述","poster":"封面","media_url":"媒体网页地址","preview_url":"预览地址","time_millis":123.123//时长}]}，最多一个 apple ebook 分享
+image       | 含图片的帖子        | [{"id":'attachment_id'}]，可以有最多 9 张图片
+video       | 含视频的帖子        | [{"id":'attachment_id'}]，最多一段视频
+audio       | 含声音的帖子        | [{"id":'attachment_id'}]，最多一段声音
+location    | 位置分享贴          | [{"place":"地名","latitude":11.11,"longitude":22.22}]，最多一个位置
+github      | github 分享贴       | [{"repo_id":1,"name":"name","full_name":"full_name","description":"description","url":"url",created_at:1296068472.0}]，最多一个 github 分享
+dribbble    | dribbble 分享贴     | [{"shot_id":1,"title":"标题","description":"描述","media_url":"media_url","url":"url",created_at:1296068472.0}]，最多一个 dribbble 分享
+apple_music | apple music 分享帖  | [{"title":"标题","description":"描述","poster":"封面","media_url":"媒体网页地址","preview_url":"预览地址","time_millis":123.123//时长}]，最多一个 apple music 分享
+apple_movie | apple movie 分享贴  | [{"title":"标题","description":"描述","poster":"封面","media_url":"媒体网页地址","preview_url":"预览地址","time_millis":123.123//时长}]，最多一个 apple movie 分享
+apple_ebook | apple ebook 分享贴  | [{"title":"标题","description":"描述","poster":"封面","media_url":"媒体网页地址","preview_url":"预览地址","time_millis":123.123//时长}]，最多一个 apple ebook 分享
 
 #### 示例
 
