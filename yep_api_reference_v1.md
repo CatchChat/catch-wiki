@@ -1178,7 +1178,7 @@ PATCH /v1/user/set_avatar
 ### 示例
 
 ```
-curl -XPATCH https://api.soyep.com/v1/user/avatar -F avatar=@/Users/tumayun/workspcae/park_server/spec/fixtures/image.jpg -H 'Authorization: Token token="test-token"'
+curl -X PATCH https://api.soyep.com/v1/user/set_avatar -F avatar=@/Users/tumayun/workspcae/park_server/spec/fixtures/image.jpg -H 'Authorization: Token token="test-token"'
 ```
 
 ### 响应
@@ -2235,7 +2235,7 @@ curl https://api.soyep.com/v1/friend_requests/with_user/ba994ac6dba5bc71489ab75f
 
 ### 所有好友
 
-按照 position 升序排列，最近联系过的好友越靠前 
+按照 position 升序排列，最近联系过的好友越靠前
 
 ```
 GET /v1/friendships
