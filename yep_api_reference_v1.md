@@ -2881,7 +2881,7 @@ curl -X POST https://api.soyep.com/v1/topics/bc93fe60a44cf376edeb98a9d68d85b9/re
 
 ### 流程
 
-1. 客户端通过 WebView 发起请求`https://soyep.com/auth/:provider?_tkn=test-token`，其中`_tkn`为`access_token`值
+1. 客户端通过 WebView 发起请求`https://api.soyep.com/auth/:provider?_tkn=test-token`，其中`_tkn`为`access_token`值
 2. 客户端等待接收绑定是否成功的通知
 
 ### 判断绑定结果
