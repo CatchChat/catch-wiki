@@ -70,7 +70,7 @@
 * [instant_state](#即时状态消息) （即时状态）
 * [mark_as_read](#已读确认消息) （已读确认）
 * [message](#有新的聊天消息) (聊天消息)
-* [message_deleted](#撤回聊天消息) （聊天消息被撤回）
+* [message_deleted](#删除聊天消息) （聊天消息被删除）
 
 ### 即时状态消息
 
@@ -149,18 +149,19 @@
 }
 ```
 
-### 撤回聊天消息
+### 删除聊天消息
 
 发送者撤销聊天消息
 
 ```
 {
-  "message_type":"message_deleted", // 表示有消息被撤回
+  "message_type":"message_deleted", // 表示有消息被删除
   "message": {
-    "id":<id>, // 被撤回的消息ID
-    "recipient_type":"User", // 接收者类型，User 表示是一对一消息，Circle 表示是群发消息，客户端可以借此确定要撤回的消息是在哪个聊天界面
+    "id":<id>, // 被删除的消息ID
+    "recipient_type":"User", // 接收者类型，User 表示是一对一消息，Circle 表示是群发消息，客户端可以借此确定要删除的消息是在哪个聊天界面
     "recipient_id":<id>, // 接收者ID
-    "sender": { // 消息发送者，也就是消息的撤回者
+    "deleted_at":1451403816,
+    "sender": { // 消息发送者，也就是消息的删除者
       "id":<id>,
       "username":"username",
       "nickname":"nickname"

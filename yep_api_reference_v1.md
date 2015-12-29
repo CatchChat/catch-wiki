@@ -351,6 +351,8 @@ Topic `kind` 为 audio 时，格式如下：
 
 在 API 返回 message 信息时，将会以 `<message>` 替代如下结构：
 
+正常消息：
+
 ```
 {
   "id":<id>,
@@ -376,6 +378,23 @@ Topic `kind` 为 audio 时，格式如下：
 }
 ```
 
+被删除的消息
+
+```
+{
+  "id":<id>,
+  "recipient_id":<id>,
+  "recipient_type":"User",
+  "deleted":true,
+  "deleted_at":1451403816,
+  "sender":{
+    "id":<id>,
+    "username":"tumayun",
+    "nickname":"涂马云"
+  }
+}
+```
+
 ### 推送
 
 推送 extras 说明
@@ -391,12 +410,12 @@ Topic `kind` 为 audio 时，格式如下：
 | recipient_id | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
 | recipient_type | 接受者（聊天对象）类型，只能是 User 或者 Circle |
 
-#### 消息撤回
+#### 消息删除
 
 | key | value |
 |--------|--------|
 | type | message_deleted |
-| message | { "id":<id>, "recipient_id":<id>, "recipient_type":"User", "sender":{ "id":<id>, "username":"tumayun", "nickname":"涂马云" } } |
+| message | { "id":<id>, "recipient_id":<id>, "recipient_type":"User", "deleted_at": 1451403816, "sender":{ "id":<id>, "username":"tumayun", "nickname":"涂马云" } } |
 
 #### 官方消息
 
@@ -1828,9 +1847,9 @@ curl -X PATCH https://api.soyep.com/v1/users/<id>/messages/batch_mark_as_read -H
 
 { "last_read_at":1445596604.144 }
 
-### 撤回已发送消息
+### 删除已发送消息
 
-撤回成功会发送`message_deleted`类型的消息到 faye server，客户端收到消息后需要删除消息，faye server 消息体如下：
+删除成功会发送`message_deleted`类型的消息到 faye server，客户端收到消息后需要删除消息，faye server 消息体如下：
 
 ```
 {
@@ -1839,6 +1858,7 @@ curl -X PATCH https://api.soyep.com/v1/users/<id>/messages/batch_mark_as_read -H
     "id":<id>,
     "recipient_id":<id>,
     "recipient_type":"User",
+    "deleted_at":1451403816,
     "sender":{
       "id":<id>,
       "username":"tumayun",
@@ -1857,6 +1877,7 @@ curl -X PATCH https://api.soyep.com/v1/users/<id>/messages/batch_mark_as_read -H
     "id":<id>,
     "recipient_id":<id>,
     "recipient_type":"User",
+    "deleted_at":1451403816,
     "sender":{
       "id":<id>,
       "username":"tumayun",
