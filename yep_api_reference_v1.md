@@ -1905,18 +1905,7 @@ curl -X DELETE https://api.soyep.com/v1/messages/<id> -H 'Authorization: Token t
 
 #### 响应
 
-```
-{
-  "id":<id>,
-  "recipient_id":<id>,
-  "recipient_type":"User",
-  "sender":{
-    "id":<id>,
-    "username":"tumayun",
-    "nickname":"涂马云"
-  }
-}
-```
+只返回状态码
 
 ### 获取指定聊天窗口的消息历史
 
