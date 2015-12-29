@@ -2964,8 +2964,148 @@ curl -X POST https://api.soyep.com/v1/feedbacks -F content=test -F device_info=t
 
 #### 响应
 
+只返回状态码
+
+### 获取所有反馈
+
+**需要管理员权限**
+
 ```
-{}
+GET /v1/feedbacks
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/feedbacks -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "feedbacks": [
+    {
+      "content": "\u800d",
+      "created_at": 1449916478,
+      "device_info": "iPhone 6s, Version 9.2 (Build 13C75)",
+      "id": <id>,
+      "replied": false, // 是否回复过
+      "user": { // 提交反馈的用户
+        <mini_user>
+      }
+    }
+  ],
+  "current_page": 1,
+  "per_page": 1,
+  "count": 33
+}
+```
+
+### 获取单个反馈
+
+**需要管理员权限**
+
+```
+GET /v1/feedbacks/:id
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/feedbacks/<id> -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "content": "\u800d",
+  "created_at": 1449916478,
+  "device_info": "iPhone 6s, Version 9.2 (Build 13C75)",
+  "id": <id>,
+  "replied": true,
+  "replies": [ // 回复列表
+    {
+      "attachments": [],
+      "created_at": 1451391074.479,
+      "latitude": null,
+      "longitude": null,
+      "media_type": "text",
+      "state": "unread",
+      "text_content": "text",
+      "updated_at": 1451391074.479
+    },
+    {
+      "attachments": [
+        {
+          <attachment>
+        }
+      ],
+      "created_at": 1451391257.432,
+      "latitude": null,
+      "longitude": null,
+      "media_type": "image",
+      "state": "unread",
+      "text_content": null,
+      "updated_at": 1451391257.432
+    }
+  ],
+  "user": { // 提交反馈的用户
+    <mini_user>
+  }
+}
+```
+
+### 提交回复
+
+**需要管理员权限**
+
+```
+POST /v1/feedbacks/:id/reply
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+media_type | String | 否 | 消息类型，参考`发送消息 API`
+text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
+attachment_id | String | 否 | 附件 ID }
+longitude | Float | 否 | 只有位置消息才需要
+latitude | Float | 否 | 只有位置消息才需要
+
+#### 示例
+
+```
+curl -XPOST https://api.soyep.com/v1/feedbacks/<id>/reply -F media_type=image -F attachment_id=<id> -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "attachments": [
+    {
+      <attachment>
+    }
+  ],
+  "created_at": 1451391257.432,
+  "latitude": null,
+  "longitude": null,
+  "media_type": "image",
+  "state": "unread",
+  "text_content": null,
+  "updated_at": 1451391257.432
+}
 ```
 
 ## Topics (Feeds)
