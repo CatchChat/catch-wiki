@@ -387,6 +387,7 @@ Topic `kind` 为 audio 时，格式如下：
   "recipient_type":"User",
   "deleted":true,
   "deleted_at":1451403816,
+  "created_at": 1451403812.333,
   "sender":{
     "id":<id>,
     "username":"tumayun",
@@ -409,13 +410,6 @@ Topic `kind` 为 audio 时，格式如下：
 | subtype | 消息的 media_type 值，可能值为：`text`， `image`， `video`， `audio`， `sticker`， `location` |
 | recipient_id | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
 | recipient_type | 接受者（聊天对象）类型，只能是 User 或者 Circle |
-
-#### 消息删除
-
-| key | value |
-|--------|--------|
-| type | message_deleted |
-| message | { "id":<id>, "recipient_id":<id>, "recipient_type":"User", "deleted_at": 1451403816, "sender":{ "id":<id>, "username":"tumayun", "nickname":"涂马云" } } |
 
 #### 官方消息
 
@@ -1859,25 +1853,7 @@ curl -X PATCH https://api.soyep.com/v1/users/<id>/messages/batch_mark_as_read -H
     "recipient_id":<id>,
     "recipient_type":"User",
     "deleted_at":1451403816,
-    "sender":{
-      "id":<id>,
-      "username":"tumayun",
-      "nickname":"涂马云"
-    }
-  }
-}
-```
-
-并且有推送发出，客户端收到推送后需要删除消息，推送的`extras`为：
-
-```
-{
-  type: 'message_deleted',
-  message: {
-    "id":<id>,
-    "recipient_id":<id>,
-    "recipient_type":"User",
-    "deleted_at":1451403816,
+    "created_at": 1451403812.333,
     "sender":{
       "id":<id>,
       "username":"tumayun",
