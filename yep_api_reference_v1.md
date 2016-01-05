@@ -411,6 +411,14 @@ Topic `kind` 为 audio 时，格式如下：
 | recipient_id | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
 | recipient_type | 接受者（聊天对象）类型，只能是 User 或者 Circle |
 
+#### 被用户提及
+
+| key | value |
+|--------|--------|
+| type | mentioned |
+| recipient_id | 群聊 ID |
+| recipient_type | Circle |
+
 #### 官方消息
 
 | key | value |
@@ -1422,6 +1430,59 @@ curl htts://api.soyep.com/v1/contacts/upload -F contacts="[{\"name\":\"abc\",\"n
 
 ## Users 用户
 
+### Type A Head (@ 用户)
+
+一次最多匹配到 5 个用户，关键字越长，匹配越精确
+
+```
+GET /v1/users/typeahead
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| q | String | 是 | username 前缀 |
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/users/typeahead?q=t -H 'Authorization: Token token="EtErCK18xN9pxakiCPp61418029033.582837"'
+```
+
+#### 响应
+
+```
+{
+  "users": [
+    {
+      "id": "45533a143c5c912dc7fce6a9d4a1a1a5",
+      "avatar": {
+        "thumb_url": "https://s3.cn-north-1.amazonaws.com.cn/yep-avatars/thumb_19ac575a-c32e-481c-9398-a850b61c6561-1450874271.jpg"
+      },
+      "username": "tonyho",
+      "nickname": "tonyho"
+    },
+    {
+      "id": "a2692db13f2c2879f7ae118a46b62bd9",
+      "avatar": {
+        "thumb_url": "https://s3.cn-north-1.amazonaws.com.cn/yep-avatars/thumb_51cc3185-c36a-465b-93ee-1b0c2889cea6-1451304072.jpg"
+      },
+      "username": "tumayun",
+      "nickname": "tumayun"
+    },
+    {
+      "id": "4fe032e9ad285e75e31c8a06c584f1b8",
+      "avatar": {
+        "thumb_url": "https://s3.cn-north-1.amazonaws.com.cn/yep-avatars/thumb_e30d2a38-7057-49bf-9ee3-6da1a7ee3937-1450874344.jpg"
+      },
+      "username": "tifan",
+      "nickname": "d zhang"
+    }
+  ]
+}
+```
+
 ### 搜索用户
 
 ```
@@ -1758,7 +1819,8 @@ curl https://api.soyep.com/v1/messages/unread -H 'Authorization: Token token="nH
 
 ### 发送消息
 
-发送图片视频语音消息时，需要先上传附件，拿到附件ID后再请求发送消息API
+发送图片视频语音消息时，需要先上传附件，拿到附件ID后再请求发送消息API。
+当在群聊中提及（@）其他用户时，`text_content` 格式应该为 `@tumayun 你好`（得有空格），此时如果用户`tumayun`没有屏蔽掉消息的发送者，且消息 5 秒内没有被撤回，则会自动添加`tumayun`为群组成员，并且[推送通知](#被用户提及)。
 
 ```
 POST /v1/:recipient_type/:recipient_id/messages
