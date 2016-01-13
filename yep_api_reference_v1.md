@@ -1820,7 +1820,8 @@ curl https://api.soyep.com/v1/messages/unread -H 'Authorization: Token token="nH
 ### 发送消息
 
 发送图片视频语音消息时，需要先上传附件，拿到附件ID后再请求发送消息API。
-当在群聊中提及（@）其他用户时，`text_content` 格式应该为 `@tumayun 你好`（得有空格），此时如果用户`tumayun`没有屏蔽掉消息的发送者，且消息 5 秒内没有被撤回，则会自动添加`tumayun`为群组成员，并且[推送通知](#被用户提及)。
+
+当在群聊中提及（@）其他用户时，`text_content` 格式应该为 `@tumayun 你好`（符合正则`/(?:[^a-zA-Z0-9_!#\$%&*@＠]|^:?)[@＠]([a-zA-Z0-9_]{4,16})/`），此时如果用户`tumayun`没有屏蔽掉消息的发送者，且消息 5 秒内没有被撤回，则会自动添加`tumayun`为群组成员，并且[推送通知](#被用户提及)。
 
 ```
 POST /v1/:recipient_type/:recipient_id/messages
@@ -3268,7 +3269,9 @@ curl https://api.soyep.com/v1/topics/discover -H 'Authorization: Token token="te
 
 ### 发布帖子
 
-如果发布含有图片声音视频的帖子，需要先上传附件，拿到附件ID后在请求发布帖子API
+如果发布含有图片声音视频的帖子，需要先上传附件，拿到附件ID后在请求发布帖子API。   
+
+当提及（@）其他用户时，`body` 格式应该为 `@tumayun 你好`（符合正则`/(?:[^a-zA-Z0-9_!#\$%&*@＠]|^:?)[@＠]([a-zA-Z0-9_]{4,16})/`），此时如果用户`tumayun`没有屏蔽掉帖子的创建者，则会自动添加`tumayun`为群组成员，并且[推送通知](#被用户提及)。
 
 ```
 POST /v1/topics
