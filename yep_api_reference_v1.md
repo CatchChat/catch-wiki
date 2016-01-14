@@ -3387,7 +3387,7 @@ curl https://api.soyep.com/v1/admin/reports -H 'Authorization: Token token="test
 }
 ```
 
-### 获取单个反馈
+### 获取单个举报
 
 ```
 GET /v1/admin/reports/:id
