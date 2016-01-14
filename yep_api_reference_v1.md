@@ -3417,7 +3417,7 @@ curl https://api.soyep.com/v1/admin/reports/<id> -H 'Authorization: Token token=
   "user": {
     <mini_user>
   },
-  "reportable": { // 被举报对象，根据 reportable_type 判断对象是话题还是用户
+  "reportable": { // 被举报对象，根据 reportable_type 判断对象是话题还是用户；如果 reportable 为 null，表示被举报对象已经被删除
     <topic>|<user>
   },
   "replies": [
