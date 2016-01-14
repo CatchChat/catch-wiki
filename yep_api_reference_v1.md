@@ -3019,148 +3019,6 @@ curl -X POST https://api.soyep.com/v1/feedbacks -F content=test -F device_info=t
 
 只返回状态码
 
-### 获取所有反馈
-
-**需要管理员权限**
-
-```
-GET /v1/feedbacks
-```
-
-#### 参数
-
-无
-
-#### 示例
-
-```
-curl https://api.soyep.com/v1/feedbacks -H 'Authorization: Token token="test-token"'
-```
-
-#### 响应
-
-```
-{
-  "feedbacks": [
-    {
-      "content": "\u800d",
-      "created_at": 1449916478,
-      "device_info": "iPhone 6s, Version 9.2 (Build 13C75)",
-      "id": <id>,
-      "replied": false, // 是否回复过
-      "user": { // 提交反馈的用户
-        <mini_user>
-      }
-    }
-  ],
-  "current_page": 1,
-  "per_page": 1,
-  "count": 33
-}
-```
-
-### 获取单个反馈
-
-**需要管理员权限**
-
-```
-GET /v1/feedbacks/:id
-```
-
-#### 参数
-
-无
-
-#### 示例
-
-```
-curl https://api.soyep.com/v1/feedbacks/<id> -H 'Authorization: Token token="test-token"'
-```
-
-#### 响应
-
-```
-{
-  "content": "\u800d",
-  "created_at": 1449916478,
-  "device_info": "iPhone 6s, Version 9.2 (Build 13C75)",
-  "id": <id>,
-  "replied": true,
-  "replies": [ // 回复列表
-    {
-      "attachments": [],
-      "created_at": 1451391074.479,
-      "latitude": null,
-      "longitude": null,
-      "media_type": "text",
-      "state": "unread",
-      "text_content": "text",
-      "updated_at": 1451391074.479
-    },
-    {
-      "attachments": [
-        {
-          <attachment>
-        }
-      ],
-      "created_at": 1451391257.432,
-      "latitude": null,
-      "longitude": null,
-      "media_type": "image",
-      "state": "unread",
-      "text_content": null,
-      "updated_at": 1451391257.432
-    }
-  ],
-  "user": { // 提交反馈的用户
-    <mini_user>
-  }
-}
-```
-
-### 提交回复
-
-**需要管理员权限**
-
-```
-POST /v1/feedbacks/:id/reply
-```
-
-#### 参数
-
-名称 | 类型 | 是否必须 | 描述
---- |--- |--- |--- |
-media_type | String | 否 | 消息类型，参考`发送消息 API`
-text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
-attachment_id | String | 否 | 附件 ID }
-longitude | Float | 否 | 只有位置消息才需要
-latitude | Float | 否 | 只有位置消息才需要
-
-#### 示例
-
-```
-curl -XPOST https://api.soyep.com/v1/feedbacks/<id>/reply -F media_type=image -F attachment_id=<id> -H 'Authorization: Token token="test-token"'
-```
-
-#### 响应
-
-```
-{
-  "attachments": [
-    {
-      <attachment>
-    }
-  ],
-  "created_at": 1451391257.432,
-  "latitude": null,
-  "longitude": null,
-  "media_type": "image",
-  "state": "unread",
-  "text_content": null,
-  "updated_at": 1451391257.432
-}
-```
-
 ## Topics (Feeds)
 
 ### 获取所有我发的帖子
@@ -3343,3 +3201,279 @@ curl -XDELETE https://api.soyep.com/v1/topics/516055075accc1e4067dd5ff6b2682cd -
 #### 响应
 
 不返回数据，只返回状态码
+
+
+## 反馈管理
+
+**以下 API 需要管理员权限**
+
+### 获取所有反馈
+
+```
+GET /v1/admin/feedbacks
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/admin/feedbacks -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "feedbacks": [
+    {
+      "content": "\u800d",
+      "created_at": 1449916478,
+      "device_info": "iPhone 6s, Version 9.2 (Build 13C75)",
+      "id": <id>,
+      "replied": false, // 是否回复过
+      "user": { // 提交反馈的用户
+        <mini_user>
+      }
+    }
+  ],
+  "current_page": 1,
+  "per_page": 1,
+  "count": 33
+}
+```
+
+### 获取单个反馈
+
+```
+GET /v1/admin/feedbacks/:id
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/admin/feedbacks/<id> -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "content": "\u800d",
+  "created_at": 1449916478,
+  "device_info": "iPhone 6s, Version 9.2 (Build 13C75)",
+  "id": <id>,
+  "replied": true,
+  "replies": [ // 回复列表
+    {
+      "attachments": [],
+      "created_at": 1451391074.479,
+      "latitude": null,
+      "longitude": null,
+      "media_type": "text",
+      "state": "unread",
+      "text_content": "text",
+      "updated_at": 1451391074.479
+    },
+    {
+      "attachments": [
+        {
+          <attachment>
+        }
+      ],
+      "created_at": 1451391257.432,
+      "latitude": null,
+      "longitude": null,
+      "media_type": "image",
+      "state": "unread",
+      "text_content": null,
+      "updated_at": 1451391257.432
+    }
+  ],
+  "user": { // 提交反馈的用户
+    <mini_user>
+  }
+}
+```
+
+### 提交回复
+
+```
+POST /v1/admin/feedbacks/:id/reply
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+media_type | String | 否 | 消息类型，参考`发送消息 API`
+text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
+attachment_id | String | 否 | 附件 ID }
+longitude | Float | 否 | 只有位置消息才需要
+latitude | Float | 否 | 只有位置消息才需要
+
+#### 示例
+
+```
+curl -XPOST https://api.soyep.com/v1/admin/feedbacks/<id>/reply -F media_type=image -F attachment_id=<id> -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "attachments": [
+    {
+      <attachment>
+    }
+  ],
+  "created_at": 1451391257.432,
+  "latitude": null,
+  "longitude": null,
+  "media_type": "image",
+  "state": "unread",
+  "text_content": null,
+  "updated_at": 1451391257.432
+}
+```
+
+## 管理举报
+
+**以下 API 需要管理员权限**
+
+### 获取所有举报
+
+```
+GET /v1/admin/reports
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/admin/reports -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "reports": [
+    {
+      "id": "51aad4db304c33bb15461618cbb3158c",
+      "reason": null, // 当 report_type 为 3 时，会有举报原因
+      "report_type": 0, // 0 表示色情低俗, 1 表示广告骚扰, 2 表示诈骗, 3 表示其他
+      "reportable_type": "User", // 被举报的对象，目前有 User 和 Topic，表示被举报对象为用户和话题
+      "reportable_id": "8a3876f01e5d6bb7b0d329410132cedc", // 与 reportable_type 对应，被举报对象的 ID
+      "created_at": 1452229081,
+      "replied": false, // 是否回复过
+      "user": { // 举报的发起人
+        <mini_user>
+      }
+    }
+  ],
+  "current_page": 1,
+  "per_page": 1,
+  "count": 33
+}
+```
+
+### 获取单个反馈
+
+```
+GET /v1/admin/reports/:id
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/admin/reports/<id> -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "id": "cc4f9983535f170eaecdf163f81be2db",
+  "reason": null,
+  "report_type": 0,
+  "reportable_type": "Topic",
+  "reportable_id": "0f0cd19a4e820bbcbfcc2bd9496671be",
+  "created_at": 1449650473,
+  "replied": true,
+  "user": {
+    <mini_user>
+  },
+  "reportable": { // 被举报对象，根据 reportable_type 判断对象是话题还是用户
+    <topic>|<user>
+  },
+  "replies": [
+    {
+      "text_content": "test",
+      "longitude": null,
+      "latitude": null,
+      "media_type": "text",
+      "state": "unread",
+      "created_at": 1452785824.74,
+      "updated_at": 1452785824.74,
+      "attachments": [
+        <attachment>
+      ]
+    }
+  ]
+}
+```
+
+### 提交回复
+
+```
+POST /v1/admin/reports/:id/reply
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+media_type | String | 否 | 消息类型，参考`发送消息 API`
+text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
+attachment_id | String | 否 | 附件 ID }
+longitude | Float | 否 | 只有位置消息才需要
+latitude | Float | 否 | 只有位置消息才需要
+
+#### 示例
+
+```
+curl -XPOST https://api.soyep.com/v1/admin/reports/<id>/reply -F media_type=image -F attachment_id=<id> -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "attachments": [
+    {
+      <attachment>
+    }
+  ],
+  "created_at": 1451391257.432,
+  "latitude": null,
+  "longitude": null,
+  "media_type": "image",
+  "state": "unread",
+  "text_content": null,
+  "updated_at": 1451391257.432
+}
+```
