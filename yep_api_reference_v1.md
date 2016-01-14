@@ -238,7 +238,6 @@ Topic `kind` 为 audio 时，格式如下：
 `kind` 为 apple_music 时，格式如下：
 
 ```
-"kind":"apple_music",
 "title":"Upside Down",
 "description":"Sing-a-Longs and Lullabies for the Film Curious George",
 "poster":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewAlbum?i=120954025&id=120954021&s=143441",
@@ -250,7 +249,6 @@ Topic `kind` 为 audio 时，格式如下：
 `kind` 为 apple_movie 时，格式如下：
 
 ```
-"kind":"apple_music",
 "title":"Upside Down",
 "description":"Sing-a-Longs and Lullabies for the Film Curious George",
 "poster":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewAlbum?i=120954025&id=120954021&s=143441",
@@ -262,7 +260,6 @@ Topic `kind` 为 audio 时，格式如下：
 `kind` 为 apple_ebook 时，格式如下：
 
 ```
-"kind":"apple_music",
 "title":"Upside Down",
 "description":"Sing-a-Longs and Lullabies for the Film Curious George",
 "poster":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewAlbum?i=120954025&id=120954021&s=143441",
@@ -274,7 +271,6 @@ Topic `kind` 为 audio 时，格式如下：
 `kind` 为 location 时，格式如下：
 
 ```
-"kind":"location",
 "place":"NanChange",
 "latitude":11.11,
 "longitude":22.22
@@ -283,7 +279,6 @@ Topic `kind` 为 audio 时，格式如下：
 `kind` 为 github 时，格式如下：
 
 ```
-"kind":"github",
 "repo_id":1,
 "name":"ttafu_attribute",
 "full_name":"tumayun/ttafu_attribute",
@@ -295,13 +290,22 @@ Topic `kind` 为 audio 时，格式如下：
 `kind` 为 dribbble 时，格式如下：
 
 ```
-"kind":"dribbble",
 "shot_id":1,
 "title":"Sasquatch",
 "description":"<p>Quick, messy, five minute sketch of something that might become a fictional something.</p>",
 "media_url":"https://d13yacurqjgara.cloudfront.net/users/1/screenshots/471756/sasquatch.png",
 "url":"https://dribbble.com/shots/471756-Sasquatch",
 "created_at":1448192340
+```
+
+`kind` 为 web_page 时，格式如下：
+
+```
+"site_name":"Yep",
+"title":"Yep Meet Genius",
+"description":"有人用Realm数据库的嘛？坑多吗？优劣？来来来分享下经验",
+"image_url":"http://static-catch.qiniudn.com/icon-iphone.png",
+"url":"https://soyep.com/groups/share/?token=GqOXCQES-WQMJvHq8KdasDXkjgK9qVHX-CIRD7zBdhU=",
 ```
 
 #### Topic 字段模板
@@ -3281,7 +3285,7 @@ POST /v1/topics
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| kind | String | 是 | 帖子类型，目前有 apple_music|apple_movie|apple_ebook|text|image|video|audio|location|github|dribbble |
+| kind | String | 是 | 帖子类型，目前有 apple_music|apple_movie|apple_ebook|text|image|video|audio|location|github|dribbble|web_page |
 | body | Text | 是 | 帖子内容 |
 | latitude | Float | 是 | latitude |
 | longitude | Float | 是 | longitude |
@@ -3303,6 +3307,7 @@ dribbble    | dribbble 分享贴     | [{"shot_id":1,"title":"标题","descripti
 apple_music | apple music 分享帖  | [{"title":"标题","description":"描述","poster":"封面","media_url":"媒体网页地址","preview_url":"预览地址","time_millis":123.123//时长}]，最多一个 apple music 分享
 apple_movie | apple movie 分享贴  | [{"title":"标题","description":"描述","poster":"封面","media_url":"媒体网页地址","preview_url":"预览地址","time_millis":123.123//时长}]，最多一个 apple movie 分享
 apple_ebook | apple ebook 分享贴  | [{"title":"标题","description":"描述","poster":"封面","media_url":"媒体网页地址","preview_url":"预览地址","time_millis":123.123//时长}]，最多一个 apple ebook 分享
+web_page    | 网页分享贴          | [{"site_name":"site_name","title":"标题","description":"描述","image_url":"image_url","url":"url"}]，最多一个网页分享
 
 #### 示例
 
