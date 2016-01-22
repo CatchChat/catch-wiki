@@ -543,6 +543,26 @@ http://api.soyep.com/v1/auth/token_by_mobile
   error: "手机号或验证码错误"
 }
 
+### 退出登录
+
+```
+DELETE /v1/auth/logout
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl -X DELETE https://api.soyep.com/v1/auth/logout -H 'Authorization: Token token="g5zzZ2Pk5eJpC4CqZ5hJ1422527060.772875"'
+```
+
+#### 响应
+
+只返回状态码
+
 ### 发送用户名,手机号码，发起注册,等待接收手机验证码
 
 ```
