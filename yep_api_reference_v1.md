@@ -1178,7 +1178,7 @@ PATCH /v1/user
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
 | nickname | String | 否 | 昵称 |
-| username | String | 否 | 用户名，必须唯一（忽略大小写），只能是由字母、数字、下划线组成，长度为4到16个字符 |
+| username | String | 否 | 用户名，必须唯一（忽略大小写），只能是由字母、数字、下划线组成，长度为4到16个字符，且一经设置成功，不能修改 |
 | latitude | Float | 否 | 纬度 |
 | longitude | Float | 否 | 经度 |
 | push_content | Boolean | 否 | 标识推送时是推送消息内容还是推送通知，true 推送消息内容，false 推送通知 |
@@ -1186,6 +1186,7 @@ PATCH /v1/user
 | badge | String | 否 | 徽章，有：android apple ball bubble camera game heart music palette pet plane star steve tech wine |
 | mute_started_at_string | String | 否 | 防打扰开始时间，如：23:30，UTC 时间 |
 | mute_ended_at_string | String | 否 | 防打扰结束时间，如：07:30，UTC 时间 |
+| push_genius | Boolean | 否 | 推送附近新加入的天才 |
 
 #### 示例
 
