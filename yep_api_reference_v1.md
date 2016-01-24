@@ -1161,7 +1161,8 @@ curl https://api.soyep.com/v1/user -H 'Authorization: Token oken="kuH3PbRifgSATC
   "pusher_id":"439ee7d09180529d3442bd25",
   "state":"active",
   "mute_started_at_string":"23:30", // 防打扰开始时间, UTC 时间，需要转换成客户端当前时区后再显示
-  "mute_ended_at_string":"07:30" // 防打扰结束时间, UTC 时间，需要转换成客户端当前时区后再显示
+  "mute_ended_at_string":"07:30", // 防打扰结束时间, UTC 时间，需要转换成客户端当前时区后再显示
+  "push_genius":true // 推送附近新加入的天才
 }
 ```
 
@@ -1205,7 +1206,8 @@ curl -X PATCH https://api.soyep.com/v1/user -F badge=apple -F username=tumayun -
   "pusher_id":"439ee7d09180529d3442bd25",
   "state":"active",
   "mute_started_at_string":"23:30", // 防打扰开始时间，UTC 时间
-  "mute_ended_at_string":"07:30" // 防打扰结束时间，UTC 时间
+  "mute_ended_at_string":"07:30", // 防打扰结束时间，UTC 时间
+  "push_genius":true // 推送附近新加入的天才
 }
 ```
 
