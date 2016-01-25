@@ -1163,6 +1163,7 @@ curl https://api.soyep.com/v1/user -H 'Authorization: Token oken="kuH3PbRifgSATC
   "mute_started_at_string":"23:30", // 防打扰开始时间, UTC 时间，需要转换成客户端当前时区后再显示
   "mute_ended_at_string":"07:30", // 防打扰结束时间, UTC 时间，需要转换成客户端当前时区后再显示
   "push_genius":true // 推送附近新加入的天才
+  "genius_distance":30 // 表示推送30km内的新加入天才
 }
 ```
 
@@ -1188,6 +1189,7 @@ PATCH /v1/user
 | mute_started_at_string | String | 否 | 防打扰开始时间，如：23:30，UTC 时间 |
 | mute_ended_at_string | String | 否 | 防打扰结束时间，如：07:30，UTC 时间 |
 | push_genius | Boolean | 否 | 推送附近新加入的天才 |
+| genius_distance | Integer | 否 | 距离，推送在此距离内的新加入天才，push_genius 为 true 时生效，默认距离 30km |
 
 #### 示例
 
@@ -1208,6 +1210,7 @@ curl -X PATCH https://api.soyep.com/v1/user -F badge=apple -F username=tumayun -
   "mute_started_at_string":"23:30", // 防打扰开始时间，UTC 时间
   "mute_ended_at_string":"07:30", // 防打扰结束时间，UTC 时间
   "push_genius":true // 推送附近新加入的天才
+  "genius_distance":30 // 表示推送30km内的新加入天才
 }
 ```
 
