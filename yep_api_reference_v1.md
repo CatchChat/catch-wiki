@@ -122,7 +122,6 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "nickname":"user9",
 "avatar":{
   "url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-  // 有可能没有 thumb_url，因为是 background 方式生成缩略图的
   "thumb_url":"http://catch-avatars.qiniudn.com/thumb_sJAUYG6nc84glXkq.jpg"
 },
 "latitude":0.0,
@@ -144,7 +143,6 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "nickname":"tumayun",
 "avatar":{
   "url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-  // 有可能没有 thumb_url，因为是 background 方式生成缩略图的
   "thumb_url":"http://catch-avatars.qiniudn.com/thumb_sJAUYG6nc84glXkq.jpg"
 },
 "latitude":28.3213,
@@ -179,7 +177,6 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 
 ```
 "id":<id>,
-"topic_id":<id>
 "kind":"Circle", // kind 为 Circle 表示普通群聊，TopicCircle 表示 Feed 群聊
 "name":"circle",
 "active":true, // 是否允许发送消息
@@ -207,7 +204,6 @@ Topic `kind` 为 image 时，格式如下：
 "file":{
   "expires_in":86400, // URL 过期时间，0 表示不会过期，单位：秒
   "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-  // 注意：thumb_url 可能没有，因为服务器是 background 方式生成缩略图的
   "thumb_url":"http://catch.qiniudn.com/thumb_BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
 }
 ```
@@ -219,7 +215,6 @@ Topic `kind` 为 video 时，格式如下：
 "file":{
   "expires_in":86400, // URL 过期时间，0 表示不会过期，单位：秒
   "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-  // 注意：thumb_url 可能没有，因为服务器是 background 方式生成缩略图的
   "thumb_url":"http://catch.qiniudn.com/thumb_BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
 }
 ```
@@ -346,7 +341,6 @@ Topic `kind` 为 audio 时，格式如下：
 "file":{
   "expires_in":86400, // URL 过期时间，0 表示不会过期，单位：秒
   "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
-  // 注意：thumb_url 可能没有，因为服务器是 background 方式生成缩略图的
   "thumb_url":"http://catch.qiniudn.com/thumb_BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
 }
 ```
@@ -520,7 +514,6 @@ http://api.soyep.com/v1/auth/token_by_mobile
     "nickname":"ruanwz",
     "avatar":{
       "url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      // 有可能没有 thumb_url，因为是 background 方式生成缩略图的
       "thumb_url":"http://catch-avatars.qiniudn.com/thumb_sJAUYG6nc84glXkq.jpg"
     },
     "mobile":"12345678",
@@ -626,7 +619,6 @@ cURL 请求范例：
     "nickname":"testnick",
     "avatar":{
       "url":"http://catch-avatars.qiniudn.com/sJAUYG6nc84glXkq.jpg",
-      // 有可能没有 thumb_url，因为是 background 方式生成缩略图的
       "thumb_url":"http://catch-avatars.qiniudn.com/thumb_sJAUYG6nc84glXkq.jpg"
     },
     "mobile":"15626044835",
@@ -2093,8 +2085,6 @@ curl https://api.soyep.cim/v1/friend_requests/received/accepted -H 'Authorizatio
   "friend_requests":[
     {
       "id":<id>,
-      "user_id":<id>,
-      "friend_id":<id>,
       "state":2,
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
@@ -2141,8 +2131,6 @@ curl https://api.soyep.com/v1/friend_requests/sent/accepted -H 'Authorization: T
   "friend_requests":[
     {
       "id":<id>,
-      "user_id":<id>,
-      "friend_id":<id>,
       "state":2,
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
@@ -2184,8 +2172,6 @@ curl -X POST https://api.soyep.com/v1/friend_requests -F friend_id=8 -H 'Authori
 ```
 {
   "id":<id>,
-  "user_id":<id>,
-  "friend_id":<id>,
   "state":1,
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
@@ -2219,8 +2205,6 @@ curl -X PATCH https://api.soyep.com/v1/friend_requests/received/7/accept  -H 'Au
 ```
 {
   "id":<id>,
-  "user_id":<id>,
-  "friend_id":<id>,
   "state":2,
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
@@ -2254,8 +2238,6 @@ curl -X PATCH https://api.soyep.com/v1/friend_requests/received/7/reject -H 'Aut
 ```
 {
   "id":<id>,
-  "user_id":<id>,
-  "friend_id":<id>,
   "state":3,
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
@@ -2293,16 +2275,12 @@ curl https://api.soyep.com/v1/friend_requests/with_user/ba994ac6dba5bc71489ab75f
    "friend":false,        // 表示当前用户与指定用户是否是好友关系
    "received":{           // 指定用户没有向当前用户发起过好友请求，则返回 null； 指定用户向当前用户发起过好友请求，则返回好友请求数据给客户端。
       "id":<id>,
-      "user_id":<id>,
-      "friend_id":<id>,
       "state":"pending",
       "updated_at":1439783441,
       "created_at":1439783441
    },
    "sent":"received":{    // 当前用户没有向指定用户发起过好友请求，则返回 null；指定用户向当前用户发起过好友请求，则返回好友请求数据给客户端。
       "id":<id>,
-      "user_id":<id>,
-      "friend_id":<id>,
       "state":"pending",
       "updated_at":1439783441,
       "created_at":1439783441
@@ -2336,13 +2314,8 @@ curl https://api.soyep.com/v1/friendships\?page\=1\&per_page\=10 -H 'Authorizati
   "friendships":[
     {
       "id":<id>,
-      "user_id":<id>,
-      "friend_id":<id>,
       "contact_name":null,
       "remarked_name":null,
-      "favored":false,           // 标示是否星组成员
-      "position":1,
-      "favored_position":null,
       "name":"user1",
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
@@ -2385,13 +2358,8 @@ curl https://api.soyep.com/v1/friendships/recent\?page\=1\&per_page\=10 -H 'Auth
   "friendships":[
     {
       "id":<id>,
-      "user_id":<id>,
-      "friend_id":<id>,
       "contact_name":null,
       "remarked_name":null,
-      "favored":false,           // 标示是否星组成员
-      "position":1,
-      "favored_position":null,
       "name":"user1",
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
@@ -2432,13 +2400,8 @@ curl https://api.soyep.com/v1/friendships/27 -H 'Authorization: Token token="8ni
 ```
 {
   "id":<id>,
-  "user_id":<id>,
-  "friend_id":<id>,
   "contact_name":"bac",
   "remarked_name":null,
-  "favored":false,
-  "position":5,
-  "favored_position":null,
   "name":"bac",
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
@@ -2471,13 +2434,8 @@ curl https://api.soyep.com/v1/friendships/with/14 -H 'Authorization: Token token
 ```
 {
   "id":<id>,
-  "user_id":<id>,
-  "friend_id":<id>,
   "contact_name":"bac",
   "remarked_name":null,
-  "favored":false,
-  "position":5,
-  "favored_position":null,
   "name":"bac",
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
@@ -2512,13 +2470,8 @@ curl -X PATCH https://api.soyep.com/v1/friendships/13 -F contact_name=contact_na
 ```
 {
   "id":<id>,
-  "user_id":<id>,
-  "friend_id":<id>,
   "contact_name":"bac",
   "remarked_name":null,
-  "favored":false,
-  "position":5,
-  "favored_position":null,
   "name":"bac",
   "created_at":1433930183, // UNIX 时间戳
   "updated_at":1433930183, // UNIX 时间戳
@@ -2553,13 +2506,8 @@ curl https://api.soyep.com/v1/friendships/search\?q\=1515816 -H 'Authorization: 
   "friendships":[
     {
       "id":<id>,
-      "user_id":<id>,
-      "friend_id":<id>,
       "contact_name":null,
       "remarked_name":null,
-      "favored":false,           // 标示是否星组成员
-      "position":1,
-      "favored_position":null,
       "name":"user1",
       "created_at":1433930183, // UNIX 时间戳
       "updated_at":1433930183, // UNIX 时间戳
@@ -3399,7 +3347,6 @@ curl https://api.soyep.com/v1/admin/reports -H 'Authorization: Token token="test
       "reason": null, // 当 report_type 为 3 时，会有举报原因
       "report_type": 0, // 0 表示色情低俗, 1 表示广告骚扰, 2 表示诈骗, 3 表示其他
       "reportable_type": "User", // 被举报的对象，目前有 User 和 Topic，表示被举报对象为用户和话题
-      "reportable_id": "8a3876f01e5d6bb7b0d329410132cedc", // 与 reportable_type 对应，被举报对象的 ID
       "created_at": 1452229081,
       "replied": false, // 是否回复过
       "user": { // 举报的发起人
@@ -3440,7 +3387,6 @@ curl https://api.soyep.com/v1/admin/reports/<id> -H 'Authorization: Token token=
   "reason": null,
   "report_type": 0,
   "reportable_type": "Topic",
-  "reportable_id": "0f0cd19a4e820bbcbfcc2bd9496671be",
   "created_at": 1449650473,
   "replied": true,
   "user": {
