@@ -202,7 +202,6 @@ Topic `kind` 为 image 时，格式如下：
 ```
 "metadata":"metadata",
 "file":{
-  "expires_in":86400, // URL 过期时间，0 表示不会过期，单位：秒
   "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
   "thumb_url":"http://catch.qiniudn.com/thumb_BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
 }
@@ -213,7 +212,6 @@ Topic `kind` 为 video 时，格式如下：
 ```
 "metadata":"metadata",
 "file":{
-  "expires_in":86400, // URL 过期时间，0 表示不会过期，单位：秒
   "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
   "thumb_url":"http://catch.qiniudn.com/thumb_BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
 }
@@ -225,7 +223,6 @@ Topic `kind` 为 audio 时，格式如下：
 // audio 没有缩略图
 "metadata":"metadata",
 "file":{
-  "expires_in":86400, // URL 过期时间，0 表示不会过期，单位：秒
   "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
 }
 ```
@@ -337,9 +334,10 @@ Topic `kind` 为 audio 时，格式如下：
 在 API 返回 attachment 信息时，将会以 `<attachment>` 替代如下结构：
 
 ```
+"id":<id>,
 "metadata":"metadata",
 "file":{
-  "expires_in":86400, // URL 过期时间，0 表示不会过期，单位：秒
+  "expires_at":1454298804, // URL 过期时间
   "url":"http://catch.qiniudn.com/BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
   "thumb_url":"http://catch.qiniudn.com/thumb_BOmgCcbMqwaBs3OidTT2MbplmMLsCaIs.mp4?e=1419025369&token=YSMhpYfzim6GOG-_sqsm3C0CpWI7RAPeq5IxjHeD:MDp3E4cxzhderCN4zTWVlLc2Cs4="
 }
@@ -2602,6 +2600,28 @@ curl https://api.soyep.com/v1/attachments -F file=@/Users/tumayun/Downloads/2015
 
 ```
 {"id":"fef50241350066923aaa548b056e59c2"}
+```
+
+### Refresh url 刷新 URL
+
+URL 在即将过期时，需要请求此 API，目前只有消息的附件才会有过期时间，其他附件的 URL 不过期。
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl -XPATCH https://api.soyep.com/v1/attachments/ba29b1dbb127d4cdf31c47b23f365bdc/refresh_url -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  <attachment>
+}
 ```
 
 ## Block User API（拒绝接收对方消息）
