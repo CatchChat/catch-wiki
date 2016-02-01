@@ -2613,14 +2613,19 @@ URL 在即将过期时，需要请求此 API，目前只有消息的附件才会
 #### 示例
 
 ```
-curl -XPATCH https://api.soyep.com/v1/attachments/ba29b1dbb127d4cdf31c47b23f365bdc/refresh_url -H 'Authorization: Token token="test-token"'
+curl -XPATCH https://api.soyep.com/v1/attachments/refresh_url -d '{"ids":["34de1e660dc91c70e098d77212d2ab71","ae5fe73e02d143a2344e0bd9fb75775d"]}' -H 'Content-Type: application/json' -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
 
 ```
 {
-  <attachment>
+  "attachments":[
+    {<attachment>},
+    {<attachment>},
+    {<attachment>},
+    {<attachment>}
+  ]
 }
 ```
 
