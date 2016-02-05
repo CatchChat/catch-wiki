@@ -3201,10 +3201,10 @@ curl -XDELETE https://api.soyep.com/v1/topics/516055075accc1e4067dd5ff6b2682cd -
 
 不返回数据，只返回状态码
 
+----------------
+**以下 API 需要管理员权限**
 
 ## 反馈管理
-
-**以下 API 需要管理员权限**
 
 ### 获取所有反馈
 
@@ -3344,8 +3344,6 @@ curl -XPOST https://api.soyep.com/v1/admin/feedbacks/<id>/reply -F media_type=im
 
 ## 管理举报
 
-**以下 API 需要管理员权限**
-
 ### 获取所有举报
 
 ```
@@ -3477,3 +3475,117 @@ curl -XPOST https://api.soyep.com/v1/admin/reports/<id>/reply -F media_type=imag
   "updated_at": 1451391257.432
 }
 ```
+
+## 管理帖子
+
+### 获取所有帖子
+
+```
+GET /v1/admin/topics
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/admin/topics -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "count": 1,
+  "current_page": 1,
+  "per_page": 30,
+  "topics": [
+    {
+      <topic>,
+      hidden: false // 是否被隐藏
+    },
+    .
+    .
+    .
+  ]
+}
+```
+
+### 隐藏帖子
+
+```
+PATCH /v1/admin/topics/:id/hide
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl -XPATCH https://api.soyep.com/v1/admin/topics/<id>/hide -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+只返回状态码
+
+## 管理用户
+
+### 获取所有用户
+
+```
+GET /v1/admin/users
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/admin/users -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "count": 1,
+  "current_page": 1,
+  "per_page": 30,
+  "users": [
+    {
+      <mini_user>,
+      hidden: false // 是否被隐藏
+    },
+    .
+    .
+    .
+  ]
+}
+```
+
+### 隐藏用户
+
+```
+PATCH /v1/admin/users/:id/hide
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl -XPATCH https://api.soyep.com/v1/admin/users/<id>/hide -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+只返回状态码
