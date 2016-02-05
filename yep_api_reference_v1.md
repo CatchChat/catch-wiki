@@ -3589,3 +3589,23 @@ curl -XPATCH https://api.soyep.com/v1/admin/users/<id>/hide -H 'Authorization: T
 #### 响应
 
 只返回状态码
+
+### 禁止用户
+
+```
+PATCH /v1/admin/users/:id/block
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl -XPATCH https://api.soyep.com/v1/admin/users/<id>/block -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+只返回状态码
