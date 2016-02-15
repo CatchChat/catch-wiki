@@ -1800,6 +1800,39 @@ curl https://api.soyep.com/v1/learning_skills/90913b93738c8a627129e49db32eeec3/u
 
 ## Message 消息
 
+### 同步当前客户端未收到的消息
+
+**支持分页，同步消息时应该判断是否同步完成，未完成应该 page + 1 后继续请求**
+
+```
+GET /v1/messages
+```
+
+#### 参数
+
+名称 | 类型 | 是否必须 | 描述
+--- |--- |--- |--- |
+min_id | String | 否 | 当前客户端所有会话中最新消息的 ID
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/messages -F min_id=<id> -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
+```
+
+#### 返回
+
+```
+{
+  "messages":[
+    <message>
+  ],
+  "current_page": 1,
+  "per_page": 25,
+  "count": 100
+}
+```
+
 ### 获取最新未读消息
 
 每个聊天窗口至多返回10条未读消息，进入聊天窗口后想要获取更多消息可以请求消息历史API
