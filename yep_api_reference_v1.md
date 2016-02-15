@@ -1833,43 +1833,6 @@ curl https://api.soyep.com/v1/messages -F min_id=<id> -H 'Authorization: Token t
 }
 ```
 
-### 获取最新未读消息
-
-每个聊天窗口至多返回10条未读消息，进入聊天窗口后想要获取更多消息可以请求消息历史API
-
-```
-GET /v1/messages/unread
-```
-
-#### 参数
-
-**无，且不支持分页**
-
-#### 示例
-
-```
-curl https://api.soyep.com/v1/messages/unread -H 'Authorization: Token token="nH-CaGbGvS5tJRizTsiM1418019414.813717"'
-```
-
-#### 响应
-
-```
-{
-  "conversations":[
-    {
-      "conversation_type":"User" // 聊天窗口类型，值可能为 User 或者 Circle，分别表示单聊和群聊
-      "conversation":{ // 根据 conversation_type 的不同，可能是 user 或者 circle
-        <mini_user>|<circle_with_topic>,
-      },
-      "messages":[    // 未读消息
-        <message>
-      ],
-      "count":100     // 未读总数
-    }
-  ]
-}
-```
-
 ### 发送消息
 
 发送图片视频语音消息时，需要先上传附件，拿到附件ID后再请求发送消息API。    
