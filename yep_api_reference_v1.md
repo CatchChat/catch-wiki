@@ -306,7 +306,6 @@ Topic `kind` 为 audio 时，格式如下：
 
 ```
 "id": <id>,
-"allow_comment": true, // 是否允许评论
 "kind": "normal" // 帖子类型，目前有 apple_music|apple_movie|apple_ebook|text|image|video|audio|location|github|dribbble
 "body": "test", // 帖子内容
 "message_count": 0, // 评论消息数
@@ -3142,7 +3141,6 @@ POST /v1/topics
 | body | Text | 是 | 帖子内容 |
 | latitude | Float | 是 | latitude |
 | longitude | Float | 是 | longitude |
-| allow_comment | Boolean | 否 | 是否允许评论，允许评论则会创建 circle，默认为 true |
 | skill_id | String | 否 | 技能ID |
 | attachments | JSON | 否 | 如：[{"id":'attachment_id'}] |
 
@@ -3165,7 +3163,7 @@ web_page    | 网页分享贴          | [{"site_name":"site_name","title":"标�
 #### 示例
 
 ```
-curl -XPOST https://api.soyep.com/v1/topics -F body=test -F latitude=11.11 -F longitude=22.22 -F allow_comment=true -F skill_id=cee89797007ab6db9f356f53edd0174a -H 'Authorization: Token token="test-token"'
+curl -XPOST https://api.soyep.com/v1/topics -F body=test -F latitude=11.11 -F longitude=22.22 -F skill_id=cee89797007ab6db9f356f53edd0174a -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
