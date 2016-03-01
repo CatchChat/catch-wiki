@@ -2594,7 +2594,7 @@ curl https://api.soyep.com/v1/attachments -F file=@/Users/tumayun/Downloads/2015
 #### 响应
 
 ```
-{"id":"fef50241350066923aaa548b056e59c2"}
+{ <attachment> }
 ```
 
 ### Refresh url 刷新 URL
