@@ -2047,7 +2047,102 @@ curl https://api.soyep.com/v1/users/<id>/messages/sent_last_read_at -H 'Authoriz
 
 #### 响应
 
-{ "last_read_at":1445596604.144 }
+{ "last_read_at":1445596604.144, "last_read_id":<id> }
+
+### 删除指定消息
+
+从聊天历史中删除指定 ID 的消息，返回成功删除的消息 ID
+
+```
+DELETE /:version/:recipient_type/:recipient_id/messages/delete_messages
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+| recipient_id | String | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
+| recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 users 或者 circles |
+| ids | Array | 是 | 要删除的消息 ID |
+
+#### 示例
+
+```
+curl -X DELETE https://api.soyep.com/v1/users/<id>/messages/delete_messages -d '{"ids":["34de1e660dc91c70e098d77212d2ab71","ae5fe73e02d143a2344e0bd9fb75775d"]}' -H 'Content-Type: application/json' -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "deleted_ids":["34de1e660dc91c70e098d77212d2ab71","ae5fe73e02d143a2344e0bd9fb75775d"]
+}
+```
+
+### 删除消息历史
+
+删除会话以及会话中的消息历史，下次同步会话列表时将不再返回该会话
+
+```
+DELETE /:version/:recipient_type/:recipient_id/messages/delete_history
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+| recipient_id | String | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
+| recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 users 或者 circles |
+
+#### 示例
+
+```
+curl -X DELETE https://api.soyep.com/v1/users/<id>/messages/delete_history -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+只返回状态码
+
+### 获取会话列表
+
+客户端登录后，应该立即请求此API，获取会话列表，包括 Users、Circles、Messages，客户端需要严格按照 Messages 的顺序排列展示 Users 和 Circles。
+Messages 是每个会话的最新消息（每个会话只有一条），客户端需要根据消息的 recipient_type 和 recipient_id 确定消息所属会话，并正确加载到会话中。
+在进入到会话后，客户端应立即请求`GET /v1/:recipient_type/:recipient_id/messages` API，加载更多的历史消息。
+
+```
+GET /v1/dialogs
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+| offset | String | 否 | 上一次请求获取到的 messages 中最后那条消息的 ID，以保证获取到的会话不会重复，只在有更多会话可以获取的时候才需要 |
+| limit | Integer | 是 | 获取会话的数量 |
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/dialogs?offset=<id>&limit=20 -H 'Authorization: Token token="test-token"'
+```
+
+```
+{
+  "messages":[
+    <message>
+  ],
+  "users":[
+    <user>
+  ],
+  "circles":[
+    <circle_with_topic>
+  ],
+  "current_page":1,
+  "per_page":20,
+  "count":50
+}
+```
 
 ## FriendRequest 好友请求
 
