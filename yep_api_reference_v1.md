@@ -2111,20 +2111,20 @@ Messages 是每个会话的最新消息（每个会话只有一条），客户�
 在进入到会话后，客户端应立即请求`GET /v1/:recipient_type/:recipient_id/messages` API，加载更多的历史消息。
 
 ```
-GET /v1/dialogs
+GET /v1/conversations
 ```
 
 #### 参数
 
 名称 | 类型 | 是否必需 | 描述
 --- |--- |--- |--- |
-| offset | String | 否 | 上一次请求获取到的 messages 中最后那条消息的 ID，以保证获取到的会话不会重复，只在有更多会话可以获取的时候才需要 |
-| limit | Integer | 是 | 获取会话的数量 |
+| max_id | String | 否 | 上一次请求获取到的 messages 中最后那条消息的 ID，以保证获取到的会话不会重复，只在有更多会话可以获取的时候才需要 |
+| per_page | Integer | 是 | 获取会话的数量 |
 
 #### 示例
 
 ```
-curl https://api.soyep.com/v1/dialogs?offset=<id>&limit=20 -H 'Authorization: Token token="test-token"'
+curl https://api.soyep.com/v1/conversations?max_id=<id>&per_page=20 -H 'Authorization: Token token="test-token"'
 ```
 
 ```
