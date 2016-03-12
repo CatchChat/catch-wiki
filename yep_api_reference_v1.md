@@ -179,7 +179,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "id":<id>,
 "kind":"Circle", // kind 为 Circle 表示普通群聊，TopicCircle 表示 Feed 群聊
 "name":"circle",
-"active":true, // 是否允许发送消息
+"creator_id":<id>, // 创建者
 "created_at":1433930183, // UNIX 时间戳
 "updated_at":1433930183, // UNIX 时间戳
 ```
@@ -691,7 +691,7 @@ POST /v1/circles
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
 | name | String | 是 | 群组名 |
-| members | JSON | 否 | 成员ID数组 |
+| members | JSON | 是 | 成员ID数组 |
 
 #### 示例
 
@@ -702,12 +702,9 @@ curl -i -X POST https://api.soyep.com/v1/circles -d '{ "members": [3,4,5], "name
 #### 响应
 
 ```
-//!! Topic Circle 不返回 owner 和 members
+//!! Topic Circle 不返回 members
 {
   <circle_with_topic>,
-  "owner":{
-    <mini_user>
-  },
   "members":[
     {
       <mini_user>
@@ -741,12 +738,9 @@ curl -X PUT https://api.soyep.com/v1/circles/2 -d '{ "name": "群组" }' -H 'Aut
 #### 响应
 
 ```
-//!! Topic Circle 不返回 owner 和 members
+//!! Topic Circle 不返回 members
 {
   <circle_with_topic>,
-  "owner":{
-    <mini_user>
-  },
   "members":[
     {
       <mini_user>
@@ -779,12 +773,9 @@ curl -X GET https://api.soyep.com/v1/circles/2 -H 'Authorization: Token token="r
 #### 响应
 
 ```
-//!! Topic Circle 不返回 owner 和 members
+//!! Topic Circle 不返回 members
 {
   <circle_with_topic>,
-  "owner":{
-    <mini_user>
-  },
   "members":[
     {
       <mini_user>
@@ -817,12 +808,9 @@ curl -X POST https://api.soyep.com/v1/circles/2/join -H 'Authorization: Token to
 #### 响应
 
 ```
-//!! Topic Circle 不返回 owner 和 members
+//!! Topic Circle 不返回 members
 {
   <circle_with_topic>,
-  "owner":{
-    <mini_user>
-  },
   "members":[
     {
       <mini_user>
@@ -878,12 +866,9 @@ curl -X POST https://api.soyep.com/v1/circles/2/batch_add -d '{ "members": [4,5]
 #### 响应
 
 ```
-//!! Topic Circle 不返回 owner 和 members
+//!! Topic Circle 不返回 members
 {
   <circle_with_topic>,
-  "owner":{
-    <mini_user>
-  },
   "members":[
     {
       <mini_user>
@@ -895,7 +880,7 @@ curl -X POST https://api.soyep.com/v1/circles/2/batch_add -d '{ "members": [4,5]
 }
 ```
 
-### 批量删除成员（只能是群 owner 才能删除成员）
+### 批量删除成员（只能是群创建者才能删除成员）
 
 ```
 DELETE /v1/circles/:id/batch_delete
@@ -906,7 +891,7 @@ DELETE /v1/circles/:id/batch_delete
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
 | id | Integer | 是 | 群组 ID |
-| members | String | 否 | 要删除的成员ID数组 |
+| members | String | 是 | 要删除的成员ID数组 |
 
 #### 示例
 
@@ -917,12 +902,9 @@ curl -X DELETE https://api.soyep.com/v1/circles/2/batch_delete -d '{ "members": 
 #### 响应
 
 ```
-//!! Topic Circle 不返回 owner 和 members
+//!! Topic Circle 不返回 members
 {
   <circle_with_topic>,
-  "owner":{
-    <mini_user>
-  },
   "members":[
     {
       <mini_user>
