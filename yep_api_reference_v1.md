@@ -391,6 +391,85 @@ Topic `kind` 为 audio 时，格式如下：
 }
 ```
 
+Service 消息
+
+```
+{
+  "id":<id>,
+  "recipient_id":<id>,
+  "recipient_type":"Circle",
+  "text_content":"Hello~",
+  "latitude":113.033,
+  "longitude":24.1231,
+  "parent_id":0,
+  "media_type":"image",
+  "state":"unread",
+  "created_at":1433930183, // UNIX 时间戳
+  "updated_at":1433930183, // UNIX 时间戳
+  "action":<message_action>, // 表示此为 Service 消息
+  "sender":{
+    <mini_user>
+  },
+  "attachments":[
+    <attachment>,
+    .
+    .
+    .
+  ]
+}
+```
+
+#### message_action 模板
+
+Service 消息返回 message_action 信息时，将会以 `<message_action>` 替代如下结构：
+
+##### 创建群组
+
+```
+{
+  "type":"CircleCreate",
+  "user_id":<id> // 群主ID
+}
+```
+
+##### 主动加入群组
+
+```
+{
+  "type":"CircleAddUser",
+  "user_id":<id> // 新成员ID
+}
+```
+
+##### 邀请加入群组
+
+```
+{
+  "type":"CircleAddUser",
+  "user_id":<id>, // 新成员ID
+  "invited_by":<id> // 邀请者ID
+}
+```
+
+##### 主动离开群组
+
+```
+{
+  "type":"CircleDeleteUser",
+  "user_id":<id> // 离开成员ID
+}
+```
+
+##### 被移出群组
+
+```
+{
+  "type":"CircleDeleteUser",
+  "user_id":<id>, // 被移出成员ID
+  "deleted_by":<id> // 实施移出者ID
+}
+```
+
 ### 推送
 
 推送 extras 说明
