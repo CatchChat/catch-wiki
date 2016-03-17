@@ -306,12 +306,12 @@ Topic `kind` 为 audio 时，格式如下：
 
 ```
 "id": <id>,
-"kind": "normal" // 帖子类型，目前有 apple_music|apple_movie|apple_ebook|text|image|video|audio|location|github|dribbble
-"body": "test", // 帖子内容
+"kind": "normal" // 话题类型，目前有 apple_music|apple_movie|apple_ebook|text|image|video|audio|location|github|dribbble
+"body": "test", // 话题内容
 "message_count": 0, // 评论消息数
 "created_at": 1443278450.465,
 "updated_at": 1443278450.465
-"user":{ // 帖子创建者
+"user":{ // 话题创建者
   <mini_user>
 },
 "skill":{ // 注意：skill 可能为 null
@@ -2648,7 +2648,7 @@ curl -X POST https://api.soyep.com/v1/unfriend_requests -F friend_id=2 -H 'Autho
 
 ### 上传附件
 
-上传附件后，会拿到附件ID，在发消息和发帖子的时候带上此ID就可以了
+上传附件后，会拿到附件ID，在发消息和发话题的时候带上此ID就可以了
 
 ```
 POST /v1/attachments
@@ -3092,7 +3092,7 @@ curl -X POST https://api.soyep.com/v1/feedbacks -F content=test -F device_info=t
 
 ## Topics (Feeds)
 
-### 获取所有我发的帖子
+### 获取所有我发的话题
 
 ```
 GET /v1/topics
@@ -3126,7 +3126,7 @@ curl https://api.soyep.com/v1/topics -H 'Authorization: Token token="test-token"
 }
 ```
 
-### 获取指定用户发的帖子
+### 获取指定用户发的话题
 
 ```
 GET /v1/users/:user_id/topics
@@ -3161,7 +3161,7 @@ curl https://api.soyep.com/v1/users/516055075accc1e4067dd5ff6b2682cd/topics -H '
 }
 ```
 
-### 发现帖子 (Feeds)
+### 发现话题 (Feeds)
 
 ```
 GET /v1/topics/discover
@@ -3201,11 +3201,11 @@ curl https://api.soyep.com/v1/topics/discover -H 'Authorization: Token token="te
 }
 ```
 
-### 发布帖子
+### 发布话题
 
-如果发布含有图片声音视频的帖子，需要先上传附件，拿到附件ID后在请求发布帖子API。   
+如果发布含有图片声音视频的话题，需要先上传附件，拿到附件ID后在请求发布话题API。   
 
-当提及（@）其他用户时，`body` 格式应该为 `@tumayun 你好`（符合正则`/(?:[^a-zA-Z0-9_!#\$%&*@＠]|^:?)[@＠]([a-zA-Z0-9_]{4,16})/`），此时如果用户`tumayun`没有屏蔽掉帖子的创建者，则会自动添加`tumayun`为群组成员，并且[推送通知](#被用户提及)。
+当提及（@）其他用户时，`body` 格式应该为 `@tumayun 你好`（符合正则`/(?:[^a-zA-Z0-9_!#\$%&*@＠]|^:?)[@＠]([a-zA-Z0-9_]{4,16})/`），此时如果用户`tumayun`没有屏蔽掉话题的创建者，则会自动添加`tumayun`为群组成员，并且[推送通知](#被用户提及)。
 
 ```
 POST /v1/topics
@@ -3215,8 +3215,8 @@ POST /v1/topics
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| kind | String | 是 | 帖子类型，目前有 apple_music|apple_movie|apple_ebook|text|image|video|audio|location|github|dribbble|web_page |
-| body | Text | 是 | 帖子内容 |
+| kind | String | 是 | 话题类型，目前有 apple_music|apple_movie|apple_ebook|text|image|video|audio|location|github|dribbble|web_page |
+| body | Text | 是 | 话题内容 |
 | latitude | Float | 是 | latitude |
 | longitude | Float | 是 | longitude |
 | skill_id | String | 否 | 技能ID |
@@ -3226,10 +3226,10 @@ kind 可选值为：
 
 可选值 | 描述 | attachments 格式
 --- | --- |---
-text        | 文字类型帖子        | null
-image       | 含图片的帖子        | [{"id":'attachment_id'}]，可以有最多 9 张图片
-video       | 含视频的帖子        | [{"id":'attachment_id'}]，最多一段视频
-audio       | 含声音的帖子        | [{"id":'attachment_id'}]，最多一段声音
+text        | 文字类型话题        | null
+image       | 含图片的话题        | [{"id":'attachment_id'}]，可以有最多 9 张图片
+video       | 含视频的话题        | [{"id":'attachment_id'}]，最多一段视频
+audio       | 含声音的话题        | [{"id":'attachment_id'}]，最多一段声音
 location    | 位置分享贴          | [{"place":"地名","latitude":11.11,"longitude":22.22}]，最多一个位置
 github      | github 分享贴       | [{"repo_id":1,"name":"name","full_name":"full_name","description":"description","url":"url",created_at:1296068472.0}]，最多一个 github 分享
 dribbble    | dribbble 分享贴     | [{"shot_id":1,"title":"标题","description":"描述","media_url":"media_url","url":"url",created_at:1296068472.0}]，最多一个 dribbble 分享
@@ -3253,7 +3253,7 @@ curl -XPOST https://api.soyep.com/v1/topics -F body=test -F latitude=11.11 -F lo
 }
 ```
 
-### 删除帖子
+### 删除话题
 
 ```
 DELETE /:version/topics/:id
@@ -3548,9 +3548,9 @@ curl -XPOST https://api.soyep.com/v1/admin/reports/<id>/reply -F media_type=imag
 }
 ```
 
-## 管理帖子
+## 管理话题
 
-### 获取所有帖子
+### 获取所有话题
 
 ```
 GET /v1/admin/topics
@@ -3585,7 +3585,7 @@ curl https://api.soyep.com/v1/admin/topics -H 'Authorization: Token token="test-
 }
 ```
 
-### 隐藏帖子
+### 隐藏话题
 
 ```
 PATCH /v1/admin/topics/:id/hide
