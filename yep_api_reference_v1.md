@@ -1494,7 +1494,7 @@ GET v1/users/search
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| q | String | 是 | mobile|username|nickname，其中 username 和 nickname 是前缀匹配，mobile 则是全文匹配  |
+| q | String | 是 | mobile, username 或 nickname，其中 username 和 nickname 是前缀匹配，mobile 则是全文匹配  |
 
 #### 示例
 
@@ -3171,7 +3171,7 @@ GET /v1/topics/discover
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| sort | String | 否 | 排序方式，目前支持 default|distance|time。default 表示按技能相关性排序，distance 表示按距离倒序展示，time 表示两周内的 topics 按发帖时间倒序展示。默认值为 default |
+| sort | String | 否 | 排序方式，目前支持 default distance time。default 表示按技能相关性排序，distance 表示按距离倒序展示，time 表示两周内的 topics 按发帖时间倒序展示。默认值为 default |
 | skill_id | String | 否 | 技能ID，支持按技能过滤 |
 | max_id | String | 否 | 仅当 sort 值为 time 或 distance 时有效，表示 ID 获取小于 max_id 的话题。当带有 max_id 参数时，应该不传 page 参数或者始终置为 1 |
 | min_id | String | 否 | 仅当 sort 值为 time 或 distance 时有效，表示 ID 获取大于 min_id 的话题。当带有 min_id 参数时，应该不传 page 参数或者始终置为 1 |
@@ -3215,7 +3215,7 @@ POST /v1/topics
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| kind | String | 是 | 话题类型，目前有 apple_music|apple_movie|apple_ebook|text|image|video|audio|location|github|dribbble|web_page |
+| kind | String | 是 | 话题类型，目前有 apple_music apple_movie apple_ebook text image video audio location github dribbble web_page |
 | body | Text | 是 | 话题内容 |
 | latitude | Float | 是 | latitude |
 | longitude | Float | 是 | longitude |
