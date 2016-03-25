@@ -473,6 +473,8 @@ Service 消息返回 message_action 信息时，将会以 `<message_action>` 替
 
 ##### 话题被删除
 
+接收到话题被删除的消息后，应该将“参与的话题”中的此话题标记为已删除
+
 ```
 {
   "type":"TopicDelete"
