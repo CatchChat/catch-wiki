@@ -351,6 +351,7 @@ Topic `kind` 为 audio 时，格式如下：
 ```
 {
   "id":<id>,
+  "random_id":"123456", // 客户端生成的随机ID，防止消息出现重复
   "recipient_id":<id>,
   "recipient_type":"Circle",
   "text_content":"Hello~",
@@ -1912,9 +1913,10 @@ recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 us
 media_type | String | 否 | 消息类型，text 表示文字, image 表示图片, video 表示视频, audio 表示语音, sticker 表示贴纸, location 表示位置, 默认是text
 text_content | String | 否 | 文字内容，**只有是文字消息时才是必填字段，其他情况都是选填字段**
 parent_id | String | 否 | 回复的消息 ID，表示当前要发送的消息是回复哪条消息
-attachment_id | String | 否 | 附件 ID }
+attachment_id | String | 否 | 附件 ID
 longitude | Float | 否 | 只有位置消息才需要
 latitude | Float | 否 | 只有位置消息才需要
+random_id | String | 否 | 客户端生成的随机ID，防止消息出现重复
 
 media_type 可选值：
 
