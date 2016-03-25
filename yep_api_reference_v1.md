@@ -471,6 +471,14 @@ Service 消息返回 message_action 信息时，将会以 `<message_action>` 替
 }
 ```
 
+##### 话题被删除
+
+```
+{
+  "type":"TopicDelete"
+}
+```
+
 ### 推送
 
 推送 extras 说明
