@@ -351,7 +351,7 @@ Topic `kind` 为 audio 时，格式如下：
 ```
 {
   "id":<id>,
-  "random_id":"123456", // 客户端生成的随机ID，防止消息出现重复
+  "random_id":"123456", // 客户端生成的随机 ID，可以用以防止发送消息时还没收到服务器的响应就已经收到 faye 消息的情况导致的消息重复问题
   "recipient_id":<id>,
   "recipient_type":"Circle",
   "text_content":"Hello~",
@@ -1916,7 +1916,7 @@ parent_id | String | 否 | 回复的消息 ID，表示当前要发送的消息�
 attachment_id | String | 否 | 附件 ID
 longitude | Float | 否 | 只有位置消息才需要
 latitude | Float | 否 | 只有位置消息才需要
-random_id | String | 否 | 客户端生成的随机ID，防止消息出现重复
+random_id | String | 否 | // 客户端生成的随机 ID，可以用以防止发送消息时还没收到服务器的响应就已经收到 faye 消息的情况导致的消息重复问题
 
 media_type 可选值：
 
