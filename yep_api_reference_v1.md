@@ -3123,7 +3123,11 @@ GET /v1/official_messages
 
 #### 参数
 
-无，且不支持分页
+支持分页
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+ min_id | String | 否 | 获取 id 大于 min_id 的官方消息
 
 #### 示例
 
@@ -3152,7 +3156,10 @@ curl https://api.soyep.com/v1/official_messages -H 'Authorization: Token token="
         .
       ]
     }
-  ]
+  ],
+  "count": 1,
+  "current_page": 1,
+  "per_page": 30
 }
 ```
 
