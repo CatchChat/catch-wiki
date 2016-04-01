@@ -2873,6 +2873,83 @@ curl -X DELETE https://api.soyep.com/v1/blocked_users/516055075accc1e4067dd5ff6b
 {}
 ```
 
+## 不看Ta的话题 API
+
+### 获取所有被我设置为“不看Ta的话题”的用户
+
+```
+GET /v1/blocked_topic_creators
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl -X GET https://api.soyep.com/v1/blocked_topic_creators -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+```
+
+#### 响应
+
+```
+{
+  "blocked_topic_creators":[
+    {
+      <mini_user>
+    }
+  ],
+  "current_page":1,
+  "per_page":30,
+  "count":1
+}
+```
+
+### 设置为“不看Ta的话题”
+
+```
+POST /v1/blocked_topic_creators
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+user_id | String | 是 | 想要设置为“不看Ta的话题”的用户 ID
+
+#### 示例
+
+```
+curl -X POST https://api.soyep.com/v1/blocked_topic_creators -F user_id=516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+```
+
+#### 响应
+
+只返回状态码
+
+### 取消“不看Ta的话题”
+
+```
+DELETE /v1/blocked_topic_creators/:id
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+id | String | 是 | 想要取消“不看Ta的话题”的用户 ID
+
+#### 示例
+
+```
+curl -X DELETE https://api.soyep.com/v1/blocked_topic_creators/516055075accc1e4067dd5ff6b2682cd -H 'Authorization: Token token="__6d1nbPEXM5-ycZdaHW1427949278.5644941"'
+```
+
+#### 响应
+
+只返回状态码
+
 ## Master Skills（已有的技能）
 
 ### 添加已有技能
