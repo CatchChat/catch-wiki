@@ -3376,6 +3376,43 @@ curl https://api.soyep.com/v1/topics/discover -H 'Authorization: Token token="te
 }
 ```
 
+### 搜索话题
+
+```
+GET /v1/topics/search
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| q | String | 是 | 话题关键字 |
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/topics/search?q=kevin -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "count": 1,
+  "current_page": 1,
+  "per_page": 30,
+  "topics": [
+    {
+      <topic>,
+      distance: 245.3, // km
+    },
+    .
+    .
+    .
+  ]
+}
+```
+
 ### 发布话题
 
 如果发布含有图片声音视频的话题，需要先上传附件，拿到附件ID后在请求发布话题API。   
