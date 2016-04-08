@@ -1744,7 +1744,7 @@ GET /v1/users/:id/settings_with_current_user
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| id | String | 是 | user id |
+| id | String | 是 | 指定用户的 id |
 
 #### 示例
 
@@ -1758,6 +1758,32 @@ curl https://api.soyep.com/v1/users/90913b93738c8a627129e49db32eeec3/settings_wi
 {
   blocked: true,   // 当前用户是否 block 了 user<90913b93738c8a627129e49db32eeec3>
   dnd: true        // 当前用户是否将 user<90913b93738c8a627129e49db32eeec3> 设置为请勿打扰了
+}
+```
+
+### 获取当前用户是否将指定用户设置为不看 TA 的话题
+
+```
+GET /v1/users/:id/hide_topics_setting
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| id | String | 是 | 指定用户的 id |
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/users/90913b93738c8a627129e49db32eeec3/hide_topics_setting -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  hide_topics: true // 当前用户已将指定用户设置为不看 TA 的话题
 }
 ```
 
