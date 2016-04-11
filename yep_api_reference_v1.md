@@ -3195,6 +3195,30 @@ curl -X POST https://api.soyep.com/v1/topics/bc93fe60a44cf376edeb98a9d68d85b9/re
 
 只返回 http code
 
+### 举报消息
+
+```
+POST /v1/messages/:id/reports
+```
+
+#### 参数
+
+名称 | 类型 | 是否必需 | 描述
+--- |--- |--- |--- |
+id | String | 是 | 要举报的消息 ID
+report_type | Integer | 是 | 0 表示色情低俗, 1 表示广告骚扰, 2 表示诈骗, 3 表示其他
+reason | Text | 否 | 举报原因，当 report_type 为 3 时，reason 为必填
+
+#### 示例
+
+```
+curl -X POST https://api.soyep.com/v1/messages/bc93fe60a44cf376edeb98a9d68d85b9/reports -F report_type=1 -F reason=test -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+只返回 http code
+
 ## Oauth (绑定第三方平台账号)
 
 ### 流程
