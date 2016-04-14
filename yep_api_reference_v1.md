@@ -74,7 +74,7 @@ X-RateLimit-Reset: 1377013266
 
 ### Response
 
-HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请求失败，失败会有错误信息，错误信息在 `error` 中。
+HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请求失败，失败会有错误信息，错误信息在 `error` 中，有些 API 由于客户端要根据不同的错误类型做处理，会附加一个 `code`，表示错误类型。
 
 ### 字段模板
 
@@ -1972,6 +1972,12 @@ curl -X POST https://api.soyep.com/v1/users/<id>/messages -d '{ "text_content": 
 ```
 
 #### 响应
+
+##### 错误码 code
+
+Error Code | 描述
+--- |--- |
+rejected_your_message | 当前用户已被对方屏蔽
 
 ```
 <message>
