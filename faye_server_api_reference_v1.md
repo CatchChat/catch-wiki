@@ -13,13 +13,11 @@
 
 订阅消息的频道有（对应各版本的 Faye Server）：
 
-* Direct message `/v1/users/:user_id/messages`
-* Group message `/v1/circles/:circle_id/messages`
+* `/v1/users/:user_id/messages`
 
 发布消息的频道有（各版本 Faye Server 发布消息频道均一致）：
 
-* Direct message `/users/:user_id/messages`
-* Group message `/circles/:circle_id/messages`
+* `/messages`
 
 ## Version
 
@@ -58,6 +56,8 @@
     "message_type":"instant_state", // 消息类型，此处为即时状态消息
     "message":{
       "state":"typing" // 即时状态，如 typing, uploading
+      "recipient_type":"User",
+      "recipient_id":"516055075accc1e4067dd5ff6b2682cd"
     }
   }
 }
@@ -83,6 +83,8 @@
   "message_type":"instant_state", // 消息类型，此处为即时状态消息
   "message":{
     "state":"typing" // 即时状态，如 typing, uploading
+    "recipient_type":"User",
+    "recipient_id":"516055075accc1e4067dd5ff6b2682cd",
     "user":{  // 即时状态触发者
       "id":"516055075accc1e4067dd5ff6b2682cd",
       "username":"tumayun",
@@ -103,6 +105,7 @@
 {
   message_type: 'mark_as_read',
   message: {
+    "last_read_id":<id>,
     "last_read_at":1445596604.144, // max_id 对应消息的 created_at 值
     "recipient_id":<id>,
     "recipient_type":"User"
