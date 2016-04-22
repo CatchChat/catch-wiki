@@ -3437,6 +3437,8 @@ GET /v1/topics/search
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
 | q | String | 是 | 话题关键字 |
+| user_id | String | 否 | User ID，关键字搜索指定用户的话题 |
+| skill_id | String | 否 | Skill ID，关键字搜索指定技能下的话题 |
 
 #### 示例
 
