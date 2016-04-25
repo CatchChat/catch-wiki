@@ -3541,6 +3541,40 @@ curl -XDELETE https://api.soyep.com/v1/topics/516055075accc1e4067dd5ff6b2682cd -
 
 不返回数据，只返回状态码
 
+## 话题搜索热词 hot words
+
+### 获取热词
+
+不支持分页，最多返回 10 个热词
+
+```
+GET /v1/hot_words
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/hot_words -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "hot_words": [
+    "Swift",
+    "iOS",
+    .
+    .
+    .
+  ]
+}
+```
+
 ----------------
 **以下 API 需要管理员权限**
 
