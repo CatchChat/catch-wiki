@@ -3446,7 +3446,7 @@ GET /v1/topics/search
 #### 示例
 
 ```
-curl https://api.soyep.com/v1/topics/search?q=kevin -H 'Authorization: Token token="test-token"'
+curl https://api.soyep.com/v1/topics/search?q=hi -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
@@ -3460,6 +3460,7 @@ curl https://api.soyep.com/v1/topics/search?q=kevin -H 'Authorization: Token tok
     {
       <topic>,
       distance: 245.3, // km
+      highlight: "&lt;em&gt;<em>hi</em>&lt;&#x2F;em&gt;" // body 的原文是"<em>hi</em>"，搜索关键字"hi"，highlight 会先将 body 进行 HTML escape，然后再加上 <em> 标签标记搜索到的关键字
     },
     .
     .
