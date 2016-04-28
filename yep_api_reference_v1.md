@@ -1298,34 +1298,8 @@ curl -X PATCH https://api.soyep.com/v1/user/set_avatar -F avatar=@/Users/tumayun
 
 ### 更新手机号流程
 
-1. 发送当前手机号验证码 (POST /v1/sms_verification_codes)
-2. 校验当前手机号验证码  (PATCH /v1/user/check_verify_code)
-3. 发送新手机号验证码 (POST /v1/user/send_update_mobile_code)
-4. 校验新手机号验证码，通关验证后更新手机号为新手机好 (PATCH /v1/user/update_mobile)
-
-### 验证更新手机号请求的验证码
-
-```
-PATCH /v1/user/check_verify_code
-```
-
-#### 参数
-
-| 名称 | 类型 | 是否必需 | 描述 |
-|---|---|---|---|
-| token | String | 是 | 短信验证码 |
-
-#### 示例
-
-```
-curl -X PATCH https://api.soyep.com/v1/user/check_verify_code -F token=1234 -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.2053812"'
-```
-
-#### 响应
-
-```
-{}
-```
+1. 发送验证码到新手机号 (POST /v1/user/send_update_mobile_code)
+2. 校验新手机号验证码，验证后将手机号更新为新手机号 (PATCH /v1/user/update_mobile)
 
 ### 发送新手机号验证码
 
