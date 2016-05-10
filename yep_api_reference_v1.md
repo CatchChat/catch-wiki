@@ -126,6 +126,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "introduction":"",
 "badge":null,
 "website_url":"http://tumayun.com",
+"website_title":"Tumayun's Blog",
 "created_at":1441347808,
 "updated_at":1441693888,
 "last_sign_in_at":1441347780
@@ -148,6 +149,7 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "introduction":"",
 "badge":"apple",
 "website_url":"http://tumayun.com",
+"website_title":"Tumayun's Blog",
 "last_sign_in_at":1433930183, // UNIX 时间戳
 "created_at":1433930183, // UNIX 时间戳
 "updated_at":1433930183, // UNIX 时间戳
@@ -1229,6 +1231,7 @@ PATCH /v1/user
 | mute_started_at_string | String | 否 | 防打扰开始时间，如：23:30，UTC 时间 |
 | mute_ended_at_string | String | 否 | 防打扰结束时间，如：07:30，UTC 时间 |
 | website_url | String | 否 | 个人主页 URL |
+| website_title | String | 否 | 个人主页 Title |
 
 #### 示例
 
