@@ -2752,14 +2752,22 @@ POST /v1/attachments
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| file | File | 是 | 需要上传的文件，图片支持 jpg，视频支持 mp4，音频支持 m4a|aac |
+| file | File | 是 | 需要上传的文件，图片支持 jpg，视频支持 mp4，音频支持 m4a、aac |
 | attachable_type | String | 是 | 可选值：Message|Topic，分别表示上传 Message 附件和 Topic 附件 |
-| metadata | String | 否 | metadata |
+| metadata | String | 是 | metadata |
+
+*metadata 格式说明*
+
+| 类型 | metadata 格式 |
+|---|---|---|---|
+| image | `{ "image_width": 100, "image_height": 150 }` |
+| audio | `{ "audio_duration": 42, "audio_samples": [0.1, 0.2, 0.8, ...] }` |
+| video | `{ "video_width": 100, "video_height": 150 }` |
 
 #### 示例
 
 ```
-curl https://api.soyep.com/v1/attachments -F file=@/Users/tumayun/Downloads/20150512\ 205219.m4a -F attachable_type=Message -H 'Authorization: Token token="test-token"'
+curl https://api.soyep.com/v1/attachments -F file=@/Users/tumayun/Downloads/20150512\ 205219.m4a -F attachable_type=Message -F metadata={ "audio_duration": 42, "audio_samples": [0.1, 0.2, 0.8] } -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
