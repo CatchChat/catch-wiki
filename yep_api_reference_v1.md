@@ -311,6 +311,7 @@ Topic `kind` 为 audio 时，格式如下：
 "kind": "normal" // 话题类型，目前有 apple_music|apple_movie|apple_ebook|text|image|video|audio|location|github|dribbble
 "body": "test", // 话题内容
 "message_count": 0, // 评论消息数
+"recommend": true, // 话题是否被推荐
 "created_at": 1443278450.465,
 "updated_at": 1443278450.465
 "user":{ // 话题创建者
@@ -1218,6 +1219,7 @@ curl https://api.soyep.com/v1/user -H 'Authorization: Token oken="kuH3PbRifgSATC
 ```
 {
   <user>,
+  "admin":false, // 当前用户是否有管理权限
   "push_content":true,
   "phone_code":"86",
   "mobile":"15158161111",
@@ -3875,6 +3877,46 @@ PATCH /v1/admin/topics/:id/hide
 
 ```
 curl -XPATCH https://api.soyep.com/v1/admin/topics/<id>/hide -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+只返回状态码
+
+### 推荐话题
+
+```
+PATCH /v1/admin/topics/:id/recommend
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl -XPATCH https://api.soyep.com/v1/admin/topics/<id>/recommend -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+只返回状态码
+
+### 取消推荐话题
+
+```
+PATCH /v1/admin/topics/:id/cancel_recommended
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl -XPATCH https://api.soyep.com/v1/admin/topics/<id>/cancel_recommended -H 'Authorization: Token token="test-token"'
 ```
 
 #### 响应
