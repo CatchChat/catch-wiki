@@ -311,7 +311,7 @@ Topic `kind` 为 audio 时，格式如下：
 "kind": "normal" // 话题类型，目前有 apple_music|apple_movie|apple_ebook|text|image|video|audio|location|github|dribbble
 "body": "test", // 话题内容
 "message_count": 0, // 评论消息数
-"recommend": true, // 话题是否被推荐
+"recommended": true, // 话题是否被推荐
 "created_at": 1443278450.465,
 "updated_at": 1443278450.465
 "user":{ // 话题创建者
