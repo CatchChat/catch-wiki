@@ -20,10 +20,7 @@ cURL 请求范例：
 curl https://api.soyep.com/v1/friendships?page=2&per_page=100
 ```
 
-<!---
 ### 请求速率
-
-1小时支持5000次请求，你能通过 HTTP Header 了解到请求速率的限制：
 
 cURL 请求范例：
 
@@ -35,7 +32,7 @@ curl -i https://api.soyep.cim/v1/friendships
 
 | Header 字段 | 描述 |
 |---|---|
-| X-RateLimit-Limit | 1小时内最大请求数 |
+| X-RateLimit-Limit | 在时间窗口内，最大请求数 |
 | X-RateLimit-Remaining | 在时间窗口内，剩余的请求数 |
 | X-RateLimit-Reset | 请求窗口重置的时间，UTC epoch seconds 表示 |
 
@@ -59,10 +56,10 @@ X-RateLimit-Remaining: 0
 X-RateLimit-Reset: 1377013266
 
 {
-    error: "来自 xxx.xxx.xxx.xxx 的 API 请求已经超过限制"
+    "error": "请求次数过多，请稍后再试",
+    "code": "rate_limit_exceeded"
 }
 ```
---->
 
 ### Header
 
@@ -528,9 +525,9 @@ Service 消息返回 message_action 信息时，将会以 `<message_action>` 替
 
 ----
 
-## 注册登录
+## 登录
 
-### 手机号和验证码认证
+### 获取短信验证码
 
 **发送验证码到指定手机号。**
 
@@ -540,35 +537,37 @@ Service 消息返回 message_action 信息时，将会以 `<message_action>` 替
 POST /v1/sms_verification_codes
 ```
 
-| 参数 | 描述 |
-|--------|--------|
-| mobile | 手机号 |
-| phone_code | 国家代码 |
-| method | 发送方式，`sms` 短信方式，`call` 语音方式 |
+#### 参数
 
-cURL 请求范例：
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| phone_code | String | 是 | 国家码 |
+| mobile | String | 是 | 手机号 |
+| method | String | 是 | 发送方式，`sms` 短信方式，`call` 语音方式 |
+
+#### 示例
 
 ```
 curl -X POST -H "Content-Type: application/json" -d '{"phone_code":"86","mobile":"12345678","method":"sms"}' http://api.soyep.com/v1/sms_verification_codes
 ```
 
-返回范例：
+#### 响应
 
-```
-{}
-```
+##### 成功
 
-如果发送次数过多，则返回 429 Too Many Requests 的错误。
+只返回 Http Code
 
-```
-HTTP/1.1 403 Too Many Requests
-Date: Tue, 20 Aug 2013 14:50:41 GMT
-Status: 429 Too Many Requests
+##### 失败
 
-{
-  error: "发给手机号 xxxxxxxxxxx 的验证码数量已经超过限制"
-}
-```
+返回错误码
+
+Error Code | 描述
+--- |--- |
+invalid_method | 无效的 method 参数
+not_yet_registered | 该手机号还未注册
+user_was_blocked | 当前用户已被禁用
+
+### 获取 access_token
 
 **发送手机号 (mobile) 和验证码 (verify_code)，可获取相应的 access_token。**
 
@@ -576,15 +575,17 @@ Status: 429 Too Many Requests
 POST /v1/auth/token_by_mobile
 ```
 
-| 参数 | 描述 |
-|--------|--------|
-| mobile | 手机号 |
-| phone_code | 国家代码 |
-| verify_code | 验证码 |
-| expiring | access_token 过期时间。单位为秒，设置为0表示永不过期，不设置默认7天过期 |
-| client | 用于推送, official=0, company=1, local=2, 默认是official |
+#### 参数
 
-cURL 请求范例：
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| phone_code | String | 是 | 国家码 |
+| mobile | String | 是 | 手机号 |
+| verify_code | String | 是 | 验证码 |
+| client | Float | 否 | 用于推送, official=0, company=1, local=2, 默认是official |
+| expiring | Float | 否 | access_token 过期时间。单位为秒，设置为0表示永不过期，不设置默认一年过期 |
+
+#### 示例
 
 ```
 curl -X POST   -H "Content-Type: application/json" -d '{"phone_code":"86",
@@ -592,7 +593,7 @@ curl -X POST   -H "Content-Type: application/json" -d '{"phone_code":"86",
 http://api.soyep.com/v1/auth/token_by_mobile
 ```
 
-返回范例：
+#### 响应
 
 ```
 {
@@ -610,20 +611,6 @@ http://api.soyep.com/v1/auth/token_by_mobile
   }
 }
 ```
-
-cURL 请求范例（1小时过期）：
-
-```
-
-curl -X POST -H "Content-Type: application/json" -d '{"phone_code":"86",
-"mobile":"12345678", "verify_code": "23397", "expiring": 3600}'
-http://api.soyep.com/v1/auth/token_by_mobile
-```
-
-如果手机号和验证码错误，或验证码已经过期，则返回 HTTP 401.
-{
-  error: "手机号或验证码错误"
-}
 
 ### 退出登录
 
@@ -643,23 +630,27 @@ curl -X DELETE https://api.soyep.com/v1/auth/logout -H 'Authorization: Token tok
 
 #### 响应
 
-只返回状态码
+只返回 Http Code
 
-### 发送用户名,手机号码，发起注册,等待接收手机验证码
+## 注册
+
+### 发送用户名,手机号码，发起注册, 等待接收手机验证码
 
 ```
 POST   /v1/registration/create
 ```
 
-| 参数 | 描述 |
-|--------|--------|
-| mobile | 手机号 |
-| nickname | 用户昵称 |
-| phone_code | 国家码 |
-| longitude | longitude |
-| latitude | latitude |
+#### 参数
 
-cURL 请求范例：
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| phone_code | String | 是 | 国家码 |
+| mobile | String | 是 | 手机号 |
+| nickname | String | 是 | 用户昵称 |
+| longitude | Float | 是 | longitude |
+| latitude | Float | 是 | latitude |
+
+#### 示例
 
 ```
 curl -X POST -H "Content-Type: application/json" -d '{"phone_code":"86",
@@ -667,7 +658,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"phone_code":"86",
 http://api.soyep.com/v1/registration/create
 ```
 
-返回范例：
+#### 响应
 
 ```
 {
@@ -685,20 +676,25 @@ http://api.soyep.com/v1/registration/create
 ```
 PUT   /v1/registration/update
 ```
-| 参数 | 描述 |
-|--------|--------|
-| mobile | 手机号 |
-| phone_code | 国家码 |
-| token | 手机短信收到的验证码 |
-| client |可选，用于推送, official=0, company=1, local=2 ，默认为0|
-| expiring | 可选，access_token 过期时间。单位为秒，设置为0表示永不过期，不设置默认一年过期 |
 
-cURL 请求范例：
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| phone_code | String | 是 | 国家码 |
+| mobile | String | 是 | 手机号 |
+| token | String | 是 | 短信验证码 |
+| client | Integer | 否 | 用于推送, official=0, company=1, local=2 ，默认为0 |
+| expiring | Integer | 否 | access_token 过期时间。单位为秒，设置为0表示永不过期，不设置默认一年过期 |
+
+#### 示例
+
 ```
  curl -X PUT -H "Content-Type: application/json" -d '{"phone_code":"86","mobile":"15626044835", "token": 70215}' http://api.soyep.com/v1/registration/update
-
 ```
-返回范例：
+
+#### 响应
+
 ```
 {
   "access_token":"DAo4Cs4dkaE-7ADS-63Q1422604371.509334",
@@ -716,23 +712,6 @@ cURL 请求范例：
   }
 }
 ```
-### 用 Access Token 调用其他 API
-
-现在你可以通过 **access_token** 来调用其他 API 了，比如：
-
-```
-GET /v1/xxx
-```
-
-cURL 请求范例：
-
-```
-curl https://api.soyep.com/v1/xxx  -H 'Authorization: Token token="p7DvqB4MoT5ux-B1xg"'
-```
-
-如果 access_token 不存在或过期了，则返回 HTTP 401
-
-HTTP Token: Access denied.
 
 ## Circle 群组
 
@@ -934,7 +913,7 @@ curl -X DELETE https://api.soyep.com/v1/circles/2/leave -H 'Authorization: Token
 
 #### 响应
 
-不返回数据，只返回状态码
+不返回数据，只返回 Http Code
 
 ### 批量添加成员
 
@@ -1110,7 +1089,7 @@ curl -XPOST https://api.soyep.com/v1/circles/2/dnd -H 'Authorization: Token toke
 
 #### 响应
 
-只返回状态码
+只返回 Http Code
 
 ### 当前用户取消设置指定群组为免打扰
 
@@ -1132,7 +1111,7 @@ curl -XDELETE https://api.soyep.com/v1/circles/2/dnd -H 'Authorization: Token to
 
 #### 响应
 
-只返回状态码
+只返回 Http Code
 
 ### 获取当前用户对指定群组的免打扰设置
 
@@ -1778,7 +1757,7 @@ curl -XPOST https://api.soyep.com/v1/users/90913b93738c8a627129e49db32eeec3/dnd 
 
 #### 响应
 
-只返回状态码
+只返回 Http Code
 
 ### 当前登录用户取消设置指定用户为免打扰
 
@@ -1800,7 +1779,7 @@ curl -XDELETE https://api.soyep.com/v1/users/90913b93738c8a627129e49db32eeec3/dn
 
 #### 响应
 
-只返回状态码
+只返回 Http Code
 
 ### 获取擅长指定技能的用户
 
@@ -1944,15 +1923,19 @@ curl -X POST https://api.soyep.com/v1/users/<id>/messages -d '{ "text_content": 
 
 #### 响应
 
-##### 错误码 code
-
-Error Code | 描述
---- |--- |
-rejected_your_message | 当前用户已被对方屏蔽
+##### 成功
 
 ```
 <message>
 ```
+
+##### 失败
+
+返回错误码
+
+Error Code | 描述
+--- |--- |
+rejected_your_message | 当前用户已被对方屏蔽
 
 ### 标记指定聊天窗口的多条消息为已读
 
@@ -2035,7 +2018,7 @@ curl -X DELETE https://api.soyep.com/v1/messages/<id> -H 'Authorization: Token t
 
 #### 响应
 
-只返回状态码
+只返回 Http Code
 
 ### 获取指定聊天窗口的消息历史
 
@@ -2178,7 +2161,7 @@ curl -X DELETE https://api.soyep.com/v1/users/<id>/messages/delete_history -H 'A
 
 #### 响应
 
-只返回状态码
+只返回 Http Code
 
 ### 获取会话列表
 
@@ -2929,7 +2912,7 @@ curl -X POST https://api.soyep.com/v1/blocked_topic_creators -F user_id=51605507
 
 #### 响应
 
-只返回状态码
+只返回 Http Code
 
 ### 取消“不看Ta的话题”
 
@@ -2951,7 +2934,7 @@ curl -X DELETE https://api.soyep.com/v1/blocked_topic_creators/516055075accc1e40
 
 #### 响应
 
-只返回状态码
+只返回 Http Code
 
 ## Master Skills（已有的技能）
 
@@ -3290,7 +3273,7 @@ curl -X POST https://api.soyep.com/v1/feedbacks -F content=test -F device_info=t
 
 #### 响应
 
-只返回状态码
+只返回 Http Code
 
 ## Topics (Feeds)
 
@@ -3513,7 +3496,7 @@ curl -XDELETE https://api.soyep.com/v1/topics/516055075accc1e4067dd5ff6b2682cd -
 
 #### 响应
 
-不返回数据，只返回状态码
+不返回数据，只返回 Http Code
 
 ## 话题搜索热词 hot words
 
@@ -3879,7 +3862,7 @@ curl -XPATCH https://api.soyep.com/v1/admin/topics/<id>/hide -H 'Authorization: 
 
 #### 响应
 
-只返回状态码
+只返回 Http Code
 
 ## 管理用户
 
@@ -3936,9 +3919,9 @@ curl -XPATCH https://api.soyep.com/v1/admin/users/<id>/hide -H 'Authorization: T
 
 #### 响应
 
-只返回状态码
+只返回 Http Code
 
-### 禁止用户
+### 禁用用户
 
 ```
 PATCH /v1/admin/users/:id/block
@@ -3956,4 +3939,4 @@ curl -XPATCH https://api.soyep.com/v1/admin/users/<id>/block -H 'Authorization: 
 
 #### 响应
 
-只返回状态码
+只返回 Http Code
