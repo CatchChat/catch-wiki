@@ -1302,9 +1302,7 @@ curl -X POST -H 'Authorization: Token oken="E9PnSDQMRZvjzL84yBi21418033718.20538
 
 #### 响应
 
-```
-{}
-```
+只返回 Http Code
 
 ### 更新手机号
 
@@ -1328,9 +1326,7 @@ curl -X PATCH https://api.soyep.com/v1/user/update_mobile -F phone_ode=86 -F mob
 
 #### 响应
 
-```
-{}
-```
+只返回 Http Code
 
 ### Discover 发现
 
@@ -2691,9 +2687,7 @@ curl -X PATCH https://api.soyep.com/v1/friendships/3/move_to_top -H 'Authorizati
 
 #### 响应
 
-```
-{}
-```
+只返回 Http Code
 
 ## UnfriendRequest 解除好友请求
 
@@ -2717,9 +2711,7 @@ curl -X POST https://api.soyep.com/v1/unfriend_requests -F friend_id=2 -H 'Autho
 
 #### 响应
 
-```
-{}
-```
+只返回 Http Code
 
 ## Attachment 附件
 
@@ -2831,9 +2823,7 @@ curl -X POST https://api.soyep.com/v1/blocked_users -F user_id=516055075accc1e40
 
 #### 响应
 
-```
-{}
-```
+只返回 Http Code
 
 ### Unblock User
 
@@ -2855,9 +2845,7 @@ curl -X DELETE https://api.soyep.com/v1/blocked_users/516055075accc1e4067dd5ff6b
 
 #### 响应
 
-```
-{}
-```
+只返回 Http Code
 
 ## 不看Ta的话题 API
 
@@ -2958,9 +2946,7 @@ curl -X POST https://api.soyep.com/v1/master_skills -F skill_id=516055075accc1e4
 
 #### 响应
 
-```
-{}
-```
+只返回 Http Code
 
 ### 移除已有技能
 
@@ -2982,9 +2968,7 @@ curl -X DELETE https://api.soyep.com/v1/master_skills/516055075accc1e4067dd5ff6b
 
 #### 响应
 
-```
-{}
-```
+只返回 Http Code
 
 ## Learning Skills（想学的技能）
 
@@ -3008,9 +2992,7 @@ curl -X POST https://api.soyep.com/v1/learning_skills -F skill_id=516055075accc1
 
 #### 响应
 
-```
-{}
-```
+只返回 Http Code
 
 ### 移除想学的技能
 
@@ -3032,9 +3014,7 @@ curl -X DELETE https://api.soyep.com/v1/learning_skills/516055075accc1e4067dd5ff
 
 #### 响应
 
-```
-{}
-```
+只返回 Http Code
 
 ## 技能分类（Skill Category）
 
