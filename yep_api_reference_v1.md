@@ -1257,19 +1257,19 @@ curl -X PATCH https://api.soyep.com/v1/user -F badge=apple -F username=tumayun -
 PATCH /v1/user/set_avatar
 ```
 
-### 参数
+#### 参数
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
 | avatar | File | 是 | 头像，目前只支持 jpg |
 
-### 示例
+#### 示例
 
 ```
 curl -X PATCH https://api.soyep.com/v1/user/set_avatar -F avatar=@/Users/tumayun/workspcae/park_server/spec/fixtures/image.jpg -H 'Authorization: Token token="test-token"'
 ```
 
-### 响应
+#### 响应
 
 ```
 {"avatar":{"url":"https://s3.cn-north-1.amazonaws.com.cn/ruanwz-test-public/a2692db13f2c2879f7ae118a46b62bd9/image.jpg"}}
