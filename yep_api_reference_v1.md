@@ -3890,46 +3890,6 @@ curl -XPATCH https://api.soyep.com/v1/admin/topics/<id>/cancel_recommended -H 'A
 
 只返回状态码
 
-### 推荐话题
-
-```
-PATCH /v1/admin/topics/:id/recommend
-```
-
-#### 参数
-
-无
-
-#### 示例
-
-```
-curl -XPATCH https://api.soyep.com/v1/admin/topics/<id>/recommend -H 'Authorization: Token token="test-token"'
-```
-
-#### 响应
-
-只返回状态码
-
-### 取消推荐话题
-
-```
-PATCH /v1/admin/topics/:id/cancel_recommended
-```
-
-#### 参数
-
-无
-
-#### 示例
-
-```
-curl -XPATCH https://api.soyep.com/v1/admin/topics/<id>/cancel_recommended -H 'Authorization: Token token="test-token"'
-```
-
-#### 响应
-
-只返回状态码
-
 ## 管理用户
 
 ### 获取所有用户
