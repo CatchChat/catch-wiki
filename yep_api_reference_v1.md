@@ -3341,7 +3341,7 @@ GET /v1/topics/discover
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| sort | String | 否 | 排序方式，目前支持 default distance time。default 表示按技能相关性排序，distance 表示按距离倒序展示，time 表示两周内的 topics 按发帖时间倒序展示。默认值为 default |
+| sort | String | 否 | 排序方式，目前支持 default distance time recommended。default 表示按技能相关性排序，distance 表示 100km 内的话题按创建时间倒序展示，time 表示按创建时间倒序展示，recommended 表示被推荐的话题按照被推荐的时间倒序展示。默认值为 default |
 | skill_id | String | 否 | 技能ID，支持按技能过滤 |
 | max_id | String | 否 | 仅当 sort 值为 time 或 distance 时有效，表示 ID 获取小于 max_id 的话题。当带有 max_id 参数时，应该不传 page 参数或者始终置为 1 |
 | min_id | String | 否 | 仅当 sort 值为 time 或 distance 时有效，表示 ID 获取大于 min_id 的话题。当带有 min_id 参数时，应该不传 page 参数或者始终置为 1 |
@@ -3384,6 +3384,7 @@ GET /v1/topics/search
 | q | String | 是 | 话题关键字 |
 | user_id | String | 否 | User ID，关键字搜索指定用户的话题 |
 | skill_id | String | 否 | Skill ID，关键字搜索指定技能下的话题 |
+| recommended | Boolean | 否 | 只在推荐话题中搜索 |
 
 #### 示例
 
