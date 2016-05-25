@@ -1975,7 +1975,9 @@ curl -X PATCH https://api.soyep.com/v1/users/<id>/messages/batch_mark_as_read -H
 
 #### 响应
 
+```
 { "last_read_at":1445596604.144 }
+```
 
 ### 删除已发送消息
 
