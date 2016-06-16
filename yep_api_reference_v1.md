@@ -2170,6 +2170,8 @@ curl -X DELETE https://api.soyep.com/v1/users/<id>/messages/delete_history -H 'A
 Messages 是每个会话的最新消息（每个会话只有一条），客户端需要根据消息的 recipient_type 和 recipient_id 确定消息所属会话，并正确加载到会话中。
 在进入到会话后，客户端应立即请求`GET /v1/:recipient_type/:recipient_id/messages` API，加载更多的历史消息。
 
+![Yep 登录请求 API 流程](https://cloud.githubusercontent.com/assets/1154724/16125128/ca6f4e00-3424-11e6-8a7a-2072d61cbec0.png)
+
 ```
 GET /v1/conversations
 ```
