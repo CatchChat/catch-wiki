@@ -3551,7 +3551,7 @@ curl https://api.soyep.com/v1/genius_interviews -H 'Authorization: Token token="
       "no" => 1,
       "title" => "Kevin 的造物情结",
       "description" => "每个开发者都是手艺人",
-      "url" => "http://zi.com/xxx",
+      "link" => "http://zi.com/xxx"
       "user": { <user> },
     }
   ]
@@ -3578,7 +3578,8 @@ curl https://api.soyep.com/v1/genius_interview_banners/current -H 'Authorization
 
 ```
 {
-  "url": "https://s3.cn-north-1.amazonaws.com.cn/yep-dev-public-asserts/af522bc8-9e7b-471c-b32d-3d6e3b668923-1467344817.jpg"
+  "url": "https://s3.cn-north-1.amazonaws.com.cn/yep-dev-public-asserts/af522bc8-9e7b-471c-b32d-3d6e3b668923-1467344817.jpg", // banner 图 URL
+  "link": "http://zi.com/xxx" // 点击 banner 图跳转到该链接
 }
 ```
 
