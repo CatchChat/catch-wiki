@@ -90,6 +90,9 @@ HTTP Code 大于等于 `200` 且小于 `300` 表示请求成功，反之则请�
 "name":"Singing",        // 技能名
 "name_string":"Singing", // 技能名翻译
 "cover_url":null,        // 技能封面图片URL
+"topics_count":1,        // 话题数
+"master_users_count":1,  // 擅长人数
+"learning_users_count":1 // 学习人数
 ```
 
 在 API 返回技能分类信息时，将会以 `<skill_category>` 替代如下结构：
@@ -3103,31 +3106,34 @@ curl https://api.soyep.com/v1/skill_categories -H 'Authorization: Token token="_
 
 ## Skills（技能）
 
-### 更新技能信息
+### 获取技能列表，按热度排序
 
 ```
-PATCH /v1/skills/:id
+GET /v1/skills
 ```
 
 #### 参数
 
-名称 | 类型 | 是否必需 | 描述
---- |--- |--- |--- |
-id | String | 是 | 技能 ID
-cover_url | String | 否 | 技能封面图片地址
+无
 
 #### 示例
 
 ```
-curl -X PATCH https://api.soyep.com/v1/skills/516055075accc1e4067dd5ff6b2682cd -F cover_url=https://s3.cn-north-1.amazonaws.com.cn/ruanwz-test-public/ruby-logo.png -H 'Authorization: Token token="test-token”'
+curl -X GET https://api.soyep.com/v1/skills -H 'Authorization: Token token="test-token”'
 ```
 
 #### 响应
 
 ```
-{"id":<id>,"cover_url":"https://s3.cn-north-1.amazonaws.com.cn/ruanwz-test-public/ruby-logo.png"}
-```
+{
+  "skills": [
+    <skill>
+  ],
+  "count": 1,
+  "current_page": 1,
+  "per_page": 30
 }
+```
 
 ## 举报（reports）
 
