@@ -310,6 +310,7 @@ Topic `kind` 为 audio 时，格式如下：
 "kind": "normal" // 话题类型，目前有 apple_music|apple_movie|apple_ebook|text|image|video|audio|location|github|dribbble
 "body": "test", // 话题内容
 "message_count": 0, // 评论消息数
+"recommended": true, // 话题是否被推荐
 "created_at": 1443278450.465,
 "updated_at": 1443278450.465
 "user":{ // 话题创建者
@@ -1234,6 +1235,7 @@ curl https://api.soyep.com/v1/user -H 'Authorization: Token oken="kuH3PbRifgSATC
 ```
 {
   <user>,
+  "admin":false, // 当前用户是否有管理权限
   "push_content":true,
   "phone_code":"86",
   "mobile":"15158161111",
@@ -3378,7 +3380,7 @@ GET /v1/topics/discover
 
 | 名称 | 类型 | 是否必需 | 描述 |
 |---|---|---|---|
-| sort | String | 否 | 排序方式，目前支持 default distance time。default 表示按技能相关性排序，distance 表示按距离倒序展示，time 表示两周内的 topics 按发帖时间倒序展示。默认值为 default |
+| sort | String | 否 | 排序方式，目前支持 default distance time recommended。default 表示按技能相关性排序，distance 表示 100km 内的话题按创建时间倒序展示，time 表示按创建时间倒序展示，recommended 表示被推荐的话题按照被推荐的时间倒序展示。默认值为 default |
 | skill_id | String | 否 | 技能ID，支持按技能过滤 |
 | max_id | String | 否 | 仅当 sort 值为 time 或 distance 时有效，表示 ID 获取小于 max_id 的话题。当带有 max_id 参数时，应该不传 page 参数或者始终置为 1 |
 | min_id | String | 否 | 仅当 sort 值为 time 或 distance 时有效，表示 ID 获取大于 min_id 的话题。当带有 min_id 参数时，应该不传 page 参数或者始终置为 1 |
@@ -3421,6 +3423,7 @@ GET /v1/topics/search
 | q | String | 是 | 话题关键字 |
 | user_id | String | 否 | User ID，关键字搜索指定用户的话题 |
 | skill_id | String | 否 | Skill ID，关键字搜索指定技能下的话题 |
+| recommended | Boolean | 否 | 只在推荐话题中搜索 |
 
 #### 示例
 
@@ -3885,6 +3888,46 @@ curl -XPATCH https://api.soyep.com/v1/admin/topics/<id>/hide -H 'Authorization: 
 #### 响应
 
 只返回 Http Code
+
+### 推荐话题
+
+```
+PATCH /v1/admin/topics/:id/recommend
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl -XPATCH https://api.soyep.com/v1/admin/topics/<id>/recommend -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+只返回状态码
+
+### 取消推荐话题
+
+```
+PATCH /v1/admin/topics/:id/cancel_recommended
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl -XPATCH https://api.soyep.com/v1/admin/topics/<id>/cancel_recommended -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+只返回状态码
 
 ## 管理用户
 
