@@ -1049,6 +1049,41 @@ curl -X GET https://api.soyep.com/v1/circles/shared_messages?token=qRLyR3jBQslCQ
 }
 ```
 
+### 通过分享链接的 token 获取群组信息
+
+```
+GET /v1/circles/show_by_token
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| token | String | 是 | 分享链接带的 token 值 |
+
+#### 示例
+
+```
+curl -X GET https://api.soyep.com/v1/circles/show_by_token?token=qRLyR3jBQslCQlgADuevpwlEDLBTm28vI-t1eAioHvg=
+```
+
+#### 响应
+
+```
+//!! Topic Circle 不返回 members
+{
+  <circle_with_topic>,
+  "members":[
+    {
+      <mini_user>
+    },
+    .
+    .
+    .
+  ]
+}
+```
+
 ### 检查当前用户是否在指定群组中
 
 ```
