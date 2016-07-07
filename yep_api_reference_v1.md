@@ -3557,6 +3557,70 @@ curl https://api.soyep.com/v1/hot_words -H 'Authorization: Token token="test-tok
 }
 ```
 
+## 天才访谈
+
+### 获取天才访谈列表
+
+不支持分页
+
+```
+GET /v1/genius_interviews
+```
+
+#### 参数
+
+| 名称 | 类型 | 是否必需 | 描述 |
+|---|---|---|---|
+| count | Integer | 是 | 想要获取天才访谈的数量 |
+| max_no | Integer | 否 | 当前最后一个天才访谈的期号 |
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/genius_interviews -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "genius_interviews": [
+    {
+      "no" => 1,
+      "title" => "Kevin 的造物情结",
+      "description" => "每个开发者都是手艺人",
+      "link" => "http://zi.com/xxx"
+      "user": { <user> },
+    }
+  ]
+}
+```
+
+### 获取天才访谈 banner
+
+```
+GET /v1/genius_interview_banners/current
+```
+
+#### 参数
+
+无
+
+#### 示例
+
+```
+curl https://api.soyep.com/v1/genius_interview_banners/current -H 'Authorization: Token token="test-token"'
+```
+
+#### 响应
+
+```
+{
+  "url": "https://s3.cn-north-1.amazonaws.com.cn/yep-dev-public-asserts/af522bc8-9e7b-471c-b32d-3d6e3b668923-1467344817.jpg", // banner 图 URL
+  "link": "http://zi.com/xxx" // 点击 banner 图跳转到该链接
+}
+```
+
 ----------------
 **以下 API 需要管理员权限**
 
