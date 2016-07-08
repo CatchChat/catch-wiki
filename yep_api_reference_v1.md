@@ -2179,31 +2179,6 @@ curl -X DELETE https://api.soyep.com/v1/users/<id>/messages/delete_messages -d '
 }
 ```
 
-### 删除消息历史
-
-删除会话以及会话中的消息历史，下次同步会话列表时将不再返回该会话
-
-```
-DELETE /:version/:recipient_type/:recipient_id/messages/delete_history
-```
-
-#### 参数
-
-名称 | 类型 | 是否必需 | 描述
---- |--- |--- |--- |
-| recipient_id | String | 是 | 接收者（聊天对象） ID，接收者只有两种，User 或者 Circle，所以是 User ID 或者 Circle ID |
-| recipient_type | String | 是 | 接受者（聊天对象）类型，只能是 users 或者 circles |
-
-#### 示例
-
-```
-curl -X DELETE https://api.soyep.com/v1/users/<id>/messages/delete_history -H 'Authorization: Token token="test-token"'
-```
-
-#### 响应
-
-只返回 Http Code
-
 ### 获取会话列表
 
 客户端登录后，应该立即请求此API，获取会话列表，包括 Users、Circles、Messages，客户端需要严格按照 Messages 的顺序排列展示 Users 和 Circles。
