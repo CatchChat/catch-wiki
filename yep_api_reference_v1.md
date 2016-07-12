@@ -3648,7 +3648,8 @@ curl https://api.soyep.com/v1/genius_interview_banners/current -H 'Authorization
 ```
 {
   "url": "https://s3.cn-north-1.amazonaws.com.cn/yep-dev-public-asserts/af522bc8-9e7b-471c-b32d-3d6e3b668923-1467344817.jpg", // banner 图 URL
-  "link": "http://zi.com/xxx" // 点击 banner 图跳转到该链接
+  "link": "http://zi.com/xxx", // 点击 banner 图跳转到该链接
+  "user": { <user> }
 }
 ```
 
